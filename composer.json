@@ -1,0 +1,29 @@
+{
+	"name" : "artscorestudio/layout-bundle",
+	"license" : "MIT",
+	"type" : "library",
+	"description" : "Layout Bundle is a Symfony 3 component providing frontend and backend layouts in your Symfony 3 application based on jQuery and Twitter Bootstrap. This package is a part of Artscore Studio Framework.",
+	"homepage" : "https://github.com/artscorestudio/layout-bundle",
+	"authors" : [{
+		"name" : "Nicolas Claverie",
+		"email" : "info@artscore-studio.fr"
+	}, {
+		"name" : "Artscore Studio",
+		"homepage" : "http://www.artscore-studio.fr"
+	}
+	],
+	"require" : {
+		"php" : ">=5.5.9",
+		"symfony/symfony" : "3.0.*"
+	},
+	"require-dev" : {
+		"sensio/generator-bundle": "^3.0",
+    "symfony/phpunit-bridge": "^2.7"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"ASF\\CoreBundle\\" : ""
+		}
+	},
+	"minimum-stability" : "dev"
+}
