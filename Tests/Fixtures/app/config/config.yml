@@ -1,4 +1,5 @@
+imports:
+    - { resource: parameters.yml }
+    
 framework:
-    test: ~
-    session:
-        storage_id: session.storage.mock_file
+    secret: "%secret%"

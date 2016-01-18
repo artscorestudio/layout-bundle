@@ -9,7 +9,6 @@
  */
 namespace ASF\LayoutBundle\Tests;
 
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 use ASF\LayoutBundle\ASFLayoutBundle;
 
 /**
@@ -18,7 +17,7 @@ use ASF\LayoutBundle\ASFLayoutBundle;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class ASFLayoutBundleTest extends TestCase
+class ASFLayoutBundleTest extends ContainerAwareTestCase
 {
 	/**
 	 * (non-PHPdoc)

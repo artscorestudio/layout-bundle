@@ -28,5 +28,7 @@ class Configuration implements ConfigurationInterface
 	{
 		$treeBuilder = new TreeBuilder();
 		$rootNode = $treeBuilder->root('asf_layout');
+		
+		return $treeBuilder;
 	}
 }
