@@ -29,6 +29,18 @@ class Configuration implements ConfigurationInterface
 		$treeBuilder = new TreeBuilder();
 		$rootNode = $treeBuilder->root('asf_layout');
 		
+		$rootNode
+			->children()
+				->arrayNode('supports')
+					->children()
+						->scalarNode('jquery')->defaultFalse()->end()
+					->end()
+				->end()
+				
+				->scalarNode('jquery_path')->defaultValue("%kernel.root_dir%/Resources/public/jquery/jquery.min.js")->end()
+				
+			->end();
+		
 		return $treeBuilder;
 	}
 }
