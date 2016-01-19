@@ -26,6 +26,5 @@ class ASFLayoutBundleTest extends ContainerAwareTestCase
 	public function testBuild()
 	{
 		$bundle = new ASFLayoutBundle();
-		$bundle->build($this->container);
 	}
 }

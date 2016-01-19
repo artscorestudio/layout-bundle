@@ -76,7 +76,9 @@
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer">
       <argument type="collection"/>
     </service>
-    <service id="service_container" synthetic="true"/>
+    <service id="service_container" synthetic="true">
+      <autowiring-type>Symfony\Component\DependencyInjection\ContainerInterface</autowiring-type>
+    </service>
     <service id="kernel" synthetic="true"/>
     <service id="filesystem" class="Symfony\Component\Filesystem\Filesystem"/>
     <service id="file_locator" class="Symfony\Component\HttpKernel\Config\FileLocator">
@@ -419,7 +421,7 @@
       <tag name="monolog.logger" channel="php"/>
       <argument>null</argument>
       <argument>null</argument>
-      <argument>null</argument>
+      <argument>28586</argument>
       <argument>null</argument>
       <argument>true</argument>
       <argument>null</argument>

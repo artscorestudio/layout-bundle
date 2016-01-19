@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="Tests/bootstrap.php"
+         bootstrap="./Tests/autoload.php"
 >
     <testsuites>
         <testsuite name="Asf Core Test Suite">

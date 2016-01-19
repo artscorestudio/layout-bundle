@@ -9,8 +9,8 @@
  */
 namespace ASF\LayoutBundle\Tests\DependencyInjection;
 
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use ASF\LayoutBundle\Tests\ContainerAwareTestCase;
+use ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension;
 
 /**
  * Bundle's Extension Test Suites
@@ -18,32 +18,18 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class ASFLayoutExtensionTest extends TestCase
+class ASFLayoutExtensionTest extends ContainerAwareTestCase
 {
 	/**
-	 * @var \Symfony\Component\DependencyInjection\ContainerBuilder
+	 * @var ASFLayoutExtension
 	 */
-	protected $container;
+	protected $extension;
 	
-	/**
-	 * {@inheritDoc}
-	 * @see PHPUnit_TestCase::setUp()
-	 */
-	protected function setUp()
+	public function setUp()
 	{
 		parent::setUp();
 		
-		$this->container = new ContainerBuilder();
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * @see PHPUnit_TestCase::tearDown()
-	 */
-	protected function tearDown()
-	{
-		unset($this->container);
-		parent::tearDown();
+		$this->extension = new ASFLayoutExtension();
 	}
 	
 	/**
@@ -51,6 +37,9 @@ class ASFLayoutExtensionTest extends TestCase
 	 */
 	public function testDefaultConfiguration()
 	{
+		$configs = $this->container->getExtensionConfig($this->extension->getAlias());
+		$this->extension->load($configs, $this->container);
 		
+		$this->assertTrue($this->container->hasParameter($this->extension->getAlias().'.supports'));
 	}
 }

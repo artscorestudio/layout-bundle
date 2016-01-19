@@ -9,28 +9,16 @@
  */
 namespace ASF\LayoutBundle\Tests;
 
-use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase as BaseTestCase;
 
 /**
- * Test class for container aware test subjects
+ * Abstract class for unit test cases
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-abstract class ContainerAwareTestCase extends TestCase
+abstract class TestCase extends BaseTestCase
 {
-	/**
-	 * @var Kernel
-	 */
-	protected $kernel;
-	
-	/**
-	 * @var ContainerBuilder
-	 */
-	protected $container;
-	
 	/**
 	 * {@inheritDoc}
 	 * @see PHPUnit_Framework_TestCase::setUp()
@@ -38,11 +26,6 @@ abstract class ContainerAwareTestCase extends TestCase
 	protected function setUp()
 	{
 		parent::setUp();
-		
-		$this->kernel = new \AppKernel('test', true);
-		$this->kernel->boot();
-		
-		$this->container = new ContainerBuilder();
 	}
 	
 	/**
@@ -51,10 +34,6 @@ abstract class ContainerAwareTestCase extends TestCase
 	 */
 	protected function tearDown()
 	{
-		if ( null !== $this->kernel ) {
-			$this->kernel->shutdown();
-		}
-		
 		parent::tearDown();
 	}
 }

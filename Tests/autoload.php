@@ -16,4 +16,6 @@ if ( !file_exists($file) ) {
 	}
 }
 
-$autoload = require_once $file;
+$loader = require_once $file;
+
+require_once __DIR__ . '/Fixtures/app/AppKernel.php';
