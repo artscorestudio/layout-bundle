@@ -8,12 +8,12 @@ use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
 
 /**
- * appTestDebugProjectContainer.
+ * appDevDebugProjectContainer.
  *
  * This class has been auto-generated
  * by the Symfony Dependency Injection Component.
  */
-class appTestDebugProjectContainer extends Container
+class appDevDebugProjectContainer extends Container
 {
     private $parameters;
     private $targetDirs = array();
@@ -1107,18 +1107,17 @@ class appTestDebugProjectContainer extends Container
     {
         return array(
             'kernel.root_dir' => $this->targetDirs[2],
-            'kernel.environment' => 'test',
+            'kernel.environment' => 'dev',
             'kernel.debug' => true,
             'kernel.name' => 'app',
             'kernel.cache_dir' => __DIR__,
             'kernel.logs_dir' => ($this->targetDirs[2].'\\logs'),
             'kernel.bundles' => array(
                 'FrameworkBundle' => 'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle',
-                'ASFCoreBundle' => 'ASF\\CoreBundle\\ASFCoreBundle',
                 'ASFLayoutBundle' => 'ASF\\LayoutBundle\\ASFLayoutBundle',
             ),
             'kernel.charset' => 'UTF-8',
-            'kernel.container_class' => 'appTestDebugProjectContainer',
+            'kernel.container_class' => 'appDevDebugProjectContainer',
             'secret' => 'WeAreNotInVietnamThereIsBowlingYouPlayByTheRules',
             'fragment.renderer.hinclude.global_template' => '',
             'fragment.path' => '/_fragment',
@@ -1145,7 +1144,7 @@ class appTestDebugProjectContainer extends Container
 
             ),
             'debug.error_handler.throw_at' => -1,
-            'debug.container.dump' => (__DIR__.'/appTestDebugProjectContainer.xml'),
+            'debug.container.dump' => (__DIR__.'/appDevDebugProjectContainer.xml'),
             'asf_layout.supports.jquery' => false,
             'asf_layout.jquery_path' => ($this->targetDirs[2].'/Resources/public/jquery/jquery.min.js'),
             'asf_layout.twig.extension.supports.class' => 'ASF\\LayoutBundle\\Twig\\Extension\\SupportsExtension',

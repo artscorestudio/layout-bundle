@@ -9,8 +9,8 @@
  */
 namespace ASF\LayoutBundle\Tests\DependencyInjection;
 
-use ASF\LayoutBundle\Tests\ContainerAwareTestCase;
 use ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Bundle's Extension Test Suites
@@ -18,17 +18,30 @@ use ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class ASFLayoutExtensionTest extends ContainerAwareTestCase
-{
+class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
+{	
 	/**
 	 * @var ASFLayoutExtension
 	 */
 	protected $extension;
 	
+	/**
+	 * @var ContainerBuilder
+	 */
+	protected $container;
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \ASF\LayoutBundle\Tests\ContainerAwareTestCase::setUp()
+	 */
 	public function setUp()
 	{
 		parent::setUp();
 		
+		/*$this->container = new ContainerBuilder();
+		$this->container->setParameter('kernel.cache_dir', $this->kernel->getContainer()->getParameter('kernel.cache_dir'));
+		$this->container->setParameter('kernel.bundles', $this->kernel->getContainer()->getParameter('kernel.bundles'));
+		*/
 		$this->extension = new ASFLayoutExtension();
 	}
 	
@@ -37,9 +50,10 @@ class ASFLayoutExtensionTest extends ContainerAwareTestCase
 	 */
 	public function testDefaultConfiguration()
 	{
-		$configs = $this->container->getExtensionConfig($this->extension->getAlias());
-		$this->extension->load($configs, $this->container);
+		$configs = array();
 		
-		$this->assertTrue($this->container->hasParameter($this->extension->getAlias().'.supports'));
+		$this->extension->load(array($configs), $this->container);
+		
+		$this->assertTrue($this->container->hasParameter($this->extension->getAlias().'.supports.jquery'));
 	}
 }

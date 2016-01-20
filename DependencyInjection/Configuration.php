@@ -32,14 +32,14 @@ class Configuration implements ConfigurationInterface
 		$rootNode
 			->children()
 				->arrayNode('supports')
+					->addDefaultsIfNotSet()
 					->children()
 						->scalarNode('jquery')->defaultFalse()->end()
 					->end()
 				->end()
-				
 				->scalarNode('jquery_path')->defaultValue("%kernel.root_dir%/Resources/public/jquery/jquery.min.js")->end()
-				
-			->end();
+			->end()
+		;
 		
 		return $treeBuilder;
 	}

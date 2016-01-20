@@ -15,7 +15,7 @@ namespace ASF\LayoutBundle\Twig\Extension;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class SupportsExtension extends \Twig_Extension
+class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitRuntimeInterface
 {
 	/**
 	 * @var \Twig_Environment

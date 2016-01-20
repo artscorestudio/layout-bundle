@@ -41,8 +41,8 @@ abstract class ContainerAwareTestCase extends TestCase
 		
 		$this->kernel = new \AppKernel('test', true);
 		$this->kernel->boot();
-		
-		$this->container = new ContainerBuilder();
+		$this->container = $this->kernel->getContainer();
+		var_dump( $this->container->get('asf_layout.supports.jquery') );
 	}
 	
 	/**

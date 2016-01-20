@@ -29,6 +29,7 @@ class ASFLayoutExtension extends ASFExtension implements PrependExtensionInterfa
 	 */
 	public function load(array $configs, ContainerBuilder $container)
 	{
+		//var_dump( get_class( $container ) );
 		$configuration = new Configuration();
 		$config = $this->processConfiguration($configuration, $configs);
 		
