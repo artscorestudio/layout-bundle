@@ -11,6 +11,8 @@ namespace ASF\LayoutBundle\Tests\DependencyInjection;
 
 use ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use ASF\LayoutBundle\DependencyInjection\Configuration;
+use Symfony\Component\Yaml\Parser;
 
 /**
  * Bundle's Extension Test Suites
@@ -21,39 +23,49 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 {	
 	/**
-	 * @var ASFLayoutExtension
-	 */
-	protected $extension;
-	
-	/**
 	 * @var ContainerBuilder
 	 */
-	protected $container;
+	protected $configuration;
 	
 	/**
-	 * {@inheritDoc}
-	 * @see \ASF\LayoutBundle\Tests\ContainerAwareTestCase::setUp()
+	 * Test if bundle default configuration parameters are in container has container's parameter
 	 */
-	public function setUp()
+	public function testIfBundleConfigurationParametersAreInContainer()
 	{
-		parent::setUp();
+		$loader = new ASFLayoutExtension();
+		$container = new ContainerBuilder();
+		$config = $this->getEmptyConfig();
+		$loader->load(array($config), $container);
 		
-		/*$this->container = new ContainerBuilder();
-		$this->container->setParameter('kernel.cache_dir', $this->kernel->getContainer()->getParameter('kernel.cache_dir'));
-		$this->container->setParameter('kernel.bundles', $this->kernel->getContainer()->getParameter('kernel.bundles'));
-		*/
-		$this->extension = new ASFLayoutExtension();
+		// Test if bundle's configuration parameter asf_layout.supports.jquery is in container parameters
+		$this->assertTrue($container->hasParameter($loader->getAlias().'.supports.jquery'));
+		
+		// Test if bundle's configuration parameter asf_layout.jquery_path is in container parameters
+		$this->assertTrue($container->hasParameter($loader->getAlias().'.jquery_path'));
 	}
 	
 	/**
-	 * Test bundle's default configuration
+	 * Test if bundle's default configuration are properly loaded with an empty app configuration (yaml)
 	 */
-	public function testDefaultConfiguration()
+	public function testUserLoadThrowsExceptionUnlessSupportsJquerySet()
 	{
-		$configs = array();
+		$loader = new ASFLayoutExtension();
+		$config = $this->getEmptyConfig();
 		
-		$this->extension->load(array($configs), $this->container);
-		
-		$this->assertTrue($this->container->hasParameter($this->extension->getAlias().'.supports.jquery'));
+		$loader->load(array($config), new ContainerBuilder());
+	}
+	
+	/**
+	 * getEmptyConfig
+	 *
+	 * @return array
+	 */
+	protected function getEmptyConfig()
+	{
+		$yaml = <<<EOF
+supports: ~
+EOF;
+		$parser = new Parser();
+		return $parser->parse($yaml);
 	}
 }
