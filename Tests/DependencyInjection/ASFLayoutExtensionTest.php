@@ -9,10 +9,9 @@
  */
 namespace ASF\LayoutBundle\Tests\DependencyInjection;
 
+use \Mockery as m; 
 use ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\Definition\Processor;
-use ASF\LayoutBundle\DependencyInjection\Configuration;
 
 /**
  * Bundle's Extension Test Suites
@@ -27,17 +26,61 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected $kernel;
 	
+	/**
+	 * @var \ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension
+	 */
+	protected $extension;
+	
+	/**
+	 * {@inheritDoc}
+	 * @see PHPUnit_Framework_TestCase::setUp()
+	 */
 	public function setUp()
 	{
 		parent::setUp();
 		
 		$this->kernel = new \AppKernel('test', true);
 		$this->kernel->boot();
+		
+		$this->extension = new ASFLayoutExtension();
 	}
 	
-	public function testLoadCinfoguration()
+	/**
+	 * Test the load method in bundle's extension
+	 */
+	public function testLoadExtension()
 	{
-		//$bag = \Mock
+		$bag = m::mock('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag');
+		$bag->shouldReceive('add');
+		
+		$container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+		$container->shouldReceive('hasExtension')->andReturn(false);
+		$container->shouldReceive('addResource');
+		$container->shouldReceive('getParameterBag')->andReturn($bag);
+		$container->shouldReceive('setDefinition');
+		$container->shouldReceive('setParameter');
+		
+		$this->extension->load(array(), $container);
+	}
+	
+	/**
+	 * Test the prepend method in bundle's extension
+	 */
+	public function testPrependExtension()
+	{
+		$bundles = $this->kernel->getContainer()->getParameter('kernel.bundles');
+		$extensions = array(
+			'assetic' => array(),
+			'twig' => array()
+		);
+		
+		$container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+		$container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+		$container->shouldReceive('getExtensions')->andReturn($extensions);
+		$container->shouldReceive('getExtensionConfig')->andReturn(array());
+		$container->shouldReceive('prependExtensionConfig');
+		
+		$this->extension->prepend($container);
 	}
 	
 	/**
@@ -46,15 +89,16 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testJqueryPathHasEmptyParameter()
 	{
 		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
-		$loader = new ASFLayoutExtension();
-		$loader->load(array(array(
+		$container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+		$extension = new ASFLayoutExtension();
+		$extension->load(array(array(
 			'supports' => array(
 				'jquery' => true
 			),
 			'jquery_config' => array(
 				'path' => ''
 			)
-		)), new ContainerBuilder());
+		)), $container);
 	}
 	
 	/**
@@ -62,43 +106,30 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testJqueryPathResourceNotFound()
 	{
-		$config = $this->processConfiguration(array(array(
+		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+		
+		$config = array(array(
 			'supports' => array(
 				'jquery' => true
 			),
 			'jquery_config' => array(
 				'path' => '/path/to/jquery.min.js'
 			)
-		)));
+		));
 		
-		//$loader = new ASFLayoutExtension();
-		$loader = $this->getMockBuilder('ASF\LayoutBundle\DependencyInjection\ASFExtension')->getMock();
-		$loader->method('configureSupportsBundle')->with($this->getContainer(), $config);
-		$this->assertInstanceOf('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException', $loader->configureSupportsBundle());
-	}
-	
-	/**
-	 * @return ContainerBuilder
-	 */
-	public function getContainer()
-	{
-		$container = new ContainerBuilder();
-		$container->setParameter('kernel.root_dir', $this->kernel->getContainer()->getParameter('kernel.root_dir'));
-		$container->setParameter('kernel.bundles', $this->kernel->getContainer()->getParameter('kernel.bundles'));
+		$bundles = $this->kernel->getContainer()->getParameter('kernel.bundles');
+		$extensions = array(
+			'assetic' => array(),
+			'twig' => array()
+		);
 		
-		return $container;
-	}
-	
-	/**
-	 * Processes an array of configurations.
-	 *
-	 * @param array $configs An array of configuration items to process
-	 *
-	 * @return array The processed configuration
-	 */
-	public function processConfiguration($configs)
-	{
-		$processor = new Processor();
-		return $processor->processConfiguration(new Configuration(), $configs);
+		$container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+		$container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+		$container->shouldReceive('getParameter')->with('kernel.root_dir')->andReturn($this->kernel->getContainer()->getParameter('kernel.root_dir'));
+		$container->shouldReceive('getExtensions')->andReturn($extensions);
+		$container->shouldReceive('getExtensionConfig')->with('asf_layout')->andReturn($config);
+		$container->shouldReceive('prependExtensionConfig');
+		
+		$this->extension->prepend($container);
 	}
 }
