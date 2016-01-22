@@ -37,18 +37,34 @@ class Configuration implements ConfigurationInterface
 						->booleanNode('jquery')->defaultFalse()->end()
 					->end()
 				->end()
-				->arrayNode('jquery_config')
-					->addDefaultsIfNotSet()
-					->children()
-						->scalarNode('path')
-							->cannotBeEmpty()
-							->defaultValue("%kernel.root_dir%/Resources/public/jquery/jquery.min.js")
-						->end()
-					->end()
-				->end()
+				
+				->append($this->addJqueryConfigNode())
 			->end()
 		;
 		
 		return $treeBuilder;
+	}
+	
+	/**
+	 * Add jQuery Confinguration in bundle's Configuration
+	 * 
+	 * @return 
+	 */
+	protected function addJqueryConfigNode()
+	{
+	    $builder = new TreeBuilder();
+	    $node = $builder->root('jquery_config');
+	    
+	    $node
+           ->addDefaultsIfNotSet()
+	       ->children()
+	           ->scalarNode('path')
+	               ->cannotBeEmpty()
+	               ->defaultValue("%kernel.root_dir%/../vendor/components/jquery/jquery.min.js")
+	           ->end()
+	       ->end()
+	    ;
+	    
+        return $node;
 	}
 }
