@@ -20,8 +20,14 @@ use ASF\LayoutBundle\DependencyInjection\Configuration;
  */
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
+	public function testDefaultConfiguration()
+	{
+		$processor = new Processor();
+		$config = $processor->processConfiguration(new Configuration(), array());
+	}
+	
 	/**
-	 * Test supports children parameter with invalid format
+	 * Test supports children parameter with invalid format (boolean required)
 	 */
 	public function testSupportsParameterWithInvalidFormat()
 	{
@@ -34,7 +40,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test if jquery default configuration is valid 
+	 * Test if jquery default configuration is invalid (jquery_config.path cannot be empty)
 	 */
 	public function testConfigurationWithInvalidJqueryConfiguration()
 	{
