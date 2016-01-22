@@ -24,6 +24,14 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 		$processor = new Processor();
 		$config = $processor->processConfiguration(new Configuration(), array());
+		
+		// Check if supports key is present
+		$this->assertArrayHasKey('supports', $config);
+		
+		// Check default jQuery Configuration
+		$this->assertArrayHasKey('jquery', $config['supports']);
+		$this->assertArrayHasKey('jquery_config', $config);
+		$this->assertArrayHasKey('path', $config['jquery_config']);
 	}
 	
 	/**

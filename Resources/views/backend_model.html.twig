@@ -1,0 +1,145 @@
+{% trans_default_domain 'asf_layout' %}
+
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+    <head>
+    	{% block asf_base_encoding %}
+        <meta charset="UTF-8" />
+        {% endblock asf_base_encoding %}
+        
+        <title>
+        	{% block asf_base_meta_title_prefix %}{% endblock %}
+			{% block asf_base_meta_title %}{{ 'Home'|trans }}{% endblock %}
+			{% block asf_base_meta_title_suffix %}{{ 'meta_title_separator'|trans }}{{ 'app_name'|trans }}{% endblock %}
+        </title>
+        
+        {% block asf_base_favicon %}
+        	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% endblock asf_base_favicon %}
+        
+		{% block asf_base_header_stylesheets %}
+			{{ asf_layout_stylesheets() }}
+			
+			{% stylesheets '@ASFLayoutBundle/Resources/public/backend/less/asf-layout-backend.less' %}
+				<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+			{% endstylesheets %}
+		{% endblock %}
+        
+        {% block asf_base_header_javascripts %}
+			{{ asf_layout_javascripts() }}
+			
+			{% javascripts '@ASFLayoutBundle/Resources/public/backend/js/asf-layout-backend.js' %}
+				<script src="{{ asset_url }}"></script>
+			{% endjavascripts %}
+		{% endblock %}
+    </head>
+    
+    {% block asf_base_body_tag %}
+    <body>
+    {% endblock asf_base_body_tag %}
+    
+    	{% block asf_base_body %}
+	    	{% block navbar %}
+	    	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	    		<div class="container-fluid">
+		    		<div class="navbar-header">
+		    			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#primary-menu-container">
+		    				<span class="sr-only">{{ 'Toggle navigation'|trans }}</span>
+		    				<span class="icon-bar"></span>
+		    				<span class="icon-bar"></span>
+		    				<span class="icon-bar"></span>
+		    			</button>
+		    			{% block navbar_brand %}{% endblock %}
+		    		</div>
+		    		
+		    		<div class="collapse navbar-collapse" id="primary-menu-container">
+		    			{% if asf_layout_supports.knp_menu == true %}
+		    				{{ knp_menu_render('top_right_menu', { 'style': 'navbar-right', allow_safe_labels: true }) }}
+		    			{% endif %}
+		    		</div>
+	    		</div>
+	    	</nav>
+	    	{% endblock navbar %}
+	    	
+	    	{% block content_wrapper %}
+	    	<div class="content-wrapper">
+	    	
+	    		{% block content_container %}
+	    		<div class="container-fluid">
+	    		
+	    			<div class="row">
+	    				{% block sidebar_left %}
+	    				<div class="col-xs-2">
+	    					{% block primary_menu %}
+		    				<div class="widget widget-primary-menu">
+								{% if asf_layout_supports.knp_menu == true %}
+									{{ knp_menu_render('main_menu', { allow_safe_labels: true }) }}
+			    				{% endif %}
+							</div>
+							{% endblock %}
+						</div>
+	    				{% endblock sidebar_left %}
+	    				
+	    				{% block content %}
+	    				<div class="col-xs-10">
+	    					
+		    				{% block content_title %}
+			    			<header class="container-fluid">
+			    				
+			    				<div class="row header-additional">
+				    				{% block breadcrumbs_root %}
+			    						<div class="col-xs-8 breadcrumbs">
+			    							<a href="{{ path('asf_application_admin_homepage') }}" title="{{ 'Home'|trans }}">{{ 'Home'|trans }}</a>
+			    							{% block breadcrumbs_tree %}{% endblock %}
+			    						</div>
+			    					{% endblock breadcrumbs_root %}
+			    					
+			    					<div class="col-xs-4 text-right">
+			    						<div class="btn-group btn-group-xs" role="group">
+			    						{% block asf_content_cmd %}{% endblock asf_content_cmd %}
+			    						</div>
+			    					</div>
+		    					</div>
+			    				
+			    				{% block page_title_container %}<h1>{% block page_title %}{% endblock %}</h1>{% endblock page_title_container %}
+			    				
+			    				{% block flash_messages %}
+			    				<div class="row">
+			    					<div class="col-sm-12">
+			    						{{ asf_flash_alerts() }}
+			    					</div>
+			    				</div>
+				    			{% endblock %}
+			    				
+			    			</header>
+			    			{% endblock content_title %}
+			    			
+			    			{% block view_actions_content %}{% endblock %}
+		    				
+		    				{% block page_content %}{% endblock page_content %}
+	    					
+	    				</div>
+	    				{% endblock %}
+	    			</div>
+	    			
+	    		</div>
+	    		{% endblock content_container %}
+	    		
+	    	</div> 	
+	    	{% endblock content_wrapper %}
+	    	
+	    	{% block footer %}
+	    		<footer class="navbar navbar-default">
+	    			<div class="container-fluid">
+	    				<div class="container" id="footer-menu-wrapper">
+	    					<p class="text-center"><small>&copy; 2012-{{ "now"|date("Y") }} {{ 'Artscore Studio'|trans }} - v{{ version }}</small></p>
+	    				</div>
+	    			</div>
+	    		</footer>
+	    	{% endblock footer %}
+	    {% endblock asf_base_body %}
+
+    	{% block asf_base_footer_javascripts %}{% endblock asf_base_footer_javascripts %}
+    	
+    </body>
+</html>

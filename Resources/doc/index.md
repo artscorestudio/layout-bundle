@@ -1,8 +1,16 @@
 # Artscore Studio Layout Bundle
 
-Layout Bundle is a Symfony 3 component providing frontend and backend layouts in your Symfony 3 application based on jQuery and Twitter Bootstrap. This package is a part of Artscore Studio Framework.
+Layout Bundle is a Symfony 3 component providing frontend and backend layouts models in your Symfony 3 application based on jQuery and Twitter Bootstrap. This package is a part of Artscore Studio Framework.
 
-IMPORTANT NOTICE: This bundle is still under development. Any changes will be done without prior notice to consumers of this package. Of course this code will become stable at a certain point, but for now, use at your own risk.
+Layout bundle provides model layouts which is not mandatory for construct User Interface. The target of the bundle is to provide features for accelerate User Interface developement.
+
+Why ? For my personnal developments, I use jQuery and Twitter Bootstrap. When I started new Symfony project, I wanted to get jQuery and Twitter Bootstrap in basic Twig template just by installing a bundle and boom ! I have a User Interface in place !
+
+But this bundle allows you to enable or disable external libraries or add more libraries supports. We will see this later.
+
+> IMPORTANT NOTICE: This bundle is still under development. Any changes will be done without prior notice to consumers of this package. Of course this code will become stable at a certain point, but for now, use at your own risk.
+
+> BE CARREFUL : This bundle does not include external libraries, you must install the libraries via Compoer, in accordance with best practices of Symfony documentation.
 
 ## Prerequisites
 
@@ -18,11 +26,11 @@ framework:
     translator: ~
 ```
 
-For more inforamtion about translations, check [Symfony documentation](https://symfony.com/doc/current/book/translation.html).
+For more information about translations, check [Symfony documentation](https://symfony.com/doc/current/book/translation.html).
 
 ## Installation
 
-### Step 1 : Dwonload AsfLayoutBundle using composer
+### Step 1 : Dwonload ASFLayoutBundle using composer
 
 Require the bundle with composer :
 
@@ -30,7 +38,7 @@ Require the bundle with composer :
 $ composer require artscorestudio/layout-bundle "dev-master"
 ```
 
-Composer will install the bundle to your project's *vendor/artscorestudio/layout-bundle* directory.
+Composer will install the bundle to your project's *vendor/artscorestudio/layout-bundle* directory. It also install dependencies. 
 
 ### Step 2 : Enable the bundle
 
@@ -43,16 +51,59 @@ public function registerBundles()
 {
 	$bundles = array(
 		// ...
-		new Asf\LayoutBundle\ASFLayoutBundle()
+		new ASF\LayoutBundle\ASFLayoutBundle()
 		// ...
 	);
 }
 ```
 
+### Step 3 : Configure the bundle for a quickly use of it with jQuery and Twitter Bootstrap
+
+For a quickly access to a basic template based on jQuery and Twitter Bottstrap, enable it in your application configuration file :
+
+```yaml
+// app/config/config.yml
+asf_layout:
+	supports:
+		jquery: true
+		twbs: true
+		
+	jquery_config:
+		path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+		
+	twbs_config:
+	    [...] TODO
+    
+### Step 4 : Add jQuery and Twitter Bootstrap in your composer.json file
+
+For install jQuery, add it to your project's composer.json file :
+
+```bash
+$ composer require components/jquery "2.2.*"
+```
+
+And for install Twitter Bootstrap, add it to your project's composer.json file :
+
+```bash
+$ composer require components/bootstrap "3.3.*"
+```
+
+### Step 3 : Extend model layouts
+
+Open your base template and extend model templates from Layout bundle :
+
+```twig
+// app/Resources/views/base.html.twig
+{% extends ASFLayoutBundle::frontend_layout.html.twig %}
+```
+
+And it's done ! If you go in your favorite browser, you have basic template for your project based on jQuery and Twitter Bootstrap.
+You can use it as this or overriding it !
+
 ### Next Steps
 
-Now you have completed the basic installation and configuration of the AsfLayoutBundle, you are ready to learn about more advanced features and usages of the bundle.
+Now you have completed the basic installation and configuration of the ASFLayoutBundle, you are ready to learn about more advanced features and usages of the bundle.
 
 The following documents are available :
-
+* [Enable/Disable an external library](enable-external-library.md)
 * [ASFLayoutBundle Configuration Reference](configuration.md)
