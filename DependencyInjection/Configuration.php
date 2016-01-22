@@ -29,17 +29,23 @@ class Configuration implements ConfigurationInterface
 		$treeBuilder = new TreeBuilder();
 		$rootNode = $treeBuilder->root('asf_layout');
 		
-		$supportedExternalLibraries = array('jquery');
-		
 		$rootNode
 			->children()
 				->arrayNode('supports')
-					->isRequired()
+					->addDefaultsIfNotSet()
 					->children()
 						->booleanNode('jquery')->defaultFalse()->end()
 					->end()
 				->end()
-				->scalarNode('jquery_path')->defaultValue("%kernel.root_dir%/Resources/public/jquery/jquery.min.js")->end()
+				->arrayNode('jquery_config')
+					->addDefaultsIfNotSet()
+					->children()
+						->scalarNode('path')
+							->cannotBeEmpty()
+							->defaultValue("%kernel.root_dir%/Resources/public/jquery/jquery.min.js")
+						->end()
+					->end()
+				->end()
 			->end()
 		;
 		

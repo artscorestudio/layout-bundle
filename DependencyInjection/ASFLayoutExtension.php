@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 /**
  * Bundle extension
@@ -31,7 +32,7 @@ class ASFLayoutExtension extends ASFExtension implements PrependExtensionInterfa
 	{
 		$configuration = new Configuration();
 		$config = $this->processConfiguration($configuration, $configs);
-		
+
 		$this->mapsParameters($container, $this->getAlias(), $config);
 		
 		$loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
@@ -47,12 +48,12 @@ class ASFLayoutExtension extends ASFExtension implements PrependExtensionInterfa
 	 */
 	public function prepend(ContainerBuilder $container)
 	{
-		$bundles = array_keys($container->getParameter('kernel.bundles'));
+		$bundles = $container->getParameter('kernel.bundles');
 		
 		$configs = $container->getExtensionConfig($this->getAlias());
 		$config = $this->processConfiguration(new Configuration(), $configs);
 		
-		if ( isset($bundles['assetic']) && count($config['supports']) > 0 ) {
+		if ( array_key_exists('AsseticBundle', $bundles) && count($config['supports']) > 0 ) {
 			$this->configureSupportsBundle($container, $config);
 		}
 	}
@@ -69,18 +70,24 @@ class ASFLayoutExtension extends ASFExtension implements PrependExtensionInterfa
 			switch($name) {
 				case 'twig':
 					// Add supports assets list in twig variables
-					$container->prependExtensionConfig($name, array('asf_layout_supports' => $config['supports']));
+					$container->prependExtensionConfig($name, array(
+						'globals' => array(
+							'asf_layout_supports' => $config['supports']
+						)
+					));
 					break;
 				case 'assetic':
 					// Add jQuery in assets
-    				if ( isset($config['supports']['jquery']) && true === $config['supports']['jquery'] && isset($config['jquery_path']) ) {
+    				if ( isset($config['supports']['jquery']) && true === $config['supports']['jquery'] && isset($config['jquery_config']['path']) && true === $this->checkPath($config['jquery_config']['path'], $container) ) {
+    					
     					$container->prependExtensionConfig($name, array(
     						'assets' => array(
-    							'jquery' => $config['jquery_path']
+    							'jquery' => $config['jquery_config']['path']
     						)
     					));
-    				} elseif ( isset($config['supports']['jquery']) && true === $config['supports']['jquery'] && (!isset($config['jquery_path']) || empty($config['jquery_path']) )  ) {
-    					throw new \Exception('You have enabled the support of jQuery but you do not specify the path to the file');
+    					
+    				} elseif ( isset($config['supports']['jquery']) && true === $config['supports']['jquery'] && (!isset($config['jquery_config']['path']) || empty($config['jquery_config']['path']) || false === $this->checkPath($config['jquery_config']['path'], $container) )  ) {
+    					throw new InvalidConfigurationException('You have enabled the support of jQuery but you do not specify the path to the file or the file is not reachable.');
     				}
 					break;
 			}

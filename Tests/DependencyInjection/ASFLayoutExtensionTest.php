@@ -11,8 +11,8 @@ namespace ASF\LayoutBundle\Tests\DependencyInjection;
 
 use ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Config\Definition\Processor;
 use ASF\LayoutBundle\DependencyInjection\Configuration;
-use Symfony\Component\Yaml\Parser;
 
 /**
  * Bundle's Extension Test Suites
@@ -21,51 +21,84 @@ use Symfony\Component\Yaml\Parser;
  *
  */
 class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
-{	
+{
 	/**
-	 * @var ContainerBuilder
+	 * @var \AppKernel
 	 */
-	protected $configuration;
+	protected $kernel;
+	
+	public function setUp()
+	{
+		parent::setUp();
+		
+		$this->kernel = new \AppKernel('test', true);
+		$this->kernel->boot();
+	}
+	
+	public function testLoadCinfoguration()
+	{
+		//$bag = \Mock
+	}
 	
 	/**
-	 * Test if bundle default configuration parameters are in container has container's parameter
+	 * Test jQuery path (empty parameter)
 	 */
-	public function testIfBundleConfigurationParametersAreInContainer()
+	public function testJqueryPathHasEmptyParameter()
 	{
+		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 		$loader = new ASFLayoutExtension();
+		$loader->load(array(array(
+			'supports' => array(
+				'jquery' => true
+			),
+			'jquery_config' => array(
+				'path' => ''
+			)
+		)), new ContainerBuilder());
+	}
+	
+	/**
+	 * Test jQuery path (file not found)
+	 */
+	public function testJqueryPathResourceNotFound()
+	{
+		$config = $this->processConfiguration(array(array(
+			'supports' => array(
+				'jquery' => true
+			),
+			'jquery_config' => array(
+				'path' => '/path/to/jquery.min.js'
+			)
+		)));
+		
+		//$loader = new ASFLayoutExtension();
+		$loader = $this->getMockBuilder('ASF\LayoutBundle\DependencyInjection\ASFExtension')->getMock();
+		$loader->method('configureSupportsBundle')->with($this->getContainer(), $config);
+		$this->assertInstanceOf('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException', $loader->configureSupportsBundle());
+	}
+	
+	/**
+	 * @return ContainerBuilder
+	 */
+	public function getContainer()
+	{
 		$container = new ContainerBuilder();
-		$config = $this->getEmptyConfig();
-		$loader->load(array($config), $container);
+		$container->setParameter('kernel.root_dir', $this->kernel->getContainer()->getParameter('kernel.root_dir'));
+		$container->setParameter('kernel.bundles', $this->kernel->getContainer()->getParameter('kernel.bundles'));
 		
-		// Test if bundle's configuration parameter asf_layout.supports.jquery is in container parameters
-		$this->assertTrue($container->hasParameter($loader->getAlias().'.supports.jquery'));
-		
-		// Test if bundle's configuration parameter asf_layout.jquery_path is in container parameters
-		$this->assertTrue($container->hasParameter($loader->getAlias().'.jquery_path'));
+		return $container;
 	}
 	
 	/**
-	 * Test if bundle's default configuration are properly loaded with an empty app configuration (yaml)
-	 */
-	public function testUserLoadThrowsExceptionUnlessSupportsJquerySet()
-	{
-		$loader = new ASFLayoutExtension();
-		$config = $this->getEmptyConfig();
-		
-		$loader->load(array($config), new ContainerBuilder());
-	}
-	
-	/**
-	 * getEmptyConfig
+	 * Processes an array of configurations.
 	 *
-	 * @return array
+	 * @param array $configs An array of configuration items to process
+	 *
+	 * @return array The processed configuration
 	 */
-	protected function getEmptyConfig()
+	public function processConfiguration($configs)
 	{
-		$yaml = <<<EOF
-supports: ~
-EOF;
-		$parser = new Parser();
-		return $parser->parse($yaml);
+		$processor = new Processor();
+		return $processor->processConfiguration(new Configuration(), $configs);
 	}
 }

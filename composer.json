@@ -13,12 +13,15 @@
 	}
 	],
 	"require" : {
-		"php" : ">=5.5.9",
+		"php": ">=5.5.9",
+        "symfony/symfony": "3.0.*",
 		"artscorestudio/core-bundle": "dev-master"
 	},
 	"require-dev" : {
-		"symfony/framework-bundle": "~3.0",
-        "phpunit/phpunit": "5.1.*"
+		"sensio/generator-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^2.7",
+        "phpunit/phpunit": "5.1.*",
+        "mockery/mockery": "0.9.*"
 	},
 	"autoload" : {
 		"psr-4" : {
