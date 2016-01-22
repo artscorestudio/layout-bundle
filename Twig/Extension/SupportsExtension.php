@@ -48,7 +48,7 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	 */
 	public function getStylesheets()
 	{
-		return $this->environment->render('AsfLayoutBundle:supports:stylesheets_layout.html.twig');
+		return $this->environment->render('ASFLayoutBundle:supports:stylesheets_layout.html.twig');
 	}
 	
 	/**
@@ -56,7 +56,7 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	 */
 	public function getJavascripts()
 	{
-		return $this->environment->render('AsfLayoutBundle:supports:javascripts_layout.html.twig');
+		return $this->environment->render('ASFLayoutBundle:supports:javascripts_layout.html.twig');
 	}
 	
 	/**
