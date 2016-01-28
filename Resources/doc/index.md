@@ -8,6 +8,8 @@ But this bundle allows you to enable or disable external libraries or add more l
 
 > IMPORTANT NOTICE: This bundle is still under development. Any changes will be done without prior notice to consumers of this package. Of course this code will become stable at a certain point, but for now, use at your own risk.
 
+https://travis-ci.org/artscorestudio/layout-bundle.svg?branch=master
+
 ## Prerequisites
 
 This version of the bundle requires :
