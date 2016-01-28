@@ -31,40 +31,34 @@ class Configuration implements ConfigurationInterface
 		
 		$rootNode
 			->children()
-				->arrayNode('supports')
+				->booleanNode('enable_twig_support')
+				    ->defaultTrue()
+				->end()
+				->arrayNode('supported_assets')
 					->addDefaultsIfNotSet()
 					->children()
-						->booleanNode('jquery')->defaultFalse()->end()
+					   ->arrayNode('jquery')
+					       ->beforeNormalization()
+					           ->ifTrue(function($value){
+					               return !isset($value['path']) || $value == false;
+					           })
+					           ->then(function($value){
+					               return array('path' => false);
+					           })
+					       ->end()
+					       ->addDefaultsIfNotSet()
+					       ->children()
+    					       ->scalarNode('path')
+    					           ->cannotBeEmpty()
+    					           ->defaultValue("%kernel.root_dir%/../vendor/components/jquery/jquery.min.js")
+    					       ->end()
+					       ->end()
+					   ->end()
 					->end()
 				->end()
-				
-				->append($this->addJqueryConfigNode())
 			->end()
 		;
 		
 		return $treeBuilder;
-	}
-	
-	/**
-	 * Add jQuery Confinguration in bundle's Configuration
-	 * 
-	 * @return 
-	 */
-	protected function addJqueryConfigNode()
-	{
-	    $builder = new TreeBuilder();
-	    $node = $builder->root('jquery_config');
-	    
-	    $node
-           ->addDefaultsIfNotSet()
-	       ->children()
-	           ->scalarNode('path')
-	               ->cannotBeEmpty()
-	               ->defaultValue("%kernel.root_dir%/../vendor/components/jquery/jquery.min.js")
-	           ->end()
-	       ->end()
-	    ;
-	    
-        return $node;
 	}
 }

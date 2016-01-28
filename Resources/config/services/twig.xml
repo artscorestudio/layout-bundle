@@ -9,6 +9,9 @@
 	
 	<services>
 		<service id="asf_layout.twig.extension.supports" class="%asf_layout.twig.extension.supports.class%">
+			<call method="setSupportedAssets">
+				<argument>%asf_layout.supported_assets%</argument>
+			</call>
 			<tag name="twig.extension" />
 		</service>
 	</services>

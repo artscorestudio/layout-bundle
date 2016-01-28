@@ -9,6 +9,8 @@
  */
 namespace ASF\LayoutBundle\Twig\Extension;
 
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+
 /**
  * External assets extension
  * 
@@ -21,6 +23,11 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	 * @var \Twig_Environment
 	 */
 	private $environment;
+	
+	/**
+	 * @var array
+	 */
+	protected $supportedAssets;
 	
 	/**
 	 * (non-PHPdoc)
@@ -56,7 +63,20 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	 */
 	public function getJavascripts()
 	{
-		return $this->environment->render('ASFLayoutBundle:supports:javascripts_layout.html.twig');
+	    if ( $this->supportedAssets['jquery']['path'] !== false && !file_exists($this->supportedAssets['jquery']['path']) )
+            throw new InvalidConfigurationException('You have enabled the support of jQuery but you do not specify the path to the file or the file is not reachable.');
+	    elseif ($this->supportedAssets['jquery']['path'] !== false)
+            return $this->environment->render('ASFLayoutBundle:supports:jquery.html.twig');
+	}
+	
+	/**
+	 * Set supported assets
+	 * 
+	 * @param array $supported_assets
+	 */
+	public function setSupportedAssets(array $supported_assets)
+	{
+	    $this->supportedAssets = $supported_assets;
 	}
 	
 	/**

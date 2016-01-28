@@ -9,7 +9,8 @@
  */
 namespace ASF\LayoutBundle\DependencyInjection;
 
-use ASF\CoreBundle\DependencyInjection\ASFExtension;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
@@ -22,7 +23,7 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class ASFLayoutExtension extends ASFExtension implements PrependExtensionInterface
+class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 {
 	/**
 	 * {@inheritDoc}
@@ -32,13 +33,12 @@ class ASFLayoutExtension extends ASFExtension implements PrependExtensionInterfa
 	{
 		$configuration = new Configuration();
 		$config = $this->processConfiguration($configuration, $configs);
-
-		$this->mapsParameters($container, $this->getAlias(), $config);
-		
+        
 		$loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		
-		if ( count($config['supports']) > 0 ) {
-			$loader->load('services/supports.xml');
+		if ( $config['enable_twig_support'] == true ) {
+		    $loader->load('services/twig.xml');
+		    $container->setParameter('asf_layout.supported_assets', $config['supported_assets']);
 		}
 	}
 	
@@ -53,9 +53,11 @@ class ASFLayoutExtension extends ASFExtension implements PrependExtensionInterfa
 		$configs = $container->getExtensionConfig($this->getAlias());
 		$config = $this->processConfiguration(new Configuration(), $configs);
 		
-		if ( array_key_exists('AsseticBundle', $bundles) && count($config['supports']) > 0 ) {
-			$this->configureSupportsBundle($container, $config);
-		}
+		if ( array_key_exists('AsseticBundle', $bundles) && count($config['supported_assets']) > 0 )
+			$this->configureAsseticBundle($container, $config);
+		
+		if ( !array_key_exists('TwigBundle', $bundles) && $config['enable_twig_support'] == true )
+            throw new InvalidConfigurationException('You have enabled the support of Twig but Twig is not enabled.');
 	}
 	
 	/**
@@ -64,30 +66,18 @@ class ASFLayoutExtension extends ASFExtension implements PrependExtensionInterfa
 	 * @param ContainerBuilder $container
 	 * @param array $config
 	 */
-	public function configureSupportsBundle(ContainerBuilder $container, array $config)
+	public function configureAsseticBundle(ContainerBuilder $container, array $config)
 	{
 		foreach(array_keys($container->getExtensions()) as $name) {
 			switch($name) {
-				case 'twig':
-					// Add supports assets list in twig variables
-					$container->prependExtensionConfig($name, array(
-						'globals' => array(
-							'asf_layout_supports' => $config['supports']
-						)
-					));
-					break;
 				case 'assetic':
 					// Add jQuery in assets
-    				if ( isset($config['supports']['jquery']) && true === $config['supports']['jquery'] && isset($config['jquery_config']['path']) && true === $this->checkPath($config['jquery_config']['path'], $container) ) {
-    					
+    				if ( $config['supported_assets']['jquery']['path'] !== false ) {
     					$container->prependExtensionConfig($name, array(
     						'assets' => array(
-    							'jquery' => $config['jquery_config']['path']
+    							'jquery' => $config['supported_assets']['jquery']['path']
     						)
     					));
-    					
-    				} elseif ( isset($config['supports']['jquery']) && true === $config['supports']['jquery'] && (!isset($config['jquery_config']['path']) || empty($config['jquery_config']['path']) || false === $this->checkPath($config['jquery_config']['path'], $container) )  ) {
-    					throw new InvalidConfigurationException('You have enabled the support of jQuery but you do not specify the path to the file or the file is not reachable.');
     				}
 					break;
 			}
