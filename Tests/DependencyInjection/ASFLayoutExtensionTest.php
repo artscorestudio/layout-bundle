@@ -68,10 +68,14 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testPrependExtension()
 	{
-		$bundles = $this->kernel->getContainer()->getParameter('kernel.bundles');
+		$bundles = $bundles = array(
+		    'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+		    'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+		);
+		
 		$extensions = array(
 			'assetic' => array(),
-			'twig' => array()
+		    'twig' => array()
 		);
 		
 		$container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
@@ -84,7 +88,28 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test jQuery path (empty parameter)
+	 * Test preprend method without Twig Bundle enabled - InvalidConfigurationException Exception expected
+	 */
+	public function testPrependExtensionWithoutTwigBundle()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $bundles = array('AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle');
+	    
+	    $extensions = array(
+	        'assetic' => array()
+	    );
+	    
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+	    $container->shouldReceive('getExtensions')->andReturn($extensions);
+	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
+	    $container->shouldReceive('prependExtensionConfig');
+	    
+	    $this->extension->prepend($container);
+	}
+	
+	/**
+	 * Test jQuery path (empty parameter) - InvalidConfigurationException Exception expected
 	 */
 	public function testJqueryPathHasEmptyParameter()
 	{
@@ -92,44 +117,11 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 		$container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
 		$extension = new ASFLayoutExtension();
 		$extension->load(array(array(
-			'supports' => array(
-				'jquery' => true
-			),
-			'jquery_config' => array(
-				'path' => ''
+			'supported_assets' => array(
+				'jquery' => array(
+				    'path' => ''
+				)
 			)
 		)), $container);
-	}
-	
-	/**
-	 * Test jQuery path (file not found)
-	 */
-	public function testJqueryPathResourceNotFound()
-	{
-		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
-		
-		$config = array(array(
-			'supports' => array(
-				'jquery' => true
-			),
-			'jquery_config' => array(
-				'path' => '/path/to/jquery.min.js'
-			)
-		));
-		
-		$bundles = $this->kernel->getContainer()->getParameter('kernel.bundles');
-		$extensions = array(
-			'assetic' => array(),
-			'twig' => array()
-		);
-		
-		$container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
-		$container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
-		$container->shouldReceive('getParameter')->with('kernel.root_dir')->andReturn($this->kernel->getContainer()->getParameter('kernel.root_dir'));
-		$container->shouldReceive('getExtensions')->andReturn($extensions);
-		$container->shouldReceive('getExtensionConfig')->with('asf_layout')->andReturn($config);
-		$container->shouldReceive('prependExtensionConfig');
-		
-		$this->extension->prepend($container);
 	}
 }

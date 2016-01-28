@@ -20,47 +20,54 @@ use ASF\LayoutBundle\DependencyInjection\Configuration;
  */
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
-	public function testDefaultConfiguration()
+    /**
+     * Check if asf_layout.enable_twig_support is set to true by default
+     */
+	public function testEnableTwigSupportParameterInDefaultConfiguration()
 	{
 		$processor = new Processor();
 		$config = $processor->processConfiguration(new Configuration(), array());
-		
-		// Check if supports key is present
-		$this->assertArrayHasKey('supports', $config);
-		
-		// Check default jQuery Configuration
-		$this->assertArrayHasKey('jquery', $config['supports']);
-		$this->assertArrayHasKey('jquery_config', $config);
-		$this->assertArrayHasKey('path', $config['jquery_config']);
+		$this->assertTrue($config['enable_twig_support']);
 	}
 	
 	/**
-	 * Test supports children parameter with invalid format (boolean required)
+	 * Check if asf_layout.supported_assets key is set
 	 */
-	public function testSupportsParameterWithInvalidFormat()
+	public function testSupportedAssetsParameterInDefaultConfiguration()
 	{
-		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidTypeException');
-		$config = $this->process(array(array(
-			'supports' => array(
-				'jquery' => '1'
-			)
-		)));
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('supported_assets', $config);
 	}
 	
 	/**
-	 * Test if jquery default configuration is invalid (jquery_config.path cannot be empty)
+	 * Check if asf_layout.supported_key.jquery key is set
 	 */
-	public function testConfigurationWithInvalidJqueryConfiguration()
+	public function testJqueryParameterInDefaultConfiguration()
 	{
-		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
-		$config = $this->process(array(array(
-			'supports' => array(
-				'jquery' => true
-			),
-			'jquery_config' => array(
-				'path' => ''
-			)
-		)));
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('jquery', $config['supported_assets']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_key.jquery.path key is set
+	 */
+	public function testJqueryPathParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('path', $config['supported_assets']['jquery']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_key.jquery.path key is set to "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	 */
+	public function testJqueryPathParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../vendor/components/jquery/jquery.min.js', $config['supported_assets']['jquery']['path']);
 	}
 	
 	/**
