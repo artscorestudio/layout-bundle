@@ -15,7 +15,6 @@
 	"require" : {
 		"php": ">=5.5.9",
         "symfony/symfony": "3.0.*",
-		"artscorestudio/core-bundle": "dev-master",
 		"components/jquery": "2.2.*"
 	},
 	"require-dev" : {
