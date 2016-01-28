@@ -4,6 +4,8 @@ Layout Bundle is a Symfony 3 component providing frontend and backend layouts in
 
 IMPORTANT NOTICE: This bundle is still under development. Any changes will be done without prior notice to consumers of this package. Of course this code will become stable at a certain point, but for now, use at your own risk.
 
+[![Build Status](https://travis-ci.org/artscorestudio/layout-bundle.svg?branch=master)](https://travis-ci.org/artscorestudio/layout-bundle)
+
 ## Documentation
 
 The bulk of the documentation is stored in the Resources/docs/index.md file in bundle :
