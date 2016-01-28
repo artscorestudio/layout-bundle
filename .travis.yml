@@ -23,7 +23,7 @@ before_install:
 install: composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
-  - phpunit --coverage-text
+  - phpunit 
 
 notifications:
   email: travis@artscore-studio.fr
