@@ -106,6 +106,27 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * Test preprend method without Twig Bundle enabled - InvalidConfigurationException Exception expected
+	 */
+	public function testPrependExtensionWithoutAsseticBundle()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $bundles = array('TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle');
+	     
+	    $extensions = array(
+	        'twig' => array()
+	    );
+	     
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+	    $container->shouldReceive('getExtensions')->andReturn($extensions);
+	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
+	    $container->shouldReceive('prependExtensionConfig');
+	     
+	    $this->extension->prepend($container);
+	}
+	
+	/**
 	 * Test jQuery path (empty parameter) - InvalidConfigurationException Exception expected
 	 */
 	public function testJqueryPathHasEmptyParameter()

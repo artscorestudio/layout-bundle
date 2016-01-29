@@ -31,6 +31,16 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * Check if asf_layout.enable_assetic_support is set to true by default
+	 */
+	public function testEnableAsseticSupportParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertTrue($config['enable_assetic_support']);
+	}
+	
+	/**
 	 * Check if asf_layout.supported_assets key is set
 	 */
 	public function testSupportedAssetsParameterInDefaultConfiguration()

@@ -11,6 +11,7 @@
 		<service id="asf_layout.twig.extension.supports" class="%asf_layout.twig.extension.supports.class%">
 			<call method="setSupportedAssets">
 				<argument>%asf_layout.supported_assets%</argument>
+				<argument>%asf_layout.enable_assetic_support%</argument>
 			</call>
 			<tag name="twig.extension" />
 		</service>

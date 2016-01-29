@@ -30,6 +30,11 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	protected $supportedAssets;
 	
 	/**
+	 * @var boolean
+	 */
+	protected $asseticSupportEnabled;
+	
+	/**
 	 * (non-PHPdoc)
 	 * @see Twig_Extension::initRuntime()
 	 */
@@ -65,7 +70,7 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	{
 	    if ( $this->supportedAssets['jquery']['path'] !== false && !file_exists($this->supportedAssets['jquery']['path']) )
             throw new InvalidConfigurationException('You have enabled the support of jQuery but you do not specify the path to the file or the file is not reachable.');
-	    elseif ($this->supportedAssets['jquery']['path'] !== false)
+	    elseif ($this->supportedAssets['jquery']['path'] !== false && $this->asseticSupportEnabled === true)
             return $this->environment->render('ASFLayoutBundle:supports:jquery.html.twig');
 	}
 	
@@ -73,10 +78,12 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	 * Set supported assets
 	 * 
 	 * @param array $supported_assets
+	 * @param boolean $enable_assetic_support
 	 */
-	public function setSupportedAssets(array $supported_assets)
+	public function setSupportedAssets(array $supported_assets, $assetic_support_enabled)
 	{
 	    $this->supportedAssets = $supported_assets;
+	    $this->asseticSupportEnabled = $assetic_support_enabled;
 	}
 	
 	/**

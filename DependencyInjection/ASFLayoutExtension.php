@@ -39,12 +39,13 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		if ( $config['enable_twig_support'] == true ) {
 		    $loader->load('services/twig.xml');
 		    $container->setParameter('asf_layout.supported_assets', $config['supported_assets']);
+		    $container->setParameter('asf_layout.enable_assetic_support', $config['enable_assetic_support']);
 		}
 	}
 	
 	/**
-	 * 
-	 * @param ContainerBuilder $container
+	 * {@inheritDoc}
+	 * @see \Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface::prepend()
 	 */
 	public function prepend(ContainerBuilder $container)
 	{
@@ -53,11 +54,14 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		$configs = $container->getExtensionConfig($this->getAlias());
 		$config = $this->processConfiguration(new Configuration(), $configs);
 		
-		if ( array_key_exists('AsseticBundle', $bundles) && count($config['supported_assets']) > 0 )
-			$this->configureAsseticBundle($container, $config);
-		
 		if ( !array_key_exists('TwigBundle', $bundles) && $config['enable_twig_support'] == true )
-            throw new InvalidConfigurationException('You have enabled the support of Twig but Twig is not enabled.');
+		    throw new InvalidConfigurationException('You have enabled the support of Twig but Twig is not enabled.');
+		
+        if ( !array_key_exists('AsseticBundle', $bundles) && $config['enable_assetic_support'] == true )
+            throw new InvalidConfigurationException('You have enabled the support of Assetic but Assetic is not enabled.');
+		
+		if ( array_key_exists('AsseticBundle', $bundles) && count($config['supported_assets']) > 0 && $config['enable_assetic_support'] == true )
+			$this->configureAsseticBundle($container, $config);
 	}
 	
 	/**
