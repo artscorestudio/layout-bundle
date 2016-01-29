@@ -18,3 +18,5 @@ $ phpunit
 EOT;
     exit(1);
 }
+
+require_once 'AppKernel.php';
