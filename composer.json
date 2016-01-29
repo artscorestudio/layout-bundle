@@ -17,7 +17,8 @@
         "symfony/symfony": "3.0.*",
         "components/jquery": "2.2.*",
         "symfony/assetic-bundle": "^2.7",
-        "components/jqueryui": "1.11.*"
+        "components/jqueryui": "1.11.*",
+        "components/bootstrap": "3.3.*"
 	},
 	"require-dev" : {
 		"sensio/generator-bundle": "^3.0",
