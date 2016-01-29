@@ -8,12 +8,14 @@ But this bundle allows you to enable or disable external libraries or add more l
 
 > IMPORTANT NOTICE: This bundle is still under development. Any changes will be done without prior notice to consumers of this package. Of course this code will become stable at a certain point, but for now, use at your own risk.
 
+> BE CARREFUL : This bundle does not include external libraries, you must install the libraries via Compoer, in accordance with best practices of Symfony documentation.
+ 
 ## Prerequisites
 
 This version of the bundle requires :
 * Symfony 3.0+
-* jQuery 2.2+
-* Twitter Bootstrap 3.3+ [not yet implemented]
+* jQuery 2.2+ (suggest [components/jquery](https://github.com/components/jquery)
+* Twitter Bootstrap 3.3+ (suggest [components/bootstrap](https://github.com/components/bootstrap) [not yet implemented]
 
 ### Translations
 

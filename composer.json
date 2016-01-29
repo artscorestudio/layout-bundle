@@ -15,14 +15,14 @@
 	"require" : {
 		"php": ">=5.5.9",
         "symfony/symfony": "3.0.*",
-		"components/jquery": "2.2.*"
+        "components/jquery": "2.2.*",
+        "symfony/assetic-bundle": "^2.7"
 	},
 	"require-dev" : {
 		"sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^2.7",
         "phpunit/phpunit": "5.1.*",
-        "mockery/mockery": "0.9.*",
-        "symfony/assetic-bundle": "^2.7"
+        "mockery/mockery": "0.9.*"
 	},
 	"autoload" : {
 		"psr-4" : {
