@@ -2,12 +2,33 @@
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    secret: "aSecret"
 
 framework:
+    test: ~
     translator:      { fallbacks: ["%locale%"] }
-    secret:          "aSecret"
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        storage_id: session.storage.mock_file
+    fragments:       ~
+    http_method_override: true
+    assets: ~
         
 # Twig Configuration
 twig:
