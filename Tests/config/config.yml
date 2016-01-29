@@ -5,7 +5,7 @@ parameters:
 
 framework:
     translator:      { fallbacks: ["%locale%"] }
-    secret:          "%secret%"
+    secret:          "aSecret"
     
 # Twig Configuration
 twig:
