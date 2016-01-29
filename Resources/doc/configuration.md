@@ -4,8 +4,9 @@ All available configuration options are listed below with their default values.
 
 ```yaml
 asf_layout:
-    supports:
-        jquery: false
-    jquery_config:
-        path: "%kernel.root_dir%/Resources/public/jquery/jquery.min.js"
+    enable_twig_support: true
+    enable_assetic_support: true
+    supported_assets:
+        jquery:
+            path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
 ```

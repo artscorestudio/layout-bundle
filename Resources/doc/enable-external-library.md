@@ -1,38 +1,83 @@
-# Enable/Disable external libraries
+# Enable/Disable supported assets
 
-You can enable or disable external libraries in your project via the configuration file of your application.
+Layout bundle comes with a list of supported assets. The available assets are :
+* [jQuery](https://jquery.com/)
+* [jQuery UI](http://jqueryui.com/) [not yet implemented]
+* [Twitter Bootstrap](http://getbootstrap.com/) [not yet implemented]
 
-* [Enable/Disable jQuery](#jquery)
+The support of an assets means that you have just to enable it in bundle's configuration and to add it in the composer.json file of your Symfony project.
 
-<a name="jquery" id="jquery"></a> 
-## Enable/disable jquery
+> By default, this assets are enabled so don't forget to update your composer.json file.
 
-### Enable jQuery
+## Enable/disable jQuery
 
-Don't forget to install jQuery with Composer like this :
+### Adding jQuery in your project's composer.json file
+
+I suggest using [component/jquery](https://github.com/components/jquery)shim repository for jquery. You can add it by enter the follow command :
 
 ```bash
 $ composer require components/jquery "2.2.*"
 ```
 
-After that, edit config.yml and enable jQuery :
+If you do not want to use this repository, please don't forget to change the path to your jquery file like this :
 
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supports:
-        jquery: true
-    jquery_config:
-        path: "%kernel.root_dir%/vendor/components/jquery/jquery.min.js"
-```
+    supported_assets:
+        jquery:
+            path: "/path/to/your/jquery/file"
 
-Remember to fill in the path to jQuery file. By default, the path is like the exemple above; based on package components/jquery. 
+ 
 
-## Disable jQuery
+### Disable jQuery
 
 Just edit config.yml :
 
+```yaml
 asf_layout:
-    supports:
+    supported_assets:
         jquery: false
+```
+
+## Enable/disable jQuery UI
+
+### Adding jQuery UI in your project's composer.json file
+
+I suggest using [component/jqueryui](https://github.com/components/jqueryui) shim repository for jquery. You can add it by enter the follow command :
+
+```bash
+$ composer require components/jqueryui "1.11.*"
+```
+[Not yet implemented] 
+
+### Disable jQuery UI
+
+Just edit config.yml :
+
+```yaml
+asf_layout:
+    supported_assets:
+        jqueryui: false
+```
+
+## Enable/disable Twitter Bootstrap
+
+### Adding jQuery UI in your project's composer.json file
+
+I suggest using [component/bootstrap](https://github.com/components/bootstrap) shim repository for Twitter Bootstrap. You can add it by enter the follow command :
+
+```bash
+$ composer require components/bootstrap "3.3.*"
+```
+[Not yet implemented]
+
+### Disable Twitter Bootstrap
+
+Just edit config.yml :
+
+```yaml
+asf_layout:
+    supported_assets:
+        twbs: false
 ```

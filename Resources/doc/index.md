@@ -106,5 +106,5 @@ You can use it as this or overriding it !
 Now you have completed the basic installation and configuration of the ASFLayoutBundle, you are ready to learn about more advanced features and usages of the bundle.
 
 The following documents are available :
-* [Enable/Disable an external library](enable-external-library.md)
+* [Enable/Disable supported assets](enable-external-library.md)
 * [ASFLayoutBundle Configuration Reference](configuration.md)
