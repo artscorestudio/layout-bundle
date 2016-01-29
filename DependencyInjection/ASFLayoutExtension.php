@@ -83,6 +83,20 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     						)
     					));
     				}
+    				
+    				// Add jQuery UI in assets
+    				if ( $config['supported_assets']['jqueryui']['js'] !== false && $config['supported_assets']['jqueryui']['css'] !== false) {
+    				    $container->prependExtensionConfig($name, array(
+    				        'assets' => array(
+    				            'jqueryui_js' => $config['supported_assets']['jqueryui']['js'],
+    				            'jqueryui_css' => $config['supported_assets']['jqueryui']['css']
+    				        )
+    				    ));
+    				} else if ( $config['supported_assets']['jqueryui']['js'] === false && $config['supported_assets']['jqueryui']['css'] !== false ) {
+    				    throw new InvalidConfigurationException('You have enabled jQuery UI supports but js parameter is missing.');
+    				} else if ( $config['supported_assets']['jqueryui']['js'] !== false && $config['supported_assets']['jqueryui']['css'] === false ) {
+    				    throw new InvalidConfigurationException('You have enabled jQuery UI supports but css parameter is missing.');
+    				}
 					break;
 			}
 		}

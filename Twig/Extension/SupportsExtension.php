@@ -60,7 +60,18 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	 */
 	public function getStylesheets()
 	{
-		return $this->environment->render('ASFLayoutBundle:supports:stylesheets_layout.html.twig');
+		// Twig template configuration
+	    $view_options = array(
+	        'jqueryui' => false
+	    );
+	    
+	    // Check jQuery UI configuration
+	    if ( $this->supportedAssets['jqueryui']['css'] !== false && !file_exists($this->supportedAssets['jqueryui']['css']) )
+            throw new InvalidConfigurationException('You have enabled the support of jQuery UI but you do not specify the path to the CSS file or the file is not reachable.');
+        elseif ( $this->supportedAssets['jqueryui']['css'] !== false && $this->asseticSupportEnabled === true )
+            $view_options['jqueryui'] = true;
+	    
+        return $this->environment->render('ASFLayoutBundle:supports:stylesheets.html.twig', $view_options);
 	}
 	
 	/**
@@ -68,10 +79,25 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	 */
 	public function getJavascripts()
 	{
+	    // Twig template configuration
+	    $view_options = array(
+	        'jquery' => false,
+	        'jqueryui' => false
+	    );
+	    
+	    // Check jQuery configuration
 	    if ( $this->supportedAssets['jquery']['path'] !== false && !file_exists($this->supportedAssets['jquery']['path']) )
             throw new InvalidConfigurationException('You have enabled the support of jQuery but you do not specify the path to the file or the file is not reachable.');
-	    elseif ($this->supportedAssets['jquery']['path'] !== false && $this->asseticSupportEnabled === true)
-            return $this->environment->render('ASFLayoutBundle:supports:jquery.html.twig');
+	    elseif ( $this->supportedAssets['jquery']['path'] !== false && $this->asseticSupportEnabled === true )
+	       $view_options['jquery'] = true;
+	    
+	    // Check jQuery UI configuration
+	    if ( $this->supportedAssets['jqueryui']['js'] !== false && !file_exists($this->supportedAssets['jqueryui']['js']) )
+	       throw new InvalidConfigurationException('You have enabled the support of jQuery UI but you do not specify the path to the javascript file or the file is not reachable.');
+        elseif ( $this->supportedAssets['jqueryui']['js'] !== false && $this->asseticSupportEnabled === true )
+            $view_options['jqueryui'] = true;
+	    
+        return $this->environment->render('ASFLayoutBundle:supports:javascripts.html.twig', $view_options);
 	}
 	
 	/**

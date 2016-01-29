@@ -57,4 +57,41 @@ class SupportsTwigExtensionTest extends \PHPUnit_Framework_TestCase
         $this->twigExtension->setSupportedAssets($supported_assets, $enable_assetic_support);
         $this->twigExtension->getJavascripts();
     }
+    
+    /**
+     * Test getJavascript function with invalid jquery UI  js path
+     */
+    public function testGetJavascriptsWithInvalidJqueryUIJsPath()
+    {
+        $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+        $supported_assets = array(
+            'jquery' => array(
+                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+            ),
+            'jqueryui' => array(
+                'js' => '/path/jqueryui.min.js'
+            )
+        );
+        $enable_assetic_support = true;
+    
+        $this->twigExtension->setSupportedAssets($supported_assets, $enable_assetic_support);
+        $this->twigExtension->getJavascripts();
+    }
+    
+    /**
+     * Test getStylesheets function with invalid jquery UI css path
+     */
+    public function testGetStylesheetsWithInvalidJqueryUICssPath()
+    {
+        $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+        $supported_assets = array(
+            'jqueryui' => array(
+                'css' => '/path/jqueryui.min.css'
+            )
+        );
+        $enable_assetic_support = true;
+    
+        $this->twigExtension->setSupportedAssets($supported_assets, $enable_assetic_support);
+        $this->twigExtension->getStylesheets();
+    }
 }

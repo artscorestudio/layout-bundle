@@ -81,6 +81,56 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * Check if asf_layout.supported_key.jqueryui key is set
+	 */
+	public function testJqueryUIParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('jqueryui', $config['supported_assets']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_key.jqueryui.js key is set
+	 */
+	public function testJqueryUIJsPathParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('js', $config['supported_assets']['jqueryui']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_key.jqueryui.js key is set to "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
+	 */
+	public function testJqueryUIJsParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js', $config['supported_assets']['jqueryui']['js']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_key.jqueryui.css key is set
+	 */
+	public function testJqueryUICssPathParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('css', $config['supported_assets']['jqueryui']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_key.jqueryui.css key is set to "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	 */
+	public function testJqueryUICssParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css', $config['supported_assets']['jqueryui']['css']);
+	}
+	
+	/**
 	 * Processes an array of configurations.
 	 * 
 	 * @param array $configs An array of configuration items to process

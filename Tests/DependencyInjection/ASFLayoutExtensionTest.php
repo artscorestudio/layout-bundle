@@ -142,4 +142,40 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 			)
 		)), $container);
 	}
+	
+	/**
+	 * Test jQuery UI configuration css parameter is missing - InvalidConfigurationException Exception expected
+	 */
+	public function testJqueryUICssPathHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $extension = new ASFLayoutExtension();
+	    $extension->load(array(array(
+	        'supported_assets' => array(
+	            'jqueryui' => array(
+	                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	                'css' => ''
+	            )
+	        )
+	    )), $container);
+	}
+	
+	/**
+	 * Test jQuery UI configuration css parameter is missing - InvalidConfigurationException Exception expected
+	 */
+	public function testJqueryUIJsPathHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $extension = new ASFLayoutExtension();
+	    $extension->load(array(array(
+	        'supported_assets' => array(
+	            'jqueryui' => array(
+	                'js' => "",
+	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	            )
+	        )
+	    )), $container);
+	}
 }
