@@ -49,7 +49,7 @@ class SupportsTwigExtensionTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
         $supported_assets = array(
             'jquery' => array(
-                'path' => '/path/jquery.min.js'
+                'path' => ''
             )
         );
         $enable_assetic_support = true;

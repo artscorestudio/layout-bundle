@@ -93,26 +93,46 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				            'jqueryui_css' => $config['supported_assets']['jqueryui']['css']
     				        )
     				    ));
-    				} else if ( $config['supported_assets']['jqueryui']['js'] === false && $config['supported_assets']['jqueryui']['css'] !== false ) {
+    				} elseif ( $config['supported_assets']['jqueryui']['js'] === false && $config['supported_assets']['jqueryui']['css'] !== false ) {
     				    throw new InvalidConfigurationException('You have enabled jQuery UI supports but js parameter is missing.');
-    				} else if ( $config['supported_assets']['jqueryui']['js'] !== false && $config['supported_assets']['jqueryui']['css'] === false ) {
+    				} elseif ( $config['supported_assets']['jqueryui']['js'] !== false && $config['supported_assets']['jqueryui']['css'] === false ) {
     				    throw new InvalidConfigurationException('You have enabled jQuery UI supports but css parameter is missing.');
     				}
     				
     				// Add Twitter Bootstrap assets
     				if ( count($config['supported_assets']['twbs']) > 0 ) {
+                        
+    				    $twbs = $config['supported_assets']['twbs'];
     				    
     				    // Twitter Bootstrap javascript files
-    				    if ( is_array($config['supported_assets']['twbs']['js']) ) {
-    				        throw new \NotImplementedException('This features is not yet implemented.');
-    				    } else {
+    				    $container->prependExtensionConfig($name, array(
+    				        'assets' => array(
+    				            'twbs_js' => array(
+    				                'inputs' => $twbs['js']
+    				            )
+    				        )
+    				    ));
+    				    
+    				    // Twitter Bootstrap Less files or CSS files
+    				    if ( count($twbs['less']) > 0 && count($twbs['css']) > 0 )
+    				        throw new InvalidConfigurationException('You can\'t have less files and css files in your Twitter Bootstrap Configuration, choose one.');
+    				    elseif ( count($twbs['less']) > 0 && count($twbs['css']) == 0 ) {
+        				    $container->prependExtensionConfig($name, array(
+        				        'assets' => array(
+        				            'twbs_css' => array(
+        				                'inputs' => $twbs['less']
+        				            )
+        				        )
+        				    ));
+    				    } elseif ( count($twbs['less']) == 0 && count($twbs['css']) > 0 ) {
     				        $container->prependExtensionConfig($name, array(
     				            'assets' => array(
-    				                'twbs_js' => $config['supported_assets']['twbs']['js']
+    				                'twbs_css' => array(
+    				                    'inputs' => $twbs['css']
+    				                )
     				            )
     				        ));
     				    }
-    				    
     				}
     				
 					break;

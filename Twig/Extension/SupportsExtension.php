@@ -62,15 +62,25 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	{
 		// Twig template configuration
 	    $view_options = array(
-	        'jqueryui' => false
+	        'jqueryui' => false,
+	        'twbs'     => false
 	    );
 	    
 	    // Check jQuery UI configuration
-	    if ( $this->supportedAssets['jqueryui']['css'] !== false && !file_exists($this->supportedAssets['jqueryui']['css']) )
-            throw new InvalidConfigurationException('You have enabled the support of jQuery UI but you do not specify the path to the CSS file or the file is not reachable.');
-        elseif ( $this->supportedAssets['jqueryui']['css'] !== false && $this->asseticSupportEnabled === true )
+	    if ( $this->supportedAssets['jqueryui']['css'] !== false && $this->asseticSupportEnabled == false )
+            throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
+        elseif ( $this->supportedAssets['jqueryui']['css'] !== false )
             $view_options['jqueryui'] = true;
         
+        // Check Twitter Bootstrap configuration
+        if ( (is_array($this->supportedAssets['twbs']['less']) || is_array($this->supportedAssets['twbs']['css']))
+                && (count($this->supportedAssets['twbs']['less']) > 0 || count($this->supportedAssets['twbs']['css']) > 0) 
+                && $this->asseticSupportEnabled == false )
+            throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
+        elseif ( (is_array($this->supportedAssets['twbs']['less']) || is_array($this->supportedAssets['twbs']['css']))
+                && (count($this->supportedAssets['twbs']['less']) > 0 || count($this->supportedAssets['twbs']['css']) > 0))
+            $view_options['twbs'] = true;
+            
         return $this->environment->render('ASFLayoutBundle:supports:stylesheets.html.twig', $view_options);
 	}
 	
@@ -87,25 +97,23 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	    );
 	    
 	    // Check jQuery configuration
-	    if ( $this->supportedAssets['jquery']['path'] !== false && !file_exists($this->supportedAssets['jquery']['path']) )
-            throw new InvalidConfigurationException('You have enabled the support of jQuery but you do not specify the path to the file or the file is not reachable.');
-	    elseif ( $this->supportedAssets['jquery']['path'] !== false && $this->asseticSupportEnabled === true )
+	    if ( $this->supportedAssets['jquery']['path'] !== false && $this->asseticSupportEnabled == false )
+	        throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
+	    elseif ( $this->supportedAssets['jquery']['path'] !== false )
 	       $view_options['jquery'] = true;
 	    
 	    // Check jQuery UI configuration
-	    if ( $this->supportedAssets['jqueryui']['js'] !== false && !file_exists($this->supportedAssets['jqueryui']['js']) )
-	       throw new InvalidConfigurationException('You have enabled the support of jQuery UI but you do not specify the path to the javascript file or the file is not reachable.');
-        elseif ( $this->supportedAssets['jqueryui']['js'] !== false && $this->asseticSupportEnabled === true )
+	    if ( $this->supportedAssets['jqueryui']['js'] !== false && $this->asseticSupportEnabled == false )
+	       throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
+        elseif ( $this->supportedAssets['jqueryui']['js'] !== false )
             $view_options['jqueryui'] = true;
 	    
         // Check Twitter Bootstrap configuration
-        if ( $this->supportedAssets['twbs']['js'] !== false && is_array($this->supportedAssets['twbs']['js']) ) {
-            throw new \NotImplementedException('This features is not yet implemented');
-        } elseif ( $this->supportedAssets['twbs']['js'] !== false && !file_exists($this->supportedAssets['twbs']['js']) )
-            throw new InvalidConfigurationException('You have enabled the support of Twitter Bootstrap but you do not specify the path to the javascript file or the file is not reachable.');
-        elseif ( $this->supportedAssets['twbs']['js'] !== false && $this->asseticSupportEnabled === true )
+        if ( is_array($this->supportedAssets['twbs']['js']) && count($this->supportedAssets['twbs']['js']) > 0 && $this->asseticSupportEnabled == false )
+            throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
+        elseif ( is_array($this->supportedAssets['twbs']['js']) && count($this->supportedAssets['twbs']['js']) > 0 )
             $view_options['twbs'] = true;
-            
+        
         return $this->environment->render('ASFLayoutBundle:supports:javascripts.html.twig', $view_options);
 	}
 	

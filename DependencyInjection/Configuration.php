@@ -43,7 +43,7 @@ class Configuration implements ConfigurationInterface
 					->children()
 					   ->append($this->addJqueryParameterNode())
 					   ->append($this->addjQueryUIParameterNode())
-					   ->append($this->addjTwitterBootstrapParameterNode())
+					   ->append($this->addTwitterBootstrapParameterNode())
 					->end()
 				->end()
 			->end()
@@ -117,7 +117,7 @@ class Configuration implements ConfigurationInterface
 	/**
 	 * Get Twitter Bootstrap Configuration
 	 */
-	protected function addjTwitterBootstrapParameterNode()
+	protected function addTwitterBootstrapParameterNode()
 	{
 	    $builder = new TreeBuilder();
 	    $node = $builder->root('twbs');
@@ -135,11 +135,20 @@ class Configuration implements ConfigurationInterface
 	       ->children()
 	           ->scalarNode('js')
 	               ->cannotBeEmpty()
-    	           ->defaultValue("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js")
+    	           ->defaultValue(array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"))
+	           ->end()
+	           ->scalarNode('less')
+	               ->defaultValue(array(
+	                   "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less",
+	                   "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less"
+	               ))
+	           ->end()
+	           ->scalarNode('css')
+	               ->defaultValue(array())
 	           ->end()
 	       ->end()
 	    ;
-	     
+	    
 	    return $node;
 	}
 	
