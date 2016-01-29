@@ -20,4 +20,4 @@ EOT;
     exit(1);
 }}
 
-require_once 'AppKernel.php';
+//require_once 'AppKernel.php';
