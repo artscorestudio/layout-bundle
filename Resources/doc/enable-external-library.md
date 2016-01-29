@@ -27,8 +27,7 @@ asf_layout:
     supported_assets:
         jquery:
             path: "/path/to/your/jquery/file"
-
- 
+```
 
 ### Disable jQuery
 
@@ -49,7 +48,17 @@ I suggest using [component/jqueryui](https://github.com/components/jqueryui) shi
 ```bash
 $ composer require components/jqueryui "1.11.*"
 ```
-[Not yet implemented] 
+
+If you do not want to use this repository, please don't forget to change the path to your jquery ui files like this :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        jqueryui:
+            js: "/path/to/your/jqueryui/js/file"
+            css: "/path/to/your/jqueryui/css/file"
+```
 
 ### Disable jQuery UI
 

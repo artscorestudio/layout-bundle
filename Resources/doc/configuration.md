@@ -10,5 +10,7 @@ asf_layout:
         jquery:
             path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
         jqueryui:
+            js: "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
+            css: "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
             
 ```
