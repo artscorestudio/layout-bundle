@@ -70,7 +70,7 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
             throw new InvalidConfigurationException('You have enabled the support of jQuery UI but you do not specify the path to the CSS file or the file is not reachable.');
         elseif ( $this->supportedAssets['jqueryui']['css'] !== false && $this->asseticSupportEnabled === true )
             $view_options['jqueryui'] = true;
-	    
+        
         return $this->environment->render('ASFLayoutBundle:supports:stylesheets.html.twig', $view_options);
 	}
 	
