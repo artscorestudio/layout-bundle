@@ -38,10 +38,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		parent::setUp();
-		
-		//$this->kernel = new \AppKernel('test', true);
-		//$this->kernel->boot();
-		
+
 		$this->extension = new ASFLayoutExtension();
 	}
 	
