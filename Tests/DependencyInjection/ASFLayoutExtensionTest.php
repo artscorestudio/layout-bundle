@@ -178,4 +178,21 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	        )
 	    )), $container);
 	}
+	
+	/**
+	 * Test Twitter Bootstrap configuration js parameter is missing - InvalidConfigurationException Exception expected
+	 */
+	public function testJqueryTwbsJsPathHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $extension = new ASFLayoutExtension();
+	    $extension->load(array(array(
+	        'supported_assets' => array(
+	            'twbs' => array(
+	                'js' => ""
+	            )
+	        )
+	    )), $container);
+	}
 }

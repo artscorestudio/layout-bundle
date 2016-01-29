@@ -94,4 +94,27 @@ class SupportsTwigExtensionTest extends \PHPUnit_Framework_TestCase
         $this->twigExtension->setSupportedAssets($supported_assets, $enable_assetic_support);
         $this->twigExtension->getStylesheets();
     }
+    
+    /**
+     * Test getJavascripts function with invalid Twitter Bootstrap Js path
+     */
+    public function testGetJavascriptsWithInvalidTwbsJsPath()
+    {
+        $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+        $supported_assets = array(
+            'jquery' => array(
+                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+            ),
+            'jqueryui' => array(
+                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
+            ),
+            'twbs' => array(
+                'js' => ""
+            )
+        );
+        $enable_assetic_support = true;
+    
+        $this->twigExtension->setSupportedAssets($supported_assets, $enable_assetic_support);
+        $this->twigExtension->getJavascripts();
+    }
 }

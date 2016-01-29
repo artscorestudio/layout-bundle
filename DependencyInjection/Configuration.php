@@ -41,44 +41,9 @@ class Configuration implements ConfigurationInterface
 				->arrayNode('supported_assets')
 					->addDefaultsIfNotSet()
 					->children()
-					   ->arrayNode('jquery')
-					       ->beforeNormalization()
-					           ->ifTrue(function($value){
-					               return !isset($value['path']) || $value == false;
-					           })
-					           ->then(function($value){
-					               return array('path' => false);
-					           })
-					       ->end()
-					       ->addDefaultsIfNotSet()
-					       ->children()
-    					       ->scalarNode('path')
-    					           ->cannotBeEmpty()
-    					           ->defaultValue("%kernel.root_dir%/../vendor/components/jquery/jquery.min.js")
-    					       ->end()
-					       ->end()
-					   ->end()
-					   ->arrayNode('jqueryui')
-    					   ->beforeNormalization()
-        					   ->ifTrue(function($value){
-        					       return (!isset($value['js']) && !isset($value['css'])) || $value == false;
-        					   })
-        					   ->then(function($value){
-        					       return array('js' => false, 'css' => false);
-        					   })
-    					   ->end()
-    					   ->addDefaultsIfNotSet()
-    					   ->children()
-        					   ->scalarNode('js')
-            					   ->cannotBeEmpty()
-            					   ->defaultValue("%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js")
-        					   ->end()
-        					   ->scalarNode('css')
-        					       ->cannotBeEmpty()
-        					       ->defaultValue("%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css")
-        					   ->end()
-    					   ->end()
-					   ->end()
+					   ->append($this->addJqueryParameterNode())
+					   ->append($this->addjQueryUIParameterNode())
+					   ->append($this->addjTwitterBootstrapParameterNode())
 					->end()
 				->end()
 			->end()
@@ -86,4 +51,96 @@ class Configuration implements ConfigurationInterface
 		
 		return $treeBuilder;
 	}
+	
+	/**
+	 * Return jQuery configuration
+	 */
+	protected function addJqueryParameterNode()
+	{
+	    $builder = new TreeBuilder();
+	    $node = $builder->root('jquery');
+	    
+	    $node
+            ->beforeNormalization()
+                ->ifTrue(function($value){
+                    return !isset($value['path']) || $value == false;
+                })
+                ->then(function($value){
+                    return array('path' => false);
+                })
+            ->end()
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('path')
+                    ->cannotBeEmpty()
+                    ->defaultValue("%kernel.root_dir%/../vendor/components/jquery/jquery.min.js")
+                ->end()
+            ->end()
+        ;
+        
+        return $node;
+	}
+	
+	/**
+	 * Get jQuery UI Configuration
+	 */
+	protected function addjQueryUIParameterNode()
+	{
+	    $builder = new TreeBuilder();
+	    $node = $builder->root('jqueryui');
+	     
+	    $node
+	       ->beforeNormalization()
+	           ->ifTrue(function($value){
+	               return (!isset($value['js']) && !isset($value['css'])) || $value == false;
+	           })
+	           ->then(function($value){
+	               return array('js' => false, 'css' => false);
+	           })
+	       ->end()
+	       ->addDefaultsIfNotSet()
+	       ->children()
+	           ->scalarNode('js')
+	               ->cannotBeEmpty()
+	               ->defaultValue("%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js")
+	           ->end()
+	           ->scalarNode('css')
+	               ->cannotBeEmpty()
+	               ->defaultValue("%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css")
+	           ->end()
+	       ->end()
+	    ;
+	    
+	    return $node;
+	}
+	
+	/**
+	 * Get Twitter Bootstrap Configuration
+	 */
+	protected function addjTwitterBootstrapParameterNode()
+	{
+	    $builder = new TreeBuilder();
+	    $node = $builder->root('twbs');
+	
+	    $node
+	       ->beforeNormalization()
+	           ->ifTrue(function($value){
+	               return $value == false;
+	           })
+	           ->then(function($value){
+	               return array('js' => false);
+	           })
+	       ->end()
+	       ->addDefaultsIfNotSet()
+	       ->children()
+	           ->scalarNode('js')
+	               ->cannotBeEmpty()
+    	           ->defaultValue("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js")
+	           ->end()
+	       ->end()
+	    ;
+	     
+	    return $node;
+	}
+	
 }

@@ -75,6 +75,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		foreach(array_keys($container->getExtensions()) as $name) {
 			switch($name) {
 				case 'assetic':
+				    
 					// Add jQuery in assets
     				if ( $config['supported_assets']['jquery']['path'] !== false ) {
     					$container->prependExtensionConfig($name, array(
@@ -97,6 +98,23 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				} else if ( $config['supported_assets']['jqueryui']['js'] !== false && $config['supported_assets']['jqueryui']['css'] === false ) {
     				    throw new InvalidConfigurationException('You have enabled jQuery UI supports but css parameter is missing.');
     				}
+    				
+    				// Add Twitter Bootstrap assets
+    				if ( count($config['supported_assets']['twbs']) > 0 ) {
+    				    
+    				    // Twitter Bootstrap javascript files
+    				    if ( is_array($config['supported_assets']['twbs']['js']) ) {
+    				        throw new \NotImplementedException('This features is not yet implemented.');
+    				    } else {
+    				        $container->prependExtensionConfig($name, array(
+    				            'assets' => array(
+    				                'twbs_js' => $config['supported_assets']['twbs']['js']
+    				            )
+    				        ));
+    				    }
+    				    
+    				}
+    				
 					break;
 			}
 		}

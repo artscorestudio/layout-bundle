@@ -51,7 +51,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_key.jquery key is set
+	 * Check if asf_layout.supported_assets.jquery key is set
 	 */
 	public function testJqueryParameterInDefaultConfiguration()
 	{
@@ -61,7 +61,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_key.jquery.path key is set
+	 * Check if asf_layout.supported_assets.jquery.path key is set
 	 */
 	public function testJqueryPathParameterInDefaultConfiguration()
 	{
@@ -71,7 +71,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_key.jquery.path key is set to "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	 * Check if asf_layout.supported_assets.jquery.path key is set to "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
 	 */
 	public function testJqueryPathParameterValueInDefaultConfiguration()
 	{
@@ -81,7 +81,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_key.jqueryui key is set
+	 * Check if asf_layout.supported_assets.jqueryui key is set
 	 */
 	public function testJqueryUIParameterInDefaultConfiguration()
 	{
@@ -91,7 +91,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_key.jqueryui.js key is set
+	 * Check if asf_layout.supported_assets.jqueryui.js key is set
 	 */
 	public function testJqueryUIJsPathParameterInDefaultConfiguration()
 	{
@@ -101,7 +101,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_key.jqueryui.js key is set to "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
+	 * Check if asf_layout.supported_assets.jqueryui.js key is set to "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
 	 */
 	public function testJqueryUIJsParameterValueInDefaultConfiguration()
 	{
@@ -111,7 +111,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_key.jqueryui.css key is set
+	 * Check if asf_layout.supported_assets.jqueryui.css key is set
 	 */
 	public function testJqueryUICssPathParameterInDefaultConfiguration()
 	{
@@ -121,13 +121,33 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_key.jqueryui.css key is set to "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	 * Check if asf_layout.supported_assets.jqueryui.css key is set to "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
 	 */
 	public function testJqueryUICssParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
 	    $this->assertEquals('%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css', $config['supported_assets']['jqueryui']['css']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.twbs.js key is set
+	 */
+	public function testTwbsJsPathParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('js', $config['supported_assets']['twbs']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.twbs.js key is set to ""%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js""
+	 */
+	public function testTwbsJsParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js', $config['supported_assets']['twbs']['js']);
 	}
 	
 	/**

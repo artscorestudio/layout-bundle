@@ -81,8 +81,9 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	{
 	    // Twig template configuration
 	    $view_options = array(
-	        'jquery' => false,
-	        'jqueryui' => false
+	        'jquery'   => false,
+	        'jqueryui' => false,
+	        'twbs'     => false
 	    );
 	    
 	    // Check jQuery configuration
@@ -97,6 +98,14 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
         elseif ( $this->supportedAssets['jqueryui']['js'] !== false && $this->asseticSupportEnabled === true )
             $view_options['jqueryui'] = true;
 	    
+        // Check Twitter Bootstrap configuration
+        if ( $this->supportedAssets['twbs']['js'] !== false && is_array($this->supportedAssets['twbs']['js']) ) {
+            throw new \NotImplementedException('This features is not yet implemented');
+        } elseif ( $this->supportedAssets['twbs']['js'] !== false && !file_exists($this->supportedAssets['twbs']['js']) )
+            throw new InvalidConfigurationException('You have enabled the support of Twitter Bootstrap but you do not specify the path to the javascript file or the file is not reachable.');
+        elseif ( $this->supportedAssets['twbs']['js'] !== false && $this->asseticSupportEnabled === true )
+            $view_options['twbs'] = true;
+            
         return $this->environment->render('ASFLayoutBundle:supports:javascripts.html.twig', $view_options);
 	}
 	
