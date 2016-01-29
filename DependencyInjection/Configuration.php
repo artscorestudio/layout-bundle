@@ -11,6 +11,7 @@ namespace ASF\LayoutBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ScalarNode;
 
 /**
  * Bundle configuration
@@ -56,6 +57,27 @@ class Configuration implements ConfigurationInterface
     					           ->defaultValue("%kernel.root_dir%/../vendor/components/jquery/jquery.min.js")
     					       ->end()
 					       ->end()
+					   ->end()
+					   ->arrayNode('jquery')
+    					   ->beforeNormalization()
+        					   ->ifTrue(function($value){
+        					       return !isset($value['path']) || $value == false;
+        					   })
+        					   ->then(function($value){
+        					       return array('path' => false);
+        					   })
+    					   ->end()
+    					   ->addDefaultsIfNotSet()
+    					   ->children()
+        					   ->scalarNode('js')
+            					   ->cannotBeEmpty()
+            					   ->defaultValue("%kernel.root_dir%/../vendor/components/jqueryui/js/jqueryui.min.js")
+        					   ->end()
+        					   ->scalarNode('css')
+        					       ->cannotBeEmtpy()
+        					       ->defaultValue("%kernel.root_dir%/Resources/public/jquery-ui/themes")
+        					   ->end()
+    					   ->end()
 					   ->end()
 					->end()
 				->end()

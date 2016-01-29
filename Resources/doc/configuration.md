@@ -9,4 +9,6 @@ asf_layout:
     supported_assets:
         jquery:
             path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+        jqueryui:
+            
 ```
