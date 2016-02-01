@@ -44,6 +44,7 @@ class Configuration implements ConfigurationInterface
 					   ->append($this->addJqueryParameterNode())
 					   ->append($this->addjQueryUIParameterNode())
 					   ->append($this->addTwitterBootstrapParameterNode())
+					   ->append($this->addSelect2ParameterNode())
 					->end()
 				->end()
 			->end()
@@ -150,6 +151,37 @@ class Configuration implements ConfigurationInterface
 	    ;
 	    
 	    return $node;
+	}
+	
+	/**
+	 * Get Select2 Configuration
+	 */
+	protected function addSelect2ParameterNode()
+	{
+	    $builder = new TreeBuilder();
+	    $node = $builder->root('select2');
+	    
+	    $node
+	       ->beforeNormalization()
+    	       ->ifTrue(function($value){
+	               return $value == false;
+	           })
+	           ->then(function($value){
+	               return array('js' => false, 'css' => false);
+	           })
+	       ->end()
+	       ->addDefaultsIfNotSet()
+	       ->children()
+	           ->scalarNode('js')
+	               ->defaultValue("%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js")
+	           ->end()
+	           ->scalarNode('css')
+	               ->defaultValue("%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css")
+	           ->end()
+	       ->end()
+	    ;
+	           
+	       return $node;
 	}
 	
 }

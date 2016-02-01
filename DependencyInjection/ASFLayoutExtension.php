@@ -37,9 +37,9 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		$loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		
 		if ( $config['enable_twig_support'] == true ) {
-		    $loader->load('services/twig.xml');
 		    $container->setParameter('asf_layout.supported_assets', $config['supported_assets']);
 		    $container->setParameter('asf_layout.enable_assetic_support', $config['enable_assetic_support']);
+		    $loader->load('services/twig.xml');
 		}
 	}
 	
@@ -134,6 +134,20 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				            )
     				        ));
     				    }
+    				}
+    				
+    				// Add select2 files
+    				if ( $config['supported_assets']['select2']['js'] !== false && $config['supported_assets']['select2']['css'] !== false) {
+    				    $container->prependExtensionConfig($name, array(
+    				        'assets' => array(
+    				            'select2_js' => $config['supported_assets']['select2']['js'],
+    				            'select2_css' => $config['supported_assets']['select2']['css']
+    				        )
+    				    ));
+    				} elseif ( $config['supported_assets']['select2']['js'] === false && $config['supported_assets']['select2']['css'] !== false ) {
+    				    throw new InvalidConfigurationException('You have enabled select2 supports but js parameter is missing.');
+    				} elseif ( $config['supported_assets']['select2']['js'] !== false && $config['supported_assets']['select2']['css'] === false ) {
+    				    throw new InvalidConfigurationException('You have enabled select2 supports but css parameter is missing.');
     				}
     				
 					break;

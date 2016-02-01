@@ -63,7 +63,8 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 		// Twig template configuration
 	    $view_options = array(
 	        'jqueryui' => false,
-	        'twbs'     => false
+	        'twbs'     => false,
+	        'select2'  => false
 	    );
 	    
 	    // Check jQuery UI configuration
@@ -81,6 +82,12 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
                 && (count($this->supportedAssets['twbs']['less']) > 0 || count($this->supportedAssets['twbs']['css']) > 0))
             $view_options['twbs'] = true;
             
+        // Check Select2 configuration
+        if ( $this->supportedAssets['select2']['css'] !== false && $this->asseticSupportEnabled == false )
+            throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
+        elseif ( $this->supportedAssets['select2']['css'] !== false )
+            $view_options['select2'] = true;
+        
         return $this->environment->render('ASFLayoutBundle:supports:stylesheets.html.twig', $view_options);
 	}
 	
@@ -93,7 +100,8 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	    $view_options = array(
 	        'jquery'   => false,
 	        'jqueryui' => false,
-	        'twbs'     => false
+	        'twbs'     => false,
+	        'select2'  => false
 	    );
 	    
 	    // Check jQuery configuration
@@ -113,6 +121,12 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
         elseif ( is_array($this->supportedAssets['twbs']['js']) && count($this->supportedAssets['twbs']['js']) > 0 )
             $view_options['twbs'] = true;
+        
+        // Check select2 configuration
+        if ( $this->supportedAssets['select2']['js'] !== false && $this->asseticSupportEnabled == false )
+            throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
+        elseif ( $this->supportedAssets['select2']['js'] !== false )
+            $view_options['select2'] = true;
         
         return $this->environment->render('ASFLayoutBundle:supports:javascripts.html.twig', $view_options);
 	}
