@@ -63,7 +63,7 @@ public function registerBundles()
 For a quickly access to a basic template based on jQuery and Twitter Bottstrap, enable it in your application configuration file :
 
 ```yaml
-// app/config/config.yml
+# app/config/config.yml
 asf_layout:
 	supports:
 		jquery: true
