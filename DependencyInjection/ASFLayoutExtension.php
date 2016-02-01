@@ -151,12 +151,13 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				}
     				
     				// Add Basinga js translation in assets
-    				if ( true === $config['supported_assets']['bazinga_js_translation'] ) {
+    				if ( $config['supported_assets']['bazinga_js_translator'] !== false ) {
+    				    $bz_config = $config['supported_assets']['bazinga_js_translator'];
     				    $container->prependExtensionConfig($name, array(
     				        'assets' => array(
-    				            'bz_translator_js' => $config['supported_assets']['bazinga_js_translation']['bz_translator_js'],
-    				            'bz_translator_config' => $config['supported_assets']['bazinga_js_translation']['bz_translator_config'],
-    				            'bz_translations_files' => $config['supported_assets']['bazinga_js_translation']['bz_translations_files']
+    				            'bz_translator_js' => $bz_config['bz_translator_js'],
+    				            'bz_translator_config' => $bz_config['bz_translator_config'],
+    				            'bz_translations_files' => $bz_config['bz_translations_files']
     				        )
     				    ));
     				}

@@ -101,7 +101,10 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	        'jquery'   => false,
 	        'jqueryui' => false,
 	        'twbs'     => false,
-	        'select2'  => false
+	        'select2'  => false,
+	        'bazinga_js_translation' => false,
+	        'speaking_url' => false,
+	        'fos_js_routing' => $this->supportedAssets['fos_js_routing']
 	    );
 	    
 	    // Check jQuery configuration
@@ -127,6 +130,23 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
         elseif ( $this->supportedAssets['select2']['js'] !== false )
             $view_options['select2'] = true;
+        
+        // Check bazinga js translation configuration
+        if ( $this->supportedAssets['bazinga_js_translator']['bz_translator_js'] !== false
+            && $this->supportedAssets['bazinga_js_translator']['bz_translator_config'] !== false
+            && $this->supportedAssets['bazinga_js_translator']['bz_translations_files'] !== false
+            && $this->asseticSupportEnabled == false )
+            throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
+        elseif ( $this->supportedAssets['bazinga_js_translator']['bz_translator_js'] !== false
+            && $this->supportedAssets['bazinga_js_translator']['bz_translator_config'] !== false
+            && $this->supportedAssets['bazinga_js_translator']['bz_translations_files'] !== false )
+            $view_options['bazinga_js_translation'] = true;
+        
+        // Check speaking_url configuration
+        if ( $this->supportedAssets['speaking_url']['path'] !== false && $this->asseticSupportEnabled == false )
+            throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
+        elseif ( $this->supportedAssets['speaking_url']['path'] !== false )
+            $view_options['speaking_url'] = true;
         
         return $this->environment->render('ASFLayoutBundle:supports:javascripts.html.twig', $view_options);
 	}

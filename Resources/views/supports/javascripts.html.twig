@@ -14,6 +14,15 @@
 	{% include "ASFLayoutBundle:supports:select2_js.html.twig" %}
 {% endif %}
 
+{% if bazinga_js_translation == true %}
+	{% include "ASFLayoutBundle:supports:bazinga_js_translation.html.twig" %}
+{% endif %}
+
 {% if speaking_url == true %}
 	{% include "ASFLayoutBundle:supports:speakingurl_js.html.twig" %}
+{% endif %}
+
+{% if fos_js_routing == true %}
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 {% endif %}

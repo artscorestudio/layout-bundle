@@ -1,7 +1,7 @@
 {% trans_default_domain 'asf_layout' %}
 
 <!DOCTYPE html>
-<html lang="{{ app.request.getLocale() }}">
+<html lang="{{ app.request.locale|split('_')[0] }}">
     <head>
     	{% block asf_base_encoding %}
         <meta charset="UTF-8" />
