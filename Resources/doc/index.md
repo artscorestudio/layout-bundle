@@ -16,6 +16,7 @@ This version of the bundle requires :
 * Symfony 3.0+
 * jQuery 2.2+ (suggest [components/jquery](https://github.com/components/jquery))
 * Twitter Bootstrap 3.3+ (suggest [components/bootstrap](https://github.com/components/bootstrap))
+* Select2 (suggest [select2/select2](https://github.com/select2/select2))
 
 ### Translations
 

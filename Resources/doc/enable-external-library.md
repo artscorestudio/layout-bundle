@@ -102,3 +102,34 @@ asf_layout:
 ```
 
 For more information about Twitter Bootstrap, please check this documentation chapter : [Configure Twitter Bootstrap](twitter-bootstrap.md).
+
+## Enable/disable Select2
+
+### Adding Select2 in your project's composer.json file
+
+I suggest using [select2/select2](https://github.com/select2/select2) repository. You can add it by enter the follow command :
+
+```bash
+$ composer require select2/select2 "4.0.*"
+```
+
+If you do not want to use this repository, please don't forget to change the path to your select2 file like this :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        select2:
+            js: "/path/to/your/select2/js/file"
+            css: "/path/to/your/select2/css/file"
+```
+
+### Disable select2
+
+Just edit config.yml :
+
+```yaml
+asf_layout:
+    supported_assets:
+        select2: false
+```

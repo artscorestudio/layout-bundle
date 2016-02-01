@@ -16,4 +16,7 @@ asf_layout:
             js: "%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"
             less: ["@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less", @ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less]
             css: ~
+        select2:
+            js: "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js"
+            css: "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
 ```
