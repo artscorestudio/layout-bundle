@@ -55,7 +55,7 @@ class InstallCommand extends ContainerAwareCommand
     protected function installFonts(InputInterface $input, OutputInterface $output)
     {
         $dest_dir = $this->getFontsDir();
-        $src_dir = sprintf('%s/%s', $this->getContainer()->getParameter('asf.twbs.assets_dir'), 'fonts');
+        $src_dir = sprintf('%s/%s', $this->getContainer()->getParameter('asf.supported_assets.twbs.assets_dir'), 'fonts');
         
         $finder = new Finder();
         $filesystem = new Filesystem();
@@ -102,7 +102,7 @@ class InstallCommand extends ContainerAwareCommand
     protected function installLessFiles(InputInterface $input, OutputInterface $output)
     {
         $dest_dir = __DIR__ . '/../ResourceS/public/supports/bootstrap';
-        $src_dir = sprintf('%s/%s', $this->getContainer()->getParameter('asf.twbs.assets_dir'), 'less');
+        $src_dir = sprintf('%s/%s', $this->getContainer()->getParameter('asf.supported_assets.twbs.assets_dir'), 'less');
         
         $finder = new Finder();
         $filesystem = new Filesystem();
@@ -145,6 +145,6 @@ class InstallCommand extends ContainerAwareCommand
      */
     protected function getFontsDir()
     {
-        return $this->getContainer()->getParameter('asf_layout.twbs.fonts_dir');
+        return $this->getContainer()->getParameter('asf_layout.supported_assets.twbs.fonts_dir');
     }
 }

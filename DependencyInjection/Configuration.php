@@ -138,6 +138,7 @@ class Configuration implements ConfigurationInterface
 	       ->addDefaultsIfNotSet()
 	       ->children()
 	           ->scalarNode('assets_dir')
+	               ->cannotBeEmpty()
 	               ->defaultValue('"%kernel.root_dir%/../vendor/components/bootstrap')
 	           ->end()
 	           ->scalarNode('js')

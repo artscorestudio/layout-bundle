@@ -131,6 +131,66 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * Check if asf_layout.supported_assets.twbs.assets_dir exists
+	 */
+	public function testTwbsAssetsDirParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('assets_dir', $config['supported_assets']['twbs']);
+	}
+	
+	/**
+	 * Check asf_layout.supported_assets.twbs.assets_dir default value
+	 */
+	public function testTwbsAssetsDirParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap', $config['supported_assets']['twbs']['assets_dir']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.twbs.icon_prefix exists
+	 */
+	public function testTwbsIconPrefixParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('icon_prefix', $config['supported_assets']['twbs']);
+	}
+	
+	/**
+	 * Check asf_layout.supported_assets.twbs.icon_prefix default value
+	 */
+	public function testTwbsIconPrefixParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('glyphicon', $config['supported_assets']['twbs']['icon_prefix']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.twbs.fonts_dir exists
+	 */
+	public function testTwbsFontsDirParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('fonts_dir', $config['supported_assets']['twbs']);
+	}
+	
+	/**
+	 * Check asf_layout.supported_assets.twbs.fonts_dir default value
+	 */
+	public function testTwbsFontsDirParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../web/fonts', $config['supported_assets']['twbs']['fonts_dir']);
+	}
+	
+	/**
 	 * Check if asf_layout.supported_assets.twbs.js exists
 	 */
 	public function testTwbsJsPathParameterInDefaultConfiguration()

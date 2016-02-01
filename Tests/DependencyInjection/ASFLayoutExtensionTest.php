@@ -190,6 +190,19 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.twbs.assets_dir cannot be empty
+	 */
+	public function testTwbsAssetsDirHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	
+	    $config = $this->getDefaultConfig();
+	    $config['supported_assets']['twbs']['assets_dir'] = '';
+	     
+	    $this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
 	 * @expected InvalidConfigurationException : You can't have less files and css files in your Twitter Bootstrap Configuration, choose one.
 	 */
 	public function testTwbsLessAndCSSFilesSet()
@@ -327,6 +340,9 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
 	            ),
 	            'twbs' => array(
+	                'assets_dir' => "%kernel.root_dir%/../vendor/components/bootstrap",
+	                'icon_prefix' => 'glyphicon',
+	                'fonts_dir' => '%kernel.root_dir%/../web',
 	                'js' => "[%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js]",
 	                'less' => "[@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less, @ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less]",
 	                'css' => "[]"
@@ -367,6 +383,9 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
 	            ),
 	            'twbs' => array(
+	                'assets_dir' => "%kernel.root_dir%/../vendor/components/bootstrap",
+	                'icon_prefix' => 'glyphicon',
+	                'fonts_dir' => '%kernel.root_dir%/../web',
 	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
 	                'less' => array(
 	                    "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less",
