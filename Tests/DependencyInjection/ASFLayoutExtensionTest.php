@@ -323,4 +323,207 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	        )
 	    ));
 	}
+	
+	/**
+	 * Test speaking URL configuration parameter is missing - InvalidConfigurationException Exception expected
+	 */
+	public function testSpeakingURLPathHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $bundles = $bundles = array(
+	        'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+	    );
+	     
+	    $extensions = array(
+	        'assetic' => array(),
+	        'twig' => array()
+	    );
+	     
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+	    $container->shouldReceive('getExtensions')->andReturn($extensions);
+	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
+	    $container->shouldReceive('prependExtensionConfig');
+	
+	    $this->extension->configureAsseticBundle($container, array(
+	        'supported_assets' => array(
+	            'jquery' => array(
+	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	            ),
+	            'jqueryui' => array(
+	                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	            ),
+	            'twbs' => array(
+	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
+	                'less' => array('/a/path', '/double/path'),
+	                'css' => array('another/path', '/path')
+	            ),
+	            'select2' => array(
+	                'js' => "",
+	                'css' => "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
+	            ),
+	            'speaking_url' => array(
+	                'path' => ''
+	            )
+	        )
+	    ));
+	}
+	
+	/**
+	 * Test Bazinga Js Translator bz_translator_js configuration parameter is missing - InvalidConfigurationException Exception expected
+	 */
+	public function testBazingaJsTranslatorBzTranslatorJsHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $bundles = $bundles = array(
+	        'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+	    );
+	
+	    $extensions = array(
+	        'assetic' => array(),
+	        'twig' => array()
+	    );
+	
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+	    $container->shouldReceive('getExtensions')->andReturn($extensions);
+	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
+	    $container->shouldReceive('prependExtensionConfig');
+	
+	    $this->extension->configureAsseticBundle($container, array(
+	        'supported_assets' => array(
+	            'jquery' => array(
+	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	            ),
+	            'jqueryui' => array(
+	                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	            ),
+	            'twbs' => array(
+	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
+	                'less' => array('/a/path', '/double/path'),
+	                'css' => array('another/path', '/path')
+	            ),
+	            'select2' => array(
+	                'js' => "",
+	                'css' => "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
+	            ),
+	            'bazinga_js_translation' => array(
+	                'bz_translator_js' => "",
+	                'bz_translator_config' => "mock",
+	                'bz_translations_files' => "mock"
+	            ),
+	            'speaking_url' => array(
+	                'path' => ''
+	            )
+	        )
+	    ));
+	}
+	
+	/**
+	 * Test Bazinga Js Translator bz_translator_config configuration parameter is missing - InvalidConfigurationException Exception expected
+	 */
+	public function testBazingaJsTranslatorBzTranslatorConfigHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $bundles = $bundles = array(
+	        'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+	    );
+	
+	    $extensions = array(
+	        'assetic' => array(),
+	        'twig' => array()
+	    );
+	
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+	    $container->shouldReceive('getExtensions')->andReturn($extensions);
+	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
+	    $container->shouldReceive('prependExtensionConfig');
+	
+	    $this->extension->configureAsseticBundle($container, array(
+	        'supported_assets' => array(
+	            'jquery' => array(
+	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	            ),
+	            'jqueryui' => array(
+	                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	            ),
+	            'twbs' => array(
+	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
+	                'less' => array('/a/path', '/double/path'),
+	                'css' => array('another/path', '/path')
+	            ),
+	            'select2' => array(
+	                'js' => "",
+	                'css' => "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
+	            ),
+	            'bazinga_js_translation' => array(
+	                'bz_translator_js' => "mock",
+	                'bz_translator_config' => "",
+	                'bz_translations_files' => "mock"
+	            ),
+	            'speaking_url' => array(
+	                'path' => ''
+	            )
+	        )
+	    ));
+	}
+	
+	/**
+	 * Test Bazinga Js Translator bz_translations_files configuration parameter is missing - InvalidConfigurationException Exception expected
+	 */
+	public function testBazingaJsTranslatorBzTranslationsFilesHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $bundles = $bundles = array(
+	        'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+	    );
+	
+	    $extensions = array(
+	        'assetic' => array(),
+	        'twig' => array()
+	    );
+	
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+	    $container->shouldReceive('getExtensions')->andReturn($extensions);
+	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
+	    $container->shouldReceive('prependExtensionConfig');
+	
+	    $this->extension->configureAsseticBundle($container, array(
+	        'supported_assets' => array(
+	            'jquery' => array(
+	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	            ),
+	            'jqueryui' => array(
+	                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	            ),
+	            'twbs' => array(
+	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
+	                'less' => array('/a/path', '/double/path'),
+	                'css' => array('another/path', '/path')
+	            ),
+	            'select2' => array(
+	                'js' => "",
+	                'css' => "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
+	            ),
+	            'bazinga_js_translation' => array(
+	                'bz_translator_js' => "mock",
+	                'bz_translator_config' => "mock",
+	                'bz_translations_files' => ""
+	            ),
+	            'speaking_url' => array(
+	                'path' => ''
+	            )
+	        )
+	    ));
+	}
 }

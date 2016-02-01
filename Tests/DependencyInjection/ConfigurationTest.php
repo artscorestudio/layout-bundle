@@ -221,6 +221,96 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * Check if asf_layout.supported_assets.pazinga_js_translation.bz_translator_js key is set
+	 */
+	public function testBazingaJsTranslationBzTranslatorJsParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('bz_translator_js', $config['supported_assets']['bazinga_js_translation']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.bazinga_js_translation.bz_translator_js key is set to "%kernel.root_dir%/../web/bundles/bazingajstranslation/js/translator.min.js"
+	 */
+	public function testBazingaJsTranslationBzTranslatorJsParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../web/bundles/bazingajstranslation/js/translator.min.js', $config['supported_assets']['bazinga_js_translation']['bz_translator_js']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.pazinga_js_translation.bz_translator_config key is set
+	 */
+	public function testBazingaJsTranslationBzTranslatorConfigParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('bz_translator_js', $config['supported_assets']['bz_translator_config']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.bazinga_js_translation.bz_translator_config key is set to "%kernel.root_dir%/../web/js/translations/config.js"
+	 */
+	public function testBazingaJsTranslationBzTranslatorConfigParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals("%kernel.root_dir%/../web/js/translations/config.js", $config['supported_assets']['bazinga_js_translation']['bz_translator_config']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.pazinga_js_translation.bz_translations_files key is set
+	 */
+	public function testBazingaJsTranslationBzTranslationFilesParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('bz_translator_js', $config['supported_assets']['bz_translations_files']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.bazinga_js_translation.bz_translations_files key is set
+	 */
+	public function testBazingaJsTranslationBzTranslationsFilesParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals("%kernel.root_dir%/../web/js/translations/*/*.js", $config['supported_assets']['bazinga_js_translation']['bz_translations_files']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.speaking_url key is set
+	 */
+	public function testSpeakingURLParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('speaking_url', $config['supported_assets']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.speaking_url.path key is set
+	 */
+	public function testSpeakingURLPathParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('path', $config['supported_assets']['speaking_url']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.speaking_url.path key is set to "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js"
+	 */
+	public function testSpeakingURLPathParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js', $config['supported_assets']['speaking_url']['path']);
+	}
+	
+	/**
 	 * Processes an array of configurations.
 	 * 
 	 * @param array $configs An array of configuration items to process
@@ -231,5 +321,15 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 		$processor = new Processor();
 		return $processor->processConfiguration(new Configuration(), $configs);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.bazinga_js_translation key is set
+	 */
+	public function testBazingaJsTranslationParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('bazinga_js_translation', $config['supported_assets']);
 	}
 }

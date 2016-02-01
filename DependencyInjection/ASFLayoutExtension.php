@@ -150,6 +150,26 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				    throw new InvalidConfigurationException('You have enabled select2 supports but css parameter is missing.');
     				}
     				
+    				// Add Basinga js translation in assets
+    				if ( true === $config['supported_assets']['bazinga_js_translation'] ) {
+    				    $container->prependExtensionConfig($name, array(
+    				        'assets' => array(
+    				            'bz_translator_js' => $config['supported_assets']['bazinga_js_translation']['bz_translator_js'],
+    				            'bz_translator_config' => $config['supported_assets']['bazinga_js_translation']['bz_translator_config'],
+    				            'bz_translations_files' => $config['supported_assets']['bazinga_js_translation']['bz_translations_files']
+    				        )
+    				    ));
+    				}
+    				
+    				// Add Speaking URL in assets
+    				if ( $config['supported_assets']['speaking_url']['path'] !== false ) {
+    				    $container->prependExtensionConfig($name, array(
+    				        'assets' => array(
+    				            'speakingurl_js' => $config['supported_assets']['speaking_url']['path']
+    				        )
+    				    ));
+    				}
+    				
 					break;
 			}
 		}
