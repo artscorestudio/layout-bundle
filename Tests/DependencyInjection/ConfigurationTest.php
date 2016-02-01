@@ -181,6 +181,46 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * Check if asf_layout.supported_assets.select2.js key is set
+	 */
+	public function testSelect2JsPathParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('js', $config['supported_assets']['select2']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.select2.js key is set to "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js"
+	 */
+	public function testSelect2JsParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js', $config['supported_assets']['select2']['js']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.select2.css key is set
+	 */
+	public function testSelect2CssPathParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('css', $config['supported_assets']['select2']);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.select2.css key is set to ""%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css""
+	 */
+	public function testSelect2CssParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css', $config['supported_assets']['select2']['css']);
+	}
+	
+	/**
 	 * Processes an array of configurations.
 	 * 
 	 * @param array $configs An array of configuration items to process

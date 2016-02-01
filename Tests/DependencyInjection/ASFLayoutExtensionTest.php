@@ -235,4 +235,92 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	        )
 	    ));
 	}
+	
+	/**
+	 * Test Select2 configuration css parameter is missing - InvalidConfigurationException Exception expected
+	 */
+	public function testSelect2CssPathHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $bundles = $bundles = array(
+	        'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+	    );
+	     
+	    $extensions = array(
+	        'assetic' => array(),
+	        'twig' => array()
+	    );
+	     
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+	    $container->shouldReceive('getExtensions')->andReturn($extensions);
+	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
+	    $container->shouldReceive('prependExtensionConfig');
+	    
+	    $this->extension->configureAsseticBundle($container, array(
+	        'supported_assets' => array(
+	            'jquery' => array(
+	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	            ),
+	            'jqueryui' => array(
+	                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	            ),
+	            'twbs' => array(
+	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
+	                'less' => array('/a/path', '/double/path'),
+	                'css' => array('another/path', '/path')
+	            ),
+	            'select2' => array(
+	                'js' => "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js",
+	                'css' => ''
+	            )
+	        )
+	    ));
+	}
+	
+	/**
+	 * Test Select2 configuration css parameter is missing - InvalidConfigurationException Exception expected
+	 */
+	public function testSelect2JsPathHasEmptyParameter()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $bundles = $bundles = array(
+	        'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+	    );
+	    
+	    $extensions = array(
+	        'assetic' => array(),
+	        'twig' => array()
+	    );
+	    
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+	    $container->shouldReceive('getExtensions')->andReturn($extensions);
+	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
+	    $container->shouldReceive('prependExtensionConfig');
+	     
+	    $this->extension->configureAsseticBundle($container, array(
+	        'supported_assets' => array(
+	            'jquery' => array(
+	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	            ),
+	            'jqueryui' => array(
+	                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	            ),
+	            'twbs' => array(
+	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
+	                'less' => array('/a/path', '/double/path'),
+	                'css' => array('another/path', '/path')
+	            ),
+	            'select2' => array(
+	                'js' => "",
+	                'css' => "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
+	            )
+	        )
+	    ));
+	}
 }
