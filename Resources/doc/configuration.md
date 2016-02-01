@@ -12,5 +12,8 @@ asf_layout:
         jqueryui:
             js: "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
             css: "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
-            
+        twbs:
+            js: "%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"
+            less: ["@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less", @ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less]
+            css: ~
 ```

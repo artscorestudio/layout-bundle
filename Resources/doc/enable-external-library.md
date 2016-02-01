@@ -79,7 +79,17 @@ I suggest using [component/bootstrap](https://github.com/components/bootstrap) s
 ```bash
 $ composer require components/bootstrap "3.3.*"
 ```
-[Not yet implemented]
+
+If you do not want to use this repository, please don't forget to change the path to your Twitter Bootstrap files like this :
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        twbs:
+            js: "/path/to/your/twbs/js/file"
+            less: "/path/to/your/twbs/less/file"
+            css: "/path/to/your/twbs/css/file"
+```
 
 ### Disable Twitter Bootstrap
 
@@ -90,3 +100,5 @@ asf_layout:
     supported_assets:
         twbs: false
 ```
+
+For more information about Twitter Bootstrap, please check this documentation chapter : [Configure Twitter Bootstrap](twitter-bootstrap.md).
