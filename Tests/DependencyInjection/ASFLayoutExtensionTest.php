@@ -182,7 +182,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Test Twitter Bootstrap configuration js parameter is missing - InvalidConfigurationException Exception expected
 	 */
-	public function testJqueryTwbsJsPathHasEmptyParameter()
+	public function testTwbsJsPathHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
@@ -194,5 +194,45 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	            )
 	        )
 	    )), $container);
+	}
+	
+	/**
+	 * Test Twitter Bootstrap less and css files set error
+	 */
+	public function testTwbsLessAndCSSFilesSet()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	    $bundles = $bundles = array(
+            'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+	    );
+	    
+	    $extensions = array(
+	        'assetic' => array(),
+	        'twig' => array()
+	    );
+	    
+	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
+	    $container->shouldReceive('getExtensions')->andReturn($extensions);
+	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
+	    $container->shouldReceive('prependExtensionConfig');
+
+	    $this->extension->configureAsseticBundle($container, array(
+	        'supported_assets' => array(
+	            'jquery' => array(
+	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	            ),
+	            'jqueryui' => array(
+	                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	            ),
+	            'twbs' => array(
+	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
+	                'less' => array('/a/path', '/double/path'),
+	                'css' => array('another/path', '/path')
+	            )
+	        )
+	    ));
 	}
 }
