@@ -155,7 +155,7 @@ class Configuration implements ConfigurationInterface
 	           ->end()
 	           ->scalarNode('icon_prefix')
 	               ->defaultValue('glyphicon')
-	           -end()
+	           ->end()
 	           ->scalarNode('fonts_dir')
 	               ->defaultValue('%kernel.root_dir%/../web/fonts')
 	           ->end()
