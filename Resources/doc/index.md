@@ -111,5 +111,5 @@ Now you have completed the basic installation and configuration of the ASFLayout
 The following documents are available :
 * [Enable/Disable supported assets](enable-external-library.md)
 * [Configure Twitter Bootstrap](twitter-bootstrap.md)
-* [Layout models](layout-models.ms)
+* [Layout models](layout-models.md)
 * [ASFLayoutBundle Configuration Reference](configuration.md)
