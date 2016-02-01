@@ -147,7 +147,37 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js', $config['supported_assets']['twbs']['js']);
+	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js', $config['supported_assets']['twbs']['js'][0]);
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.twbs.less key is set 
+	 */
+	public function testTwbsLessParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    
+	    $default_values = array(
+	        "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less",
+            "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less"
+	    );
+	    
+	    foreach($config['supported_assets']['twbs']['less'] as $key => $value) {
+	        $this->assertEquals($default_values[$key], $value);
+	    }
+	}
+	
+	/**
+	 * Check if asf_layout.supported_assets.twbs.css key is set
+	 */
+	public function testTwbsCSSParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	     
+	    $default_values = array();
+	    $this->assertCount(0, $config['supported_assets']['twbs']['css']);
 	}
 	
 	/**
