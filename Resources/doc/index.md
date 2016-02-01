@@ -15,7 +15,7 @@ But this bundle allows you to enable or disable external libraries or add more l
 This version of the bundle requires :
 * Symfony 3.0+
 * jQuery 2.2+ (suggest [components/jquery](https://github.com/components/jquery))
-* Twitter Bootstrap 3.3+ (suggest [components/bootstrap](https://github.com/components/bootstrap)) [not yet implemented]
+* Twitter Bootstrap 3.3+ (suggest [components/bootstrap](https://github.com/components/bootstrap))
 
 ### Translations
 
