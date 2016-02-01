@@ -47,17 +47,73 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testLoadExtension()
 	{
-		$bag = m::mock('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag');
-		$bag->shouldReceive('add');
-		
-		$container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
-		$container->shouldReceive('hasExtension')->andReturn(false);
-		$container->shouldReceive('addResource');
-		$container->shouldReceive('getParameterBag')->andReturn($bag);
-		$container->shouldReceive('setDefinition');
-		$container->shouldReceive('setParameter');
-		
-		$this->extension->load(array(), $container);
+		$this->extension->load(array(), $this->getContainer());
+	}
+	
+	/**
+	 * Test bundle with jQuery disabled
+	 */
+	public function testWithoutJquery()
+	{
+	    $config = $this->getPrependDefaultConfig();
+	    $config['supported_assets']['jquery'] = false;
+	     
+	    $this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
+	 * Test bundle with jQuery UI disabled
+	 */
+	public function testWithoutJqueryUI()
+	{
+	    $config = $this->getPrependDefaultConfig();
+	    $config['supported_assets']['jqueryui'] = false;
+	
+	    $this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
+	 * Test bundle with Twitter Bootstrap disabled
+	 */
+	public function testWithoutTwbs()
+	{
+	    $config = $this->getPrependDefaultConfig();
+	    $config['supported_assets']['twbs'] = false;
+	
+	    $this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
+	 * Test bundle with Select2 disabled
+	 */
+	public function testWithoutSelect2()
+	{
+	    $config = $this->getPrependDefaultConfig();
+	    $config['supported_assets']['select2'] = false;
+	
+	    $this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
+	 * Test bundle with Bazinga Js Translator disabled
+	 */
+	public function testWithoutBazingaJsTranslator()
+	{
+	    $config = $this->getPrependDefaultConfig();
+	    $config['supported_assets']['bazinga_js_translator'] = false;
+	
+	    $this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
+	 * Test bundle with Speaking URL disabled
+	 */
+	public function testWithoutSpeakingURL()
+	{
+	    $config = $this->getPrependDefaultConfig();
+	    $config['supported_assets']['speaking_url'] = false;
+	
+	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
 	/**
@@ -218,6 +274,9 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function getContainer($bundles = null, $extensions = null)
 	{
+	    $bag = m::mock('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag');
+	    $bag->shouldReceive('add');
+	    
 	    if ( is_null($bundles) ) {
     	    $bundles = $bundles = array(
     	        'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
@@ -238,7 +297,55 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
 	    $container->shouldReceive('prependExtensionConfig');
 	    
+	    $container->shouldReceive('addResource');
+	    $container->shouldReceive('setParameter');
+	    $container->shouldReceive('hasExtension')->andReturn(false);
+	    $container->shouldReceive('getParameterBag')->andReturn($bag);
+	    $container->shouldReceive('setDefinition');
+	    $container->shouldReceive('setParameter');
+	    
 	    return $container;
+	}
+	
+	
+	/**
+	 * Return bundle's default configuration
+	 *
+	 * @return array
+	 */
+	protected function getPrependDefaultConfig()
+	{
+	    return array(
+	        'enable_twig_support' => true,
+	        'enable_assetic_support' => true,
+	        'supported_assets' => array(
+	            'jquery' => array(
+	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+	            ),
+	            'jqueryui' => array(
+	                'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	                'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	            ),
+	            'twbs' => array(
+	                'js' => "[%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js]",
+	                'less' => "[@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less, @ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less]",
+	                'css' => "[]"
+	            ),
+	            'select2' => array(
+	                'js' => "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js",
+	                'css' => "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
+	            ),
+	            'bazinga_js_translator' => array(
+	                'bz_translator_js' => "%kernel.root_dir%/../web/bundles/bazingajstranslation/js/translator.min.js",
+	                'bz_translator_config' => "%kernel.root_dir%/../web/js/translations/config.js",
+	                'bz_translations_files' => "%kernel.root_dir%/../web/js/translations/*/*.js"
+	            ),
+	            'speaking_url' => array(
+	                'path' => "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js"
+	            ),
+	            'fos_js_routing' => true
+	        )
+	    );
 	}
 	
 	/**
