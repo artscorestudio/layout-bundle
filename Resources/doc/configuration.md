@@ -13,6 +13,9 @@ asf_layout:
             js: "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
             css: "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
         twbs:
+            assets_dir: "%kernel.root_dir%/../vendor/components/bootstrap/"
+            icon_prefix: "glyphicon"
+            fonts_dir: "%kernel.root_dir%/../web/fonts"
             js: "%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"
             less: ["@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less", @ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less]
             css: ~

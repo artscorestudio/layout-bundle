@@ -1,8 +1,26 @@
 # Configure Twitter Bootstrap
 
-## Manage the fonts
+## Copy fonts and customize less files
 
-For the moment, if you want to use default fonts in Twitter Bootstrap, just copy fonts folder in your web folder. 
+If you want tocopy/paqste fonts in web folder and customize Less files, you can add this commands in post-update-cmd and post-install-cmd statements in composer.json file of your project :
+
+```json
+# composer.json
+{
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            # [...]
+            "ASF\\LayoutBundle\\Composer\\ScriptHandler::install"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+			# [...]
+            "ASF\\LayoutBundle\\Composer\\ScriptHandler::install"
+        ]
+    },
+}
+```
 
 ## Javascript files
 
