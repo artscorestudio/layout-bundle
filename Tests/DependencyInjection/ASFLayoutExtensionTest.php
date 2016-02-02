@@ -125,7 +125,20 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test preprend method without Twig Bundle enabled - InvalidConfigurationException Exception expected
+	 * @expected InvalidConfigurationException : You have to enabled FOSJsRoutingBundle
+	 */
+	public function testPrependExtensionWithoutFOSJsRoutingBundle()
+	{
+	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	     
+	    $bundles = array('AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle');
+	    $extensions = array('assetic' => array());
+	    
+	    $this->extension->prepend($this->getContainer($bundles, $extensions));
+	}
+	
+	/**
+	 * @expected InvalidConfigurationException : You have to enabled TwigBundle
 	 */
 	public function testPrependExtensionWithoutTwigBundle()
 	{
@@ -138,7 +151,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test preprend method without Assetic Bundle enabled - InvalidConfigurationException Exception expected
+	 * @expected InvalidConfigurationException : You have to enabled AsseticBundle
 	 */
 	public function testPrependExtensionWithoutAsseticBundle()
 	{
@@ -293,7 +306,8 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    if ( is_null($bundles) ) {
     	    $bundles = $bundles = array(
     	        'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
-    	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+    	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle',
+    	        'FOSJsRoutingBundle' => 'FOS\JsRoutingBundle\FOSJsRoutingBundle'
     	    );
 	    }
 	    
