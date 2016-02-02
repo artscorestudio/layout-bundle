@@ -63,22 +63,7 @@ public function registerBundles()
 
 ### Step 3 : Configure the bundle for a quickly use of it with jQuery and Twitter Bootstrap
 
-For a quickly access to a basic template based on jQuery and Twitter Bottstrap, enable it in your application configuration file :
-
-```yaml
-# app/config/config.yml
-asf_layout:
-	supports:
-		jquery: true
-		twbs: true
-		
-	jquery_config:
-		path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
-		
-	twbs_config:
-	    [...] TODO
-    
-### Step 4 : Add jQuery and Twitter Bootstrap in your composer.json file
+For a quickly access to a basic template based on jQuery and Twitter Bottstrap, just add jQuery and Twitter Bootstrap in your project's composer.json file.
 
 For install jQuery, add it to your project's composer.json file :
 
@@ -91,6 +76,8 @@ And for install Twitter Bootstrap, add it to your project's composer.json file :
 ```bash
 $ composer require components/bootstrap "3.3.*"
 ```
+
+For enable all supported assets, please check [Enable/Disable supported assets](enable-external-library.md) in this documentation.
 
 ### Step 3 : Extend model layouts
 

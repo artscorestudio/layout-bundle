@@ -21,8 +21,8 @@
 	"require-dev" : {
 		"sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^2.7",
-        "phpunit/phpunit": ">=5.1",
-        "mockery/mockery": ">=0.9",
+        "phpunit/phpunit": "5.1.*",
+        "mockery/mockery": "0.9.*",
         "components/jqueryui": ">=1.11",
         "components/bootstrap": ">=3.3",
         "select2/select2": ">=4.0",
