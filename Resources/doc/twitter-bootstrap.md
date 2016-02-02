@@ -2,7 +2,7 @@
 
 ## Copy fonts and customize less files
 
-If you want tocopy/paqste fonts in web folder and customize Less files, you can add this commands in post-update-cmd and post-install-cmd statements in composer.json file of your project :
+If you want to copy/paste fonts in web folder, add this commands in *post-install-cmd* and *post-update-cmd* statements in your project's composer.json file.
 
 ```json
 # composer.json
@@ -19,6 +19,18 @@ If you want tocopy/paqste fonts in web folder and customize Less files, you can 
     },
 }
 ```
+
+If you want to customize less files, you have to set the path to your custom bundle and the list of less files to copy. If no files are fill, all less files will be copied.
+
+```yaml
+asf_layout:
+    supported_assets:
+        twbs:
+            customize:
+                less:
+                    dest_dir : "%kernel.root_dir%/../src/AcmeDemoBundle/Resources/public/bootstrap"
+                    files : ["bootstrap.less", "theme.less", "variables.less"]
+``` 
 
 ## Javascript files
 
