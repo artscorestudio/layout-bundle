@@ -117,7 +117,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				    ));
     				    
     				    // Twitter Bootstrap Less files or CSS files
-    				    if ( count($twbs['less']) > 0 && count($twbs['css']) > 0 )
+    				    if ( count($twbs['less']) > 0 && ($twbs['css'] != false && count($twbs['css']) > 0) )
     				        throw new InvalidConfigurationException('You can\'t have less files and css files in your Twitter Bootstrap Configuration, choose one.');
     				    elseif ( count($twbs['less']) > 0 && count($twbs['css']) == 0 ) {
 

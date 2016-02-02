@@ -68,9 +68,9 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	    );
 	    
 	    // Check jQuery UI configuration
-	    if ( isset($this->supportedAssets['supported_assets']['jqueryui']) && $this->supportedAssets['jqueryui']['css'] !== false && $this->asseticSupportEnabled == false )
+	    if ( isset($this->supportedAssets['jqueryui']) && $this->supportedAssets['jqueryui']['css'] !== false && $this->asseticSupportEnabled == false )
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
-        elseif ( isset($this->supportedAssets['supported_assets']['jqueryui']) &&  $this->supportedAssets['jqueryui']['css'] !== false )
+        elseif ( isset($this->supportedAssets['jqueryui']) &&  $this->supportedAssets['jqueryui']['css'] !== false )
             $view_options['jqueryui'] = true;
         
         // Check Twitter Bootstrap configuration

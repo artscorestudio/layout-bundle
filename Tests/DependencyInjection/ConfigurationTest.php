@@ -179,8 +179,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	    $config = $processor->processConfiguration(new Configuration(), array());
 	    
 	    $default_values = array(
-	        "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less",
-            "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less"
+	        "%kernel.root_dir%/../vendor/components/bootstrap/less/bootstrap.less",
+            "%kernel.root_dir%/../vendor/components/bootstrap/less/theme.less"
 	    );
 	    
 	    $defaults_exists = true;
