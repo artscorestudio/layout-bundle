@@ -10,12 +10,10 @@ If you want tocopy/paqste fonts in web folder and customize Less files, you can 
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            # [...]
             "ASF\\LayoutBundle\\Composer\\ScriptHandler::install"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-			# [...]
             "ASF\\LayoutBundle\\Composer\\ScriptHandler::install"
         ]
     },
