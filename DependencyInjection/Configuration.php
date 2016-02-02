@@ -47,7 +47,7 @@ class Configuration implements ConfigurationInterface
 					   ->append($this->addSelect2ParameterNode())
 					   ->append($this->addBazingaJsTranslatorParameterNode())
 					   ->append($this->addSpeakingURLParameterNode())
-					   ->booleanNode('fos_js_routing')->defaultTrue()->end()
+					   ->booleanNode('fos_js_routing')->defaultFalse()->end()
 					->end()
 				->end()
 			->end()
@@ -102,7 +102,6 @@ class Configuration implements ConfigurationInterface
 	               return array('js' => false, 'css' => false);
 	           })
 	       ->end()
-	       ->addDefaultsIfNotSet()
 	       ->children()
 	           ->scalarNode('js')
 	               ->cannotBeEmpty()
@@ -182,7 +181,6 @@ class Configuration implements ConfigurationInterface
 	               return array('js' => false, 'css' => false);
 	           })
 	       ->end()
-	       ->addDefaultsIfNotSet()
 	       ->children()
 	           ->scalarNode('js')
 	               ->cannotBeEmpty()
@@ -215,7 +213,6 @@ class Configuration implements ConfigurationInterface
 	               return array('bz_translator_js' => false, 'bz_translator_config' => false, 'bz_translations_files' => false);
 	           })
 	       ->end()
-	       ->addDefaultsIfNotSet()
 	       ->children()
     	       ->scalarNode('bz_translator_js')
     	           ->cannotBeEmpty()
@@ -251,7 +248,6 @@ class Configuration implements ConfigurationInterface
 	               return array('path' => false);
 	           })
 	       ->end()
-	       ->addDefaultsIfNotSet()
 	       ->children()
 	           ->scalarNode('path')
 	               ->cannotBeEmpty()
