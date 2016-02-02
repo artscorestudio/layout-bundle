@@ -14,10 +14,10 @@ But this bundle allows you to enable or disable external libraries or add more l
 
 This version of the bundle requires :
 * Symfony 3.0+
+* Assetic bundle 2.7+ (suggest [symfony/assetic-bundle](https://packagist.org/packages/symfony/assetic-bundle))
 
 If you want to use all features of this bundle, you have to add this packages in your project's composer.json file :
 
-* Assetic bundle 2.7+ (suggest [symfony/assetic-bundle](https://packagist.org/packages/symfony/assetic-bundle))
 * jQuery 2.2+ (suggest [components/jquery](https://github.com/components/jquery))
 * Twitter Bootstrap 3.3+ (suggest [components/bootstrap](https://github.com/components/bootstrap))
 * Select2 4.0+ (suggest [select2/select2](https://github.com/select2/select2))
