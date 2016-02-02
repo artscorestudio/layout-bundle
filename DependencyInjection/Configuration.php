@@ -139,7 +139,7 @@ class Configuration implements ConfigurationInterface
 	       ->children()
 	           ->scalarNode('assets_dir')
 	               ->cannotBeEmpty()
-	               ->defaultValue('"%kernel.root_dir%/../vendor/components/bootstrap')
+	               ->defaultValue('%kernel.root_dir%/../vendor/components/bootstrap')
 	           ->end()
 	           ->scalarNode('js')
     	           ->defaultValue(array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"))
