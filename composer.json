@@ -16,19 +16,19 @@
 		"php": ">=5.5.9",
         "symfony/symfony": "3.0.*",
         "components/jquery": "2.2.*",
-        "symfony/assetic-bundle": "^2.7",
+        "symfony/assetic-bundle": "^2.7"
+	},
+	"require-dev" : {
+		"sensio/generator-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^2.7",
+        "phpunit/phpunit": "5.1.*",
+        "mockery/mockery": "0.9.*",
         "components/jqueryui": "1.11.*",
         "components/bootstrap": "3.3.*",
         "select2/select2": "4.0.*",
         "willdurand/js-translation-bundle": "2.5.*",
         "pid/speakingurl": "0.11.*",
         "friendsofsymfony/jsrouting-bundle": "2.0.*"
-	},
-	"require-dev" : {
-		"sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^2.7",
-        "phpunit/phpunit": "5.1.*",
-        "mockery/mockery": "0.9.*"
 	},
 	"autoload" : {
 		"psr-4" : {
