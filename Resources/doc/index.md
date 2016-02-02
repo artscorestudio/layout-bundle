@@ -81,9 +81,35 @@ And for install Twitter Bootstrap, add it to your project's composer.json file :
 $ composer require components/bootstrap "3.3.*"
 ```
 
+By default, Layout bundle use Less files directly. Enable Less by isntall it on your system and add it in your project's config.yml file.
+
+Less configuration on *nix operating systems :
+
+```yaml
+# /app/config/config.yml
+assetic:
+    filters:
+        cssrewrite: ~
+        less:
+            node: "/usr/local/bin/node"
+            node_paths: ["/usr/local/lib/node_modules/"]
+```
+
+Less configuration on Microsoft Windows operating systems (Windows 7+) :
+
+```yaml
+# /app/config/config.yml
+assetic:
+    filters:
+        cssrewrite: ~
+        less:
+            node: "C:\\Program Files\\nodejs\\node.exe"
+            node_paths: ["C:\\Users\\__USERNAME__\\AppData\\Roaming\\npm\\node_modules"]
+```
+
 For enable all supported assets, please check [Enable/Disable supported assets](enable-external-library.md) in this documentation.
 
-### Step 3 : Extend model layouts
+### Step 4 : Extend model layouts
 
 Open your base template and extend model templates from Layout bundle :
 

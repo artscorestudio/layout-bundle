@@ -58,10 +58,10 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		    throw new InvalidConfigurationException('You have enabled the support of FOSJsRouting but it is not enabled. Install it or disable FOSJsRoutingBundle support in Layout bundle.');
 		
 		if ( !array_key_exists('TwigBundle', $bundles) && $config['enable_twig_support'] == true )
-		    throw new InvalidConfigurationException('You have enabled the support of Twig but Twig is not enabled.');
+		    throw new InvalidConfigurationException('You have enabled the support of Twig but Twig is not enabled. Install it or disable TwigBundle support in Layout bundle.');
 		
         if ( !array_key_exists('AsseticBundle', $bundles) && $config['enable_assetic_support'] == true )
-            throw new InvalidConfigurationException('You have enabled the support of Assetic but Assetic is not enabled.');
+            throw new InvalidConfigurationException('You have enabled the support of Assetic but Assetic is not enabled. Please install symfony/assetic-bundle.');
 		
 		if ( array_key_exists('AsseticBundle', $bundles) && count($config['supported_assets']) > 0 && $config['enable_assetic_support'] == true )
 			$this->configureAsseticBundle($container, $config);
