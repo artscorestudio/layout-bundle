@@ -78,9 +78,11 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
                 && (count($this->supportedAssets['twbs']['less']) > 0 || count($this->supportedAssets['twbs']['css']) > 0) 
                 && $this->asseticSupportEnabled == false )
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
-        elseif ( (is_array($this->supportedAssets['twbs']['less']) || is_array($this->supportedAssets['twbs']['css']))
-                && (count($this->supportedAssets['twbs']['less']) > 0 || count($this->supportedAssets['twbs']['css']) > 0))
-            $view_options['twbs'] = true;
+        elseif ( is_array($this->supportedAssets['twbs']['less']) && count($this->supportedAssets['twbs']['less']) > 0) {
+            $view_options['twbs'] = true; $view_options['is_less'] = true;
+        } elseif ( is_array($this->supportedAssets['twbs']['css']) && count($this->supportedAssets['twbs']['css']) > 0 ) {
+            $view_options['twbs'] = true; $view_options['is_less'] = false;
+        }
             
         // Check Select2 configuration
         if ( isset($this->supportedAssets['select2']) && $this->supportedAssets['select2']['css'] !== false && $this->asseticSupportEnabled == false )
