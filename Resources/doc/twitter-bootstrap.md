@@ -1,8 +1,10 @@
 # Configure Twitter Bootstrap
 
-## Copy fonts and customize less files
+## Copy fonts
 
-If you want to copy/paste fonts in web folder, add this commands in *post-install-cmd* and *post-update-cmd* statements in your project's composer.json file.
+### Copy fonts
+
+If you want to automatically copy fonts in web folder, add this commands in *post-install-cmd* and *post-update-cmd* statements in your project's composer.json file.
 
 ```json
 # composer.json
@@ -19,18 +21,6 @@ If you want to copy/paste fonts in web folder, add this commands in *post-instal
     },
 }
 ```
-
-If you want to customize less files, you have to set the path to your custom bundle and the list of less files to copy. If no files are fill, all less files will be copied.
-
-```yaml
-asf_layout:
-    supported_assets:
-        twbs:
-            customize:
-                less:
-                    dest_dir : "%kernel.root_dir%/../src/AcmeDemoBundle/Resources/public/bootstrap"
-                    files : ["bootstrap.less", "theme.less", "variables.less"]
-``` 
 
 ## Javascript files
 
@@ -95,13 +85,37 @@ asf_layout:
 
 > Be carreful, you cannot have *asf_layout.supported_assets.less* parameter set and *asf_layout.supported_assets.css* also set, an exception will throw. 
 
-Layout bundle have a copy of bootstrap.less, theme.less and variable.less files in *@ASFLayoutBundle/Resources/public/supports/bootstrap/less* folder. The particularity of this files is they are prepared with *@import* delaration like this :
+### Customize less files
 
-```less
-// /vendor/artscorestudio/layout-bundle/Resources/public/supports/bootstrap/less/bootstrap.less
-@import "../../../../../../../../mixins.less";
+If you want to automatically copy Twitter Bootstrap less files your custom Symfony bundle, a command line tool exist for do this for you. Indeed, if you copy/paste less files in your custom bundle, the "@import" statements in thisfiles will be wrong. To remedy this problem, the command line tool automatically updates the "@import" statements.
+
+Before using the command line tool, you must specify the path of the target folder and files to copy. For that, you can pass this via the "app/config/config.yml" file.
+
+```yaml
+asf_layout:
+    supported_assets:
+        twbs:
+            customize:
+                less:
+                    dest_dir : "%kernel.root_dir%/../src/AcmeDemoBundle/Resources/public/bootstrap"
+                    files : ["bootstrap.less", "theme.less", "variables.less"]
+``` 
+
+You can now fire the command line tool :
+
+```bash
+$ php bin/console asf:twbs:less:copy
 ```
 
-If you extends Layout bundle, you can copy/paste this files and modify path according to your bundle. [With the Symfony extending bundle system](http://symfony.com/doc/current/cookbook/bundles/override.html), you have just to create this files for overrinding their contents.
+> Nota 1 : The command check if the file exists in the target folder. If the file exists, then it will not copy it.
 
-> Be carreful, do not use Layout bundle files directly ! If the bundle is updated, your changes will be lost !
+> Nota 2 : If you do not specify files in the paramter *asf_layout.twbs.customize.files*, the command line tool copy all less files.
+
+Finally, update the paths to your custom files in bundle's configuration.
+
+```yaml
+asf_layout:
+    supported_assets:
+        twbs:
+            less: less: ["@AcmeDemoBundle/Resources/public/bootstrap/less/bootstrap.less", "@AcmeDemoBundle/Resources/public/bootstrap/less/theme.less"]
+``` 
