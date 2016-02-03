@@ -202,7 +202,6 @@ class Configuration implements ConfigurationInterface
 	               ->defaultValue('%kernel.root_dir%/../web/fonts')
 	           ->end()
 	           ->arrayNode('customize')
-	               ->addDefaultsIfNotSet()
 	               ->children()
 	                   ->arrayNode('less')
 	                       ->children()

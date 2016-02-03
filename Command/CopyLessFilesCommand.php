@@ -95,6 +95,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
             if ( $copy == true && !$fs->exists($dest)) {
                 try {
                     $fs->copy($file, $dest);
+                    $this->replacePathInFile('/@import "/', '@import "'.$path, $dest, $this->twbs_config['customize']['less']['files']);
                 } catch (IOException $e) {
                     $output->writeln(sprintf('<error>Could not copy %s</error>', $file->getBaseName()));
                     return;
@@ -115,7 +116,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
      * 
      * @return string
      */
-    public function generateRelativePath($from, $to)
+    protected function generateRelativePath($from, $to)
     {
         // some compatibility fixes for Windows paths
         $from = is_dir($from) ? rtrim($from, '\/') . '/' : $from;
@@ -126,7 +127,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
         $from     = explode('/', $from);
         $to       = explode('/', $to);
         $relPath  = $to;
-        var_dump($from);
+        
         foreach ($from as $depth => $dir) {
             // find first non-matching dir
             if ($dir === $to[$depth]) {
@@ -147,5 +148,23 @@ class CopyLessFilesCommand extends ContainerAwareCommand
         }
         
         return implode('/', $relPath);
+    }
+    
+    /**
+     * Replace $pattern by $replace in $file
+     * 
+     * @param string $search
+     * @param string $replace
+     * @param string $dest
+     * @param array  $excluded_files
+     */
+    protected function replacePathInFile($pattern, $replace, $file, $excluded_files)
+    {
+        $content = file_get_contents($file);
+        $content = preg_replace($pattern, $replace, $content);
+        foreach($excluded_files as $filename){
+            $content = preg_replace('/'.str_replace('/', '\\/', $replace.$filename).'/', str_replace('/', '', $pattern.$filename), $content);
+        }
+        file_put_contents($file, $content);
     }
 }
