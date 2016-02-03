@@ -17,6 +17,8 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Copy Less Files Command
@@ -38,7 +40,19 @@ class CopyLessFilesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('asf:twbs:less:copy')
-            ->setDescription('Install icons ansd copy principal Twitter Bootstrap files (bootstrap.less, theme.less and variables.less)');
+            ->setDescription('Install icons ansd copy principal Twitter Bootstrap files (bootstrap.less, theme.less and variables.less)')
+            ->addArgument(
+                'target_dir',
+                InputArgument::OPTIONAL,
+                'Where do you want to copy files ?'
+            )
+            ->addOption(
+                'files',
+                null,
+                InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL,
+                'Fill in the list of files to copy (separate multiple names with a space) ?'
+            )
+        ;
     }
     
     /**
@@ -49,13 +63,24 @@ class CopyLessFilesCommand extends ContainerAwareCommand
     {
         $this->twbs_config = $this->getContainer()->getParameter('asf_layout.supported_assets')['twbs'];
         
-        if ( !isset($this->twbs_config['customize']['less']['dest_dir']) ) {
+        $target_dir = $input->getArgument('target_dir') ? $input->getArgument('target_dir') : null;
+        if ( is_null($target_dir) && !isset($this->twbs_config['customize']['less']['dest_dir']) ) {
             $output->writeln(sprintf('<error>Please check bundle\'s documentation for customize Twitter Bootstrap less files.</error>'));
             return;
         }
+        $dest_dir = is_null($target_dir) ? $this->twbs_config['customize']['less']['dest_dir'] : $target_dir;
         
-        $dest_dir = $this->twbs_config['customize']['less']['dest_dir'];
+        $output->writeln('');
+        $output->writeln(sprintf(
+            '<info>The target directory is "%s"%s.</info>',
+            $dest_dir,
+            is_null($target_dir) ? ' from application configuration file' : ''
+            ));
+        $output->writeln('');
+        
+        $files = $input->getOption('files') ? $input->getOption('files') : $this->twbs_config['customize']['less']['files'];
         $src_dir = sprintf('%s/%s', $this->twbs_config['assets_dir'], 'less');
+        var_dump($files);
         
         $finder = new Finder();
         $fs = new Filesystem();
@@ -84,9 +109,9 @@ class CopyLessFilesCommand extends ContainerAwareCommand
 
         foreach ($finder as $file) {
             $copy = false;
-            if ( !isset($this->twbs_config['customize']['less']['files']) ) {
+            if ( count($files) == 0 ) {
                 $copy = true;
-            } elseif ( in_array($file->getBaseName(), $this->twbs_config['customize']['less']['files']) ) {
+            } elseif ( in_array($file->getBaseName(), $files) ) {
                 $copy = true;
             }
             
@@ -95,7 +120,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
             if ( $copy == true && !$fs->exists($dest)) {
                 try {
                     $fs->copy($file, $dest);
-                    $this->replacePathInFile('/@import "/', '@import "'.$path, $dest, $this->twbs_config['customize']['less']['files']);
+                    $this->replacePathInFile('/@import "/', '@import "'.$path, $dest, $files);
                 } catch (IOException $e) {
                     $output->writeln(sprintf('<error>Could not copy %s</error>', $file->getBaseName()));
                     return;
