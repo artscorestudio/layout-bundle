@@ -14,11 +14,15 @@ But this bundle allows you to enable or disable external libraries or add more l
 
 This version of the bundle requires :
 * Symfony 3.0+
+* Assetic bundle 2.7+ (suggest [symfony/assetic-bundle](https://packagist.org/packages/symfony/assetic-bundle))
 * jQuery 2.2+ (suggest [components/jquery](https://github.com/components/jquery))
 * Twitter Bootstrap 3.3+ (suggest [components/bootstrap](https://github.com/components/bootstrap))
-* Select2 (suggest [select2/select2](https://github.com/select2/select2))
-* Bazinga Js Translation (suggest [willdurand/js-translation-bundle](https://github.com/willdurand/BazingaJsTranslationBundle))
-* Speaking URL (suggest [pid/speakingurl](https://github.com/pid/speakingurl))
+
+If you want to use all features of this bundle, you have to add this packages in your project's composer.json file :
+
+* Select2 4.0+ (suggest [select2/select2](https://github.com/select2/select2))
+* Bazinga Js Translation 2.5+ (suggest [willdurand/js-translation-bundle](https://github.com/willdurand/BazingaJsTranslationBundle))
+* Speaking URL 0.11+ (suggest [pid/speakingurl](https://github.com/pid/speakingurl))
 
 ### Translations
 
@@ -63,22 +67,7 @@ public function registerBundles()
 
 ### Step 3 : Configure the bundle for a quickly use of it with jQuery and Twitter Bootstrap
 
-For a quickly access to a basic template based on jQuery and Twitter Bottstrap, enable it in your application configuration file :
-
-```yaml
-# app/config/config.yml
-asf_layout:
-	supports:
-		jquery: true
-		twbs: true
-		
-	jquery_config:
-		path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
-		
-	twbs_config:
-	    [...] TODO
-    
-### Step 4 : Add jQuery and Twitter Bootstrap in your composer.json file
+For a quickly access to a basic template based on jQuery and Twitter Bottstrap, just add jQuery and Twitter Bootstrap in your project's composer.json file.
 
 For install jQuery, add it to your project's composer.json file :
 
@@ -92,7 +81,35 @@ And for install Twitter Bootstrap, add it to your project's composer.json file :
 $ composer require components/bootstrap "3.3.*"
 ```
 
-### Step 3 : Extend model layouts
+By default, Layout bundle use Less files directly. Enable Less by isntall it on your system and add it in your project's config.yml file.
+
+Less configuration on *nix operating systems :
+
+```yaml
+# /app/config/config.yml
+assetic:
+    filters:
+        cssrewrite: ~
+        less:
+            node: "/usr/local/bin/node"
+            node_paths: ["/usr/local/lib/node_modules/"]
+```
+
+Less configuration on Microsoft Windows operating systems (Windows 7+) :
+
+```yaml
+# /app/config/config.yml
+assetic:
+    filters:
+        cssrewrite: ~
+        less:
+            node: "C:\\Program Files\\nodejs\\node.exe"
+            node_paths: ["C:\\Users\\__USERNAME__\\AppData\\Roaming\\npm\\node_modules"]
+```
+
+For enable all supported assets, please check [Enable/Disable supported assets](enable-external-library.md) in this documentation.
+
+### Step 4 : Extend model layouts
 
 Open your base template and extend model templates from Layout bundle :
 

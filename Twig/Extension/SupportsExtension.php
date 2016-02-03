@@ -68,9 +68,9 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	    );
 	    
 	    // Check jQuery UI configuration
-	    if ( $this->supportedAssets['jqueryui']['css'] !== false && $this->asseticSupportEnabled == false )
+	    if ( isset($this->supportedAssets['jqueryui']) && $this->supportedAssets['jqueryui']['css'] !== false && $this->asseticSupportEnabled == false )
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
-        elseif ( $this->supportedAssets['jqueryui']['css'] !== false )
+        elseif ( isset($this->supportedAssets['jqueryui']) &&  $this->supportedAssets['jqueryui']['css'] !== false )
             $view_options['jqueryui'] = true;
         
         // Check Twitter Bootstrap configuration
@@ -78,14 +78,16 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
                 && (count($this->supportedAssets['twbs']['less']) > 0 || count($this->supportedAssets['twbs']['css']) > 0) 
                 && $this->asseticSupportEnabled == false )
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
-        elseif ( (is_array($this->supportedAssets['twbs']['less']) || is_array($this->supportedAssets['twbs']['css']))
-                && (count($this->supportedAssets['twbs']['less']) > 0 || count($this->supportedAssets['twbs']['css']) > 0))
-            $view_options['twbs'] = true;
+        elseif ( is_array($this->supportedAssets['twbs']['less']) && count($this->supportedAssets['twbs']['less']) > 0) {
+            $view_options['twbs'] = true; $view_options['is_less'] = true;
+        } elseif ( is_array($this->supportedAssets['twbs']['css']) && count($this->supportedAssets['twbs']['css']) > 0 ) {
+            $view_options['twbs'] = true; $view_options['is_less'] = false;
+        }
             
         // Check Select2 configuration
-        if ( $this->supportedAssets['select2']['css'] !== false && $this->asseticSupportEnabled == false )
+        if ( isset($this->supportedAssets['select2']) && $this->supportedAssets['select2']['css'] !== false && $this->asseticSupportEnabled == false )
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
-        elseif ( $this->supportedAssets['select2']['css'] !== false )
+        elseif ( isset($this->supportedAssets['select2']) && $this->supportedAssets['select2']['css'] !== false )
             $view_options['select2'] = true;
         
         return $this->environment->render('ASFLayoutBundle:supports:stylesheets.html.twig', $view_options);
@@ -114,9 +116,9 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
 	       $view_options['jquery'] = true;
 	    
 	    // Check jQuery UI configuration
-	    if ( $this->supportedAssets['jqueryui']['js'] !== false && $this->asseticSupportEnabled == false )
+	    if ( isset($this->supportedAssets['jqueryui']) && $this->supportedAssets['jqueryui']['js'] !== false && $this->asseticSupportEnabled == false )
 	       throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
-        elseif ( $this->supportedAssets['jqueryui']['js'] !== false )
+        elseif ( isset($this->supportedAssets['jqueryui']) && $this->supportedAssets['jqueryui']['js'] !== false )
             $view_options['jqueryui'] = true;
 	    
         // Check Twitter Bootstrap configuration
@@ -126,26 +128,26 @@ class SupportsExtension extends \Twig_Extension implements \Twig_Extension_InitR
             $view_options['twbs'] = true;
         
         // Check select2 configuration
-        if ( $this->supportedAssets['select2']['js'] !== false && $this->asseticSupportEnabled == false )
+        if ( isset($this->supportedAssets['select2']) && $this->supportedAssets['select2']['js'] !== false && $this->asseticSupportEnabled == false )
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
-        elseif ( $this->supportedAssets['select2']['js'] !== false )
+        elseif ( isset($this->supportedAssets['select2']) && $this->supportedAssets['select2']['js'] !== false )
             $view_options['select2'] = true;
         
         // Check bazinga js translation configuration
-        if ( $this->supportedAssets['bazinga_js_translator']['bz_translator_js'] !== false
+        if ( isset($this->supportedAssets['bazinga_js_translator']) && $this->supportedAssets['bazinga_js_translator']['bz_translator_js'] !== false
             && $this->supportedAssets['bazinga_js_translator']['bz_translator_config'] !== false
             && $this->supportedAssets['bazinga_js_translator']['bz_translations_files'] !== false
             && $this->asseticSupportEnabled == false )
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
-        elseif ( $this->supportedAssets['bazinga_js_translator']['bz_translator_js'] !== false
+        elseif ( isset($this->supportedAssets['bazinga_js_translator']) && $this->supportedAssets['bazinga_js_translator']['bz_translator_js'] !== false
             && $this->supportedAssets['bazinga_js_translator']['bz_translator_config'] !== false
             && $this->supportedAssets['bazinga_js_translator']['bz_translations_files'] !== false )
             $view_options['bazinga_js_translation'] = true;
         
         // Check speaking_url configuration
-        if ( $this->supportedAssets['speaking_url']['path'] !== false && $this->asseticSupportEnabled == false )
+        if ( isset($this->supportedAssets['speaking_url']) && $this->supportedAssets['speaking_url']['path'] !== false && $this->asseticSupportEnabled == false )
             throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
-        elseif ( $this->supportedAssets['speaking_url']['path'] !== false )
+        elseif ( isset($this->supportedAssets['speaking_url']) && $this->supportedAssets['speaking_url']['path'] !== false )
             $view_options['speaking_url'] = true;
         
         return $this->environment->render('ASFLayoutBundle:supports:javascripts.html.twig', $view_options);

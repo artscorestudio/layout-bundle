@@ -47,7 +47,7 @@ class Configuration implements ConfigurationInterface
 					   ->append($this->addSelect2ParameterNode())
 					   ->append($this->addBazingaJsTranslatorParameterNode())
 					   ->append($this->addSpeakingURLParameterNode())
-					   ->booleanNode('fos_js_routing')->defaultTrue()->end()
+					   ->booleanNode('fos_js_routing')->defaultFalse()->end()
 					->end()
 				->end()
 			->end()
@@ -71,6 +71,14 @@ class Configuration implements ConfigurationInterface
                 })
                 ->then(function($value){
                     return array('path' => false);
+                })
+            ->end()
+            ->beforeNormalization()
+                ->ifTrue(function($value){
+                    return $value === true;
+                })
+                ->then(function($value){
+                    return array('path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js");
                 })
             ->end()
             ->addDefaultsIfNotSet()
@@ -102,7 +110,17 @@ class Configuration implements ConfigurationInterface
 	               return array('js' => false, 'css' => false);
 	           })
 	       ->end()
-	       ->addDefaultsIfNotSet()
+	       ->beforeNormalization()
+    	       ->ifTrue(function($value){
+    	           return $value === true;
+    	       })
+    	       ->then(function($value){
+    	           return array(
+    	               'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js", 
+    	               'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+    	           );
+    	       })
+	       ->end()
 	       ->children()
 	           ->scalarNode('js')
 	               ->cannotBeEmpty()
@@ -132,32 +150,69 @@ class Configuration implements ConfigurationInterface
 	               return $value == false;
 	           })
 	           ->then(function($value){
-	               return array('js' => false);
+	               return array();
 	           })
+	       ->end()
+	       ->beforeNormalization()
+    	       ->ifTrue(function($value){
+    	           return $value === true;
+    	       })
+    	       ->then(function($value){
+    	           return array(
+    	               'assets_dir' => '%kernel.root_dir%/../vendor/components/bootstrap',
+    	               'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
+    	               'less' => array(
+    	                   "%kernel.root_dir%/../vendor/components/bootstrap/less/bootstrap.less", 
+    	                   "%kernel.root_dir%/../vendor/components/bootstrap/less/theme.less"
+    	               ),
+    	               'icon_prefix' => 'glyphicon',
+    	               'fonts_dir' => '%kernel.root_dir%/../web/fonts'
+    	           );
+    	       })
 	       ->end()
 	       ->addDefaultsIfNotSet()
 	       ->children()
 	           ->scalarNode('assets_dir')
 	               ->cannotBeEmpty()
-	               ->defaultValue('"%kernel.root_dir%/../vendor/components/bootstrap')
+	               ->defaultValue('%kernel.root_dir%/../vendor/components/bootstrap')
 	           ->end()
-	           ->scalarNode('js')
-    	           ->defaultValue(array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"))
+	           ->arrayNode('js')
+    	           ->fixXmlConfig('js')
+    	           ->prototype('scalar')->end()
+    	           ->defaultValue(array(
+    	               "%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"
+    	           ))
 	           ->end()
-	           ->scalarNode('less')
-	               ->defaultValue(array(
-	                   "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less",
-	                   "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less"
-	               ))
+	           ->arrayNode('less')
+    	           ->fixXmlConfig('less')
+    	           ->prototype('scalar')->end()
+    	           ->defaultValue(array(
+    	               "%kernel.root_dir%/../vendor/components/bootstrap/less/bootstrap.less",
+	                   "%kernel.root_dir%/../vendor/components/bootstrap/less/theme.less"
+    	           ))
 	           ->end()
-	           ->scalarNode('css')
-	               ->defaultValue(array())
+	           ->arrayNode('css')
+    	           ->fixXmlConfig('vss')
+    	           ->prototype('scalar')->end()
 	           ->end()
 	           ->scalarNode('icon_prefix')
 	               ->defaultValue('glyphicon')
 	           ->end()
 	           ->scalarNode('fonts_dir')
 	               ->defaultValue('%kernel.root_dir%/../web/fonts')
+	           ->end()
+	           ->arrayNode('customize')
+	               ->children()
+	                   ->arrayNode('less')
+	                       ->children()
+	                           ->scalarNode('dest_dir')->end()
+	                           ->arrayNode('files')
+    	                           ->fixXmlConfig('less_files')
+    	                           ->prototype('scalar')->end()
+    	                       ->end()
+    	                   ->end()
+    	               ->end()
+    	           ->end()
 	           ->end()
 	       ->end()
 	    ;
@@ -182,7 +237,17 @@ class Configuration implements ConfigurationInterface
 	               return array('js' => false, 'css' => false);
 	           })
 	       ->end()
-	       ->addDefaultsIfNotSet()
+	       ->beforeNormalization()
+    	       ->ifTrue(function($value){
+    	           return $value === true;
+    	       })
+    	       ->then(function($value){
+    	           return array(
+    	               'js' => "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js", 
+    	               'css' => "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
+    	           );
+    	       })
+	       ->end()
 	       ->children()
 	           ->scalarNode('js')
 	               ->cannotBeEmpty()
@@ -215,7 +280,18 @@ class Configuration implements ConfigurationInterface
 	               return array('bz_translator_js' => false, 'bz_translator_config' => false, 'bz_translations_files' => false);
 	           })
 	       ->end()
-	       ->addDefaultsIfNotSet()
+	       ->beforeNormalization()
+    	       ->ifTrue(function($value){
+    	           return $value === true;
+    	       })
+    	       ->then(function($value){
+    	           return array(
+    	               'bz_translator_js' => "bundles/bazingajstranslation/js/translator.min.js", 
+    	               'bz_translator_config' => "js/translations/config.js", 
+    	               'bz_translations_files' => "js/translations/*/*.js"
+    	           );
+    	       })
+	       ->end()
 	       ->children()
     	       ->scalarNode('bz_translator_js')
     	           ->cannotBeEmpty()
@@ -251,7 +327,14 @@ class Configuration implements ConfigurationInterface
 	               return array('path' => false);
 	           })
 	       ->end()
-	       ->addDefaultsIfNotSet()
+	       ->beforeNormalization()
+    	       ->ifTrue(function($value){
+    	           return $value === true;
+    	       })
+    	       ->then(function($value){
+    	           return array('path' => "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js");
+    	       })
+	       ->end()
 	       ->children()
 	           ->scalarNode('path')
 	               ->cannotBeEmpty()

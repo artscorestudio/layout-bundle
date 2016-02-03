@@ -2,8 +2,10 @@
 	{% include "ASFLayoutBundle:supports:jqueryui_css.html.twig" %}
 {% endif %}
 
-{% if twbs == true %}
+{% if twbs == true and is_less == false %}
 	{% include "ASFLayoutBundle:supports:twbs_css.html.twig" %}
+{% elseif twbs == true and is_less == true %}
+	{% include "ASFLayoutBundle:supports:twbs_less.html.twig" %}
 {% endif %}
 
 {% if select2 == true %}

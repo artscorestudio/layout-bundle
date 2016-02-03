@@ -10,7 +10,9 @@ Layout bundle comes with a list of supported assets. The available assets are :
 
 The support of an assets means that you have just to enable it in bundle's configuration and to add it in the composer.json file of your Symfony project.
 
-> By default, this assets are enabled so don't forget to update your composer.json file.
+> By default, just jQuery and Twitter Bootstrap assets are enabled so don't forget to update your composer.json file.
+
+> Don't forget to clear cache each time you modify assets (php bin/console cache:clear command).
 
 ## Enable/disable jQuery
 
@@ -22,6 +24,25 @@ I suggest using [component/jquery](https://github.com/components/jquery)shim rep
 
 ```bash
 $ composer require components/jquery "2.2.*"
+```
+
+You can enable it by two different ways. First, just passing *true* :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        jquery: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        jquery:
+            path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
 ```
 
 If you do not want to use this repository, please don't forget to change the path to your jquery file like this :
@@ -56,6 +77,26 @@ I suggest using [component/jqueryui](https://github.com/components/jqueryui) shi
 $ composer require components/jqueryui "1.11.*"
 ```
 
+You can enable it by two different ways. First, just passing *true* :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        jqueryui: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        jqueryui:
+            js: "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
+            css: "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+```
+
 If you do not want to use this repository, please don't forget to change the path to your jquery ui files like this :
 
 ```yaml
@@ -87,6 +128,30 @@ I suggest using [component/bootstrap](https://github.com/components/bootstrap) s
 
 ```bash
 $ composer require components/bootstrap "3.3.*"
+```
+
+You can enable it by two different ways. First, just passing *true* :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        twbs: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        twbs:
+            assets_dir: "%kernel.root_dir%/../vendor/components/bootstrap/"
+            icon_prefix: "glyphicon"
+            fonts_dir: "%kernel.root_dir%/../web/fonts"
+            js: "%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"
+            less: ["@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less", @ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less]
+            css: ~
 ```
 
 If you do not want to use this repository, please don't forget to change the path to your Twitter Bootstrap files like this :
@@ -124,6 +189,26 @@ I suggest using [select2/select2](https://github.com/select2/select2) repository
 $ composer require select2/select2 "4.0.*"
 ```
 
+You can enable it by two different ways. First, just passing *true* :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        select2: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        select2:
+            js: "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js"
+            css: "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
+```
+
 If you do not want to use this repository, please don't forget to change the path to your select2 file like this :
 
 ```yaml
@@ -155,6 +240,27 @@ I suggest using [willdurand/BazingaJsTranslationBundle](https://github.com/willd
 
 ```bash
 $ composer require willdurand/BazingaJsTranslationBundle "2.5.*"
+```
+
+You can enable it by two different ways. First, just passing *true* :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        bazing_js_translator: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        bazing_js_translator:
+            bz_translator_js: "bundles/bazingajstranslation/js/translator.min.js"
+            bz_translator_config: "js/translations/config.js"
+            bz_translations_files: "js/translations/*/*.js"
 ```
 
 If you do not want to use this repository, please don't forget to change the path to your BazingJsTranslation file like this :
@@ -189,6 +295,25 @@ I suggest using [pid/speaking](https://github.com/pid/speakingurl) repository. Y
 $ composer require pid/speaking "8.0.*"
 ```
 
+You can enable it by two different ways. First, just passing *true* :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        speaking_url: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        speaking_url:
+            path: "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js"
+```
+
 If you do not want to use this repository, please don't forget to change the path to your speakingURL file like this :
 
 ```yaml
@@ -207,4 +332,33 @@ Just edit config.yml :
 asf_layout:
     supported_assets:
         speaking_url: false
+```
+
+## Enable/disable FOSJsRouting Bundle
+
+> A pretty nice way to expose your Symfony2 routing to client applications. 
+
+### Adding FOSJsRoutingBundle in your project's composer.json file
+
+I suggest using [friendsofsymfony/jsrouting-bundle](https://github.com/FriendsOfSymfony/FOSJsRoutingBundle) repository. You can add it by enter the follow command :
+
+```bash
+$ composer require friendsofsymfony/jsrouting-bundle "2.0.*"
+```
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    supported_assets:
+        fos_js_routing: true
+```
+
+### Disable FOSJsRouting
+
+Just edit config.yml :
+
+```yaml
+asf_layout:
+    supported_assets:
+        fos_js_routing: false
 ```

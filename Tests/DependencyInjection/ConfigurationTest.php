@@ -87,47 +87,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('jqueryui', $config['supported_assets']);
-	}
-	
-	/**
-	 * Check if asf_layout.supported_assets.jqueryui.js exists
-	 */
-	public function testJqueryUIJsPathParameterInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('js', $config['supported_assets']['jqueryui']);
-	}
-	
-	/**
-	 * Check asf_layout.supported_assets.jqueryui.js default value
-	 */
-	public function testJqueryUIJsParameterValueInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js', $config['supported_assets']['jqueryui']['js']);
-	}
-	
-	/**
-	 * Check if asf_layout.supported_assets.jqueryui.css exists
-	 */
-	public function testJqueryUICssPathParameterInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('css', $config['supported_assets']['jqueryui']);
-	}
-	
-	/**
-	 * Check asf_layout.supported_assets.jqueryui.css key default value
-	 */
-	public function testJqueryUICssParameterValueInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css', $config['supported_assets']['jqueryui']['css']);
+	    $this->assertArrayNotHasKey('jqueryui', $config['supported_assets']);
 	}
 	
 	/**
@@ -219,8 +179,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	    $config = $processor->processConfiguration(new Configuration(), array());
 	    
 	    $default_values = array(
-	        "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less",
-            "@ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less"
+	        "%kernel.root_dir%/../vendor/components/bootstrap/less/bootstrap.less",
+            "%kernel.root_dir%/../vendor/components/bootstrap/less/theme.less"
 	    );
 	    
 	    $defaults_exists = true;
@@ -244,147 +204,37 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.select2.js exists
+	 * Check if asf_layout.supported_assets.select2 not exists
 	 */
-	public function testSelect2JsPathParameterInDefaultConfiguration()
+	public function testSelect2ParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('js', $config['supported_assets']['select2']);
+	    $this->assertArrayNotHasKey('select2', $config['supported_assets']);
 	}
 	
 	/**
-	 * Check asf_layout.supported_assets.select2.js default value
-	 */
-	public function testSelect2JsParameterValueInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js', $config['supported_assets']['select2']['js']);
-	}
-	
-	/**
-	 * Check if asf_layout.supported_assets.select2.css exists
-	 */
-	public function testSelect2CssPathParameterInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('css', $config['supported_assets']['select2']);
-	}
-	
-	/**
-	 * Check asf_layout.supported_assets.select2.css default value
-	 */
-	public function testSelect2CssParameterValueInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css', $config['supported_assets']['select2']['css']);
-	}
-	
-	/**
-	 * Check if asf_layout.supported_assets.bazinga_js_translator exists
+	 * Check if asf_layout.supported_assets.bazinga_js_translator not exists
 	 */
 	public function testBazingaJsTranslationParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('bazinga_js_translator', $config['supported_assets']);
+	    $this->assertArrayNotHasKey('bazinga_js_translator', $config['supported_assets']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.pazinga_js_translation.bz_translator_js exists
-	 */
-	public function testBazingaJsTranslationBzTranslatorJsParameterInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('bz_translator_js', $config['supported_assets']['bazinga_js_translator']);
-	}
-	
-	/**
-	 * Check asf_layout.supported_assets.bazinga_js_translator.bz_translator_js default value
-	 */
-	public function testBazingaJsTranslationBzTranslatorJsParameterValueInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('bundles/bazingajstranslation/js/translator.min.js', $config['supported_assets']['bazinga_js_translator']['bz_translator_js']);
-	}
-	
-	/**
-	 * Check if asf_layout.supported_assets.bazinga_js_translation.bz_translator_config exists
-	 */
-	public function testBazingaJsTranslationBzTranslatorConfigParameterInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('bz_translator_config', $config['supported_assets']['bazinga_js_translator']);
-	}
-	
-	/**
-	 * Check asf_layout.supported_assets.bazinga_js_translator.bz_translator_config default value
-	 */
-	public function testBazingaJsTranslationBzTranslatorConfigParameterValueInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals("js/translations/config.js", $config['supported_assets']['bazinga_js_translator']['bz_translator_config']);
-	}
-	
-	/**
-	 * Check if asf_layout.supported_assets.bazinga_js_translation.bz_translations_files exists
-	 */
-	public function testBazingaJsTranslationBzTranslationFilesParameterInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('bz_translations_files', $config['supported_assets']['bazinga_js_translator']);
-	}
-	
-	/**
-	 * Check asf_layout.supported_assets.bazinga_js_translator.bz_translations_files default value
-	 */
-	public function testBazingaJsTranslationBzTranslationsFilesParameterValueInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals("js/translations/*/*.js", $config['supported_assets']['bazinga_js_translator']['bz_translations_files']);
-	}
-	
-	/**
-	 * Check if asf_layout.supported_assets.speaking_url exists
+	 * Check if asf_layout.supported_assets.speaking_url not exists
 	 */
 	public function testSpeakingURLParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('speaking_url', $config['supported_assets']);
+	    $this->assertArrayNotHasKey('speaking_url', $config['supported_assets']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.speaking_url.path exists
-	 */
-	public function testSpeakingURLPathParameterInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('path', $config['supported_assets']['speaking_url']);
-	}
-	
-	/**
-	 * Check asf_layout.supported_assets.speaking_url.path default value
-	 */
-	public function testSpeakingURLPathParameterValueInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js', $config['supported_assets']['speaking_url']['path']);
-	}
-	
-	/**
-	 * Check if asf_layout.supported_assets.fos_js_routing exists
+	 * Check if asf_layout.supported_assets.fos_js_routing not exists
 	 */
 	public function testFOSJsRoutingParameterInDefaultConfiguration()
 	{
@@ -400,7 +250,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertTrue($config['supported_assets']['fos_js_routing']);
+	    $this->assertFalse($config['supported_assets']['fos_js_routing']);
 	}
 	
 	/**
