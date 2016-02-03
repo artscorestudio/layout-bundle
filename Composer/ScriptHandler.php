@@ -53,7 +53,10 @@ class ScriptHandler
         $varDir = static::$options['symfony-var-dir'] = 'var';
     }
     
-    public static function install(CommandEnvent $event)
+    /**
+     * @param CommandEnvent $event
+     */
+    public static function install(CommandEvent $event)
     {
         $options = static::getOptions($event);
         $consoleDir = static::getConsoleDir($event, 'install bootstrap fonts and files');
@@ -64,18 +67,11 @@ class ScriptHandler
         
         $webDir = $options['symfony-web-dir'];
         
-        $symlink = '';
-        if ($options['symfony-assets-install'] == 'symlink') {
-            $symlink = '--symlink ';
-        } elseif ($options['symfony-assets-install'] == 'relative') {
-            $symlink = '--symlink --relative ';
-        }
-        
         if (!static::hasDirectory($event, 'symfony-web-dir', $webDir, 'install bootstrap fonts and files')) {
             return;
         }
         
-        static::executeCommand($event, $consoleDir, 'asf:bootstrap:install '.$symlink.escapeshellarg($webDir), $options['process-timeout']);
+        static::executeCommand($event, $consoleDir, 'asf:twbs:fonts:install ', $options['process-timeout']);
     }
     
     /**
@@ -85,7 +81,7 @@ class ScriptHandler
      * @param number       $timeout
      * @throws \RuntimeException
      */
-    public static function executeCommand(CommandEvent $event, $consolePath, $cmd, $timeout = 300)
+    public static function executeCommand(CommandEvent $event, $consoleDir, $cmd, $timeout = 300)
     {
         $php = escapeshellarg(static::getPhp(false));
         $phpArgs = implode(' ', array_map('escapeshellarg', static::getPhpArguments()));

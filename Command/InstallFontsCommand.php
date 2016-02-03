@@ -84,6 +84,8 @@ class InstallFontsCommand extends ContainerAwareCommand
             }
         }
         
-        $output->writeln(sprintf('Copied icon fonts to <comment>%s</comment>.', $dest_dir));
+        $output->writeln();
+        $output->writeln(sprintf('[OK] Twitter Bootstrap Glyphicons icons was successfully created in <comment>%s</comment>.', $dest_dir));
+        $output->writeln();
     }
 }
