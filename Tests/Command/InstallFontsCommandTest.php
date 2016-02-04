@@ -104,4 +104,76 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
         
         $this->assertRegExp('/\[OK\] Twitter Bootstrap Glyphicons icons was successfully created./', $commandTester->getDisplay());
     }
+    
+    /**
+     * Test with an invalid path to the Twitter Bootstrap path
+     */
+    public function testExecuteWithInvalidTwbsSrcPaths()
+    {
+        $this->container
+            ->shouldReceive('getParameter')
+            ->with('asf_layout.supported_assets')
+            ->andReturn(array(
+                'twbs' => array(
+                    'assets_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
+                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts'
+                )
+            ));
+            
+        if (Kernel::VERSION_ID >= 20500) {
+            $this->container->shouldReceive('enterScope')->with('request');
+            $this->container->shouldReceive('set')->withArgs(
+                array(
+                    'request',
+                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
+                    'request'
+                )
+                );
+        }
+        
+        $application = new Application($this->kernel);
+        $application->add(new InstallFontsCommand());
+        
+        $command = $application->find('asf:twbs:fonts:install');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(array('command' => $command->getName()));
+        
+        $this->assertRegExp('/Did you install Twitter Bootstrap ?/', $commandTester->getDisplay());
+    }
+    
+    /**
+     * Test with an error raised "Could not create directory"
+     */
+    public function testExecuteWithErrorCouldNotCreateDirectory()
+    {
+        $this->container
+        ->shouldReceive('getParameter')
+        ->with('asf_layout.supported_assets')
+        ->andReturn(array(
+            'twbs' => array(
+                'assets_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
+                'fonts_dir' => ''
+            )
+        ));
+    
+        if (Kernel::VERSION_ID >= 20500) {
+            $this->container->shouldReceive('enterScope')->with('request');
+            $this->container->shouldReceive('set')->withArgs(
+                array(
+                    'request',
+                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
+                    'request'
+                )
+                );
+        }
+    
+        $application = new Application($this->kernel);
+        $application->add(new InstallFontsCommand());
+    
+        $command = $application->find('asf:twbs:fonts:install');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(array('command' => $command->getName()));
+    
+        $this->assertRegExp('/Could not create directory/', $commandTester->getDisplay());
+    }
 }

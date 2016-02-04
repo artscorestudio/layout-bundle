@@ -65,7 +65,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
         
         $target_dir = $input->getArgument('target_dir') ? $input->getArgument('target_dir') : null;
         if ( is_null($target_dir) && !isset($this->twbs_config['customize']['less']['dest_dir']) ) {
-            $output->writeln(sprintf('<error>Please check bundle\'s documentation for customize Twitter Bootstrap less files.</error>'));
+            $output->writeln(sprintf('<error>Target directory not specified.</error>'));
             return;
         }
         $dest_dir = is_null($target_dir) ? $this->twbs_config['customize']['less']['dest_dir'] : $target_dir;
