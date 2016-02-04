@@ -31,7 +31,7 @@ You can enable it by two different ways. First, just passing *true* :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         jquery: true
 ```
 
@@ -40,7 +40,7 @@ This configuration is like following (second way) :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         jquery:
             path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
 ```
@@ -50,7 +50,7 @@ If you do not want to use this repository, please don't forget to change the pat
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         jquery:
             path: "/path/to/your/jquery/file"
 ```
@@ -61,7 +61,7 @@ Just edit config.yml :
 
 ```yaml
 asf_layout:
-    supported_assets:
+    assets:
         jquery: false
 ```
 
@@ -82,7 +82,7 @@ You can enable it by two different ways. First, just passing *true* :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         jqueryui: true
 ```
 
@@ -91,7 +91,7 @@ This configuration is like following (second way) :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         jqueryui:
             js: "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
             css: "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
@@ -102,7 +102,7 @@ If you do not want to use this repository, please don't forget to change the pat
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         jqueryui:
             js: "/path/to/your/jqueryui/js/file"
             css: "/path/to/your/jqueryui/css/file"
@@ -114,7 +114,7 @@ Just edit config.yml :
 
 ```yaml
 asf_layout:
-    supported_assets:
+    assets:
         jqueryui: false
 ```
 
@@ -135,7 +135,7 @@ You can enable it by two different ways. First, just passing *true* :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         twbs: true
 ```
 
@@ -144,7 +144,7 @@ This configuration is like following (second way) :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         twbs:
             assets_dir: "%kernel.root_dir%/../vendor/components/bootstrap/"
             icon_prefix: "glyphicon"
@@ -158,7 +158,7 @@ If you do not want to use this repository, please don't forget to change the pat
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         twbs:
             js: "/path/to/your/twbs/js/file"
             less: "/path/to/your/twbs/less/file"
@@ -171,7 +171,7 @@ Just edit config.yml :
 
 ```yaml
 asf_layout:
-    supported_assets:
+    assets:
         twbs: false
 ```
 
@@ -194,7 +194,7 @@ You can enable it by two different ways. First, just passing *true* :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         select2: true
 ```
 
@@ -203,7 +203,7 @@ This configuration is like following (second way) :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         select2:
             js: "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js"
             css: "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
@@ -214,7 +214,7 @@ If you do not want to use this repository, please don't forget to change the pat
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         select2:
             js: "/path/to/your/select2/js/file"
             css: "/path/to/your/select2/css/file"
@@ -226,7 +226,7 @@ Just edit config.yml :
 
 ```yaml
 asf_layout:
-    supported_assets:
+    assets:
         select2: false
 ```
 
@@ -247,7 +247,7 @@ You can enable it by two different ways. First, just passing *true* :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         bazing_js_translator: true
 ```
 
@@ -256,7 +256,7 @@ This configuration is like following (second way) :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         bazing_js_translator:
             bz_translator_js: "bundles/bazingajstranslation/js/translator.min.js"
             bz_translator_config: "js/translations/config.js"
@@ -268,7 +268,7 @@ If you do not want to use this repository, please don't forget to change the pat
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         bazing_js_translation:
             js: "/path/to/your/BazingJsTranslation/js/file"
 ```
@@ -279,7 +279,7 @@ Just edit config.yml :
 
 ```yaml
 asf_layout:
-    supported_assets:
+    assets:
         bazing_js_translation: false
 ```
 
@@ -300,7 +300,7 @@ You can enable it by two different ways. First, just passing *true* :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         speaking_url: true
 ```
 
@@ -309,7 +309,7 @@ This configuration is like following (second way) :
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         speaking_url:
             path: "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js"
 ```
@@ -319,7 +319,7 @@ If you do not want to use this repository, please don't forget to change the pat
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         speaking_url:
             js: "/path/to/your/speaking_url/js/file"
 ```
@@ -330,7 +330,7 @@ Just edit config.yml :
 
 ```yaml
 asf_layout:
-    supported_assets:
+    assets:
         speaking_url: false
 ```
 
@@ -349,7 +349,7 @@ $ composer require friendsofsymfony/jsrouting-bundle "2.0.*"
 ```yaml
 # app/config/config.yml
 asf_layout:
-    supported_assets:
+    assets:
         fos_js_routing: true
 ```
 
@@ -359,6 +359,6 @@ Just edit config.yml :
 
 ```yaml
 asf_layout:
-    supported_assets:
+    assets:
         fos_js_routing: false
 ```

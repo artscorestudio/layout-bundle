@@ -56,7 +56,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testWithoutJquery()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['jquery'] = false;
+	    $config['assets']['jquery'] = false;
 	     
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -67,7 +67,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testWithoutJqueryUI()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['jqueryui'] = false;
+	    $config['assets']['jqueryui'] = false;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -78,7 +78,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testWithoutTwbs()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['twbs'] = false;
+	    $config['assets']['twbs'] = false;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -89,7 +89,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testWithoutSelect2()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['select2'] = false;
+	    $config['assets']['select2'] = false;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -100,7 +100,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testWithoutBazingaJsTranslator()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['bazinga_js_translator'] = false;
+	    $config['assets']['bazinga_js_translator'] = false;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -111,7 +111,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testWithoutSpeakingURL()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['speaking_url'] = false;
+	    $config['assets']['speaking_url'] = false;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -164,53 +164,53 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.jquery.path cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.jquery.path cannot be empty
 	 */
 	public function testJqueryPathHasEmptyParameter()
 	{
 		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['jquery']['path'] = '';
+	    $config['assets']['jquery']['path'] = '';
 	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.jqueryui.css cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.jqueryui.css cannot be empty
 	 */
 	public function testJqueryUICSSPathHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['jqueryui']['css'] = '';
+	    $config['assets']['jqueryui']['css'] = '';
 	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.jqueryui.js cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.jqueryui.js cannot be empty
 	 */
 	public function testJqueryUIJsPathHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['jqueryui']['js'] = '';
+	    $config['assets']['jqueryui']['js'] = '';
 	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.twbs.assets_dir cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.twbs.assets_dir cannot be empty
 	 */
 	public function testTwbsAssetsDirHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 	
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['twbs']['assets_dir'] = '';
+	    $config['assets']['twbs']['assets_dir'] = '';
 	     
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -223,72 +223,72 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['twbs']['css'] = array('/mock/path');
+	    $config['assets']['twbs']['css'] = array('/mock/path');
 	    
 	    $this->extension->configureAsseticBundle($this->getContainer(), $config);
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.select2.css cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.select2.css cannot be empty
 	 */
 	public function testSelect2CssPathHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['select2']['css'] = '';
+	    $config['assets']['select2']['css'] = '';
 	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.select2.js cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.select2.js cannot be empty
 	 */
 	public function testSelect2JsPathHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['select2']['js'] = '';
+	    $config['assets']['select2']['js'] = '';
 	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.speaking_url.path cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.speaking_url.path cannot be empty
 	 */
 	public function testSpeakingURLPathHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['speaking_url']['path'] = '';
+	    $config['assets']['speaking_url']['path'] = '';
 	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.bazinga_js_translator.bz_translator_js cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.bazinga_js_translator.bz_translator_js cannot be empty
 	 */
 	public function testBazingaJsTranslatorBzTranslatorJsHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['bazinga_js_translator']['bz_translator_js'] = '';
+	    $config['assets']['bazinga_js_translator']['bz_translator_js'] = '';
 	     
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.supported_assets.bazinga_js_translator.bz_translator_config cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.bazinga_js_translator.bz_translator_config cannot be empty
 	 */
 	public function testBazingaJsTranslatorBzTranslatorConfigHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 	    
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['bazinga_js_translator']['bz_translator_config'] = '';
+	    $config['assets']['bazinga_js_translator']['bz_translator_config'] = '';
 	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -299,7 +299,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testJqueryUIParameterSetToTrue()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['jqueryui'] = true;
+	    $config['assets']['jqueryui'] = true;
 	     
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -310,7 +310,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testSelect2ParameterSetToTrue()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['select2'] = true;
+	    $config['assets']['select2'] = true;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -321,7 +321,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testBazingaJsTranslatorParameterSetToTrue()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['bazinga_js_translator'] = true;
+	    $config['assets']['bazinga_js_translator'] = true;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -332,7 +332,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testSpeakingURLParameterSetToTrue()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['supported_assets']['speaking_url'] = true;
+	    $config['assets']['speaking_url'] = true;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -388,7 +388,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    return array(
 	        'enable_twig_support' => true,
 	        'enable_assetic_support' => true,
-	        'supported_assets' => array(
+	        'assets' => array(
 	            'jquery' => array(
 	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
 	            ),

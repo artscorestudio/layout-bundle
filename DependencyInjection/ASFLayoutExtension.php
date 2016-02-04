@@ -37,7 +37,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		$loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		
 		if ( $config['enable_twig_support'] == true ) {
-		    $container->setParameter('asf_layout.supported_assets', $config['supported_assets']);
+		    $container->setParameter('asf_layout.assets', $config['assets']);
 		    $container->setParameter('asf_layout.enable_assetic_support', $config['enable_assetic_support']);
 		    $loader->load('services/twig.xml');
 		}
@@ -54,7 +54,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		$configs = $container->getExtensionConfig($this->getAlias());
 		$config = $this->processConfiguration(new Configuration(), $configs);
 
-		if ( !array_key_exists('FOSJsRoutingBundle', $bundles) && $config['supported_assets']['fos_js_routing'] == true )
+		if ( !array_key_exists('FOSJsRoutingBundle', $bundles) && $config['assets']['fos_js_routing'] == true )
 		    throw new InvalidConfigurationException('You have enabled the support of FOSJsRouting but it is not enabled. Install it or disable FOSJsRoutingBundle support in Layout bundle.');
 		
 		if ( !array_key_exists('TwigBundle', $bundles) && $config['enable_twig_support'] == true )
@@ -63,7 +63,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
         if ( !array_key_exists('AsseticBundle', $bundles) && $config['enable_assetic_support'] == true )
             throw new InvalidConfigurationException('You have enabled the support of Assetic but Assetic is not enabled. Please install symfony/assetic-bundle.');
 		
-		if ( array_key_exists('AsseticBundle', $bundles) && count($config['supported_assets']) > 0 && $config['enable_assetic_support'] == true )
+		if ( array_key_exists('AsseticBundle', $bundles) && count($config['assets']) > 0 && $config['enable_assetic_support'] == true )
 			$this->configureAsseticBundle($container, $config);
 	}
 	
@@ -80,32 +80,32 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 				case 'assetic':
 				    
 					// Add jQuery in assets
-    				if ( $config['supported_assets']['jquery']['path'] !== false ) {
+    				if ( $config['assets']['jquery']['path'] !== false ) {
     					$container->prependExtensionConfig($name, array(
     						'assets' => array(
-    							'jquery' => $config['supported_assets']['jquery']['path']
+    							'jquery' => $config['assets']['jquery']['path']
     						)
     					));
     				}
     				
     				// Add jQuery UI in assets
-    				if ( isset($config['supported_assets']['jqueryui']) && $config['supported_assets']['jqueryui']['js'] !== false && $config['supported_assets']['jqueryui']['css'] !== false) {
+    				if ( isset($config['assets']['jqueryui']) && $config['assets']['jqueryui']['js'] !== false && $config['assets']['jqueryui']['css'] !== false) {
     				    $container->prependExtensionConfig($name, array(
     				        'assets' => array(
-    				            'jqueryui_js' => $config['supported_assets']['jqueryui']['js'],
-    				            'jqueryui_css' => $config['supported_assets']['jqueryui']['css']
+    				            'jqueryui_js' => $config['assets']['jqueryui']['js'],
+    				            'jqueryui_css' => $config['assets']['jqueryui']['css']
     				        )
     				    ));
-    				} elseif ( isset($config['supported_assets']['jqueryui']) && $config['supported_assets']['jqueryui']['js'] === false && $config['supported_assets']['jqueryui']['css'] !== false ) {
+    				} elseif ( isset($config['assets']['jqueryui']) && $config['assets']['jqueryui']['js'] === false && $config['assets']['jqueryui']['css'] !== false ) {
     				    throw new InvalidConfigurationException('You have enabled jQuery UI supports but js parameter is missing.');
-    				} elseif ( isset($config['supported_assets']['jqueryui']) && $config['supported_assets']['jqueryui']['js'] !== false && $config['supported_assets']['jqueryui']['css'] === false ) {
+    				} elseif ( isset($config['assets']['jqueryui']) && $config['assets']['jqueryui']['js'] !== false && $config['assets']['jqueryui']['css'] === false ) {
     				    throw new InvalidConfigurationException('You have enabled jQuery UI supports but css parameter is missing.');
     				}
     				
     				// Add Twitter Bootstrap assets
-    				if ( count($config['supported_assets']['twbs']) > 0 ) {
+    				if ( count($config['assets']['twbs']) > 0 ) {
                         
-    				    $twbs = $config['supported_assets']['twbs'];
+    				    $twbs = $config['assets']['twbs'];
     				    
     				    // Twitter Bootstrap javascript files
     				    $container->prependExtensionConfig($name, array(
@@ -140,22 +140,22 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				}
     				
     				// Add select2 files
-    				if ( isset($config['supported_assets']['select2']) && $config['supported_assets']['select2']['js'] !== false && $config['supported_assets']['select2']['css'] !== false) {
+    				if ( isset($config['assets']['select2']) && $config['assets']['select2']['js'] !== false && $config['assets']['select2']['css'] !== false) {
     				    $container->prependExtensionConfig($name, array(
     				        'assets' => array(
-    				            'select2_js' => $config['supported_assets']['select2']['js'],
-    				            'select2_css' => $config['supported_assets']['select2']['css']
+    				            'select2_js' => $config['assets']['select2']['js'],
+    				            'select2_css' => $config['assets']['select2']['css']
     				        )
     				    ));
-    				} elseif ( isset($config['supported_assets']['select2']) && $config['supported_assets']['select2']['js'] === false && $config['supported_assets']['select2']['css'] !== false ) {
+    				} elseif ( isset($config['assets']['select2']) && $config['assets']['select2']['js'] === false && $config['assets']['select2']['css'] !== false ) {
     				    throw new InvalidConfigurationException('You have enabled select2 supports but js parameter is missing.');
-    				} elseif ( isset($config['supported_assets']['select2']) && $config['supported_assets']['select2']['js'] !== false && $config['supported_assets']['select2']['css'] === false ) {
+    				} elseif ( isset($config['assets']['select2']) && $config['assets']['select2']['js'] !== false && $config['assets']['select2']['css'] === false ) {
     				    throw new InvalidConfigurationException('You have enabled select2 supports but css parameter is missing.');
     				}
     				
     				// Add Basinga js translation in assets
-    				if ( isset($config['supported_assets']['bazinga_js_translator']) && $config['supported_assets']['bazinga_js_translator'] !== false ) {
-    				    $bz_config = $config['supported_assets']['bazinga_js_translator'];
+    				if ( isset($config['assets']['bazinga_js_translator']) && $config['assets']['bazinga_js_translator'] !== false ) {
+    				    $bz_config = $config['assets']['bazinga_js_translator'];
     				    $container->prependExtensionConfig($name, array(
     				        'assets' => array(
     				            'bz_translator_js' => $bz_config['bz_translator_js'],
@@ -166,10 +166,10 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				}
     				
     				// Add Speaking URL in assets
-    				if ( isset($config['supported_assets']['speaking_url']) && $config['supported_assets']['speaking_url']['path'] !== false ) {
+    				if ( isset($config['assets']['speaking_url']) && $config['assets']['speaking_url']['path'] !== false ) {
     				    $container->prependExtensionConfig($name, array(
     				        'assets' => array(
-    				            'speakingurl_js' => $config['supported_assets']['speaking_url']['path']
+    				            'speakingurl_js' => $config['assets']['speaking_url']['path']
     				        )
     				    ));
     				}

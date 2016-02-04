@@ -46,7 +46,7 @@ class InstallFontsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->twbs_config = $this->getContainer()->getParameter('asf_layout.supported_assets')['twbs'];
+        $this->twbs_config = $this->getContainer()->getParameter('asf_layout.assets')['twbs'];
         
         $dest_dir = $this->twbs_config['fonts_dir'];
         $src_dir = sprintf('%s/%s', $this->twbs_config['assets_dir'], 'fonts');

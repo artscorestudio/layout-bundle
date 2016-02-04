@@ -41,137 +41,137 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets key exists
+	 * Check if asf_layout.assets key exists
 	 */
 	public function testSupportedAssetsParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('supported_assets', $config);
+	    $this->assertArrayHasKey('assets', $config);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.jquery exists
+	 * Check if asf_layout.assets.jquery exists
 	 */
 	public function testJqueryParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('jquery', $config['supported_assets']);
+	    $this->assertArrayHasKey('jquery', $config['assets']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.jquery.path exists
+	 * Check if asf_layout.assets.jquery.path exists
 	 */
 	public function testJqueryPathParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('path', $config['supported_assets']['jquery']);
+	    $this->assertArrayHasKey('path', $config['assets']['jquery']);
 	}
 	
 	/**
-	 * Check asf_layout.supported_assets.jquery.path default value
+	 * Check asf_layout.assets.jquery.path default value
 	 */
 	public function testJqueryPathParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/components/jquery/jquery.min.js', $config['supported_assets']['jquery']['path']);
+	    $this->assertEquals('%kernel.root_dir%/../vendor/components/jquery/jquery.min.js', $config['assets']['jquery']['path']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.jqueryui exists
+	 * Check if asf_layout.assets.jqueryui exists
 	 */
 	public function testJqueryUIParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('jqueryui', $config['supported_assets']);
+	    $this->assertArrayNotHasKey('jqueryui', $config['assets']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.twbs.assets_dir exists
+	 * Check if asf_layout.assets.twbs.assets_dir exists
 	 */
 	public function testTwbsAssetsDirParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('assets_dir', $config['supported_assets']['twbs']);
+	    $this->assertArrayHasKey('assets_dir', $config['assets']['twbs']);
 	}
 	
 	/**
-	 * Check asf_layout.supported_assets.twbs.assets_dir default value
+	 * Check asf_layout.assets.twbs.assets_dir default value
 	 */
 	public function testTwbsAssetsDirParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap', $config['supported_assets']['twbs']['assets_dir']);
+	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap', $config['assets']['twbs']['assets_dir']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.twbs.icon_prefix exists
+	 * Check if asf_layout.assets.twbs.icon_prefix exists
 	 */
 	public function testTwbsIconPrefixParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('icon_prefix', $config['supported_assets']['twbs']);
+	    $this->assertArrayHasKey('icon_prefix', $config['assets']['twbs']);
 	}
 	
 	/**
-	 * Check asf_layout.supported_assets.twbs.icon_prefix default value
+	 * Check asf_layout.assets.twbs.icon_prefix default value
 	 */
 	public function testTwbsIconPrefixParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('glyphicon', $config['supported_assets']['twbs']['icon_prefix']);
+	    $this->assertEquals('glyphicon', $config['assets']['twbs']['icon_prefix']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.twbs.fonts_dir exists
+	 * Check if asf_layout.assets.twbs.fonts_dir exists
 	 */
 	public function testTwbsFontsDirParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('fonts_dir', $config['supported_assets']['twbs']);
+	    $this->assertArrayHasKey('fonts_dir', $config['assets']['twbs']);
 	}
 	
 	/**
-	 * Check asf_layout.supported_assets.twbs.fonts_dir default value
+	 * Check asf_layout.assets.twbs.fonts_dir default value
 	 */
 	public function testTwbsFontsDirParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../web/fonts', $config['supported_assets']['twbs']['fonts_dir']);
+	    $this->assertEquals('%kernel.root_dir%/../web/fonts', $config['assets']['twbs']['fonts_dir']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.twbs.js exists
+	 * Check if asf_layout.assets.twbs.js exists
 	 */
 	public function testTwbsJsPathParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('js', $config['supported_assets']['twbs']);
+	    $this->assertArrayHasKey('js', $config['assets']['twbs']);
 	}
 	
 	/**
-	 * Check asf_layout.supported_assets.twbs.js default value
+	 * Check asf_layout.assets.twbs.js default value
 	 */
 	public function testTwbsJsParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js', $config['supported_assets']['twbs']['js'][0]);
+	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js', $config['assets']['twbs']['js'][0]);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.twbs.less exists 
+	 * Check if asf_layout.assets.twbs.less exists 
 	 */
 	public function testTwbsLessParameterValueInDefaultConfiguration()
 	{
@@ -184,7 +184,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	    );
 	    
 	    $defaults_exists = true;
-	    foreach($config['supported_assets']['twbs']['less'] as $key => $value) {
+	    foreach($config['assets']['twbs']['less'] as $key => $value) {
 	        if ( $value != $default_values[$key] )
 	            $defaults_exists = false;
 	    }
@@ -192,7 +192,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.twbs.css exists
+	 * Check if asf_layout.assets.twbs.css exists
 	 */
 	public function testTwbsCSSParameterValueInDefaultConfiguration()
 	{
@@ -200,57 +200,57 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	    $config = $processor->processConfiguration(new Configuration(), array());
 	     
 	    $default_values = array();
-	    $this->assertCount(0, $config['supported_assets']['twbs']['css']);
+	    $this->assertCount(0, $config['assets']['twbs']['css']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.select2 not exists
+	 * Check if asf_layout.assets.select2 not exists
 	 */
 	public function testSelect2ParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('select2', $config['supported_assets']);
+	    $this->assertArrayNotHasKey('select2', $config['assets']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.bazinga_js_translator not exists
+	 * Check if asf_layout.assets.bazinga_js_translator not exists
 	 */
 	public function testBazingaJsTranslationParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('bazinga_js_translator', $config['supported_assets']);
+	    $this->assertArrayNotHasKey('bazinga_js_translator', $config['assets']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.speaking_url not exists
+	 * Check if asf_layout.assets.speaking_url not exists
 	 */
 	public function testSpeakingURLParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('speaking_url', $config['supported_assets']);
+	    $this->assertArrayNotHasKey('speaking_url', $config['assets']);
 	}
 	
 	/**
-	 * Check if asf_layout.supported_assets.fos_js_routing not exists
+	 * Check if asf_layout.assets.fos_js_routing not exists
 	 */
 	public function testFOSJsRoutingParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('fos_js_routing', $config['supported_assets']);
+	    $this->assertArrayHasKey('fos_js_routing', $config['assets']);
 	}
 	
 	/**
-	 * Check asf_layout.supported_assets.fos_js_routing default value
+	 * Check asf_layout.assets.fos_js_routing default value
 	 */
 	public function testFOSJsRoutingParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertFalse($config['supported_assets']['fos_js_routing']);
+	    $this->assertFalse($config['assets']['fos_js_routing']);
 	}
 	
 	/**

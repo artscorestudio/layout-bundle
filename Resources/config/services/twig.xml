@@ -4,15 +4,13 @@
 	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 	
 	<parameters>
-		<parameter key="asf_layout.twig.extension.supports.class">ASF\LayoutBundle\Twig\Extension\SupportsExtension</parameter>
+		<parameter key="asf_layout.twig.extension.assets.class">ASF\LayoutBundle\Twig\Extension\AssetsExtension</parameter>
 	</parameters>
 	
 	<services>
-		<service id="asf_layout.twig.extension.supports" class="%asf_layout.twig.extension.supports.class%">
-			<call method="setSupportedAssets">
-				<argument>%asf_layout.supported_assets%</argument>
-				<argument>%asf_layout.enable_assetic_support%</argument>
-			</call>
+		<service id="asf_layout.twig.extension.assets" class="%asf_layout.twig.extension.assets.class%">
+			<argument>%asf_layout.assets%</argument>
+			<argument>%asf_layout.enable_assetic_support%</argument>
 			<tag name="twig.extension" />
 		</service>
 	</services>

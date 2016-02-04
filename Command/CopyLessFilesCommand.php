@@ -61,7 +61,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->twbs_config = $this->getContainer()->getParameter('asf_layout.supported_assets')['twbs'];
+        $this->twbs_config = $this->getContainer()->getParameter('asf_layout.assets')['twbs'];
         
         $target_dir = $input->getArgument('target_dir') ? $input->getArgument('target_dir') : null;
         if ( is_null($target_dir) && !isset($this->twbs_config['customize']['less']['dest_dir']) ) {

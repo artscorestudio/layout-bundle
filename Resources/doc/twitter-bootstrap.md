@@ -29,7 +29,7 @@ You can use compiled bootstrap javascript file :
 ```yaml
 asf_layout:
     enable_assetic_support: true
-    supported_assets:
+    assets:
         twbs:
             js: "%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"
 ```
@@ -39,7 +39,7 @@ Or use just needed files :
 ```yaml
 asf_layout:
     enable_assetic_support: true
-    supported_assets:
+    assets:
         twbs:
             js: ["%kernel.root_dir%/../vendor/components/bootstrap/js/modal.min.js", "%kernel.root_dir%/../vendor/components/bootstrap/js/affix.min.js"]
 ```
@@ -89,13 +89,13 @@ After that, you can fill in the less parameter in Layout bundle and add the defa
 ```yaml
 asf_layout:
     enable_assetic_support: true
-    supported_assets:
+    assets:
         twbs:
             js: "/path/to/js"
             less: ["/path/vendor/bootstrap/less/bootstrap.less", "/path/vendor/bootstrap/less/theme.less"]
 ``` 
 
-> Be carreful, you cannot have *asf_layout.supported_assets.less* parameter set and *asf_layout.supported_assets.css* also set, an exception will throw. 
+> Be carreful, you cannot have *asf_layout.assets.less* parameter set and *asf_layout.assets.css* also set, an exception will throw. 
 
 ### Customize less files
 
@@ -105,7 +105,7 @@ Before using the command line tool, you must specify the path of the target fold
 
 ```yaml
 asf_layout:
-    supported_assets:
+    assets:
         twbs:
             customize:
                 less:
@@ -127,7 +127,7 @@ Finally, update the paths to your custom files in bundle's configuration.
 
 ```yaml
 asf_layout:
-    supported_assets:
+    assets:
         twbs:
             less: less: ["@AcmeDemoBundle/Resources/public/bootstrap/less/bootstrap.less", "@AcmeDemoBundle/Resources/public/bootstrap/less/theme.less"]
 ``` 

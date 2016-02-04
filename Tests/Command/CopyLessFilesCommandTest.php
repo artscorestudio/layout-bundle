@@ -26,12 +26,12 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     const FIXTURES_DIR = __DIR__ . '/../Fixtures/Command';
     
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var m\Mock|\Symfony\Component\DependencyInjection\ContainerInterface
      */
     private $container;
     
     /**
-     * @var \Symfony\Component\HttpKernel\KernelInterface
+     * @var m\Mock|\Symfony\Component\HttpKernel\KernelInterface
      */
     private $kernel;
     
@@ -71,7 +71,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     {
         $this->container
             ->shouldReceive('getParameter')
-            ->with('asf_layout.supported_assets')
+            ->with('asf_layout.assets')
             ->andReturn(array(
                 'twbs' => array(
                     'assets_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
@@ -113,7 +113,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     {
         $this->container
             ->shouldReceive('getParameter')
-            ->with('asf_layout.supported_assets')
+            ->with('asf_layout.assets')
             ->andReturn(array(
                 'twbs' => array(
                     'assets_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
@@ -155,7 +155,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     {
         $this->container
             ->shouldReceive('getParameter')
-            ->with('asf_layout.supported_assets')
+            ->with('asf_layout.assets')
             ->andReturn(array(
                 'twbs' => array(
                     'assets_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
@@ -191,7 +191,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     {
         $this->container
         ->shouldReceive('getParameter')
-        ->with('asf_layout.supported_assets')
+        ->with('asf_layout.assets')
         ->andReturn(array(
             'twbs' => array(
                 'assets_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",

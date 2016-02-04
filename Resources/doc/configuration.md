@@ -8,7 +8,7 @@ The configuration below is the configuration by default for each assets when the
 asf_layout:
     enable_twig_support: true
     enable_assetic_support: true
-    supported_assets:
+    assets:
         jquery:
             path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
         jqueryui:
@@ -41,7 +41,7 @@ On the installation of the bundle, the configuration is like following :
 asf_layout:
     enable_twig_support: true
     enable_assetic_support: true
-    supported_assets:
+    assets:
         jquery: true
         jqueryui: false
         twbs: true
@@ -59,7 +59,7 @@ If you want to enable a supported assets and use the default configuration (see 
 asf_layout:
     enable_twig_support: true
     enable_assetic_support: true
-    supported_assets:
+    assets:
         jquery: true
         jqueryui: true
         twbs: true

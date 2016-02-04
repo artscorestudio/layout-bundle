@@ -70,7 +70,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
     {
         $this->container
             ->shouldReceive('getParameter')
-            ->with('asf_layout.supported_assets')
+            ->with('asf_layout.assets')
             ->andReturn(array(
                 'twbs' => array(
                     'assets_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
@@ -112,7 +112,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
     {
         $this->container
             ->shouldReceive('getParameter')
-            ->with('asf_layout.supported_assets')
+            ->with('asf_layout.assets')
             ->andReturn(array(
                 'twbs' => array(
                     'assets_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
@@ -148,7 +148,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
     {
         $this->container
         ->shouldReceive('getParameter')
-        ->with('asf_layout.supported_assets')
+        ->with('asf_layout.assets')
         ->andReturn(array(
             'twbs' => array(
                 'assets_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",

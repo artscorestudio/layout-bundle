@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
 				->booleanNode('enable_assetic_support')
 				    ->defaultTrue()
 				->end()
-				->arrayNode('supported_assets')
+				->arrayNode('assets')
 					->addDefaultsIfNotSet()
 					->children()
 					   ->append($this->addJqueryParameterNode())
