@@ -60,6 +60,18 @@ assetic:
             node_paths: ["/usr/local/lib/node_modules/"]
 ```
 
+Less configuration on Macosx operating systems :
+
+```yaml
+# /app/config/config.yml
+assetic:
+    filters:
+        cssrewrite: ~
+        less:
+            node: "/opt/local/bin/node"
+            node_paths: ["/opt/local/lib/node_modules/"]
+```
+
 Less configuration on Microsoft Windows operating systems (Windows 7+) :
 
 ```yaml
