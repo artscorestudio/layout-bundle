@@ -12,7 +12,8 @@ namespace ASF\LayoutBundle\Tests\Command;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use ASF\LayoutBundle\Command\InstallFontsCommand;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use \Mockery as m;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Install Command Unit Tests
@@ -20,17 +21,79 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class InstallFontsCommandTest extends KernelTestCase
+class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
 {
+    const FIXTURES_DIR = __DIR__ . '/../Fixtures/Command';
+    
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    private $container;
+    
+    /**
+     * @var \Symfony\Component\HttpKernel\KernelInterface
+     */
+    private $kernel;
+    
+    /**
+     * {@inheritDoc}
+     * @see PHPUnit_Framework_TestCase::setUp()
+     */
+    public function setUp()
+    {
+        $this->container = m::mock('Symfony\Component\DependencyInjection\ContainerInterface');
+        
+        $this->kernel = m::mock('Symfony\Component\HttpKernel\KernelInterface');
+        $this->kernel->shouldReceive('getName')->andReturn('app');
+        $this->kernel->shouldReceive('getEnvironment')->andReturn('prod');
+        $this->kernel->shouldReceive('isDebug')->andReturn(false);
+        $this->kernel->shouldReceive('getContainer')->andReturn($this->container);
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see PHPUnit_Framework_TestCase::tearDown()
+     */
+    public function tearDown()
+    {
+        if ( true === file_exists(__DIR__.'../Fixtures/Resources/public/supports/twbs') ) {
+            unlink(__DIR__.'../Fixtures/Resources/public/supports/twbs');
+        }
+    }
+    
     /**
      * Test the command for copy fonts (Glyphicons) in web folder
      */
     public function testExecute()
     {
-        $kernel = $this->createKernel();
-        $kernel->boot();
+        $this->container
+            ->shouldReceive('getParameter')
+            ->with('asf_layout.supported_assets')
+            ->andReturn(array(
+                'twbs' => array(
+                    'assets_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
+                    'fonts_dir' => self::FIXTURES_DIR.'/web',
+                    'customize' => array(
+                        'less' => array(
+                            'dest_dir' => self::FIXTURES_DIR."/Resources/public/twbs",
+                            'files' => ["bootstrap.less"]
+                        )
+                    )
+                )
+            ));
+            
+        if (Kernel::VERSION_ID >= 20500) {
+            $this->container->shouldReceive('enterScope')->with('request');
+            $this->container->shouldReceive('set')->withArgs(
+                array(
+                    'request',
+                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
+                    'request'
+                )
+            );
+        }
         
-        $application = new Application($kernel);
+        $application = new Application($this->kernel);
         $application->add(new InstallFontsCommand());
         
         $command = $application->find('asf:twbs:fonts:install');
