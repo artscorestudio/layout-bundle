@@ -69,18 +69,9 @@ class CopyLessFilesCommand extends ContainerAwareCommand
             return;
         }
         $dest_dir = is_null($target_dir) ? $this->twbs_config['customize']['less']['dest_dir'] : $target_dir;
-        
-        $output->writeln('');
-        $output->writeln(sprintf(
-            '<info>The target directory is "%s"%s.</info>',
-            $dest_dir,
-            is_null($target_dir) ? ' from application configuration file' : ''
-            ));
-        $output->writeln('');
-        
+
         $files = $input->getOption('files') ? $input->getOption('files') : $this->twbs_config['customize']['less']['files'];
         $src_dir = sprintf('%s/%s', $this->twbs_config['assets_dir'], 'less');
-        var_dump($files);
         
         $finder = new Finder();
         $fs = new Filesystem();
@@ -96,7 +87,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
         
         if (false === file_exists($src_dir)) {
             $output->writeln(sprintf(
-                '<error>Fonts directory "%s" does not exist. Did you install Twitter Bootstrap ? '.
+                '<error>Source directory "%s" does not exist. Did you install Twitter Bootstrap ? '.
                 'If you used something other than Composer you need to manually change the path in '.
                 '"asf.twbs.assets_dir".</error>',
                 $src_dir
