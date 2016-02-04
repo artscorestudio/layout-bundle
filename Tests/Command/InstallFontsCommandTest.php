@@ -56,8 +56,10 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        if ( true === file_exists(__DIR__.'../Fixtures/Resources/public/supports/twbs') ) {
-            unlink(__DIR__.'../Fixtures/Resources/public/supports/twbs');
+        if ( true === file_exists(self::FIXTURES_DIR.'/web/') ) {
+            array_map('unlink', glob(self::FIXTURES_DIR.'/web/fonts/*.eot'));
+            rmdir(self::FIXTURES_DIR.'/web/fonts/');
+            rmdir(self::FIXTURES_DIR.'/web/');
         }
     }
     
@@ -72,7 +74,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
             ->andReturn(array(
                 'twbs' => array(
                     'assets_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
-                    'fonts_dir' => self::FIXTURES_DIR.'/web',
+                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
                     'customize' => array(
                         'less' => array(
                             'dest_dir' => self::FIXTURES_DIR."/Resources/public/twbs",

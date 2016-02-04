@@ -56,8 +56,11 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        if ( true === file_exists(__DIR__.'../Fixtures/Resources/public/supports/twbs') ) {
-            unlink(__DIR__.'../Fixtures/Resources/public/supports/twbs');
+        if ( true === file_exists(self::FIXTURES_DIR.'/Resources/') ) {
+            array_map('unlink', glob(self::FIXTURES_DIR.'/Resources/public/twbs/*.less'));
+            rmdir(self::FIXTURES_DIR.'/Resources/public/twbs/');
+            rmdir(self::FIXTURES_DIR.'/Resources/public/');
+            rmdir(self::FIXTURES_DIR.'/Resources/');
         }
     }
     
