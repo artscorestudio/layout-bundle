@@ -1,0 +1,29 @@
+parameters:
+    locale: en
+    
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+    secret: "ThisTokenIsNotSoSecretChangeIt"
+    translator: { fallbacks: ["%locale%"] }
+    templating:
+        engines: ['twig']
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+        
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    
+# Assetic Configuration
+assetic:
+    debug: '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+        less:
+            node: "C:\\Program Files\\nodejs\\node.exe"
+            node_paths: ["C:\\Users\\claverie.n\\AppData\\Roaming\\npm\\node_modules"]

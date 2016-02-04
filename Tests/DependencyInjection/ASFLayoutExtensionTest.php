@@ -22,11 +22,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var \AppKernel
-	 */
-	protected $kernel;
-	
-	/**
 	 * @var \ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension
 	 */
 	protected $extension;

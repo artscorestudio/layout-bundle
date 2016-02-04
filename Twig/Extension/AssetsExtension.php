@@ -19,11 +19,11 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
  */
 class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRuntimeInterface
 {
-	/**
-	 * @var \Twig_Environment
-	 */
-	protected $environment;
-	
+    /**
+     * @var \Twig_Environment
+     */
+    protected $environment;
+    
 	/**
 	 * @var array
 	 */
@@ -50,19 +50,11 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	 */
 	public function __construct(array $supported_assets, $is_assetic_enabled)
 	{
+	    //$this->renderer = $renderer;
 	    $this->assets = $supported_assets;
 	    $this->isAsseticEnabled = $is_assetic_enabled;
 	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see Twig_Extension::initRuntime()
-	 */
-	public function initRuntime(\Twig_Environment $environment)
-	{
-		$this->environment = $environment;
-	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see Twig_Extension::getFunctions()
@@ -70,16 +62,24 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	public function getFunctions()
 	{
 		return array(
-			new \Twig_SimpleFunction('asf_layout_stylesheets', array($this, 'getStylesheets'), array('is_safe' => array('html'))),
-			new \Twig_SimpleFunction('asf_layout_javascripts', array($this, 'getJavascripts'), array('is_safe' => array('html'))),
+			new \Twig_SimpleFunction('asf_layout_stylesheets', array($this, 'getStylesheets'), array(
+			    'needs_environment' => true, 
+			    'is_safe' => array('html')
+			)),
+			new \Twig_SimpleFunction('asf_layout_javascripts', array($this, 'getJavascripts'), array(
+			    'needs_environment' => true, 
+			    'is_safe' => array('html')
+			)),
 		);
 	}
 	
 	/**
 	 * Render stylesheet block for Asf Layout bundle
 	 */
-	public function getStylesheets()
+	public function getStylesheets($env)
 	{
+	    $this->environment = $env;
+	    
 	    // Check jQuery UI configuration
 	    $this->renderJqueryUICss();
         
@@ -95,8 +95,10 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	/**
 	 * Render javascripts block for Asf Layout bundle
 	 */
-	public function getJavascripts()
+	public function getJavascripts($env)
 	{
+	    $this->environment = $env;
+	    
 	    // Check jQuery configuration
 	    $this->renderJquery();
 	     
