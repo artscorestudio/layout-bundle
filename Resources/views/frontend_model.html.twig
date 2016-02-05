@@ -18,12 +18,12 @@
         {% endblock asf_base_favicon %}
         
 		{% block asf_base_header_stylesheets %}
-			{{ asf_layout_stylesheets() }}
+			{% stylesheets '@twbs_css' filter="less" %}
+            	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+            {% endstylesheets %}
 		{% endblock %}
         
-        {% block asf_base_header_javascripts %}
-			{{ asf_layout_javascripts() }}
-		{% endblock %}
+        {% block asf_base_header_javascripts %}{% endblock %}
     </head>
     
     {% block asf_base_body_tag %}
@@ -80,7 +80,11 @@
 	</div> <!-- /container -->    
     {% endblock asf_base_body %}
     
-    {% block asf_base_footer_javascripts %}{% endblock asf_base_footer_javascripts %}
+    {% block asf_base_footer_javascripts %}
+    	{% javascripts '@jquery' '@twbs_js' %}
+        	<script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock asf_base_footer_javascripts %}
     
     </body>
 </html>

@@ -6,7 +6,7 @@
 	<parameters>
 		<parameter key="asf_layout.twig.extension.assets.class">ASF\LayoutBundle\Twig\Extension\AssetsExtension</parameter>
 	</parameters>
-	
+	 
 	<services>
 		<service id="asf_layout.twig.extension.assets" class="%asf_layout.twig.extension.assets.class%">
 			<argument>%asf_layout.assets%</argument>

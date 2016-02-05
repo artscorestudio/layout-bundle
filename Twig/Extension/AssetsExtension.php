@@ -19,11 +19,6 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
  */
 class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRuntimeInterface
 {
-    /**
-     * @var \Twig_Environment
-     */
-    protected $environment;
-    
 	/**
 	 * @var array
 	 */
@@ -35,14 +30,14 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	protected $isAsseticEnabled;
 	
 	/**
-	 * @var string
+	 * @var array
 	 */
-	protected $stylesheetsView = '';
+	protected $cssTemplate;
 	
 	/**
-	 * @var string
+	 * @var array
 	 */
-	protected $javascripts_view = '';
+	protected $jsTemplates;
 	
 	/**
 	 * @param array $supported_assets
@@ -53,6 +48,8 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	    //$this->renderer = $renderer;
 	    $this->assets = $supported_assets;
 	    $this->isAsseticEnabled = $is_assetic_enabled;
+	    $this->cssTemplate = array();
+	    $this->jsTemplates = array();
 	}
 
 	/**
@@ -64,10 +61,12 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 		return array(
 			new \Twig_SimpleFunction('asf_layout_stylesheets', array($this, 'getStylesheets'), array(
 			    'needs_environment' => true, 
+			    'needs_context' => true,
 			    'is_safe' => array('html')
 			)),
 			new \Twig_SimpleFunction('asf_layout_javascripts', array($this, 'getJavascripts'), array(
-			    'needs_environment' => true, 
+			    'needs_environment' => true,
+			    'needs_context' => true,
 			    'is_safe' => array('html')
 			)),
 		);
@@ -76,9 +75,9 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	/**
 	 * Render stylesheet block for Asf Layout bundle
 	 */
-	public function getStylesheets($env)
+	public function getStylesheets($env, $context)
 	{
-	    $this->environment = $env;
+	    $env instanceof \Twig_Environment;
 	    
 	    // Check jQuery UI configuration
 	    $this->renderJqueryUICss();
@@ -89,18 +88,16 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
         // Check Select2 configuration
         $this->renderSelect2Css();
         
-        return $this->stylesheetsView;
+        return $env->resolveTemplate($this->cssTemplate)->render($context);
 	}
 	
 	/**
 	 * Render javascripts block for Asf Layout bundle
 	 */
-	public function getJavascripts($env)
+	public function getJavascripts($env, $context)
 	{
-	    $this->environment = $env;
-	    
 	    // Check jQuery configuration
-	    $this->renderJquery();
+	    /*$this->renderJquery();
 	     
 	    // Check Twitter Bootstrap configuration
 	    $this->renderTwbsJs();
@@ -120,7 +117,7 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	    // Check fos_js_routing
 	    $this->renderFOSJsRouting();
 	    
-	    return $this->javascripts_view;
+	    return $this->javascripts_view;*/
 	}
 	
 	/**
@@ -134,7 +131,7 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	        throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
 	    
 	    elseif ( isset($this->assets['jqueryui']) &&  $this->assets['jqueryui']['css'] !== false )
-	        $this->stylesheetsView .= $this->environment->render('ASFLayoutBundle:assets:jqueryui_css.html.twig');
+	        $this->cssTemplate[] = '@LayoutAssets/jqueryui_css.html.twig';
 	}
 	
 	/**
@@ -150,10 +147,10 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	        throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
 	        
 	   } elseif ( is_array($this->assets['twbs']['less']) && count($this->assets['twbs']['less']) > 0) {
-	         $this->stylesheetsView .= $this->environment->render('ASFLayoutBundle:assets:twbs_less.html.twig');
+	          $this->cssTemplate[] = '@LayoutAssets/twbs_less.html.twig';
 	         
 	    } elseif ( is_array($this->assets['twbs']['css']) && count($this->assets['twbs']['css']) > 0 ) {
-	         $this->stylesheetsView .= $this->environment->render('ASFLayoutBundle:assets:twbs_css.html.twig');
+	          $this->cssTemplate[] = '@LayoutAssets/twbs_css.html.twig';
 	    }
 	}
 	
@@ -168,7 +165,7 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	        throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
 	    
 	    elseif ( isset($this->assets['select2']) && $this->assets['select2']['css'] !== false )
-	        $this->stylesheetsView .= $this->environment->render('ASFLayoutBundle:assets:select2_css.html.twig');
+	         $this->cssTemplate[] = '@LayoutAssets/select2_css.html.twig';
 	}
 	
 	/**
@@ -181,7 +178,7 @@ class AssetsExtension extends \Twig_Extension implements \Twig_Extension_InitRun
 	    if ( $this->assets['jquery']['path'] !== false && $this->isAsseticEnabled == false )
 	        throw new InvalidConfigurationException('You have to enable Assetic Bundle.');
         elseif ( $this->assets['jquery']['path'] !== false )
-	        $this->javascripts_view .= $this->environment->render('ASFLayoutBundle:assets:jquery.html.twig');
+	         $this->cssTemplate[] = 'ASFLayoutBundle:assets:jquery.html.twig';
 	}
 	
 	/**
