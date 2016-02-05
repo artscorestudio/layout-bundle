@@ -123,11 +123,20 @@ $ php bin/console asf:twbs:less:copy
 
 > Nota 2 : If you do not specify files in the paramter *asf_layout.twbs.customize.files*, the command line tool copy all less files.
 
-Finally, update the paths to your custom files in bundle's configuration.
+Update the paths to your custom files in bundle's configuration.
 
 ```yaml
 asf_layout:
     assets:
         twbs:
-            less: less: ["@AcmeDemoBundle/Resources/public/bootstrap/less/bootstrap.less", "@AcmeDemoBundle/Resources/public/bootstrap/less/theme.less"]
+            less: ["@AcmeDemoBundle/Resources/public/bootstrap/less/bootstrap.less", "@AcmeDemoBundle/Resources/public/bootstrap/less/theme.less"]
 ``` 
+
+Finally, update your Twig template :
+
+```twig
+# With less files
+{% stylesheets '@twbs_css' filter="less" %}
+	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+{% endstylesheets %}
+```
