@@ -43,7 +43,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Check if asf_layout.enable_flash_messages is set to true by default
 	 */
-	public function testEnableAsseticSupportParameterInDefaultConfiguration()
+	public function testEnableFlashMessagesSupportParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
