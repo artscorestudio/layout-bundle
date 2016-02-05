@@ -131,6 +131,26 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * Check if asf_layout.assets.twbs.form_theme exists
+	 */
+	public function testTwbsFormThemeParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('form_theme', $config['assets']['twbs']);
+	}
+	
+	/**
+	 * Check asf_layout.assets.twbs.form_theme default value
+	 */
+	public function testTwbsFormThemeParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('ASFLayoutBundle:form:form_div_layout.html.twig', $config['assets']['twbs']['form_theme']);
+	}
+	
+	/**
 	 * Check if asf_layout.assets.twbs.fonts_dir exists
 	 */
 	public function testTwbsFontsDirParameterInDefaultConfiguration()

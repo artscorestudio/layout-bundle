@@ -59,12 +59,37 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		
 		if ( !array_key_exists('TwigBundle', $bundles) && $config['enable_twig_support'] == true )
 		    throw new InvalidConfigurationException('You have enabled the support of Twig but Twig is not enabled. Install it or disable TwigBundle support in Layout bundle.');
+		else 
+		    $this->configureTwigBundle($container, $config);
 		
         if ( !array_key_exists('AsseticBundle', $bundles) && $config['enable_assetic_support'] == true )
             throw new InvalidConfigurationException('You have enabled the support of Assetic but Assetic is not enabled. Please install symfony/assetic-bundle.');
 		
 		if ( array_key_exists('AsseticBundle', $bundles) && count($config['assets']) > 0 && $config['enable_assetic_support'] == true )
 			$this->configureAsseticBundle($container, $config);
+	}
+	
+	/**
+	 * Configure twig bundle
+	 * 
+	 * @param ContainerBuilder $container
+	 * @param array $config
+	 */
+	public function configureTwigBundle(ContainerBuilder $container, array $config)
+	{
+	    foreach(array_keys($container->getExtensions()) as $name) {
+	        switch($name) {
+	            case 'twig':
+	                if ( isset($config['assets']['twbs']['form_theme']) &&  $config['assets']['twbs']['form_theme'] !== false ) {
+	                    $container->prependExtensionConfig($name, array(
+	                        'form_themes' => array(
+	                            'resources' => $config['assets']['twbs']['form_theme']
+	                        )
+	                    ));
+	                }
+	                break;
+	        }
+	    }
 	}
 	
 	/**

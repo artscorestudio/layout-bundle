@@ -1,0 +1,162 @@
+{% extends "bootstrap_3_layout.html.twig" %}
+
+{# --------------------------------- Base Collection Form Type --------------------------------- #}
+{% block base_collection_row %}
+{% spaceless %}
+
+	<style type="text/css">
+	#{{ containerId }} .form-collection-cmd-wrapper {
+	  background-color: #f7f7f9;
+	  border: 1px solid #e1e1e8;
+	  margin-bottom: 5px;
+	  line-height: 3
+	}
+	#{{ containerId }} .form-collection-cmd-wrapper label {
+	  margin: 0
+	}
+	#{{ containerId }} .list-collection .actions {
+	  width: 50px;
+	  vertical-align: middle;
+	  text-align: center
+	}
+	#{{ containerId }} .list-collection .actions a {
+	  color:#171717
+	}
+	#{{ containerId }} .list-collection .alert {
+	  margin-top:5px;
+	  padding: 5px
+	}
+    </style>
+
+	{% if prototype is defined %}
+		{% set attr = attr|merge({'data-prototype': block(collection_item_widget) }) %}
+	{% endif %}
+	
+	<div class="container-fluid" id="{{ containerId }}">
+		<div class="row form-collection-cmd-wrapper">
+			<div class="col-xs-9">
+				{{ form_label(form) }}
+			</div>
+			<div class="col-xs-3 text-right">
+				<div class="btn-group btn-group-xs" role="group">
+					<a href="#" title="{{ 'Add'|trans({}, 'asf_contact') }}" class="btn btn-default item-add"><span class="glyphicon glyphicon-plus"></span></a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			{{ form_errors(form) }}
+		</div>
+		
+		<div class="row">
+			<div {{ block('widget_container_attributes') }}>
+			    <table class="table table-striped table-bordered list-collection">
+			    	{% set element_id = 0 %}
+					{% for item in form %}
+						<tr class="item" id="item-{{ item_id }}">
+							<td>
+								{{ form_row(item) }}
+							</td>
+							<td class="actions">
+								<a href="#" title="{{ 'Delete'|trans({}, 'asf_contact') }}" class="delete-item"><span class="glyphicon glyphicon-remove"></span></a>
+							</td>
+						</tr>
+						{% set element_id = element_id + 1 %}
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var item_count_{{ form.vars.id }} = $('#{{ form.vars.id }} .list-collection .item').length;
+				$('#{{ containerId }} .item-add').click(function(e){
+					e.preventDefault();
+
+					var $collection = $('#{{ containerId }} .list-collection')
+						, collectionParent = $collection.parent() 
+						, prototype = $(collectionParent).attr('data-prototype')
+						, prototype = prototype.replace(/__name__/g, item_count_{{ form.vars.id }}++)
+						, $prototype = $(prototype);
+
+					$collection.append($prototype);
+
+					$prototype.find('.delete-item').click(function(e){
+						e.preventDefault();
+						$(this).parent().parent().remove();
+					});
+
+					$prototype.find('.autocomplete-elm').each(function(){
+						if ( $(this).attr('data-ajax-url') ) {
+							var route = $(this).attr('data-ajax-url');
+							$(this).autocomplete({
+				                focus: function(event, ui) {
+				                    return false;
+				                },
+				                select: function(event, ui) {
+				                    this.value = ui.item.label;
+				                    terms = ui.item;
+				                    $(this).val(terms.label);
+				                    return false;
+				                },
+				                source: function(request, response) {
+				                    $.getJSON(Routing.generate(route), {
+				                        term: request.term
+				                    }, response);
+				                }
+				            });
+						}
+					});
+
+					$prototype.find('.load_jstree').each(function(){
+						$(this).jstree();
+					});
+				});
+
+				$('#{{ containerId }} .delete-item').click(function(e){
+					e.preventDefault();
+					$(this).parent().parent().remove();
+				});
+
+				$('#{{ containerId }} .autocomplete-elm').each(function(){
+
+					if ( $(this).attr('data-ajax-url') ) {
+						var route = $(this).attr('data-ajax-url');
+						$(this).autocomplete({
+			                focus: function(event, ui) {
+			                    return false;
+			                },
+			                select: function(event, ui) {
+			                    this.value = ui.item.label;
+			                    terms = ui.item;
+			                    $(this).val(terms.label);
+			                    return false;
+			                },
+			                source: function(request, response) {
+			                    $.getJSON(Routing.generate(route), {
+			                        term: request.term
+			                    }, response);
+			                }
+			            });
+					}
+				});
+			});
+		</script>
+
+	</div>
+
+{% endspaceless %}
+{% endblock %}
+
+{% block collection_item_widget %}
+{% spaceless %}
+<tr class="item" id="item-{{ item_id }}">
+	<td>
+		{{ form_row(prototype) }}
+	</td>
+	<td class="actions">
+		<a href="#" title="{{ 'Delete'|trans({}, 'asf_contact') }}" class="delete-item"><span class="glyphicon glyphicon-remove"></span></a>
+	</td>
+</tr>
+{% endspaceless %}
+{% endblock %}
