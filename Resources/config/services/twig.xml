@@ -5,6 +5,10 @@
 	
 	<parameters>
 		<parameter key="asf_layout.twig.extension.assets.class">ASF\LayoutBundle\Twig\Extension\AssetsExtension</parameter>
+		<parameter key="asf_layout.twig.badge_extension.class">ASF\LayoutBundle\Twig\Extension\BadgeExtension</parameter>
+		<parameter key="asf_layout.twig.flashalerts_extension.class">ASF\LayoutBundle\Twig\Extension\FlashAlertsExtension</parameter>
+		<parameter key="asf_layout.twig.label_extension.class">ASF\LayoutBundle\Twig\Extension\LabelExtension</parameter>
+		<parameter key="asf_layout.twig.extension.icon.class">ASF\LayoutBundle\Twig\Extension\IconExtension</parameter>
 	</parameters>
 	 
 	<services>
@@ -13,6 +17,27 @@
 			<argument>%asf_layout.enable_assetic_support%</argument>
 			<tag name="twig.extension" />
 		</service>
+		
+		<service id="asf_layout.twig.flashalerts_extension" class="%asf_layout.twig.flashalerts_extension.class%">
+			<argument type="service" id="session" />
+			<tag name="twig.extension" />
+		</service>
+		
+		<service id="asf_layout.alerts" alias="asf_layout.twig.flashalerts_extension" />
+        
+        <service id="asf_layout.twig.label_extension" class="%asf_layout.twig.label_extension.class%">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="asf_layout.twig.badge_extension" class="%asf_layout.twig.badge_extension.class%">
+            <tag name="twig.extension" />
+        </service>
+        
+        <service id="asf_layout.twig.extension.icon" class="%asf_layout.twig.extension.icon.class%">
+            <argument>%asf_layout.assets%</argument>
+            <tag name="twig.extension" />
+        </service>
+        
 	</services>
 	
 </container>

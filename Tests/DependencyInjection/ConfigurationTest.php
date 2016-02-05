@@ -41,6 +41,16 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * Check if asf_layout.enable_flash_messages is set to true by default
+	 */
+	public function testEnableAsseticSupportParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertTrue($config['enable_flash_messages']);
+	}
+	
+	/**
 	 * Check if asf_layout.assets key exists
 	 */
 	public function testSupportedAssetsParameterInDefaultConfiguration()
@@ -128,6 +138,26 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
 	    $this->assertEquals('glyphicon', $config['assets']['twbs']['icon_prefix']);
+	}
+	
+	/**
+	 * Check if asf_layout.assets.twbs.icon_tag exists
+	 */
+	public function testTwbsIconTagParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayHasKey('icon_tag', $config['assets']['twbs']);
+	}
+	
+	/**
+	 * Check asf_layout.assets.twbs.icon_prefix default value
+	 */
+	public function testTwbsIconTagParameterValueInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertEquals('span', $config['assets']['twbs']['icon_tag']);
 	}
 	
 	/**
