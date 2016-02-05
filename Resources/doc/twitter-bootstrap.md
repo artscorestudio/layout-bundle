@@ -44,6 +44,22 @@ asf_layout:
             js: ["%kernel.root_dir%/../vendor/components/bootstrap/js/modal.min.js", "%kernel.root_dir%/../vendor/components/bootstrap/js/affix.min.js"]
 ```
 
+## Use Layout bundle form theme
+
+By default, Layout bundle embed en form theme who extends bootstrap3_layout.html.twig.
+
+If you want to use your own form theme, just override bundle's form theme like following :
+
+```yaml
+# /app/config/config.yml
+asf_layout:
+    assets:
+        twbs:
+            form_theme: "custom_form_theme.html.twig"
+```
+
+If you don't want to pass throught Layout bundle, just set twig form_theme param like explains in the [Symfony documentation](http://symfony.com/doc/current/cookbook/form/form_customization.html#form-theming-in-twig).
+
 ## Use less files
 
 If you want to use directly less files for customize Twitter Bootstrap for exemple, you have to enable less filter in Assetic like the following :

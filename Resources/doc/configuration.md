@@ -31,6 +31,7 @@ asf_layout:
         speaking_url:
             path: "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js"
         fos_js_routing: false
+        form_theme: "ASFLayoutBundle:form:form_div_layout.html.twig"
 ```
 
 ## Bundle's configuration on installation
@@ -51,7 +52,7 @@ asf_layout:
         fos_js_routing: false
 ```
 
-## Enable an assets with defalt configuration
+## Enable an assets with default configuration
 
 If you want to enable a supported assets and use the default configuration (see above : Default Configuration), you can just enabled it like following :
 
