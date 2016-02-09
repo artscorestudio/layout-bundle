@@ -1,0 +1,14 @@
+{% block flash_messages %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            {% autoescape false %}{{ block('flash_messages_row') }}{% endautoescape %}
+        {% endfor %}
+    {% endfor %}
+{% endblock flash_messages %}
+
+{% block flash_messages_row %}
+    <div class="flash-{{ type }} alert alert-{{ type }}">
+    {% if button_close %}<button type="button" class="close" data-dismiss="alert">&times;</button>{% endif %}
+        {% autoescape false %}{{ message|trans({}, trans_domain) }}{% endautoescape %}
+    </div>
+{% endblock %}

@@ -19,38 +19,62 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class FlashMessage
 {
+    /**
+     * @var SessionInterface
+     */
 	protected $session;
 	
+	/**
+	 * @param SessionInterface $session
+	 */
 	public function __construct(SessionInterface $session)
 	{
 		$this->session = $session;
 	}
-	
+
+	/**
+	 * @param string $message
+	 */
 	public function alert($message)
 	{
 		$this->session->getFlashBag()->add('alert', $message);
 	}
 	
+	/**
+	 * @param string $message
+	 */
 	public function success($message)
 	{
 		$this->session->getFlashBag()->add('success', $message);
 	}
 	
+	/**
+	 * @param string $message
+	 */
 	public function info($message)
 	{
 		$this->session->getFlashBag()->add('info', $message);
 	}
 	
+	/**
+	 * @param string $message
+	 */
 	public function warning($message)
 	{
 		$this->session->getFlashBag()->add('warning', $message);
 	}
 	
+	/**
+	 * @param string $message
+	 */
 	public function danger($message)
 	{
 		$this->session->getFlashBag()->add('danger', $message);
 	}
 	
+	/**
+	 * Reset flash messages
+	 */
 	public function reset()
 	{
 		$this->session->getFlashBag()->clear();

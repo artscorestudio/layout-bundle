@@ -43,7 +43,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		}
 		
 		if ( $config['enable_flash_messages'] ) {
-		    $loader->load('services/session.xml');
+		    $loader->load('services/flash_messages.xml');
 		}
 	}
 	

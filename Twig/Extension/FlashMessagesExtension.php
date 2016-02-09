@@ -15,7 +15,7 @@ namespace ASF\LayoutBundle\Twig\Extension;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class FlashAlertsExtension extends \Twig_Extension
+class FlashMessagesExtension extends \Twig_Extension
 {
 	protected $session;
 	
@@ -56,28 +56,40 @@ class FlashAlertsExtension extends \Twig_Extension
 		return 'asf_flash_messages';
 	}
 	
+	/**
+	 * @param string $message
+	 */
 	public function addError($message)
 	{
 		$this->session->getFlashBag()->add('danger', $message);
 	}
 	
+	/**
+	 * @param string $message
+	 */
 	public function addWarning($message)
 	{
 		$this->session->getFlashBag()->add('warning', $message);
 	}
 	
+	/**
+	 * @param string $message
+	 */
 	public function addSuccess($message)
 	{
 		$this->session->getFlashBag()->add('success', $message);
 	}
 	
+	/**
+	 * @param string $message
+	 */
 	public function addInfo($message)
 	{
 		$this->session->getFlashBag()->add('info', $message);
 	}
 	
 	/**
-	 * Return HTML of flash messages according to flash-alerts-template.html.twig
+	 * Return HTML of flash messages according to flash-messages.html.twig
 	 *
 	 * @param array $options
 	 * - button_close : display a close button
@@ -90,7 +102,7 @@ class FlashAlertsExtension extends \Twig_Extension
 			'button_close' => true, 'trans_domain' => null
 		), $options);
 		
-		$template = $this->environment->loadTemplate('ASFLayoutBundle::flash-alerts-template.html.twig');
+		$template = $this->environment->loadTemplate('ASFLayoutBundle:session:flash-messages.html.twig');
 		
 		return $template->renderBlock('flash_messages', array_merge($this->environment->getGlobals(), $params));
 	}
