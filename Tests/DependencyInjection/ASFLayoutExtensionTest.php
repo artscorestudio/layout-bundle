@@ -362,6 +362,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    $container->shouldReceive('getExtensions')->andReturn($extensions);
 	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
 	    $container->shouldReceive('prependExtensionConfig');
+	    $container->shouldReceive('setAlias');
 	    
 	    $container->shouldReceive('addResource');
 	    $container->shouldReceive('setParameter');
