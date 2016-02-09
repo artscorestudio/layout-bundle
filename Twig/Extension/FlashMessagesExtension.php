@@ -99,7 +99,7 @@ class FlashMessagesExtension extends \Twig_Extension
 	public function flashMessages(array $options = array())
 	{
 		$params = array_merge(array(
-			'button_close' => true, 'trans_domain' => null
+			'close_button' => true, 'trans_domain' => null
 		), $options);
 		
 		$template = $this->environment->loadTemplate('ASFLayoutBundle:session:flash-messages.html.twig');

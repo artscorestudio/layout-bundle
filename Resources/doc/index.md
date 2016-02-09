@@ -129,4 +129,5 @@ The following documents are available :
 * [Enable/Disable supported assets](enable-external-library.md)
 * [Configure Twitter Bootstrap](twitter-bootstrap.md)
 * [Layout models](layout-models.md)
+* [Flash Messages](flash-messages.md)
 * [ASFLayoutBundle Configuration Reference](configuration.md)
