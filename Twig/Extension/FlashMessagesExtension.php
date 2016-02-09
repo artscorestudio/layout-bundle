@@ -19,19 +19,9 @@ class FlashMessagesExtension extends \Twig_Extension
 {
 	protected $session;
 	
-	/**
-	 * @var \Twig_Environment
-	 */
-	protected $environment;
-	
 	public function __construct($session)
 	{
 		$this->session = $session;
-	}
-	
-	public function initRuntime(\Twig_Environment $environment)
-	{
-		$this->environment = $environment;
 	}
 	
 	/**
@@ -42,7 +32,10 @@ class FlashMessagesExtension extends \Twig_Extension
 	public function getFunctions()
 	{
 		return array(
-			'asf_flash_alerts' => new \Twig_Function_Method($this, 'flashMessages', array('is_safe' => array('html'))),
+			new \Twig_SimpleFunction('asf_flash_alerts', array($this, 'flashMessages'), array(
+			    'needs_environment' => true,
+			    'is_safe' => array('html')
+			)),
 		);
 	}
 	
@@ -91,19 +84,20 @@ class FlashMessagesExtension extends \Twig_Extension
 	/**
 	 * Return HTML of flash messages according to flash-messages.html.twig
 	 *
+	 * @param \Twig_Environment $environment
 	 * @param array $options
 	 * - button_close : display a close button
 	 * - trans_domain set the domain for translation
 	 * @return string
 	 */
-	public function flashMessages(array $options = array())
+	public function flashMessages($environment, array $options = array())
 	{
 		$params = array_merge(array(
 			'close_button' => true, 'trans_domain' => null
 		), $options);
 		
-		$template = $this->environment->loadTemplate('ASFLayoutBundle:session:flash-messages.html.twig');
+		$template = $environment->loadTemplate('ASFLayoutBundle:session:flash-messages.html.twig');
 		
-		return $template->renderBlock('flash_messages', array_merge($this->environment->getGlobals(), $params));
+		return $template->renderBlock('flash_messages', array_merge($environment->getGlobals(), $params));
 	}
 }

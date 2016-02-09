@@ -39,11 +39,10 @@ class IconExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'parse_icons' => new Twig_Filter_Method(
-                $this,
-                'parseIconsFilter',
-                array('pre_escape' => 'html', 'is_safe' => array('html'))
-            )
+            new \Twig_SimpleFilter('parse_icons', array($this, 'parseIconsFilter'), array(
+                'pre_escape' => 'html', 
+                'is_safe' => array('html')
+            ))
         );
     }
 
@@ -53,11 +52,10 @@ class IconExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'icon' => new Twig_Function_Method(
-                $this,
-                'iconFunction',
-                array('pre_escape' => 'html', 'is_safe' => array('html'))
-            )
+            new \Twig_SimpleFunction('icon', array($this, 'iconFunction'), array(
+                'pre_escape' => 'html', 
+                'is_safe' => array('html')
+            ))
         );
     }
 

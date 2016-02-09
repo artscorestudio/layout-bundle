@@ -82,11 +82,10 @@ class FormExtension extends \Twig_Extension
 				'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode',
 				array('is_safe' => array('html'))
 			),
-			'form_control_static' => new \Twig_Function_Method(
-				$this,
-				'formControlStaticFunction',
-				array('is_safe' => array('html'))
-			)
+			new \Twig_SimpleFunction('form_control_static', array($this, 'formControlStaticFunction'), array(
+			    'is_safe' => array('html')
+			    
+			))
 		);
 	}
 	

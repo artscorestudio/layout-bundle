@@ -9,9 +9,6 @@
  */
 namespace ASF\LayoutBundle\Twig\Extension;
 
-use Twig_Extension;
-use Twig_Function_Method;
-
 /**
  * BadgeExtension
  *
@@ -23,7 +20,7 @@ use Twig_Function_Method;
  * @license    http://opensource.org/licenses/MIT The MIT License
  * @link       http://bootstrap.braincrafted.com Bootstrap for Symfony2
  */
-class BadgeExtension extends Twig_Extension
+class BadgeExtension extends \Twig_Extension
 {
     /**
      * {@inheritDoc}
@@ -31,11 +28,10 @@ class BadgeExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'badge' => new Twig_Function_Method(
-                $this,
-                'badgeFunction',
-                array('pre_escape' => 'html', 'is_safe' => array('html'))
-            )
+            new \Twig_SimpleFunction('badge', array($this, 'badgeFunction'), array(
+                'pre_escape' => 'html', 
+                'is_safe' => array('html')
+            ))
         );
     }
 
