@@ -18,9 +18,11 @@
         {% endblock asf_base_favicon %}
         
 		{% block asf_base_header_stylesheets %}
+			{% block test %}
 			{% stylesheets '@twbs_css' filter="less" %}
             	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
             {% endstylesheets %}
+            {% endblock %}
 		{% endblock %}
         
         {% block asf_base_header_javascripts %}{% endblock %}
