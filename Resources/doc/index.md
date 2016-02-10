@@ -38,7 +38,7 @@ For more information about translations, check [Symfony documentation](https://s
 
 ## Installation
 
-### Step 1 : Dwonload ASFLayoutBundle using composer
+### Step 1 : Download ASFLayoutBundle using composer
 
 Require the bundle with composer :
 
