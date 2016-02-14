@@ -50,6 +50,7 @@ class Configuration implements ConfigurationInterface
 					   ->append($this->addSelect2ParameterNode())
 					   ->append($this->addBazingaJsTranslatorParameterNode())
 					   ->append($this->addSpeakingURLParameterNode())
+					   ->append($this->addTinyMCEParameterNode())
 					   ->booleanNode('fos_js_routing')->defaultFalse()->end()
 					->end()
 				->end()
@@ -353,5 +354,41 @@ class Configuration implements ConfigurationInterface
 	    ;
 	     
 	    return $node;
+	}
+	
+	/**
+	 * Get TinyMCE Configuration
+	 */
+	protected function addTinyMCEParameterNode()
+	{
+		$builder = new TreeBuilder();
+		$node = $builder->root('tinymce');
+	/*
+		$node
+			->beforeNormalization()
+				->ifTrue(function($value){
+					return $value == false;
+				})
+				->then(function($value){
+					return array('path' => false);
+				})
+			->end()
+			->beforeNormalization()
+				->ifTrue(function($value){
+					return $value === true;
+				})
+				->then(function($value){
+					return array('path' => "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js");
+				})
+			->end()
+			->children()
+				->scalarNode('path')
+					->cannotBeEmpty()
+					->defaultValue("%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js")
+				->end()
+			->end()
+		;*/
+	
+		return $node;
 	}
 }

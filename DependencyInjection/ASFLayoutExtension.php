@@ -203,6 +203,14 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				    ));
     				}
     				
+    				// Add TinyMCE in assets
+    				/*if ( isset($config['assets']['tinymce']) && $config['assets']['tinymce']['path'] !== false ) {
+    					$container->prependExtensionConfig($name, array(
+    							'assets' => array(
+    									'speakingurl_js' => $config['assets']['speaking_url']['path']
+    							)
+    					));
+    				}*/
 					break;
 			}
 		}
