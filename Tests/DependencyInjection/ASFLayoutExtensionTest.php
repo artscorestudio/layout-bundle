@@ -46,68 +46,22 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test bundle with jQuery disabled
+	 * Test bundle without assets
 	 */
-	public function testWithoutJquery()
+	public function testWithoutAssets()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['assets']['jquery'] = false;
+	    $config['assets'] = array(
+	        'jquery' => false,
+	        'twbs' => false,
+	        'jqueryui' => false,
+	        'select2' => false,
+	        'bazinga_js_translation' => false,
+	        'speakingurl' => false,
+	        'tinymce' => false,
+	        'fos_js_routing' => false
+	    );
 	     
-	    $this->extension->load(array($config), $this->getContainer());
-	}
-	
-	/**
-	 * Test bundle with jQuery UI disabled
-	 */
-	public function testWithoutJqueryUI()
-	{
-	    $config = $this->getDefaultConfig();
-	    $config['assets']['jqueryui'] = false;
-	
-	    $this->extension->load(array($config), $this->getContainer());
-	}
-	
-	/**
-	 * Test bundle with Twitter Bootstrap disabled
-	 */
-	public function testWithoutTwbs()
-	{
-	    $config = $this->getDefaultConfig();
-	    $config['assets']['twbs'] = false;
-	
-	    $this->extension->load(array($config), $this->getContainer());
-	}
-	
-	/**
-	 * Test bundle with Select2 disabled
-	 */
-	public function testWithoutSelect2()
-	{
-	    $config = $this->getDefaultConfig();
-	    $config['assets']['select2'] = false;
-	
-	    $this->extension->load(array($config), $this->getContainer());
-	}
-	
-	/**
-	 * Test bundle with Bazinga Js Translator disabled
-	 */
-	public function testWithoutBazingaJsTranslator()
-	{
-	    $config = $this->getDefaultConfig();
-	    $config['assets']['bazinga_js_translation'] = false;
-	
-	    $this->extension->load(array($config), $this->getContainer());
-	}
-	
-	/**
-	 * Test bundle with Speaking URL disabled
-	 */
-	public function testWithoutSpeakingURL()
-	{
-	    $config = $this->getDefaultConfig();
-	    $config['assets']['speakingurl'] = false;
-	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
