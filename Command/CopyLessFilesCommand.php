@@ -71,7 +71,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
         $dest_dir = is_null($target_dir) ? $this->twbs_config['customize']['less']['dest_dir'] : $target_dir;
 
         $files = $input->getOption('files') ? $input->getOption('files') : $this->twbs_config['customize']['less']['files'];
-        $src_dir = sprintf('%s/%s', $this->twbs_config['assets_dir'], 'less');
+        $src_dir = sprintf('%s/%s', $this->twbs_config['twbs_dir'], 'less');
         
         $finder = new Finder();
         $fs = new Filesystem();
@@ -89,7 +89,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
             $output->writeln(sprintf(
                 '<error>Source directory "%s" does not exist. Did you install Twitter Bootstrap ? '.
                 'If you used something other than Composer you need to manually change the path in '.
-                '"asf.twbs.assets_dir".</error>',
+                '"asf_layout.assets.twbs.twbs_dir".</error>',
                 $src_dir
                 ));
             return;
