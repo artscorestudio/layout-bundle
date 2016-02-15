@@ -1,0 +1,44 @@
+{% trans_default_domain 'asf_layout' %}
+
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+    <head>
+    	{% block asf_base_encoding %}
+        <meta charset="UTF-8" />
+        {% endblock asf_base_encoding %}
+        
+        <title>
+        	{% block asf_base_meta_title_prefix %}{% endblock %}
+			{% block asf_base_meta_title %}{{ 'Home'|trans }}{% endblock %}
+			{% block asf_base_meta_title_suffix %}{% endblock %}
+        </title>
+        
+        {% block asf_base_favicon %}
+        	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% endblock asf_base_favicon %}
+        
+		{% block asf_base_header_stylesheets %}
+			{% block test %}
+			{% stylesheets '@twbs_css' filter="less" %}
+            	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+            {% endstylesheets %}
+            {% endblock %}
+		{% endblock %}
+        
+        {% block asf_base_header_javascripts %}{% endblock %}
+    </head>
+    
+    {% block asf_base_body_tag %}
+    <body>
+    {% endblock asf_base_body_tag %}
+    
+    {% block asf_base_body %}{% endblock asf_base_body %}
+    
+    {% block asf_base_footer_javascripts %}
+    	{% javascripts '@jquery' '@twbs_js' '@tinymce_js' %}
+        	<script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock asf_base_footer_javascripts %}
+    
+    </body>
+</html>

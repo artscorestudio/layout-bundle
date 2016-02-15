@@ -12,6 +12,7 @@ namespace ASF\LayoutBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ScalarNode;
+use Symfony\Component\DependencyInjection\Tests\Compiler\CannotBeAutowired;
 
 /**
  * Bundle configuration
@@ -363,7 +364,7 @@ class Configuration implements ConfigurationInterface
 	{
 		$builder = new TreeBuilder();
 		$node = $builder->root('tinymce');
-	/*
+	
 		$node
 			->beforeNormalization()
 				->ifTrue(function($value){
@@ -383,11 +384,20 @@ class Configuration implements ConfigurationInterface
 			->end()
 			->children()
 				->scalarNode('path')
-					->cannotBeEmpty()
-					->defaultValue("%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js")
+					->CannotBeEmpty()
+					->defaultValue("%kernel.root_dir%/../vendor/tinymce/tinymce/tinymce.jquery.min.js")
+				->end()
+				->arrayNode('config')
+					->addDefaultsIfNotSet()
+					->children()
+						->scalarNode('selector')
+							->cannotBeEmpty()
+							->defaultValue('.tinymce-content')
+						->end()
+					->end()
 				->end()
 			->end()
-		;*/
+		;
 	
 		return $node;
 	}
