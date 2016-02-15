@@ -152,14 +152,14 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.twbs.assets_dir cannot be empty
+	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.twbs.twbs_dir cannot be empty
 	 */
 	public function testTwbsAssetsDirHasEmptyParameter()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 	
 	    $config = $this->getDefaultConfig();
-	    $config['assets']['twbs']['assets_dir'] = '';
+	    $config['assets']['twbs']['twbs_dir'] = '';
 	     
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -283,6 +283,17 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    $config = $this->getDefaultConfig();
 	    $config['assets']['speakingurl'] = true;
 	
+	    $this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
+	 * Test bundle's configuration with tinymce set to true
+	 */
+	public function testTinyMCEParameterSetToTrue()
+	{
+	    $config = $this->getDefaultConfig();
+	    $config['assets']['tinymce'] = true;
+	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
