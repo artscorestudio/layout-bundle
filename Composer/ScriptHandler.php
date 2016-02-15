@@ -56,6 +56,14 @@ class ScriptHandler
     /**
      * @param CommandEnvent $event
      */
+    public function installTinyMCE(CommandEvent $event)
+    {
+        
+    }
+    
+    /**
+     * @param CommandEnvent $event
+     */
     public static function install(CommandEvent $event)
     {
         $options = static::getOptions($event);
