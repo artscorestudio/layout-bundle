@@ -45,6 +45,10 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		if ( $config['enable_flash_messages'] ) {
 		    $loader->load('services/flash_messages.xml');
 		}
+		
+		if ( isset($config['assets']['tinymce']) && $config['assets']['tinymce'] != false ) {
+		    $loader->load('services/tinymce.xml');
+		}
 	}
 	
 	/**
@@ -107,114 +111,221 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		foreach(array_keys($container->getExtensions()) as $name) {
 			switch($name) {
 				case 'assetic':
-				    
 					// Add jQuery in assets
-    				if ( $config['assets']['jquery']['path'] !== false ) {
-    					$container->prependExtensionConfig($name, array(
-    						'assets' => array(
-    							'jquery' => $config['assets']['jquery']['path']
-    						)
-    					));
-    				}
-    				
-    				// Add jQuery UI in assets
-    				if ( isset($config['assets']['jqueryui']) && $config['assets']['jqueryui']['js'] !== false && $config['assets']['jqueryui']['css'] !== false) {
-    				    $container->prependExtensionConfig($name, array(
-    				        'assets' => array(
-    				            'jqueryui_js' => $config['assets']['jqueryui']['js'],
-    				            'jqueryui_css' => $config['assets']['jqueryui']['css']
-    				        )
-    				    ));
-    				} elseif ( isset($config['assets']['jqueryui']) && $config['assets']['jqueryui']['js'] === false && $config['assets']['jqueryui']['css'] !== false ) {
-    				    throw new InvalidConfigurationException('You have enabled jQuery UI supports but js parameter is missing.');
-    				} elseif ( isset($config['assets']['jqueryui']) && $config['assets']['jqueryui']['js'] !== false && $config['assets']['jqueryui']['css'] === false ) {
-    				    throw new InvalidConfigurationException('You have enabled jQuery UI supports but css parameter is missing.');
-    				}
+    				$this->addJqueryInAssetic($container, $config['assets']['jquery']);
     				
     				// Add Twitter Bootstrap assets
-    				if ( count($config['assets']['twbs']) > 0 ) {
-                        
-    				    $twbs = $config['assets']['twbs'];
-    				    
-    				    // Twitter Bootstrap javascript files
-    				    $container->prependExtensionConfig($name, array(
-    				        'assets' => array(
-    				            'twbs_js' => array(
-    				                'inputs' => $twbs['js']
-    				            )
-    				        )
-    				    ));
-    				    
-    				    // Twitter Bootstrap Less files or CSS files
-    				    if ( count($twbs['less']) > 0 && ($twbs['css'] != false && count($twbs['css']) > 0) )
-    				        throw new InvalidConfigurationException('You can\'t have less files and css files in your Twitter Bootstrap Configuration, choose one.');
-    				    elseif ( count($twbs['less']) > 0 && count($twbs['css']) == 0 ) {
+    				$this->addTwbsInAssetic($container, $config['assets']['twbs']);
 
-        				    $container->prependExtensionConfig($name, array(
-        				        'assets' => array(
-        				            'twbs_css' => array(
-        				                'inputs' => $twbs['less']
-        				            )
-        				        )
-        				    ));
-    				    } elseif ( count($twbs['less']) == 0 && count($twbs['css']) > 0 ) {
-    				        $container->prependExtensionConfig($name, array(
-    				            'assets' => array(
-    				                'twbs_css' => array(
-    				                    'inputs' => $twbs['css']
-    				                )
-    				            )
-    				        ));
-    				    }
+    				// Add jQuery UI in assets
+    				if ( isset($config['assets']['jqueryui']) ) {
+    				    $this->addJqueryUIInAssetic($container, $config['assets']['jqueryui']);
     				}
     				
     				// Add select2 files
-    				if ( isset($config['assets']['select2']) && $config['assets']['select2']['js'] !== false && $config['assets']['select2']['css'] !== false) {
-    				    $container->prependExtensionConfig($name, array(
-    				        'assets' => array(
-    				            'select2_js' => $config['assets']['select2']['js'],
-    				            'select2_css' => $config['assets']['select2']['css']
-    				        )
-    				    ));
-    				} elseif ( isset($config['assets']['select2']) && $config['assets']['select2']['js'] === false && $config['assets']['select2']['css'] !== false ) {
-    				    throw new InvalidConfigurationException('You have enabled select2 supports but js parameter is missing.');
-    				} elseif ( isset($config['assets']['select2']) && $config['assets']['select2']['js'] !== false && $config['assets']['select2']['css'] === false ) {
-    				    throw new InvalidConfigurationException('You have enabled select2 supports but css parameter is missing.');
+    				if ( isset($config['assets']['select2']) ) {
+    				    $this->addSelect2InAssetic($container, $config['assets']['select2']);
     				}
     				
     				// Add Basinga js translation in assets
-    				if ( isset($config['assets']['bazinga_js_translator']) && $config['assets']['bazinga_js_translator'] !== false ) {
-    				    $bz_config = $config['assets']['bazinga_js_translator'];
-    				    $container->prependExtensionConfig($name, array(
-    				        'assets' => array(
-    				            'bz_translator_js' => $bz_config['bz_translator_js'],
-    				            'bz_translator_config' => $bz_config['bz_translator_config'],
-    				            'bz_translations_files' => $bz_config['bz_translations_files']
-    				        )
-    				    ));
+    				if ( isset($config['assets']['bazinga_js_translation']) ) {
+    				    $this->addBazingaJsTranslationInAssetic($container, $config['assets']['bazinga_js_translation']);
     				}
     				
     				// Add Speaking URL in assets
-    				if ( isset($config['assets']['speaking_url']) && $config['assets']['speaking_url']['path'] !== false ) {
-    				    $container->prependExtensionConfig($name, array(
-    				        'assets' => array(
-    				            'speakingurl_js' => $config['assets']['speaking_url']['path']
-    				        )
-    				    ));
+    				if ( isset($config['assets']['speakingurl']) ) {
+    				    $this->addSpeakingURLInAssetic($container, $config['assets']['speakingurl']);
     				}
     				
     				// Add TinyMCE in assets
     				if ( isset($config['assets']['tinymce']) ) {
-    					$tinymce = $config['assets']['tinymce'];
-    					$container->prependExtensionConfig($name, array(
-    						'assets' => array(
-    							'tinymce_js' => $tinymce['path'],
-    							'config' => $tinymce['config']
-    						)
-    					));
+    				    $this->addTinyMCEInAsseetic($container, $config['assets']['tinymce']);
     				}
 					break;
 			}
 		}
+	}
+	
+	/**
+	 * Adding jQuery in Assetic
+	 * 
+	 * @param ContainerBuilder $container
+	 * @param array            $config
+	 */
+	protected function addJqueryInAssetic(ContainerBuilder $container, array $config)
+	{
+	    if ( $config['path'] !== false ) {
+	        $container->prependExtensionConfig('assetic', array(
+	            'assets' => array(
+	                'jquery' => $config['path']
+	            )
+	        ));
+	    }
+	}
+	
+	/**
+	 * Adding jQuery UI in Assetic
+	 * 
+	 * @param  ContainerBuilder $container
+	 * @param  array            $config
+	 * @throws InvalidConfigurationException : "Js path not set or CSS path not set"
+	 */
+	protected function addJqueryUIInAssetic(ContainerBuilder $container, array $config)
+	{
+	    if ( $config['js'] !== false && $config['css'] !== false) {
+	        $container->prependExtensionConfig('assetic', array(
+	            'assets' => array(
+	                'jqueryui_js' => $config['js'],
+	                'jqueryui_css' => $config['css']
+	            )
+	        ));
+	        
+	    } elseif ( $config['js'] === false && $config['css'] !== false ) {
+	        throw new InvalidConfigurationException('You have enabled jQuery UI supports but js parameter is missing.');
+	        
+	    } elseif ( $config['js'] !== false && $config['css'] === false ) {
+	        throw new InvalidConfigurationException('You have enabled jQuery UI supports but css parameter is missing.');
+	    }
+	}
+	
+	/**
+	 * Adding Twitter Bootstrap in Assetic
+	 * 
+	 * @param  ContainerBuilder $container
+	 * @param  array            $config
+	 * @throws InvalidConfigurationException : You can't have less files and css files configured
+	 */
+	protected function addTwbsInAssetic(ContainerBuilder $container, array $config)
+	{
+	    if ( $config['twbs_dir'] !== false && !is_null($config['twbs_dir']) ) {
+
+	        // Twitter Bootstrap javascript files
+	        $inputs = array();
+	        foreach($config['js'] as $file) {
+	            $inputs[] = $config['twbs_dir'].'/'.$file;
+	        }
+	        
+	        $container->prependExtensionConfig('assetic', array(
+	            'assets' => array(
+	                'twbs_js' => array(
+	                    'inputs' => $inputs
+	                )
+	            )
+	        ));
+	    
+	        // Twitter Bootstrap Less files or CSS files
+	        if ( count($config['less']) > 0 && count($config['css']) > 0 ) {
+	            throw new InvalidConfigurationException('You can\'t have less files and css files in your Twitter Bootstrap Configuration, choose one.');
+	            
+	        } elseif ( count($config['less']) > 0 ) {
+	            $inputs = array();
+	            foreach($config['less'] as $file) {
+	                $inputs[] = $config['twbs_dir'].'/'.$file;
+	            }
+	            
+	            $container->prependExtensionConfig('assetic', array(
+	                'assets' => array(
+	                    'twbs_css' => array(
+	                        'inputs' => $inputs
+	                    )
+	                )
+	            ));
+	            
+	        } elseif ( count($config['css']) > 0 ) {
+	            $inputs = array();
+	            foreach($config['css'] as $file) {
+	                $inputs[] = $config['twbs_dir'].'/'.$file;
+	            }
+	            
+                $container->prependExtensionConfig('assetic', array(
+                    'assets' => array(
+                        'twbs_css' => array(
+                            'inputs' => $inputs
+                        )
+                    )
+                ));
+                
+	        }
+	    }
+	}
+	
+	/**
+	 * Adding Select2 in Assetic
+	 * 
+	 * @param  ContainerBuilder $container
+	 * @param  array            $config
+	 * @throws InvalidConfigurationException : "Js path not set or CSS path not set"
+	 */
+	protected function addSelect2InAssetic(ContainerBuilder $container, array $config)
+	{
+	    if ( $config['js'] !== false && $config['css'] !== false) {
+	        $container->prependExtensionConfig('assetic', array(
+	            'assets' => array(
+	                'select2_js' => $config['js'],
+	                'select2_css' => $config['css']
+	            )
+	        ));
+	        
+	    } elseif ( $config['js'] === false && $config['css'] !== false ) {
+	        throw new InvalidConfigurationException('You have enabled select2 supports but js parameter is missing.');
+	        
+	    } elseif ( $config['js'] !== false && $config['css'] === false ) {
+	        throw new InvalidConfigurationException('You have enabled select2 supports but css parameter is missing.');
+	        
+	    }
+	}
+	
+	/**
+	 * Adding Bazinga Js Translation in Assetic
+	 * 
+	 * @param ContainerBuilder $container
+	 * @param array            $config
+	 */
+	protected function addBazingaJsTranslationInAssetic(ContainerBuilder $container, array $config)
+	{
+	    if ( $config['bz_translator_js'] !== false ) {
+	        $container->prependExtensionConfig('assetic', array(
+	            'assets' => array(
+	                'bz_translator_js' => $config['bz_translator_js'],
+	                'bz_translator_config' => $config['bz_translator_config'],
+	                'bz_translations_files' => $config['bz_translations_files']
+	            )
+	        ));
+	    }
+	}
+	
+	/**
+	 * Adding Speaking URL in Assetic
+	 * 
+	 * @param ContainerBuilder $container
+	 * @param array            $config
+	 */
+	protected function addSpeakingURLInAssetic(ContainerBuilder $container, array $config)
+	{
+	    if ( $config['path'] !== false ) {
+	        $container->prependExtensionConfig('assetic', array(
+	            'assets' => array(
+	                'speakingurl_js' => $config['path']
+	            )
+	        ));
+	    }
+	}
+	
+	/**
+	 * Adding TinyMCE In Assetic
+	 * 
+	 * @param ContainerBuilder $container
+	 * @param array            $config
+	 */
+	protected function addTinyMCEInAsseetic(ContainerBuilder $container, array $config)
+	{
+	    if ( $config['tinymce_dir'] !== false ) {
+	        $container->prependExtensionConfig('assetic', array(
+	            'assets' => array(
+	                'tinymce_js' => $config['tinymce_dir'].'/'.$config['js'],
+	                'config' => $config['config']
+	            )
+	        ));
+	    }
 	}
 }

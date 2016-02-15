@@ -11,8 +11,6 @@ namespace ASF\LayoutBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ScalarNode;
-use Symfony\Component\DependencyInjection\Tests\Compiler\CannotBeAutowired;
 
 /**
  * Bundle configuration
@@ -46,10 +44,10 @@ class Configuration implements ConfigurationInterface
 					->addDefaultsIfNotSet()
 					->children()
 					   ->append($this->addJqueryParameterNode())
-					   ->append($this->addjQueryUIParameterNode())
 					   ->append($this->addTwitterBootstrapParameterNode())
+					   ->append($this->addjQueryUIParameterNode())
 					   ->append($this->addSelect2ParameterNode())
-					   ->append($this->addBazingaJsTranslatorParameterNode())
+					   ->append($this->addBazingaJsTranslationParameterNode())
 					   ->append($this->addSpeakingURLParameterNode())
 					   ->append($this->addTinyMCEParameterNode())
 					   ->booleanNode('fos_js_routing')->defaultFalse()->end()
@@ -70,26 +68,13 @@ class Configuration implements ConfigurationInterface
 	    $node = $builder->root('jquery');
 	    
 	    $node
-            ->beforeNormalization()
-                ->ifTrue(function($value){
-                    return !isset($value['path']) || $value == false;
-                })
-                ->then(function($value){
-                    return array('path' => false);
-                })
-            ->end()
-            ->beforeNormalization()
-                ->ifTrue(function($value){
-                    return $value === true;
-                })
-                ->then(function($value){
-                    return array('path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js");
-                })
-            ->end()
+            ->treatTrueLike(array('path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"))
+            ->treatFalseLike(array('path' => false))
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('path')
                     ->cannotBeEmpty()
+                    ->info('Fill this value if you do not use the package "component/jquery".')
                     ->defaultValue("%kernel.root_dir%/../vendor/components/jquery/jquery.min.js")
                 ->end()
             ->end()
@@ -107,32 +92,21 @@ class Configuration implements ConfigurationInterface
 	    $node = $builder->root('jqueryui');
 	     
 	    $node
-	       ->beforeNormalization()
-	           ->ifTrue(function($value){
-	               return (!isset($value['js']) && !isset($value['css'])) || $value == false;
-	           })
-	           ->then(function($value){
-	               return array('js' => false, 'css' => false);
-	           })
-	       ->end()
-	       ->beforeNormalization()
-    	       ->ifTrue(function($value){
-    	           return $value === true;
-    	       })
-    	       ->then(function($value){
-    	           return array(
-    	               'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js", 
-    	               'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
-    	           );
-    	       })
-	       ->end()
+	       ->treatTrueLike(array(
+	           'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
+	           'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	       ))
+	       ->treatFalseLike(array('js' => false, 'css' => false))
+	       ->treatNullLike(array('js' => false, 'css' => false))
 	       ->children()
 	           ->scalarNode('js')
 	               ->cannotBeEmpty()
+	               ->info('Fill this value if you do not use the package "component/jqueryui".')
 	               ->defaultValue("%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js")
 	           ->end()
 	           ->scalarNode('css')
 	               ->cannotBeEmpty()
+	               ->info('Fill this value if you do not use the package "component/jqueryui".')
 	               ->defaultValue("%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css")
 	           ->end()
 	       ->end()
@@ -150,54 +124,55 @@ class Configuration implements ConfigurationInterface
 	    $node = $builder->root('twbs');
 	
 	    $node
-	       ->beforeNormalization()
-	           ->ifTrue(function($value){
-	               return $value == false;
-	           })
-	           ->then(function($value){
-	               return array();
-	           })
-	       ->end()
-	       ->beforeNormalization()
-    	       ->ifTrue(function($value){
-    	           return $value === true;
-    	       })
-    	       ->then(function($value){
-    	           return array(
-    	               'assets_dir' => '%kernel.root_dir%/../vendor/components/bootstrap',
-    	               'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
-    	               'less' => array(
-    	                   "%kernel.root_dir%/../vendor/components/bootstrap/less/bootstrap.less", 
-    	                   "%kernel.root_dir%/../vendor/components/bootstrap/less/theme.less"
-    	               ),
-    	               'icon_prefix' => 'glyphicon',
-    	               'fonts_dir' => '%kernel.root_dir%/../web/fonts'
-    	           );
-    	       })
-	       ->end()
+	       ->treatTrueLike(array(
+               'twbs_dir' => '%kernel.root_dir%/../vendor/components/bootstrap',
+               'js' => array("js/bootstrap.min.js"),
+               'less' => array(
+                   "less/bootstrap.less", 
+                   "less/theme.less"
+               ),
+	           'css' => array(),
+               'icon_prefix' => 'glyphicon',
+               'fonts_dir' => '%kernel.root_dir%/../web/fonts',
+	           'icon_tag' => 'span',
+	           'form_theme' => 'ASFLayoutBundle:form:form_div_layout.html.twig'
+           ))
+           ->treatFalseLike(array(
+               'twbs_dir' => false
+           ))
 	       ->addDefaultsIfNotSet()
 	       ->children()
-	           ->scalarNode('assets_dir')
+	           ->scalarNode('twbs_dir')
 	               ->cannotBeEmpty()
+	               ->info('Fill this value if you do not use the package "component/bootstrap".')
 	               ->defaultValue('%kernel.root_dir%/../vendor/components/bootstrap')
 	           ->end()
 	           ->arrayNode('js')
+	               ->treatNullLike(array())
+	               ->treatFalseLike(array())
+	               ->info('By default, the bundle search js files in folder fill in "asf_layout.assets.twbs.twbs_dir" parameter.')
     	           ->fixXmlConfig('js')
     	           ->prototype('scalar')->end()
     	           ->defaultValue(array(
-    	               "%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"
+    	               "js/bootstrap.min.js"
     	           ))
 	           ->end()
 	           ->arrayNode('less')
+	               ->treatNullLike(array())
+	               ->treatFalseLike(array())
+	               ->info('By default, the bundle search less files in folder fill in "asf_layout.assets.twbs.twbs_dir" parameter.')
     	           ->fixXmlConfig('less')
     	           ->prototype('scalar')->end()
     	           ->defaultValue(array(
-    	               "%kernel.root_dir%/../vendor/components/bootstrap/less/bootstrap.less",
-	                   "%kernel.root_dir%/../vendor/components/bootstrap/less/theme.less"
+    	               "less/bootstrap.less",
+	                   "less/theme.less"
     	           ))
 	           ->end()
 	           ->arrayNode('css')
-    	           ->fixXmlConfig('vss')
+	               ->treatNullLike(array())
+	               ->treatFalseLike(array())
+	               ->info('By default, the bundle search css files in folder fill in "asf_layout.assets.twbs.twbs_dir" parameter.')
+    	           ->fixXmlConfig('css')
     	           ->prototype('scalar')->end()
 	           ->end()
 	           ->scalarNode('icon_prefix')
@@ -240,69 +215,47 @@ class Configuration implements ConfigurationInterface
 	    $node = $builder->root('select2');
 	    
 	    $node
-	       ->beforeNormalization()
-    	       ->ifTrue(function($value){
-	               return $value == false;
-	           })
-	           ->then(function($value){
-	               return array('js' => false, 'css' => false);
-	           })
-	       ->end()
-	       ->beforeNormalization()
-    	       ->ifTrue(function($value){
-    	           return $value === true;
-    	       })
-    	       ->then(function($value){
-    	           return array(
-    	               'js' => "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js", 
-    	               'css' => "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
-    	           );
-    	       })
-	       ->end()
-	       ->children()
-	           ->scalarNode('js')
-	               ->cannotBeEmpty()
-	               ->defaultValue("%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js")
-	           ->end()
-	           ->scalarNode('css')
-	               ->cannotBeEmpty()
-	               ->defaultValue("%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css")
-	           ->end()
-	       ->end()
-	    ;
+            ->treatFalseLike(array('js' => false, 'css' => false))
+            ->treatNullLike(array('js' => false, 'css' => false))
+            ->treatTrueLike(array(
+                'js' => "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js", 
+                'css' => "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
+            ))
+            ->children()
+                ->scalarNode('js')
+                    ->cannotBeEmpty()
+                    ->defaultValue("%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js")
+                ->end()
+                ->scalarNode('css')
+                    ->cannotBeEmpty()
+                    ->defaultValue("%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css")
+                ->end()
+            ->end()
+        ;
 	           
-	       return $node;
+        return $node;
 	}
 	
 	/**
 	 * Get Bazinga Js Translator Configuration
 	 */
-	protected function addBazingaJsTranslatorParameterNode()
+	protected function addBazingaJsTranslationParameterNode()
 	{
 	    $builder = new TreeBuilder();
-	    $node = $builder->root('bazinga_js_translator');
-	     
+	    $node = $builder->root('bazinga_js_translation');
+	    
 	    $node
-	       ->beforeNormalization()
-	           ->ifTrue(function($value){
-	               return $value == false;
-	           })
-	           ->then(function($value){
-	               return array('bz_translator_js' => false, 'bz_translator_config' => false, 'bz_translations_files' => false);
-	           })
-	       ->end()
-	       ->beforeNormalization()
-    	       ->ifTrue(function($value){
-    	           return $value === true;
-    	       })
-    	       ->then(function($value){
-    	           return array(
-    	               'bz_translator_js' => "bundles/bazingajstranslation/js/translator.min.js", 
-    	               'bz_translator_config' => "js/translations/config.js", 
-    	               'bz_translations_files' => "js/translations/*/*.js"
-    	           );
-    	       })
-	       ->end()
+	       ->treatFalseLike(array(
+	           'bz_translator_js' => false
+	       ))
+	       ->treatNullLike(array(
+	           'bz_translator_js' => false
+	       ))
+	       ->treatTrueLike(array(
+               'bz_translator_js' => "bundles/bazingajstranslation/js/translator.min.js", 
+               'bz_translator_config' => "js/translations/config.js", 
+               'bz_translations_files' => "js/translations/*/*.js"
+           ))
 	       ->children()
     	       ->scalarNode('bz_translator_js')
     	           ->cannotBeEmpty()
@@ -327,25 +280,12 @@ class Configuration implements ConfigurationInterface
 	protected function addSpeakingURLParameterNode()
 	{
 	    $builder = new TreeBuilder();
-	    $node = $builder->root('speaking_url');
+	    $node = $builder->root('speakingurl');
 	
 	    $node
-	       ->beforeNormalization()
-	           ->ifTrue(function($value){
-	               return $value == false;
-	           })
-	           ->then(function($value){
-	               return array('path' => false);
-	           })
-	       ->end()
-	       ->beforeNormalization()
-    	       ->ifTrue(function($value){
-    	           return $value === true;
-    	       })
-    	       ->then(function($value){
-    	           return array('path' => "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js");
-    	       })
-	       ->end()
+	       ->treatTrueLike(array('path' => "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js"))
+	       ->treatFalseLike(array('path' => false))
+	       ->treatNullLike(array('path' => false))
 	       ->children()
 	           ->scalarNode('path')
 	               ->cannotBeEmpty()
@@ -362,30 +302,45 @@ class Configuration implements ConfigurationInterface
 	 */
 	protected function addTinyMCEParameterNode()
 	{
-		$builder = new TreeBuilder();
-		$node = $builder->root('tinymce');
-	
-		$node
-			->beforeNormalization()
-				->ifTrue(function($value){
-					return $value == false;
-				})
-				->then(function($value){
-					return array('path' => false);
-				})
-			->end()
-			->beforeNormalization()
-				->ifTrue(function($value){
-					return $value === true;
-				})
-				->then(function($value){
-					return array('path' => "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js");
-				})
-			->end()
-			->children()
-				->scalarNode('path')
+        $builder = new TreeBuilder();
+        $node = $builder->root('tinymce');
+        
+        $exclude_files = array('bower.json', 'changelog.txt', 'composer.json', 'license.txt', 'package.json', 'readme.md');
+        
+        $node
+            ->treatTrueLike(array(
+                'tinymce_dir' => '%kernel.root_dir%/../vendor/tinymce/tinymce',
+                'js' => "tinymce.min.js",
+                'config' => array(
+                    'selector' => '.tinymce-content'
+                ),
+                'customize' => array(
+                    'dest_dir' => '%kernel.root_dir%/../web/js/tinymce',
+                    'base_url' => '/js/tinymce'
+                )
+            ))
+            ->treatFalseLike(array(
+                'tinymce_dir' => false
+            ))
+            ->treatNullLike(array(
+                'tinymce_dir' => '%kernel.root_dir%/../vendor/tinymce/tinymce',
+                'js' => "tinymce.min.js",
+                'config' => array(
+                    'selector' => '.tinymce-content'
+                ),
+                'customize' => array(
+                    'dest_dir' => '%kernel.root_dir%/../web/js/tinymce',
+                    'base_url' => '/js/tinymce'
+                )
+            ))
+            ->children()
+                ->scalarNode('tinymce_dir')
+                    ->cannotBeEmpty()
+                    ->defaultValue('%kernel.root_dir%/../vendor/tinymce/tinymce')
+                ->end()
+				->scalarNode('js')
 					->CannotBeEmpty()
-					->defaultValue("%kernel.root_dir%/../vendor/tinymce/tinymce/tinymce.jquery.min.js")
+					->defaultValue("tinymce.min.js")
 				->end()
 				->arrayNode('config')
 					->addDefaultsIfNotSet()
@@ -396,6 +351,24 @@ class Configuration implements ConfigurationInterface
 						->end()
 					->end()
 				->end()
+				->arrayNode('customize')
+				    ->addDefaultsIfNotSet()
+	               ->children()
+                       ->scalarNode('dest_dir')
+                           ->cannotBeEmpty()
+                           ->defaultValue('%kernel.root_dir%/../web/js/tinymce')
+                       ->end()
+                       ->scalarNode('base_url')
+                           ->cannotBeEmpty()
+                           ->defaultValue('/js/tinymce')
+                       ->end()
+                       ->arrayNode('exclude_files')
+                           ->fixXmlConfig('exclude_files')
+                           ->prototype('scalar')->end()
+                           ->defaultValue($exclude_files)
+                       ->end()
+    	           ->end()
+	           ->end()
 			->end()
 		;
 	
