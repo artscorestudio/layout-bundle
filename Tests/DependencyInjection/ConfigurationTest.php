@@ -87,7 +87,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertRegExp('components/jquery', $config['assets']['jquery']['path']);
+	    $this->assertRegExp('/components\/jquery/', $config['assets']['jquery']['path']);
 	}
 	
 	/**
@@ -117,7 +117,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertRegExp('components/bootstrap', $config['assets']['twbs']['twbs_dir']);
+	    $this->assertRegExp('/components\/bootstrap/', $config['assets']['twbs']['twbs_dir']);
 	}
 	
 	/**

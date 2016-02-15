@@ -95,7 +95,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testWithoutBazingaJsTranslator()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['assets']['bazinga_js_translator'] = false;
+	    $config['assets']['bazinga_js_translation'] = false;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -106,7 +106,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testWithoutSpeakingURL()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['assets']['speaking_url'] = false;
+	    $config['assets']['speakingurl'] = false;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -257,7 +257,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['assets']['speaking_url']['path'] = '';
+	    $config['assets']['speakingurl']['path'] = '';
 	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -270,7 +270,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 
 	    $config = $this->getDefaultConfig();
-	    $config['assets']['bazinga_js_translator']['bz_translator_js'] = '';
+	    $config['assets']['bazinga_js_translation']['bz_translator_js'] = '';
 	     
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -283,7 +283,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
 	    
 	    $config = $this->getDefaultConfig();
-	    $config['assets']['bazinga_js_translator']['bz_translator_config'] = '';
+	    $config['assets']['bazinga_js_translation']['bz_translator_config'] = '';
 	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -316,7 +316,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testBazingaJsTranslatorParameterSetToTrue()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['assets']['bazinga_js_translator'] = true;
+	    $config['assets']['bazinga_js_translation'] = true;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -327,7 +327,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testSpeakingURLParameterSetToTrue()
 	{
 	    $config = $this->getDefaultConfig();
-	    $config['assets']['speaking_url'] = true;
+	    $config['assets']['speakingurl'] = true;
 	
 	    $this->extension->load(array($config), $this->getContainer());
 	}
@@ -390,7 +390,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
 	            ),
 	            'twbs' => array(
-	                'assets_dir' => "%kernel.root_dir%/../vendor/components/bootstrap",
+	                'twbs_dir' => "%kernel.root_dir%/../vendor/components/bootstrap",
 	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
 	                'less' => array(
 	                    "%kernel.root_dir%/../vendor/components/bootstrap/less/bootstrap.less",
