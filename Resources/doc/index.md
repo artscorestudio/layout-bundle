@@ -128,6 +128,8 @@ Now you have completed the basic installation and configuration of the ASFLayout
 The following documents are available :
 * [Enable/Disable supported assets](enable-external-library.md)
 * [Configure Twitter Bootstrap](twitter-bootstrap.md)
+* [Configure TinyMCE](tinymce.md)
 * [Layout models](layout-models.md)
 * [Flash Messages](flash-messages.md)
 * [ASFLayoutBundle Configuration Reference](configuration.md)
+* [ASFLayoutBundle Commands Reference](commands.md)

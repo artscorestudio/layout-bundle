@@ -425,7 +425,6 @@ asf_layout:
 Update your Twig template :
 
 ```twig
-# OR with CSS files
 {% block javascripts %}
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 	<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
@@ -441,3 +440,62 @@ asf_layout:
     assets:
         fos_js_routing: false
 ```
+
+## Enable/disable TinyMCE
+
+> JavaScript library for WYSIWYG HTML editing 
+
+### Adding TinyMCE in your project's composer.json file
+
+I suggest using [tinymce/tinymce](https://github.com/tinymce/tinymce-dist) repository. You can add it by enter the follow command :
+
+```bash
+$ composer require tinymce/tinymce ">=4"
+```
+
+You can enable it by two different ways. First, just passing *true* :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        tinymce: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        tinymce:
+            tinymce_dir: "%kernel.root_dir%/../vendor/tinymce/tinymce"
+            js: "tinymce.min.js"
+            config:
+                selector: ".tinymce-content"
+            customize:
+                dest_dir: "%kernel.root_dir%/../web/js/tinymce"
+                base_url: "/js/tinymce"
+                exclude_files: ['bower.json', 'changelog.txt', 'composer.json', 'license.txt', 'package.json', 'readme.md']
+```
+
+Update your Twig template :
+
+```twig
+{% javascripts '@tinymce_js' %}
+	<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{{ tinymce_init() }}
+```
+
+### Disable TinyMCE
+
+Just edit config.yml :
+
+```yaml
+asf_layout:
+    assets:
+        tinymce: false
+```
+
+For more information about TinyMCE, please check this documentation chapter : [Configure TinyMCE](tinymce.md).

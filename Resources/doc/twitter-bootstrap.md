@@ -2,8 +2,6 @@
 
 ## Copy fonts
 
-### Copy fonts
-
 If you want to automatically copy fonts in web folder, add this commands in *post-install-cmd* and *post-update-cmd* statements in your project's composer.json file.
 
 ```json

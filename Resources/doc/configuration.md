@@ -15,23 +15,37 @@ asf_layout:
             js: "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
             css: "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
         twbs:
-            assets_dir: "%kernel.root_dir%/../vendor/components/bootstrap/"
-            icon_prefix: "glyphicon"
-            fonts_dir: "%kernel.root_dir%/../web/fonts"
-            js: "%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"
-            less: ["@ASFLayoutBundle/Resources/public/supports/bootstrap/less/bootstrap.less", @ASFLayoutBundle/Resources/public/supports/bootstrap/less/theme.less]
+            twbs_dir: "%kernel.root_dir%/../vendor/components/bootstrap/"
+            js: js/bootstrap.min.js"
+            less: ["less/bootstrap.less", "less/theme.less"]
             css: ~
+            icon_prefix: "glyphicon"
+            icon_tag: "span"
+            fonts_dir: "%kernel.root_dir%/../web/fonts"
+            form_theme: "ASFLayoutBundle:form:form_div_layout.html.twig"
+            customize:
+                less:
+                    dest_dir: ~
+                    files: ~
         select2:
             js: "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js"
             css: "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
-        bazing_js_translator:
+        bazinga_js_translation:
             bz_translator_js: "bundles/bazingajstranslation/js/translator.min.js"
             bz_translator_config: "js/translations/config.js"
             bz_translations_files: "js/translations/*/*.js"
         speaking_url:
             path: "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js"
         fos_js_routing: false
-        form_theme: "ASFLayoutBundle:form:form_div_layout.html.twig"
+        tinymce:
+            tinymce_dir: "%kernel.root_dir%/../vendor/tinymce/tinymce"
+            js: "tinymce.min.js"
+            config:
+                selector: ".tinymce-content"
+            customize:
+                dest_dir: "%kernel.root_dir%/../web/js/tinymce"
+                base_url: "/js/tinymce"
+                exclude_files: ['bower.json', 'changelog.txt', 'composer.json', 'license.txt', 'package.json', 'readme.md']
 ```
 
 ## Bundle's configuration on installation
@@ -44,12 +58,13 @@ asf_layout:
     enable_assetic_support: true
     assets:
         jquery: true
-        jqueryui: false
         twbs: true
+        jqueryui: false
         select2: false
         bazing_js_translation: false
         speaking_url: false
         fos_js_routing: false
+        tinymce: false
 ```
 
 ## Enable an assets with default configuration
@@ -68,4 +83,5 @@ asf_layout:
         bazing_js_translation: true
         speaking_url: true
         fos_js_routing: true
+        tinymce: true
 ```
