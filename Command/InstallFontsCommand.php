@@ -49,7 +49,7 @@ class InstallFontsCommand extends ContainerAwareCommand
         $this->twbs_config = $this->getContainer()->getParameter('asf_layout.assets')['twbs'];
         
         $dest_dir = $this->twbs_config['fonts_dir'];
-        $src_dir = sprintf('%s/%s', $this->twbs_config['assets_dir'], 'fonts');
+        $src_dir = sprintf('%s/%s', $this->twbs_config['twbs_dir'], 'fonts');
         
         $finder = new Finder();
         $fs = new Filesystem();
@@ -66,7 +66,7 @@ class InstallFontsCommand extends ContainerAwareCommand
             $output->writeln(sprintf(
                 '<error>Fonts directory "%s" does not exist. Did you install Twitter Bootstrap ? '.
                 'If you used something other than Composer you need to manually change the path in '.
-                '"asf.twbs.assets_dir".</error>',
+                '"asf_layout.twbs.twbs_dir".</error>',
                 $src_dir
                 ));
             return;
