@@ -58,7 +58,20 @@ class ScriptHandler
      */
     public function installTinyMCE(CommandEvent $event)
     {
+        $options = static::getOptions($event);
+        $consoleDir = static::getConsoleDir($event, 'install TinyMCE files');
         
+        if (null === $consoleDir) {
+            return;
+        }
+        
+        $webDir = $options['symfony-web-dir'];
+        
+        if (!static::hasDirectory($event, 'symfony-web-dir', $webDir, 'install TinyMCE files')) {
+            return;
+        }
+        
+        static::executeCommand($event, $consoleDir, 'asf:tinymce:copy', $options['process-timeout']);
     }
     
     /**
