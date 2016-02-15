@@ -73,7 +73,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->andReturn(array(
                 'twbs' => array(
-                    'assets_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
                     'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
                     'customize' => array(
                         'less' => array(
@@ -115,7 +115,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->andReturn(array(
                 'twbs' => array(
-                    'assets_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
                     'fonts_dir' => self::FIXTURES_DIR.'/web/fonts'
                 )
             ));
@@ -151,7 +151,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
         ->with('asf_layout.assets')
         ->andReturn(array(
             'twbs' => array(
-                'assets_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
+                'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
                 'fonts_dir' => ''
             )
         ));

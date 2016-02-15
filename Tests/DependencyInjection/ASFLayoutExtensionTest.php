@@ -384,20 +384,25 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	    return array(
 	        'enable_twig_support' => true,
 	        'enable_assetic_support' => true,
+	        'enable_flash_messages' => true,
 	        'assets' => array(
 	            'jquery' => array(
 	                'path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
 	            ),
 	            'twbs' => array(
 	                'assets_dir' => "%kernel.root_dir%/../vendor/components/bootstrap",
-	                'icon_prefix' => 'glyphicon',
-	                'fonts_dir' => '%kernel.root_dir%/../web',
 	                'js' => array("%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js"),
 	                'less' => array(
 	                    "%kernel.root_dir%/../vendor/components/bootstrap/less/bootstrap.less",
 	                    "%kernel.root_dir%/../vendor/components/bootstrap/less/theme.less"
-	                )
-	            )
+	                ),
+	                'css' => array(),
+	                'icon_prefix' => 'glyphicon',
+	                'icon_tag' => 'span',
+	                'fonts_dir' => '%kernel.root_dir%/../web/fonts',
+	                'form_theme' => 'ASFLayoutBundle:form:form_div_layout.html.twig'
+	            ),
+	            'fos_js_routing' => false
 	        )
 	    );
 	}

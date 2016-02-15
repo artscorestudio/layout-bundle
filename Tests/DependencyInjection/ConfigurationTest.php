@@ -87,7 +87,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/components/jquery/jquery.min.js', $config['assets']['jquery']['path']);
+	    $this->assertRegExp('components/jquery', $config['assets']['jquery']['path']);
 	}
 	
 	/**
@@ -103,21 +103,21 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Check if asf_layout.assets.twbs.assets_dir exists
 	 */
-	public function testTwbsAssetsDirParameterInDefaultConfiguration()
+	public function testTwbsDirParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('assets_dir', $config['assets']['twbs']);
+	    $this->assertArrayHasKey('twbs_dir', $config['assets']['twbs']);
 	}
 	
 	/**
 	 * Check asf_layout.assets.twbs.assets_dir default value
 	 */
-	public function testTwbsAssetsDirParameterValueInDefaultConfiguration()
+	public function testTwbsDirParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap', $config['assets']['twbs']['assets_dir']);
+	    $this->assertRegExp('components/bootstrap', $config['assets']['twbs']['twbs_dir']);
 	}
 	
 	/**
@@ -217,7 +217,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../vendor/components/bootstrap/js/bootstrap.min.js', $config['assets']['twbs']['js'][0]);
+	    $this->assertEquals('js/bootstrap.min.js', $config['assets']['twbs']['js'][0]);
 	}
 	
 	/**
@@ -229,8 +229,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	    $config = $processor->processConfiguration(new Configuration(), array());
 	    
 	    $default_values = array(
-	        "%kernel.root_dir%/../vendor/components/bootstrap/less/bootstrap.less",
-            "%kernel.root_dir%/../vendor/components/bootstrap/less/theme.less"
+	        "less/bootstrap.less",
+            "less/theme.less"
 	    );
 	    
 	    $defaults_exists = true;
@@ -280,7 +280,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('speaking_url', $config['assets']);
+	    $this->assertArrayNotHasKey('speakingurl', $config['assets']);
 	}
 	
 	/**
@@ -301,6 +301,16 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
 	    $this->assertFalse($config['assets']['fos_js_routing']);
+	}
+	
+	/**
+	 * Check if asf_layout.assets.tinymce not exists
+	 */
+	public function testTinyMCEParameterInDefaultConfiguration()
+	{
+	    $processor = new Processor();
+	    $config = $processor->processConfiguration(new Configuration(), array());
+	    $this->assertArrayNotHasKey('tinymce', $config['assets']);
 	}
 	
 	/**
