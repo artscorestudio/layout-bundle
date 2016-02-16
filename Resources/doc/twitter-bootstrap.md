@@ -10,11 +10,11 @@ If you want to automatically copy fonts in web folder, add this commands in *pos
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "ASF\\LayoutBundle\\Composer\\ScriptHandler::install"
+            "ASF\\LayoutBundle\\Composer\\ScriptHandler::installTwbs"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "ASF\\LayoutBundle\\Composer\\ScriptHandler::install"
+            "ASF\\LayoutBundle\\Composer\\ScriptHandler::installTwbs"
         ]
     },
 }
