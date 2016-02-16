@@ -56,7 +56,7 @@ class ScriptHandler
     /**
      * @param CommandEnvent $event
      */
-    public function installTinyMCE(CommandEvent $event)
+    public static function installTinyMCE(CommandEvent $event)
     {
         $options = static::getOptions($event);
         $consoleDir = static::getConsoleDir($event, 'install TinyMCE files');
@@ -77,7 +77,7 @@ class ScriptHandler
     /**
      * @param CommandEnvent $event
      */
-    public static function install(CommandEvent $event)
+    public static function installTwbs(CommandEvent $event)
     {
         $options = static::getOptions($event);
         $consoleDir = static::getConsoleDir($event, 'install bootstrap fonts and files');
