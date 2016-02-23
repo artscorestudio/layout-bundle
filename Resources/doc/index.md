@@ -131,5 +131,6 @@ The following documents are available :
 * [Configure TinyMCE](tinymce.md)
 * [Layout models](layout-models.md)
 * [Flash Messages](flash-messages.md)
+* [Knp Menu template](knp-menu-template.md)
 * [ASFLayoutBundle Configuration Reference](configuration.md)
 * [ASFLayoutBundle Commands Reference](commands.md)
