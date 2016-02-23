@@ -2,10 +2,18 @@
 
 <!DOCTYPE html>
 <html lang="{{ app.request.locale|split('_')[0] }}">
+	{% block html_head %}
     <head>
     	{% block asf_base_encoding %}
         <meta charset="UTF-8" />
         {% endblock asf_base_encoding %}
+        
+        {% block asf_base_meta %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+        {% endblock %}
         
         <title>
         	{% block asf_base_meta_title_prefix %}{% endblock %}
@@ -18,93 +26,266 @@
         {% endblock asf_base_favicon %}
         
 		{% block asf_base_header_stylesheets %}
-			{% block test %}
 			{% stylesheets '@twbs_css' filter="less" %}
             	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
             {% endstylesheets %}
-            {% endblock %}
+            {% stylesheets '@ASFLayoutBundle/Resources/public/css/backend/*' %}
+            	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+            {% endstylesheets %}
 		{% endblock %}
         
         {% block asf_base_header_javascripts %}
-        	{% javascripts '@jquery' '@twbs_js' %}
+        	{% javascripts '@jquery' '@twbs_js' '@ASFLayoutBundle/Resources/public/js/backend/*' %}
         		<script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
+        
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
     </head>
+    {% endblock %}
     
     {% block asf_base_body_tag %}
     <body>
     {% endblock asf_base_body_tag %}
-    
-{% block asf_base_body %}
+   
+	{% block asf_base_body %}
 	<div class="container">
 		{% block navbar %}
-		<div class="header clearfix">
-			{% block primary_menu %}
-			<nav>
-				<ul class="nav nav-pills pull-right">
-					<li role="presentation" class="active"><a href="#">Home</a></li>
-					<li role="presentation"><a href="#">About</a></li>
-					<li role="presentation"><a href="#">Contact</a></li>
-				</ul>
-			</nav>
-			{% endblock %}
-			{% block project_name %}
-			<h3 class="text-muted">Project name</h3>
-			{% endblock %}
-		</div>
-		{% endblock %}
-		
-		<div class="row">
-			{{ asf_flash_alerts() }}
-		</div>
-		
-		{% block heading %}
-		<div class="jumbotron">
-			<h1>{% block heading_title %}Jumbotron heading{% endblock %}</h1>
-			<p class="lead">{% block heading_lead %}Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.{% endblock %}</p>
-			{% block heading_action_btn %}
-			<p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
-			{% endblock %}
-		</div>
-		{% endblock %}
-		
-		{% block content %}
-		<div class="row marketing">
-			<div class="col-lg-6">
-				<h4>Subheading</h4>
-				<p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-				<h4>Subheading</h4>
-				<p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-				<h4>Subheading</h4>
-				<p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					{% block navbar_project %}
+					<a class="navbar-brand" href="#">Project name</a>
+					{% endblock %}
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					{% block navbar_nav %}
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Dashboard</a></li>
+						<li><a href="#">Settings</a></li>
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">Help</a></li>
+					</ul>
+					{% endblock %}
+					{% block navbar_form %}
+					<form class="navbar-form navbar-right">
+						<input type="text" class="form-control" placeholder="Search...">
+					</form>
+					{% endblock %}
+				</div>
 			</div>
-
-			<div class="col-lg-6">
-				<h4>Subheading</h4>
-				<p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-				<h4>Subheading</h4>
-				<p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-				<h4>Subheading</h4>
-				<p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-			</div>
-		</div>
+		</nav>
 		{% endblock %}
 		
-		{% block footer %}
-		<footer class="footer">
-			<p>&copy; 2015 Company, Inc.</p>
-		</footer>
-		{% endblock %}
-	</div> <!-- /container -->    
+		{% block container %}
+		<div class="container-fluid">
+			<div class="row">
+				{% block sidebar %}
+				<div class="col-sm-3 col-md-2 sidebar">
+					{% block sidebar_nav %}
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+						<li><a href="#">Reports</a></li>
+						<li><a href="#">Analytics</a></li>
+						<li><a href="#">Export</a></li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li><a href="">Nav item</a></li>
+						<li><a href="">Nav item again</a></li>
+						<li><a href="">One more nav</a></li>
+						<li><a href="">Another nav item</a></li>
+						<li><a href="">More navigation</a></li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li><a href="">Nav item again</a></li>
+						<li><a href="">One more nav</a></li>
+						<li><a href="">Another nav item</a></li>
+					</ul>
+					{% endblock %}
+				</div>
+				{% endblock %}
+				{% block main_container %}
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					
+					<div class="row">
+						{{ asf_flash_alerts() }}
+					</div>
+		
+					{% block header %}
+					<h1 class="page-header">{% block page_title %}Dashboard{% endblock %}</h1>
+					{% endblock %}
+					
+					{% block content %}
+					<div class="row placeholders">
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Label</h4>
+							<span class="text-muted">Something else</span>
+						</div>
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Label</h4>
+							<span class="text-muted">Something else</span>
+						</div>
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Label</h4>
+							<span class="text-muted">Something else</span>
+						</div>
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Label</h4>
+							<span class="text-muted">Something else</span>
+						</div>
+					</div>
+
+					<h2 class="sub-header">Section title</h2>
+					<div class="table-responsive">
+						<table class="table table-striped">
+						<thead>
+							<tr>
+							<th>#</th>
+							<th>Header</th>
+							<th>Header</th>
+							<th>Header</th>
+							<th>Header</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1,001</td>
+								<td>Lorem</td>
+								<td>ipsum</td>
+								<td>dolor</td>
+								<td>sit</td>
+							</tr>
+							<tr>
+								<td>1,002</td>
+								<td>amet</td>
+								<td>consectetur</td>
+								<td>adipiscing</td>
+								<td>elit</td>
+							</tr>
+							<tr>
+								<td>1,003</td>
+								<td>Integer</td>
+								<td>nec</td>
+								<td>odio</td>
+								<td>Praesent</td>
+							</tr>
+							<tr>
+								<td>1,003</td>
+								<td>libero</td>
+								<td>Sed</td>
+								<td>cursus</td>
+								<td>ante</td>
+							</tr>
+							<tr>
+								<td>1,004</td>
+								<td>dapibus</td>
+								<td>diam</td>
+								<td>Sed</td>
+								<td>nisi</td>
+							</tr>
+							<tr>
+								<td>1,005</td>
+								<td>Nulla</td>
+								<td>quis</td>
+								<td>sem</td>
+								<td>at</td>
+							</tr>
+							<tr>
+								<td>1,006</td>
+								<td>nibh</td>
+								<td>elementum</td>
+								<td>imperdiet</td>
+								<td>Duis</td>
+							</tr>
+							<tr>
+								<td>1,007</td>
+								<td>sagittis</td>
+								<td>ipsum</td>
+								<td>Praesent</td>
+								<td>mauris</td>
+							</tr>
+							<tr>
+								<td>1,008</td>
+								<td>Fusce</td>
+								<td>nec</td>
+								<td>tellus</td>
+								<td>sed</td>
+							</tr>
+							<tr>
+								<td>1,009</td>
+								<td>augue</td>
+								<td>semper</td>
+								<td>porta</td>
+								<td>Mauris</td>
+							</tr>
+							<tr>
+								<td>1,010</td>
+								<td>massa</td>
+								<td>Vestibulum</td>
+								<td>lacinia</td>
+								<td>arcu</td>
+							</tr>
+							<tr>
+								<td>1,011</td>
+								<td>eget</td>
+								<td>nulla</td>
+								<td>Class</td>
+								<td>aptent</td>
+							</tr>
+							<tr>
+								<td>1,012</td>
+								<td>taciti</td>
+								<td>sociosqu</td>
+								<td>ad</td>
+								<td>litora</td>
+							</tr>
+							<tr>
+								<td>1,013</td>
+								<td>torquent</td>
+								<td>per</td>
+								<td>conubia</td>
+								<td>nostra</td>
+							</tr>
+							<tr>
+								<td>1,014</td>
+								<td>per</td>
+								<td>inceptos</td>
+								<td>himenaeos</td>
+								<td>Curabitur</td>
+							</tr>
+								<tr>
+								<td>1,015</td>
+								<td>sodales</td>
+								<td>ligula</td>
+								<td>in</td>
+								<td>libero</td>
+							</tr>
+						</tbody>
+						</table>
+					</div>
+					{% endblock %}
+				</div>
+				{% endblock %}
+			</div>
+		</div>
+		{% endblock container %}
+	</div>
     {% endblock asf_base_body %}
     
-    {% block asf_base_footer_javascripts %}
-    {% endblock asf_base_footer_javascripts %}
-    
+    {% block asf_base_footer_javascripts %}{% endblock %}
     </body>
 </html>
