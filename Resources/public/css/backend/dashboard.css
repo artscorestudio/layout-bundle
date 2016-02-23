@@ -65,7 +65,22 @@ body {
   color: #fff;
   background-color: #428bca;
 }
-
+.nav-sidebar > li > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+}
+.nav-sidebar > li > ul > li > a {
+  display: block;
+  position: relative;
+  padding:5px 20px 5px 35px;
+}
+.nav-sidebar > li > ul > li > a:hover, 
+.nav-sidebar > li > ul > li > focus {
+  background-color: #EEE;
+  text-decoration: none
+}
 
 /*
  * Main content
