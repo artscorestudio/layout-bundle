@@ -14,11 +14,12 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+
 /**
  * Copy Less Files Command Unit Tests
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
- *
+ * @covers ASF\LayoutBundle\Command\CopyLessFilesCommand
  */
 class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
 {
