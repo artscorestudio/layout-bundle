@@ -10,10 +10,9 @@
 namespace ASF\LayoutBundle\Tests\Command;
 
 use ASF\LayoutBundle\Command\CopyLessFilesCommand;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use \Mockery as m;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Copy Less Files Command Unit Tests
@@ -23,42 +22,7 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
 {
-    const FIXTURES_DIR = __DIR__ . '/../Fixtures/Command';
-    
-    /**
-     * @var m\Mock|\Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
-    
-    /**
-     * @var m\Mock|\Symfony\Component\HttpKernel\KernelInterface
-     */
-    private $kernel;
-    
-    /**
-     * {@inheritDoc}
-     * @see PHPUnit_Framework_TestCase::setUp()
-     */
-    public function setUp()
-    {
-        $bundles = [
-            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new \Symfony\Bundle\TwigBundle\TwigBundle(),
-            new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new \ASF\LayoutBundle\ASFLayoutBundle(),
-        ];
-        
-        $this->container = m::mock('Symfony\Component\DependencyInjection\ContainerInterface');
-
-        $this->kernel = m::mock('Symfony\Component\HttpKernel\KernelInterface');
-        $this->kernel->shouldReceive('getName')->andReturn('app');
-        $this->kernel->shouldReceive('getEnvironment')->andReturn('prod');
-        $this->kernel->shouldReceive('isDebug')->andReturn(false);
-        $this->kernel->shouldReceive('boot');
-        $this->kernel->shouldReceive('getBundles')->andReturn($bundles);
-        $this->kernel->shouldReceive('getContainer')->andReturn($this->container);
-    }
+    const FIXTURES_DIR = __DIR__ . '/Fixtures';
     
     /**
      * {@inheritDoc}
@@ -75,14 +39,36 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test the command for copy less fiels in custom bundle
+     * @param ContainerInterface $container
+     * @param Application        $application
+     * @return \Symfony\Component\Console\Tester\CommandTester
+     */
+    private function createCommandTester(ContainerInterface $container, Application $application = null)
+    {
+        if ( null === $application ) {
+            $application = new Application();
+        }
+    
+        $application->setAutoExit(false);
+    
+        $command = new CopyLessFilesCommand();
+        $command->setContainer($container);
+        
+        $application->add($command);
+        
+        return new CommandTester($application->find('asf:twbs:less:copy'));
+    }
+    
+    /**
+     * Test the command for copy less files in custom bundle
      */
     public function testExecute()
     {
-        $this->container
-            ->shouldReceive('getParameter')
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container->expects($this->once())
+            ->method('getParameter')
             ->with('asf_layout.assets')
-            ->andReturn(array(
+            ->willReturn(array(
                 'twbs' => array(
                     'twbs_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
                     'fonts_dir' => self::FIXTURES_DIR.'/web',
@@ -94,25 +80,15 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ));
-            
-        if (Kernel::VERSION_ID >= 20500) {
-            $this->container->shouldReceive('enterScope')->with('request');
-            $this->container->shouldReceive('set')->withArgs(
-                array(
-                    'request',
-                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
-                    'request'
-                )
-                );
-        }
         
-        $application = new Application($this->kernel);
-        $application->add(new CopyLessFilesCommand());
-    
-        $command = $application->find('asf:twbs:less:copy');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName()));
-    
+        $commandTester = $this->createCommandTester($container);
+        $exitCode = $commandTester->execute(array(
+            'command' => 'asf:twbs:less:copy'
+        ), array(
+            'decorated' => false,
+            'interactive' => false
+        ));
+        
         $this->assertRegExp('/\[OK\] Twitter Bootstrap less files was successfully copied./', $commandTester->getDisplay());
     }
     
@@ -121,10 +97,11 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecuteWithInvalidTwbsSrcPaths()
     {
-        $this->container
-            ->shouldReceive('getParameter')
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container->expects($this->once())
+            ->method('getParameter')
             ->with('asf_layout.assets')
-            ->andReturn(array(
+            ->willReturn(array(
                 'twbs' => array(
                     'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
                     'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
@@ -136,25 +113,15 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ));
-    
-        if (Kernel::VERSION_ID >= 20500) {
-            $this->container->shouldReceive('enterScope')->with('request');
-            $this->container->shouldReceive('set')->withArgs(
-                array(
-                    'request',
-                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
-                    'request'
-                )
-                );
-        }
-    
-        $application = new Application($this->kernel);
-        $application->add(new CopyLessFilesCommand());
-    
-        $command = $application->find('asf:twbs:less:copy');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName()));
-    
+        
+        $commandTester = $this->createCommandTester($container);
+        $exitCode = $commandTester->execute(array(
+            'command' => 'asf:twbs:less:copy'
+        ), array(
+            'decorated' => false,
+            'interactive' => false
+        ));
+        
         $this->assertRegExp('/Did you install Twitter Bootstrap ?/', $commandTester->getDisplay());
     }
     
@@ -163,33 +130,24 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecuteWithNoTargetDirectorySpecified()
     {
-        $this->container
-            ->shouldReceive('getParameter')
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container->expects($this->once())
+            ->method('getParameter')
             ->with('asf_layout.assets')
-            ->andReturn(array(
+            ->willReturn(array(
                 'twbs' => array(
                     'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
                     'fonts_dir' => self::FIXTURES_DIR.'/web/fonts'
                 )
             ));
-    
-        if (Kernel::VERSION_ID >= 20500) {
-            $this->container->shouldReceive('enterScope')->with('request');
-            $this->container->shouldReceive('set')->withArgs(
-                array(
-                    'request',
-                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
-                    'request'
-                )
-                );
-        }
-    
-        $application = new Application($this->kernel);
-        $application->add(new CopyLessFilesCommand());
-    
-        $command = $application->find('asf:twbs:less:copy');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName()));
+            
+        $commandTester = $this->createCommandTester($container);
+        $exitCode = $commandTester->execute(array(
+            'command' => 'asf:twbs:less:copy'
+        ), array(
+            'decorated' => false,
+            'interactive' => false
+        ));
     
         $this->assertRegExp('/Target directory not specified./', $commandTester->getDisplay());
     }
@@ -199,39 +157,30 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecuteWithErrorCouldNotCreateDirectory()
     {
-        $this->container
-        ->shouldReceive('getParameter')
-        ->with('asf_layout.assets')
-        ->andReturn(array(
-            'twbs' => array(
-                'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
-                'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
-                'customize' => array(
-                    'less' => array(
-                        'dest_dir' => '',
-                        'files' => array('bootstrap.less')
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container->expects($this->once())
+            ->method('getParameter')
+            ->with('asf_layout.assets')
+            ->willReturn(array(
+                'twbs' => array(
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
+                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
+                    'customize' => array(
+                        'less' => array(
+                            'dest_dir' => '',
+                            'files' => array('bootstrap.less')
+                        )
                     )
                 )
-            )
+            ));
+            
+        $commandTester = $this->createCommandTester($container);
+        $exitCode = $commandTester->execute(array(
+            'command' => 'asf:twbs:less:copy'
+        ), array(
+            'decorated' => false,
+            'interactive' => false
         ));
-    
-        if (Kernel::VERSION_ID >= 20500) {
-            $this->container->shouldReceive('enterScope')->with('request');
-            $this->container->shouldReceive('set')->withArgs(
-                array(
-                    'request',
-                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
-                    'request'
-                )
-                );
-        }
-    
-        $application = new Application($this->kernel);
-        $application->add(new CopyLessFilesCommand());
-    
-        $command = $application->find('asf:twbs:less:copy');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName()));
     
         $this->assertRegExp('/Could not create directory/', $commandTester->getDisplay());
     }

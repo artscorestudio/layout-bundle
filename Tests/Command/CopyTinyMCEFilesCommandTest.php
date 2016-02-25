@@ -10,10 +10,9 @@
 namespace ASF\LayoutBundle\Tests\Command;
 
 use ASF\LayoutBundle\Command\CopyTinyMCEFilesCommand;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use \Mockery as m;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Copy Less Files Command Unit Tests
@@ -23,34 +22,8 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
 {
-    const FIXTURES_DIR = __DIR__ . '/../Fixtures/Command';
-    
-    /**
-     * @var m\Mock|\Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
-    
-    /**
-     * @var m\Mock|\Symfony\Component\HttpKernel\KernelInterface
-     */
-    private $kernel;
-    
-    /**
-     * {@inheritDoc}
-     * @see PHPUnit_Framework_TestCase::setUp()
-     */
-    public function setUp()
-    {
-        $this->container = m::mock('Symfony\Component\DependencyInjection\ContainerInterface');
-        
-        $this->kernel = m::mock('Symfony\Component\HttpKernel\KernelInterface');
-        $this->kernel->shouldReceive('getName')->andReturn('app');
-        $this->kernel->shouldReceive('getEnvironment')->andReturn('prod');
-        $this->kernel->shouldReceive('isDebug')->andReturn(false);
-        $this->kernel->shouldReceive('boot');
-        $this->kernel->shouldReceive('getContainer')->andReturn($this->container);
-    }
-    
+    const FIXTURES_DIR = __DIR__ . '/Fixtures';
+
     /**
      * {@inheritDoc}
      * @see PHPUnit_Framework_TestCase::tearDown()
@@ -74,14 +47,36 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * @param ContainerInterface $container
+     * @param Application        $application
+     * @return \Symfony\Component\Console\Tester\CommandTester
+     */
+    private function createCommandTester(ContainerInterface $container, Application $application = null)
+    {
+        if ( null === $application ) {
+            $application = new Application();
+        }
+    
+        $application->setAutoExit(false);
+    
+        $command = new CopyTinyMCEFilesCommand();
+        $command->setContainer($container);
+    
+        $application->add($command);
+    
+        return new CommandTester($application->find('asf:tinymce:copy'));
+    }
+    
+    /**
      * Test the command for copy less fiels in custom bundle
      */
     public function testExecute()
     {
-        $this->container
-            ->shouldReceive('getParameter')
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container->expects($this->once())
+            ->method('getParameter')
             ->with('asf_layout.assets')
-            ->andReturn(array(
+            ->willReturn(array(
                 'tinymce' => array(
                     'tinymce_dir' => self::FIXTURES_DIR."/vendor/tinymce/tinymce",
                     'js' => "tinymce.min.js",
@@ -95,24 +90,14 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ));
-        
-        if (Kernel::VERSION_ID >= 20500) {
-            $this->container->shouldReceive('enterScope')->with('request');
-            $this->container->shouldReceive('set')->withArgs(
-                array(
-                    'request',
-                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
-                    'request'
-                )
-                );
-        }
-        
-        $application = new Application($this->kernel);
-        $application->add(new CopyTinyMCEFilesCommand());
-    
-        $command = $application->find('asf:tinymce:copy');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName()));
+            
+        $commandTester = $this->createCommandTester($container);
+        $exitCode = $commandTester->execute(array(
+            'command' => 'asf:tinymce:copy'
+        ), array(
+            'decorated' => false,
+            'interactive' => false
+        ));
     
         $this->assertRegExp('/\[OK\] TinyMCE files was successfully copied./', $commandTester->getDisplay());
     }
@@ -122,10 +107,11 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecuteWithInvalidTinyMCESrcPaths()
     {
-        $this->container
-            ->shouldReceive('getParameter')
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container->expects($this->once())
+            ->method('getParameter')
             ->with('asf_layout.assets')
-            ->andReturn(array(
+            ->willReturn(array(
                 'tinymce' => array(
                     'tinymce_dir' => self::FIXTURES_DIR."/vendor/tinymce/invalid_tinymce",
                     'js' => "tinymce.min.js",
@@ -139,24 +125,14 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ));
-    
-        if (Kernel::VERSION_ID >= 20500) {
-            $this->container->shouldReceive('enterScope')->with('request');
-            $this->container->shouldReceive('set')->withArgs(
-                array(
-                    'request',
-                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
-                    'request'
-                )
-                );
-        }
-    
-        $application = new Application($this->kernel);
-        $application->add(new CopyTinyMCEFilesCommand());
-    
-        $command = $application->find('asf:tinymce:copy');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName()));
+        
+        $commandTester = $this->createCommandTester($container);
+        $exitCode = $commandTester->execute(array(
+            'command' => 'asf:tinymce:copy'
+        ), array(
+            'decorated' => false,
+            'interactive' => false
+        ));
     
         $this->assertRegExp('/Did you install TinyMCE ?/', $commandTester->getDisplay());
     }
@@ -166,10 +142,11 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecuteWithErrorCouldNotCreateDirectory()
     {
-        $this->container
-            ->shouldReceive('getParameter')
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container->expects($this->once())
+            ->method('getParameter')
             ->with('asf_layout.assets')
-            ->andReturn(array(
+            ->willReturn(array(
                 'tinymce' => array(
                     'tinymce_dir' => self::FIXTURES_DIR."/vendor/tinymce/invalid_tinymce",
                     'js' => "tinymce.min.js",
@@ -183,25 +160,15 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ));
-    
-        if (Kernel::VERSION_ID >= 20500) {
-            $this->container->shouldReceive('enterScope')->with('request');
-            $this->container->shouldReceive('set')->withArgs(
-                array(
-                    'request',
-                    \Mockery::type('Symfony\Component\HttpFoundation\Request'),
-                    'request'
-                )
-                );
-        }
-    
-        $application = new Application($this->kernel);
-        $application->add(new CopyTinyMCEFilesCommand());
-    
-        $command = $application->find('asf:tinymce:copy');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName()));
-    
+        
+        $commandTester = $this->createCommandTester($container);
+        $exitCode = $commandTester->execute(array(
+            'command' => 'asf:tinymce:copy'
+        ), array(
+            'decorated' => false,
+            'interactive' => false
+        ));
+        
         $this->assertRegExp('/Could not create directory/', $commandTester->getDisplay());
     }
 }
