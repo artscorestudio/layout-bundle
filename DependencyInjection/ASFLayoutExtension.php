@@ -90,9 +90,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 	            case 'twig':
 	                if ( isset($config['assets']['twbs']['form_theme']) &&  $config['assets']['twbs']['form_theme'] !== false ) {
 	                    $container->prependExtensionConfig($name, array(
-	                        'form_themes' => array(
-	                            'resources' => $config['assets']['twbs']['form_theme']
-	                        )
+	                        'form_themes' => array($config['assets']['twbs']['form_theme'])
 	                    ));
 	                }
 	                break;
