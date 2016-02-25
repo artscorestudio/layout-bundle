@@ -81,6 +81,12 @@ body {
   background-color: #EEE;
   text-decoration: none
 }
+.nav-sidebar > li > ul > .active > a,
+.nav-sidebar > li > ul > .active > a:hover,
+.nav-sidebar > li > ul > .active > a:focus {
+  color: #fff;
+  background-color: #3EC0E1;
+}
 
 /*
  * Main content

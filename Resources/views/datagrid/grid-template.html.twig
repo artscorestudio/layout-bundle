@@ -1,0 +1,78 @@
+{% extends 'APYDataGridBundle::blocks.html.twig' %}
+
+{# ------------------------------------------------------ grid ------------------------------------------------------ #}
+{% block grid %}
+<div class="grid">
+{% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
+    <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
+    	
+    	<div class="row">
+    		<div class="col-xs-12">
+			{% if grid.isPagerSectionVisible %}
+				{{ grid_pager(grid) }}
+	        {% endif %}
+    		</div>
+    	</div>
+    	
+    	<div class="row">
+    		<div class="grid_header col-xs-12">
+			{% if grid.massActions|length > 0 %}
+				{{ grid_actions(grid) }}
+			{% endif %}
+    		</div>
+    	</div>
+    	
+    	<div class="row">
+        	<div class="grid_body col-xs-12">
+        		<table class="table table-bordered table-striped table-hover">
+		        {% if grid.isTitleSectionVisible %}
+		            {{ grid_titles(grid) }}
+		        {% endif %}
+		        {% if grid.isFilterSectionVisible %}
+		            {{ grid_filters(grid) }}
+		        {% endif %}
+		        {{ grid_rows(grid) }}
+		        </table>
+        	</div>
+        </div>
+        
+        <div class="row">
+        	<div class="grid_footer col-xs-12">
+	        {% if grid.isPagerSectionVisible %}
+	            {{ grid_pager(grid) }}
+	        {% endif %}
+	        {% if grid.exports|length > 0 %}
+	            {{ grid_exports(grid) }}
+	        {% endif %}
+	        {% if grid.tweaks|length > 0 %}
+	            {{ grid_tweaks(grid) }}
+	        {% endif %}
+			</div>
+		</div>
+		
+        {% if withjs %}
+            {{ grid_scripts(grid) }}
+        {% endif %}
+        
+    </form>
+{% else %}
+    {{ grid_no_data(grid) }}
+{% endif %}
+</div>
+{% endblock grid %}
+
+{# --------------------------------------------------- grid_no_data ------------------------------------------------- #}
+{% block grid_no_data %}<div class="no_data alert alert-warning">{{ grid.noDataMessage|default('No data')|trans|raw }}</div>{% endblock grid_no_data %}
+
+{# ---------------------------------------------------- grid_pager -------------------------------------------------- #}
+{% block grid_pager %}
+    {% if pagerfanta %}
+        {{ grid_pagerfanta(grid) }}
+    {% else %}
+        <div class="pager alert alert-warning">
+            {{ grid_pager_totalcount(grid) }}
+            {{ grid_pager_selectpage(grid) }}
+            {{ grid_pager_results_perpage(grid) }}
+        </div>
+    {% endif %}
+{% endblock grid_pager %}
