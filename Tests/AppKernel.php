@@ -7,6 +7,7 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
+        var_dump('register_bundles');
         $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),

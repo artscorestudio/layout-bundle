@@ -41,12 +41,22 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->container = m::mock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $bundles = [
+            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new \Symfony\Bundle\TwigBundle\TwigBundle(),
+            new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new \ASF\LayoutBundle\ASFLayoutBundle(),
+        ];
         
+        $this->container = m::mock('Symfony\Component\DependencyInjection\ContainerInterface');
+
         $this->kernel = m::mock('Symfony\Component\HttpKernel\KernelInterface');
         $this->kernel->shouldReceive('getName')->andReturn('app');
         $this->kernel->shouldReceive('getEnvironment')->andReturn('prod');
         $this->kernel->shouldReceive('isDebug')->andReturn(false);
+        $this->kernel->shouldReceive('boot');
+        $this->kernel->shouldReceive('getBundles')->andReturn($bundles);
         $this->kernel->shouldReceive('getContainer')->andReturn($this->container);
     }
     
@@ -84,7 +94,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ));
-        
+            
         if (Kernel::VERSION_ID >= 20500) {
             $this->container->shouldReceive('enterScope')->with('request');
             $this->container->shouldReceive('set')->withArgs(
