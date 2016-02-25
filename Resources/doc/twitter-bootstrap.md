@@ -20,6 +20,12 @@ If you want to automatically copy fonts in web folder, add this commands in *pos
 }
 ```
 
+You can do it by hand :
+
+```bash
+$ php bin/console asf:twbs:fonts:install
+```
+
 ## Javascript files
 
 You can use compiled bootstrap javascript file :
