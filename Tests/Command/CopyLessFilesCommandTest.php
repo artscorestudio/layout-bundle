@@ -47,9 +47,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
         $this->kernel->shouldReceive('getName')->andReturn('app');
         $this->kernel->shouldReceive('getEnvironment')->andReturn('prod');
         $this->kernel->shouldReceive('isDebug')->andReturn(false);
-        $this->kernel->shouldReceive('boot');
         $this->kernel->shouldReceive('getContainer')->andReturn($this->container);
-        
     }
     
     /**
