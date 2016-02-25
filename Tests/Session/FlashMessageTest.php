@@ -48,7 +48,7 @@ class FlashMessageTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test alert()
+     * @covers ASF\LayoutBundle\Session\FlashMessage::alert
      */
     public function testAlert()
     {
@@ -57,7 +57,7 @@ class FlashMessageTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test success()
+     * @covers ASF\LayoutBundle\Session\FlashMessage::success
      */
     public function testSuccess()
     {
@@ -66,7 +66,7 @@ class FlashMessageTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test success()
+     * @covers ASF\LayoutBundle\Session\FlashMessage::info
      */
     public function testInfo()
     {
@@ -75,7 +75,7 @@ class FlashMessageTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test success()
+     * @covers ASF\LayoutBundle\Session\FlashMessage::warning
      */
     public function testWarning()
     {
@@ -84,7 +84,7 @@ class FlashMessageTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test success()
+     * @covers ASF\LayoutBundle\Session\FlashMessage::danger
      */
     public function testDanger()
     {

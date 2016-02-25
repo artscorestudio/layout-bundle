@@ -59,7 +59,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test the command for copy fonts (Glyphicons) in web folder
+     * @covers ASF\LayoutBundle\Command\InstallFontsCommand
      */
     public function testExecute()
     {
@@ -92,7 +92,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test with an invalid path to the Twitter Bootstrap path
+     * @covers ASF\LayoutBundle\Command\InstallFontsCommand
      */
     public function testExecuteWithInvalidTwbsSrcPaths()
     {
@@ -119,7 +119,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test with an error raised "Could not create directory"
+     * @covers ASF\LayoutBundle\Command\InstallFontsCommand
      */
     public function testExecuteWithErrorCouldNotCreateDirectory()
     {

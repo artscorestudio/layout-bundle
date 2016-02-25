@@ -38,7 +38,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test the load method in bundle's extension
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::load
 	 */
 	public function testLoadExtension()
 	{
@@ -46,7 +46,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test bundle without assets
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::load
 	 */
 	public function testWithoutAssets()
 	{
@@ -66,7 +66,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test the prepend method in bundle's extension
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
 	 */
 	public function testPrependExtension()
 	{	
@@ -74,7 +74,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : You have to enabled FOSJsRoutingBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testPrependExtensionWithoutFOSJsRoutingBundle()
 	{
@@ -87,7 +92,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : You have to enabled TwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testPrependExtensionWithoutTwigBundle()
 	{
@@ -100,7 +110,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : You have to enabled AsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testPrependExtensionWithoutAsseticBundle()
 	{
@@ -113,7 +128,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.jquery.path cannot be empty
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testJqueryPathHasEmptyParameter()
 	{
@@ -126,7 +146,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.jqueryui.css cannot be empty
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testJqueryUICSSPathHasEmptyParameter()
 	{
@@ -139,7 +164,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.jqueryui.js cannot be empty
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testJqueryUIJsPathHasEmptyParameter()
 	{
@@ -152,7 +182,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.twbs.twbs_dir cannot be empty
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testTwbsAssetsDirHasEmptyParameter()
 	{
@@ -165,7 +200,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : You can't have less files and css files in your Twitter Bootstrap Configuration, choose one.
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testTwbsLessAndCSSFilesSet()
 	{
@@ -178,7 +218,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.select2.css cannot be empty
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testSelect2CssPathHasEmptyParameter()
 	{
@@ -191,7 +236,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.select2.js cannot be empty
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testSelect2JsPathHasEmptyParameter()
 	{
@@ -204,7 +254,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.speaking_url.path cannot be empty
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testSpeakingURLPathHasEmptyParameter()
 	{
@@ -217,7 +272,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.bazinga_js_translator.bz_translator_js cannot be empty
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testBazingaJsTranslatorBzTranslatorJsHasEmptyParameter()
 	{
@@ -230,7 +290,12 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @expected InvalidConfigurationException : Parameter asf_layout.assets.bazinga_js_translator.bz_translator_config cannot be empty
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 * 
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 	 */
 	public function testBazingaJsTranslatorBzTranslatorConfigHasEmptyParameter()
 	{
@@ -243,7 +308,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test bundle's configuration with jquerui set to true 
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::load
 	 */
 	public function testJqueryUIParameterSetToTrue()
 	{
@@ -254,7 +319,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test bundle's configuration with select2 set to true
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::load
 	 */
 	public function testSelect2ParameterSetToTrue()
 	{
@@ -265,7 +330,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test bundle's configuration with bazinga_js_translator set to true
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::load
 	 */
 	public function testBazingaJsTranslatorParameterSetToTrue()
 	{
@@ -276,7 +341,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test bundle's configuration with speaking_url set to true
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::load
 	 */
 	public function testSpeakingURLParameterSetToTrue()
 	{
@@ -287,7 +352,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Test bundle's configuration with tinymce set to true
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::load
 	 */
 	public function testTinyMCEParameterSetToTrue()
 	{

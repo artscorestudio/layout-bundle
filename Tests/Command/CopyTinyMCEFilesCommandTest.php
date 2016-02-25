@@ -68,7 +68,7 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test the command for copy less fiels in custom bundle
+     * @covers ASF\LayoutBundle\Command\CopyTinyMCEFilesCommand
      */
     public function testExecute()
     {
@@ -103,7 +103,7 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test with an invalid path to the TinyMCE path
+     * @covers ASF\LayoutBundle\Command\CopyTinyMCEFilesCommand
      */
     public function testExecuteWithInvalidTinyMCESrcPaths()
     {
@@ -138,7 +138,7 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test with an error raised "Could not create directory" 
+     * @covers ASF\LayoutBundle\Command\CopyTinyMCEFilesCommand
      */
     public function testExecuteWithErrorCouldNotCreateDirectory()
     {

@@ -19,7 +19,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Copy Less Files Command Unit Tests
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
- * @covers ASF\LayoutBundle\Command\CopyLessFilesCommand
  */
 class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -61,7 +60,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test the command for copy less files in custom bundle
+     * @covers ASF\LayoutBundle\Command\CopyLessFilesCommand
      */
     public function testExecute()
     {
@@ -94,7 +93,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test with an invalid path to the Twitter Bootstrap path
+     * @covers ASF\LayoutBundle\Command\CopyLessFilesCommand
      */
     public function testExecuteWithInvalidTwbsSrcPaths()
     {
@@ -127,7 +126,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test with an no target directory specified
+     * @covers ASF\LayoutBundle\Command\CopyLessFilesCommand
      */
     public function testExecuteWithNoTargetDirectorySpecified()
     {
@@ -154,7 +153,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test with an error raised "Could not create directory" 
+     * @covers ASF\LayoutBundle\Command\CopyLessFilesCommand
      */
     public function testExecuteWithErrorCouldNotCreateDirectory()
     {

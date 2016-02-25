@@ -21,7 +21,7 @@ use ASF\LayoutBundle\DependencyInjection\Configuration;
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Check if asf_layout.enable_twig_support is set to true by default
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
      */
 	public function testEnableTwigSupportParameterInDefaultConfiguration()
 	{
@@ -31,8 +31,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.enable_assetic_support is set to true by default
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testEnableAsseticSupportParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -41,8 +41,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.enable_flash_messages is set to true by default
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testEnableFlashMessagesSupportParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -51,8 +51,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets key exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testSupportedAssetsParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -61,8 +61,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.jquery exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testJqueryParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -71,8 +71,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.jquery.path exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testJqueryPathParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -81,8 +81,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check asf_layout.assets.jquery.path default value
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testJqueryPathParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -91,8 +91,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.jqueryui exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testJqueryUIParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -101,8 +101,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.twbs.assets_dir exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsDirParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -111,8 +111,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check asf_layout.assets.twbs.assets_dir default value
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsDirParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -121,8 +121,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.twbs.icon_prefix exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsIconPrefixParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -131,8 +131,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check asf_layout.assets.twbs.icon_prefix default value
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsIconPrefixParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -141,8 +141,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.twbs.icon_tag exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsIconTagParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -151,8 +151,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check asf_layout.assets.twbs.icon_prefix default value
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsIconTagParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -161,8 +161,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.twbs.form_theme exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsFormThemeParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -171,8 +171,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check asf_layout.assets.twbs.form_theme default value
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsFormThemeParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -181,8 +181,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.twbs.fonts_dir exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsFontsDirParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -191,8 +191,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check asf_layout.assets.twbs.fonts_dir default value
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsFontsDirParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -201,8 +201,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.twbs.js exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsJsPathParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -211,8 +211,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check asf_layout.assets.twbs.js default value
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsJsParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -221,8 +221,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.twbs.less exists 
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsLessParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -242,8 +242,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.twbs.css exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTwbsCSSParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -254,8 +254,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.select2 not exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testSelect2ParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -264,8 +264,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.bazinga_js_translator not exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testBazingaJsTranslationParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -274,8 +274,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.speaking_url not exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testSpeakingURLParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -284,8 +284,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.fos_js_routing not exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testFOSJsRoutingParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -294,8 +294,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check asf_layout.assets.fos_js_routing default value
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testFOSJsRoutingParameterValueInDefaultConfiguration()
 	{
 	    $processor = new Processor();
@@ -304,8 +304,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * Check if asf_layout.assets.tinymce not exists
-	 */
+     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+     */
 	public function testTinyMCEParameterInDefaultConfiguration()
 	{
 	    $processor = new Processor();
