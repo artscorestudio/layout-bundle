@@ -7,6 +7,7 @@ Layout bundle comes with a list of supported assets. The available assets are :
 * [Select2 jQuery Plugin for select box](https://github.com/select2/select2)
 * [Bazinga Js TranslationBundle for get bundle's translations in javascript](https://github.com/willdurand/BazingaJsTranslationBundle)
 * [Speaking URL for generate a slug](https://github.com/pid/speakingurl)
+* [TinyMCE](https://github.com/tinymce/tinymce)
 
 The support of an assets means that you have just to enable it in bundle's configuration, add it in the composer.json file of your Symfony project and in your Twig template.
 
@@ -388,7 +389,7 @@ Update your Twig template :
 
 ```twig
 # OR with CSS files
-{% javascripts '@speaking_url' %}
+{% javascripts '@speakingurl_js' %}
 	<script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 ```
