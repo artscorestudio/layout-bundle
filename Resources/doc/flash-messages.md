@@ -45,8 +45,9 @@ You can find the Twitter Bootstrap types messages :
 
 ```php
 // /your/controller/path
-$this->get('session')->getFlashBag()->add('success', 'my flash message');
-$this->get('session')->getFlashBag()->add('info', 'my flash message');
-$this->get('session')->getFlashBag()->add('warning', 'my flash message');
-$this->get('session')->getFlashBag()->add('danger', 'my flash message');
+$this->get('asf_layout.flash_message')->alert('My message');
+$this->get('asf_layout.flash_message')->success('My message');
+$this->get('asf_layout.flash_message')->info('My message');
+$this->get('asf_layout.flash_message')->warning('My message');
+$this->get('asf_layout.flash_message')->danger('My message');
 ```

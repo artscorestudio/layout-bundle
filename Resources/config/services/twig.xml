@@ -4,22 +4,23 @@
 	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 	
 	<parameters>
-		<parameter key="asf_layout.twig.badge_extension.class">ASF\LayoutBundle\Twig\Extension\BadgeExtension</parameter>
-		<parameter key="asf_layout.twig.label_extension.class">ASF\LayoutBundle\Twig\Extension\LabelExtension</parameter>
+		<parameter key="asf_layout.twig.extension.badge.class">ASF\LayoutBundle\Twig\Extension\BadgeExtension</parameter>
+		<parameter key="asf_layout.twig.extension.label.class">ASF\LayoutBundle\Twig\Extension\LabelExtension</parameter>
 		<parameter key="asf_layout.twig.extension.icon.class">ASF\LayoutBundle\Twig\Extension\IconExtension</parameter>
 	</parameters>
 	 
 	<services>
-        <service id="asf_layout.twig.label_extension" class="%asf_layout.twig.label_extension.class%">
+        <service id="asf_layout.twig.extension.label" class="%asf_layout.twig.extension.label.class%">
             <tag name="twig.extension" />
         </service>
 
-        <service id="asf_layout.twig.badge_extension" class="%asf_layout.twig.badge_extension.class%">
+        <service id="asf_layout.twig.extension.badge" class="%asf_layout.twig.extension.badge.class%">
             <tag name="twig.extension" />
         </service>
         
         <service id="asf_layout.twig.extension.icon" class="%asf_layout.twig.extension.icon.class%">
-            <argument>%asf_layout.assets%</argument>
+            <argument>%asf_layout.assets.twbs.icon_prefix%</argument>
+            <argument>%asf_layout.assets.twbs.icon_tag%</argument>
             <tag name="twig.extension" />
         </service>
         

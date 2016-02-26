@@ -9,56 +9,66 @@
  */
 namespace ASF\LayoutBundle\Twig\Extension;
 
-use Twig_Filter_Method;
-use Twig_Function_Method;
-
 /**
- * IconExtension
+ * BootstrapIconExtension
  *
- * @author Nicolas Claverie <info@artscore-studio.fr>
- * @link   based on http://bootstrap.braincrafted.com Bootstrap for Symfony2
+ * @package    BraincraftedBootstrapBundle
+ * @subpackage Twig
+ * @author     Florian Eckerstorfer <florian@eckerstorfer.co>
+ * @copyright  2012-2013 Florian Eckerstorfer
+ * @license    http://opensource.org/licenses/MIT The MIT License
+ * @link       http://bootstrap.braincrafted.com Bootstrap for Symfony2
  */
 class IconExtension extends \Twig_Extension
 {
     /**
-     * @var array
+     * @var string
      */
-    protected $twbsConfig;
-
+    private $iconPrefix;
+    
     /**
-     * @param array $twbs_config
+     * @var string
      */
-    public function __construct($twbs_config)
+    private $iconTag;
+    
+    /**
+     * @param string $iconPrefix
+     * @param string $iconTag
+     */
+    public function __construct($iconPrefix, $iconTag = 'span')
     {
-        $this->twbsConfig = $twbs_config;
+        $this->iconPrefix = $iconPrefix;
+        $this->iconTag = $iconTag;
     }
-
+    
     /**
      * {@inheritDoc}
      */
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('parse_icons', array($this, 'parseIconsFilter'), array(
-                'pre_escape' => 'html', 
-                'is_safe' => array('html')
-            ))
+            new \Twig_SimpleFilter(
+                'parse_icons',
+                array($this, 'parseIconsFilter'),
+                array('pre_escape' => 'html', 'is_safe' => array('html'))
+            )
         );
     }
-
+    
     /**
      * {@inheritDoc}
      */
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('icon', array($this, 'iconFunction'), array(
-                'pre_escape' => 'html', 
-                'is_safe' => array('html')
-            ))
+            new \Twig_SimpleFunction(
+                'icon',
+                array($this, 'iconFunction'),
+                array('pre_escape' => 'html', 'is_safe' => array('html'))
+            )
         );
     }
-
+    
     /**
      * Parses the given string and replaces all occurrences of .icon-[name] with the corresponding icon.
      *
@@ -69,28 +79,28 @@ class IconExtension extends \Twig_Extension
     public function parseIconsFilter($text)
     {
         $that = $this;
-
         return preg_replace_callback(
-            '/\.icon-([a-z0-9+-]+)/',
+            '/\.([a-z]+)-([a-z0-9+-]+)/',
             function ($matches) use ($that) {
-                return $that->iconFunction($matches[1]);
+                return $that->iconFunction($matches[2], $matches[1]);
             },
             $text
         );
     }
-
+    
     /**
      * Returns the HTML code for the given icon.
      *
      * @param string $icon The name of the icon
+     * @param string $iconSet The icon-set name
      *
      * @return string The HTML code for the icon
      */
-    public function iconFunction($icon)
+    public function iconFunction($icon, $iconSet = 'icon')
     {
-        $icon = str_replace('+', ' '.$this->twbsConfig['icon_prefix'].'-', $icon);
-
-        return sprintf('<%1$s class="%2$s %2$s-%3$s"></%1$s>', $this->twbsConfig['icon_tag'], $this->twbsConfig['icon_prefix'], $icon);
+        if ($iconSet == 'icon') $iconSet = $this->iconPrefix;
+        $icon = str_replace('+', ' '.$iconSet.'-', $icon);
+        return sprintf('<%1$s class="%2$s %2$s-%3$s"></%1$s>', $this->iconTag, $iconSet, $icon);
     }
 
     /**

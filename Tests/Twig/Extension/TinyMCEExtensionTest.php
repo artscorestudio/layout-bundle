@@ -31,8 +31,8 @@ class TinyMCEExtensionTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->extension = new TinyMCEExtension(array(
 			'tinymce' => array(
-					'config' => array('selector' => '.tinymce-content'),
-					'customize' => array('base_url' => '/js/tinymce')
+				'config' => array('selector' => '.tinymce-content'),
+				'customize' => array('base_url' => '/js/tinymce')
 			)
 		));
 	}
@@ -43,15 +43,6 @@ class TinyMCEExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testGetFunctions()
 	{
 		$this->assertCount(1, $this->extension->getFunctions());
-	}
-	
-	/**
-	 * @covers ASF\LayoutBundle\Twig\Extension\TinyMCEExtension::tinymceInitJs()
-	 */
-	public function testTinymceInitJs()
-	{
-		$environment = new \Twig_Environment();
-		$this->assertRegExp('/tinymce.init/', $this->extension->tinymceInitJs($environment));
 	}
 	
 	/**

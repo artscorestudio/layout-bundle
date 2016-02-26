@@ -5,13 +5,7 @@
 	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 		
 	<parameters>
-		<parameter key="asf_layout.form.type.form_actions.class">ASF\LayoutBundle\Form\Type\FormActionsType</parameter>
-		<parameter key="asf_layout.form.type.form_static_control.class">ASF\LayoutBundle\Form\Type\FormStaticControlType</parameter>
-		<parameter key="asf_layout.form.extension.typesetter_extension.class">ASF\LayoutBundle\Form\Extension\TypeSetterExtension</parameter>
-		<parameter key="asf_layout.form.extension.button_extension.class">ASF\LayoutBundle\Form\Extension\ButtonTypeExtension</parameter>
-		<parameter key="asf_layout.form.extension.static_control.class">ASF\LayoutBundle\Form\Extension\StaticControlExtension</parameter>
-		<parameter key="asf_layout.form.extension.input_group_button.class">ASF\LayoutBundle\Form\Extension\InputGroupButtonExtension</parameter>
-		
+
 		<!-- Forms -->
 		<parameter key="asf_layout.form.type.base_collection.class">ASF\LayoutBundle\Form\Type\BaseCollectionFormType</parameter>
 		
@@ -22,31 +16,6 @@
 		<!-- FORMS -->
 		<service id="asf_layout.form.type.base_collection" class="%asf_layout.form.type.base_collection.class%">
 			<tag name="form.type" alias="base_collection" />
-		</service>
-
-		<!--  Non tested form type and extensions -->
-		<service id="asf_layout.form.type.form_actions" class="%asf_layout.form.type.form_actions.class%">
-			<tag name="form.type" alias="form_actions" />
-		</service>
-		
-		<service id="asf_layout.form.type.form_control_static" class="%asf_layout.form.type.form_static_control.class%">
-			<tag name="form.type" alias="bs_static" />
-		</service>
-		
-		<service id="asf_layout.form.extension.typesetter_extension" class="%asf_layout.form.extension.typesetter_extension.class%">
-			<tag name="form.type_extension" alias="form" />
-		</service>
-		
-		<service id="asf_layout.form.extension.form_action_button" class="%asf_layout.form.extension.button_extension.class%">
-			<tag name="form.type_extension" alias="button" />
-		</service>
-		
-		<service id="asf_layout.form.extension.static_control" class="%asf_layout.form.extension.static_control.class%">
-			<tag name="form.type_extension" alias="form" />
-		</service>
-		
-		<service id="asf_layout.form.extension.input_group_button" class="%asf_layout.form.extension.input_group_button.class%">
-			<tag name="form.type_extension" alias="text" />
 		</service>
 
 	</services>

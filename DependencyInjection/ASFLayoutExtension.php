@@ -39,6 +39,8 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		if ( $config['enable_twig_support'] == true ) {
 		    $container->setParameter('asf_layout.assets', $config['assets']);
 		    $container->setParameter('asf_layout.enable_assetic_support', $config['enable_assetic_support']);
+		    $container->setParameter('asf_layout.assets.twbs.icon_prefix', $config['assets']['twbs']['icon_prefix']);
+		    $container->setParameter('asf_layout.assets.twbs.icon_tag', $config['assets']['twbs']['icon_tag']);
 		    $loader->load('services/twig.xml');
 		}
 		

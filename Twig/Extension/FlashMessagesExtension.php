@@ -17,15 +17,8 @@ namespace ASF\LayoutBundle\Twig\Extension;
  */
 class FlashMessagesExtension extends \Twig_Extension
 {
-	protected $session;
-	
-	public function __construct($session)
-	{
-		$this->session = $session;
-	}
-	
 	/**
-	 * Functions delcarations
+	 * Functions declarations
 	 *
 	 * @see Twig_Extension::getFunctions()
 	 */
@@ -38,49 +31,7 @@ class FlashMessagesExtension extends \Twig_Extension
 			)),
 		);
 	}
-	
-	/**
-	 * Return the extension's name
-	 *
-	 * @see Twig_ExtensionInterface::getName()
-	 */
-	public function getName()
-	{
-		return 'asf_flash_messages';
-	}
-	
-	/**
-	 * @param string $message
-	 */
-	public function addError($message)
-	{
-		$this->session->getFlashBag()->add('danger', $message);
-	}
-	
-	/**
-	 * @param string $message
-	 */
-	public function addWarning($message)
-	{
-		$this->session->getFlashBag()->add('warning', $message);
-	}
-	
-	/**
-	 * @param string $message
-	 */
-	public function addSuccess($message)
-	{
-		$this->session->getFlashBag()->add('success', $message);
-	}
-	
-	/**
-	 * @param string $message
-	 */
-	public function addInfo($message)
-	{
-		$this->session->getFlashBag()->add('info', $message);
-	}
-	
+
 	/**
 	 * Return HTML of flash messages according to flash-messages.html.twig
 	 *
@@ -99,5 +50,15 @@ class FlashMessagesExtension extends \Twig_Extension
 		$template = $environment->loadTemplate('ASFLayoutBundle:session:flash-messages.html.twig');
 		
 		return $template->renderBlock('flash_messages', array_merge($environment->getGlobals(), $params));
+	}
+
+	/**
+	 * Return the extension's name
+	 *
+	 * @see Twig_ExtensionInterface::getName()
+	 */
+	public function getName()
+	{
+	    return 'asf_flash_messages';
 	}
 }

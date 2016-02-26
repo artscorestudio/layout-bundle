@@ -6,7 +6,7 @@
 		
 	<parameters>
 		<parameter key="asf_layout.flash_message.class">ASF\LayoutBundle\Session\FlashMessage</parameter>
-		<parameter key="asf_layout.twig.flash_messages_extension.class">ASF\LayoutBundle\Twig\Extension\FlashMessagesExtension</parameter>
+		<parameter key="asf_layout.twig.extension.flash_messages.class">ASF\LayoutBundle\Twig\Extension\FlashMessagesExtension</parameter>
 	</parameters>
 	
 	<services>
@@ -15,12 +15,11 @@
 			<argument type="service" id="session" />
 		</service>
 		
-		<service id="asf_layout.twig.flash_messages_extension" class="%asf_layout.twig.flash_messages_extension.class%">
-			<argument type="service" id="session" />
+		<service id="asf_layout.twig.extension.flash_messages" class="%asf_layout.twig.extension.flash_messages.class%">
 			<tag name="twig.extension" />
 		</service>
 		
-		<service id="asf_layout.alerts" alias="asf_layout.twig.flash_messages_extension" />
+		<service id="asf_layout.alerts" alias="asf_layout.twig.extension.flash_messages" />
         
 	</services>
 	
