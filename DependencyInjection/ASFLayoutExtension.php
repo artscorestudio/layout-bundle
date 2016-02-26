@@ -139,7 +139,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				
     				// Add TinyMCE in assets
     				if ( isset($config['assets']['tinymce']) ) {
-    				    $this->addTinyMCEInAsseetic($container, $config['assets']['tinymce']);
+    				    $this->addTinyMCEInAssetic($container, $config['assets']['tinymce']);
     				}
 					break;
 			}
@@ -317,7 +317,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 	 * @param ContainerBuilder $container
 	 * @param array            $config
 	 */
-	protected function addTinyMCEInAsseetic(ContainerBuilder $container, array $config)
+	protected function addTinyMCEInAssetic(ContainerBuilder $container, array $config)
 	{
 	    if ( $config['tinymce_dir'] !== false ) {
 	        $container->prependExtensionConfig('assetic', array(
