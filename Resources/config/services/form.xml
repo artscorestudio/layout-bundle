@@ -6,14 +6,14 @@
 		
 	<parameters>
 
-		<!-- Forms -->
-		<parameter key="asf_layout.form.type.base_collection.class">ASF\LayoutBundle\Form\Type\BaseCollectionFormType</parameter>
+		<!-- Collection Form Type -->
+		<parameter key="asf_layout.form.type.base_collection.class">ASF\LayoutBundle\Form\Type\BaseCollectionType</parameter>
 		
 	</parameters>
 	
 	<services>
 
-		<!-- FORMS -->
+		<!-- Collection Form Type -->
 		<service id="asf_layout.form.type.base_collection" class="%asf_layout.form.type.base_collection.class%">
 			<tag name="form.type" alias="base_collection" />
 		</service>

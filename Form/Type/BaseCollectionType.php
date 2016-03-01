@@ -12,7 +12,8 @@ namespace ASF\LayoutBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 /**
  * Base Collection Form Type
@@ -20,9 +21,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class BaseCollectionFormType extends AbstractType
+class BaseCollectionType extends AbstractType
 {
-	/* (non-PHPdoc)
+	/**
+	 * (non-PHPdoc)
 	 * @see \Symfony\Component\Form\AbstractType::buildView()
 	 */
 	public function buildView(FormView $view, FormInterface $form, array $options)
@@ -31,11 +33,12 @@ class BaseCollectionFormType extends AbstractType
 		$view->vars['collection_item_widget'] = $options['collection_item_widget'];
 		$view->vars['item_id'] = '__name__';
 	}
-	 
-	/* (non-PHPdoc)
-	 * @see \Symfony\Component\Form\AbstractType::setDefaultOptions()
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
 	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver)
+	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
 			'containerId' => 'base-collection',
@@ -49,7 +52,7 @@ class BaseCollectionFormType extends AbstractType
 	 */
 	public function getParent()
 	{
-	    return 'collection';
+	    return CollectionType::class;
 	}
 	
 	/**
