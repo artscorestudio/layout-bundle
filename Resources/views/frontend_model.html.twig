@@ -25,7 +25,11 @@
             {% endblock %}
 		{% endblock %}
         
-        {% block asf_base_header_javascripts %}{% endblock %}
+        {% block asf_base_header_javascripts %}
+            {% javascripts '@jquery' '@twbs_js' %}
+	        	<script src="{{ asset_url }}"></script>
+	        {% endjavascripts %}
+        {% endblock %}
     </head>
     
     {% block asf_base_body_tag %}
@@ -99,11 +103,7 @@
 	</div> <!-- /container -->    
     {% endblock asf_base_body %}
     
-    {% block asf_base_footer_javascripts %}
-    	{% javascripts '@jquery' '@twbs_js' %}
-        	<script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endblock asf_base_footer_javascripts %}
+    {% block asf_base_footer_javascripts %}{% endblock asf_base_footer_javascripts %}
     
     </body>
 </html>
