@@ -177,7 +177,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	{
 	    $processor = new Processor();
 	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('ASFLayoutBundle:form:form_div_layout.html.twig', $config['assets']['twbs']['form_theme']);
+	    $this->assertEquals('ASFLayoutBundle:Form:fields.html.twig', $config['assets']['twbs']['form_theme']);
 	}
 	
 	/**

@@ -430,7 +430,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	                'icon_prefix' => 'glyphicon',
 	                'icon_tag' => 'span',
 	                'fonts_dir' => '%kernel.root_dir%/../web/fonts',
-	                'form_theme' => 'ASFLayoutBundle:form:form_div_layout.html.twig'
+	                'form_theme' => 'ASFLayoutBundle:Form:fields.html.twig'
 	            ),
 	            'fos_js_routing' => false
 	        )

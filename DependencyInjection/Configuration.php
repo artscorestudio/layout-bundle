@@ -185,7 +185,7 @@ class Configuration implements ConfigurationInterface
 	               ->defaultValue('%kernel.root_dir%/../web/fonts')
 	           ->end()
 	           ->scalarNode('form_theme')
-	               ->defaultValue('ASFLayoutBundle:form:form_div_layout.html.twig')
+	               ->defaultValue('ASFLayoutBundle:Form:fields.html.twig')
 	           ->end()
 	           ->arrayNode('customize')
 	               ->children()

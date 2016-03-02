@@ -1,5 +1,3 @@
-{% extends "bootstrap_3_layout.html.twig" %}
-
 {# --------------------------------- Base Collection Form Type --------------------------------- #}
 {% block base_collection_row %}
 {% spaceless %}
@@ -39,7 +37,7 @@
 			</div>
 			<div class="col-xs-3 text-right">
 				<div class="btn-group btn-group-xs" role="group">
-					<a href="#" title="{{ 'Add'|trans({}, 'asf_contact') }}" class="btn btn-default item-add"><span class="glyphicon glyphicon-plus"></span></a>
+					<a href="#" title="{{ 'Add'|trans({}, 'asf_layout') }}" class="btn btn-default item-add"><span class="glyphicon glyphicon-plus"></span></a>
 				</div>
 			</div>
 		</div>
@@ -58,7 +56,7 @@
 								{{ form_row(item) }}
 							</td>
 							<td class="actions">
-								<a href="#" title="{{ 'Delete'|trans({}, 'asf_contact') }}" class="delete-item"><span class="glyphicon glyphicon-remove"></span></a>
+								<a href="#" title="{{ 'Delete'|trans({}, 'asf_layout') }}" class="delete-item"><span class="glyphicon glyphicon-remove"></span></a>
 							</td>
 						</tr>
 						{% set element_id = element_id + 1 %}
@@ -85,60 +83,11 @@
 						e.preventDefault();
 						$(this).parent().parent().remove();
 					});
-
-					$prototype.find('.autocomplete-elm').each(function(){
-						if ( $(this).attr('data-ajax-url') ) {
-							var route = $(this).attr('data-ajax-url');
-							$(this).autocomplete({
-				                focus: function(event, ui) {
-				                    return false;
-				                },
-				                select: function(event, ui) {
-				                    this.value = ui.item.label;
-				                    terms = ui.item;
-				                    $(this).val(terms.label);
-				                    return false;
-				                },
-				                source: function(request, response) {
-				                    $.getJSON(Routing.generate(route), {
-				                        term: request.term
-				                    }, response);
-				                }
-				            });
-						}
-					});
-
-					$prototype.find('.load_jstree').each(function(){
-						$(this).jstree();
-					});
 				});
 
 				$('#{{ containerId }} .delete-item').click(function(e){
 					e.preventDefault();
 					$(this).parent().parent().remove();
-				});
-
-				$('#{{ containerId }} .autocomplete-elm').each(function(){
-
-					if ( $(this).attr('data-ajax-url') ) {
-						var route = $(this).attr('data-ajax-url');
-						$(this).autocomplete({
-			                focus: function(event, ui) {
-			                    return false;
-			                },
-			                select: function(event, ui) {
-			                    this.value = ui.item.label;
-			                    terms = ui.item;
-			                    $(this).val(terms.label);
-			                    return false;
-			                },
-			                source: function(request, response) {
-			                    $.getJSON(Routing.generate(route), {
-			                        term: request.term
-			                    }, response);
-			                }
-			            });
-					}
 				});
 			});
 		</script>
@@ -155,7 +104,7 @@
 		{{ form_row(prototype) }}
 	</td>
 	<td class="actions">
-		<a href="#" title="{{ 'Delete'|trans({}, 'asf_contact') }}" class="delete-item"><span class="glyphicon glyphicon-remove"></span></a>
+		<a href="#" title="{{ 'Delete'|trans({}, 'asf_layout') }}" class="delete-item"><span class="glyphicon glyphicon-remove"></span></a>
 	</td>
 </tr>
 {% endspaceless %}
