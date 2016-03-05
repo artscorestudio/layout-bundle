@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
 {
-    //const FIXTURES_DIR = __DIR__ . '/Fixtures';
+    const FIXTURES_DIR = __DIR__.'/Fixtures';
     
     /**
      * {@inheritDoc}
@@ -30,11 +30,11 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        if ( true === file_exists(__DIR__.'/Fixtures/Resources/') ) {
-            array_map('unlink', glob(__DIR__.'/Fixtures/Resources/public/twbs/*.less'));
-            rmdir(__DIR__.'/Fixtures/Resources/public/twbs/');
-            rmdir(__DIR__.'/Fixtures/Resources/public/');
-            rmdir(__DIR__.'/Fixtures/Resources/');
+        if ( true === file_exists(self::FIXTURES_DIR.'/Resources/') ) {
+            array_map('unlink', glob(self::FIXTURES_DIR.'/Resources/public/twbs/*.less'));
+            rmdir(self::FIXTURES_DIR.'/Resources/public/twbs/');
+            rmdir(self::FIXTURES_DIR.'/Resources/public/');
+            rmdir(self::FIXTURES_DIR.'/Resources/');
         }
     }
     
@@ -70,11 +70,11 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => __DIR__."/Fixtures/vendor/components/bootstrap",
-                    'fonts_dir' => __DIR__.'/Fixtures/web',
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
+                    'fonts_dir' => self::FIXTURES_DIR.'/web',
                     'customize' => array(
                         'less' => array(
-                            'dest_dir' => __DIR__."/Fixtures/Resources/public/twbs",
+                            'dest_dir' => self::FIXTURES_DIR."/Resources/public/twbs",
                             'files' => ["bootstrap.less"]
                         )
                     )
@@ -103,11 +103,11 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => __DIR__."/Fixtures/vendor/components/invalid_bootstrap",
-                    'fonts_dir' => __DIR__.'/Fixtures/web/fonts',
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
+                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
                     'customize' => array(
                         'less' => array(
-                            'dest_dir' => __DIR__."/Fixtures/Resources/public/twbs",
+                            'dest_dir' => self::FIXTURES_DIR."/Resources/public/twbs",
                             'files' => array("bootstrap.less")
                         )
                     )
@@ -136,8 +136,8 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => __DIR__."/Fixtures/vendor/components/invalid_bootstrap",
-                    'fonts_dir' => __DIR__.'/Fixtures/web/fonts'
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
+                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts'
                 )
             ));
             
@@ -163,8 +163,8 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => __DIR__."/Fixtures/vendor/components/invalid_bootstrap",
-                    'fonts_dir' => __DIR__.'/Fixtures/web/fonts',
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
+                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
                     'customize' => array(
                         'less' => array(
                             'dest_dir' => '',
