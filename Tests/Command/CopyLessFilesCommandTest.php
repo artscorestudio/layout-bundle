@@ -14,7 +14,6 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 /**
  * Copy Less Files Command Unit Tests
  * 
@@ -22,7 +21,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
 {
-    const FIXTURES_DIR = __DIR__.'/Fixtures';
+	/**
+	 * @var string
+	 */
+    protected static $fixturesPath;
+    
+    /**
+     * {@inheritDoc}
+     * @see PHPUnit_Framework_TestCase::setUp()
+     */
+    public function setUp()
+    {
+    	$this->fixturesPath = __DIR__.'/Fixtures';
+    }
     
     /**
      * {@inheritDoc}
@@ -30,11 +41,11 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        if ( true === file_exists(self::FIXTURES_DIR.'/Resources/') ) {
-            array_map('unlink', glob(self::FIXTURES_DIR.'/Resources/public/twbs/*.less'));
-            rmdir(self::FIXTURES_DIR.'/Resources/public/twbs/');
-            rmdir(self::FIXTURES_DIR.'/Resources/public/');
-            rmdir(self::FIXTURES_DIR.'/Resources/');
+        if ( true === file_exists(self::$fixturesPath.'/Resources/') ) {
+            array_map('unlink', glob(self::$fixturesPath.'/Resources/public/twbs/*.less'));
+            rmdir(self::$fixturesPath.'/Resources/public/twbs/');
+            rmdir(self::$fixturesPath.'/Resources/public/');
+            rmdir(self::$fixturesPath.'/Resources/');
         }
     }
     
@@ -70,11 +81,11 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
-                    'fonts_dir' => self::FIXTURES_DIR.'/web',
+                    'twbs_dir' => self::$fixturesPath."/vendor/components/bootstrap",
+                    'fonts_dir' => self::$fixturesPath.'/web',
                     'customize' => array(
                         'less' => array(
-                            'dest_dir' => self::FIXTURES_DIR."/Resources/public/twbs",
+                            'dest_dir' => self::$fixturesPath."/Resources/public/twbs",
                             'files' => ["bootstrap.less"]
                         )
                     )
@@ -103,11 +114,11 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
-                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
+                    'twbs_dir' => self::$fixturesPath."/vendor/components/invalid_bootstrap",
+                    'fonts_dir' => self::$fixturesPath.'/web/fonts',
                     'customize' => array(
                         'less' => array(
-                            'dest_dir' => self::FIXTURES_DIR."/Resources/public/twbs",
+                            'dest_dir' => self::$fixturesPath."/Resources/public/twbs",
                             'files' => array("bootstrap.less")
                         )
                     )
@@ -136,8 +147,8 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
-                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts'
+                    'twbs_dir' => self::$fixturesPath."/vendor/components/invalid_bootstrap",
+                    'fonts_dir' => self::$fixturesPath.'/web/fonts'
                 )
             ));
             
@@ -163,8 +174,8 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
-                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
+                    'twbs_dir' => self::$fixturesPath."/vendor/components/invalid_bootstrap",
+                    'fonts_dir' => self::$fixturesPath.'/web/fonts',
                     'customize' => array(
                         'less' => array(
                             'dest_dir' => '',
