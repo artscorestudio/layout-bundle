@@ -61,7 +61,8 @@ class CopyTinyMCEFilesCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->tinymce_config = $this->getContainer()->getParameter('asf_layout.assets')['tinymce'];
+    	$assets = $this->getContainer()->getParameter('asf_layout.assets');
+    	$this->tinymce_config = $assets['tinymce'];
         
         $dest_dir = $input->getArgument('target_dir') ? $input->getArgument('target_dir') : null;
         if ( is_null($dest_dir) && isset($this->tinymce_config['customize']['dest_dir']) ) {
