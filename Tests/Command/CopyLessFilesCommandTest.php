@@ -86,7 +86,7 @@ class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
                     'customize' => array(
                         'less' => array(
                             'dest_dir' => self::$fixturesPath."/Resources/public/twbs",
-                            'files' => ["bootstrap.less"]
+                            'files' => array("bootstrap.less")
                         )
                     )
                 )
