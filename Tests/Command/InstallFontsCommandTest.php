@@ -22,29 +22,18 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var string
-	 */
-	protected static $fixturesPath;
+	const FIXTURES_DIR = '/Fixtures';
 	
-	/**
-	 * {@inheritDoc}
-	 * @see PHPUnit_Framework_TestCase::setUp()
-	 */
-	public function setUp()
-	{
-		$this->fixturesPath = __DIR__.'/Fixtures';
-	}
     /**
      * {@inheritDoc}
      * @see PHPUnit_Framework_TestCase::tearDown()
      */
     public function tearDown()
     {
-        if ( true === file_exists(self::$fixturesPath.'/web/') ) {
-            array_map('unlink', glob(self::$fixturesPath.'/web/fonts/*.eot'));
-            rmdir(self::$fixturesPath.'/web/fonts/');
-            rmdir(self::$fixturesPath.'/web/');
+        if ( true === file_exists(self::FIXTURES_DIR.'/web/') ) {
+            array_map('unlink', glob(self::FIXTURES_DIR.'/web/fonts/*.eot'));
+            rmdir(self::FIXTURES_DIR.'/web/fonts/');
+            rmdir(self::FIXTURES_DIR.'/web/');
         }
     }
     
@@ -80,11 +69,11 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => self::$fixturesPath."/vendor/components/bootstrap",
-                    'fonts_dir' => self::$fixturesPath.'/web/fonts',
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/bootstrap",
+                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts',
                     'customize' => array(
                         'less' => array(
-                            'dest_dir' => self::$fixturesPath."/Resources/public/twbs",
+                            'dest_dir' => self::FIXTURES_DIR."/Resources/public/twbs",
                             'files' => array("bootstrap.less")
                         )
                     )
@@ -113,8 +102,8 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => self::$fixturesPath."/vendor/components/invalid_bootstrap",
-                    'fonts_dir' => self::$fixturesPath.'/web/fonts'
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
+                    'fonts_dir' => self::FIXTURES_DIR.'/web/fonts'
                 )
             ));
         
@@ -140,7 +129,7 @@ class InstallFontsCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'twbs' => array(
-                    'twbs_dir' => self::$fixturesPath."/vendor/components/invalid_bootstrap",
+                    'twbs_dir' => self::FIXTURES_DIR."/vendor/components/invalid_bootstrap",
                     'fonts_dir' => ''
                 )
             ));
