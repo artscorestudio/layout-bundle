@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class CopyLessFilesCommandTest extends \PHPUnit_Framework_TestCase
 {
-    const FIXTURES_DIR = __DIR__ . '/Fixtures';
+    const FIXTURES_DIR = (__DIR__) . '/Fixtures';
     
     /**
      * {@inheritDoc}
