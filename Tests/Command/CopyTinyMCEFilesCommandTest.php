@@ -22,8 +22,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
 {
-    const FIXTURES_DIR = __DIR__ . '/Fixtures';
-
+	/**
+	 * @var string
+	 */
+	protected static $fixturesPath;
+	
+	/**
+	 * {@inheritDoc}
+	 * @see PHPUnit_Framework_TestCase::setUp()
+	 */
+	public function setUp()
+	{
+		$this->fixturesPath = __DIR__.'/Fixtures';
+	}
+	
     /**
      * {@inheritDoc}
      * @see PHPUnit_Framework_TestCase::tearDown()
