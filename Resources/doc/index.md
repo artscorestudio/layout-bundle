@@ -1,6 +1,6 @@
 # Artscore Studio Layout Bundle
 
-Layout Bundle is a Symfony 2/3 component providing frontend and backend layout models in your Symfony 2/3 application based on jQuery and Twitter Bootstrap. This package is a part of Artscore Studio Framework.
+Layout Bundle is a Symfony 2/3 component providing frontend and backend layouts in your Symfony 2/3 application based on jQuery and Twitter Bootstrap. This package is a part of Artscore Studio Framework.
 
 Why ? For my personnal developments, I use jQuery and Twitter Bootstrap. When I started new Symfony project, I wanted to get jQuery and Twitter Bootstrap in basic Twig template just by installing a bundle and boom ! I have a User Interface in place !
 
