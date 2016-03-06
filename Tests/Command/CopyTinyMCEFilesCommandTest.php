@@ -22,7 +22,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
 {
-	const FIXTURES_DIR = __DIR__.'/Fixtures';
+	/**
+	 * @var string
+	 */
+	protected $fixturesPath;
+	
+	/**
+	 * {@inheritDoc}
+	 * @see PHPUnit_Framework_TestCase::setUp()
+	 */
+	public function setUp()
+	{
+		$this->fixturesPath = __DIR__.'/Fixtures';
+	}
 	
     /**
      * {@inheritDoc}
@@ -30,19 +42,19 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        if ( true === file_exists(self::FIXTURES_DIR.'/Resources/') ) {
-            array_map('unlink', glob(self::FIXTURES_DIR.'/Resources/public/tinymce/themes/modern/*.js'));
-            array_map('unlink', glob(self::FIXTURES_DIR.'/Resources/public/tinymce/*.js'));
+        if ( true === file_exists($this->fixturesPath.'/Resources/') ) {
+            array_map('unlink', glob($this->fixturesPath.'/Resources/public/tinymce/themes/modern/*.js'));
+            array_map('unlink', glob($this->fixturesPath.'/Resources/public/tinymce/*.js'));
             
-            if ( true === file_exists(self::FIXTURES_DIR.'/Resources/public/tinymce/themes/modern') )
-                rmdir(self::FIXTURES_DIR.'/Resources/public/tinymce/themes/modern');
+            if ( true === file_exists($this->fixturesPath.'/Resources/public/tinymce/themes/modern') )
+                rmdir($this->fixturesPath.'/Resources/public/tinymce/themes/modern');
             
-            if ( true === file_exists(self::FIXTURES_DIR.'/Resources/public/tinymce/themes') )
-                rmdir(self::FIXTURES_DIR.'/Resources/public/tinymce/themes');
+            if ( true === file_exists($this->fixturesPath.'/Resources/public/tinymce/themes') )
+                rmdir($this->fixturesPath.'/Resources/public/tinymce/themes');
             
-            rmdir(self::FIXTURES_DIR.'/Resources/public/tinymce/');
-            rmdir(self::FIXTURES_DIR.'/Resources/public/');
-            rmdir(self::FIXTURES_DIR.'/Resources/');
+            rmdir($this->fixturesPath.'/Resources/public/tinymce/');
+            rmdir($this->fixturesPath.'/Resources/public/');
+            rmdir($this->fixturesPath.'/Resources/');
         }
     }
     
@@ -78,13 +90,13 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'tinymce' => array(
-                    'tinymce_dir' => self::FIXTURES_DIR."/vendor/tinymce/tinymce",
+                    'tinymce_dir' => $this->fixturesPath."/vendor/tinymce/tinymce",
                     'js' => "tinymce.min.js",
                     'config' => array(
                         'selector' => '.tinymce-content'
                     ),
                     'customize' => array(
-                        'dest_dir' => self::FIXTURES_DIR."/Resources/public/tinymce",
+                        'dest_dir' => $this->fixturesPath."/Resources/public/tinymce",
                         'base_url' => '/js/tinymce',
                         'exclude_files' => array()
                     )
@@ -113,13 +125,13 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'tinymce' => array(
-                    'tinymce_dir' => self::FIXTURES_DIR."/vendor/tinymce/invalid_tinymce",
+                    'tinymce_dir' => $this->fixturesPath."/vendor/tinymce/invalid_tinymce",
                     'js' => "tinymce.min.js",
                     'config' => array(
                         'selector' => '.tinymce-content'
                     ),
                     'customize' => array(
-                        'dest_dir' => self::FIXTURES_DIR."/Resources/public/tinymce",
+                        'dest_dir' => $this->fixturesPath."/Resources/public/tinymce",
                         'base_url' => '/js/tinymce',
                         'exclude_files' => array()
                     )
@@ -148,7 +160,7 @@ class CopyTinyMCEFilesCommandTest extends \PHPUnit_Framework_TestCase
             ->with('asf_layout.assets')
             ->willReturn(array(
                 'tinymce' => array(
-                    'tinymce_dir' => self::FIXTURES_DIR."/vendor/tinymce/invalid_tinymce",
+                    'tinymce_dir' => $this->fixturesPath."/vendor/tinymce/invalid_tinymce",
                     'js' => "tinymce.min.js",
                     'config' => array(
                         'selector' => '.tinymce-content'
