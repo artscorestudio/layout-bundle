@@ -32,7 +32,7 @@ If you wish to use default texts provided in this bundle, you have to make sure 
 # app/config/config.yml
 framework:
 translator: ~
-`````````````
+```
 
 For more information about translations, check [Symfony documentation](https://symfony.com/doc/current/book/translation.html).
 
@@ -43,8 +43,8 @@ For more information about translations, check [Symfony documentation](https://s
 Require the bundle with composer :
 
 ```bash
-$ composer require artscorestudio/layout-bundle "dev-master"
-````````````````````````````````````````````````````````````
+$ composer require artscorestudio/layout-bundle "1.0.0"
+```
 
 Composer will install the bundle to your project's *vendor/artscorestudio/layout-bundle* directory. It also install dependencies. 
 
@@ -73,13 +73,13 @@ For install jQuery, add it to your project's composer.json file :
 
 ```bash
 $ composer require components/jquery "2.2.*"
-````````````````````````````````````````````
+```
 
 And for install Twitter Bootstrap, add it to your project's composer.json file :
 
 ```bash
 $ composer require components/bootstrap "3.3.*"
-```````````````````````````````````````````````
+```
 
 By default, Layout bundle use Less files directly. Enable Less by isntall it on your system and add it in your project's config.yml file.
 
@@ -93,7 +93,7 @@ assetic:
         less:
             node: "/usr/local/bin/node"
 node_paths: ["/usr/local/lib/node_modules/"]
-````````````````````````````````````````````
+```
 
 Less configuration on Microsoft Windows operating systems (Windows 7+) :
 
@@ -105,7 +105,7 @@ assetic:
         less:
             node: "C:\\Program Files\\nodejs\\node.exe"
 node_paths: ["C:\\Users\\__USERNAME__\\AppData\\Roaming\\npm\\node_modules"]
-````````````````````````````````````````````````````````````````````````````
+```
 
 For enable all supported assets, please check [Enable/Disable supported assets](enable-external-library.md) in this documentation.
 
@@ -116,7 +116,7 @@ Open your base template and extend model templates from Layout bundle :
 ```twig
 // app/Resources/views/base.html.twig
 {% extends ASFLayoutBundle::frontend_layout.html.twig %}
-````````````````````````````````````````````````````````
+```
 
 And it's done ! If you go in your favorite browser, you have basic template for your project based on jQuery and Twitter Bootstrap.
 You can use it as this or overriding it !
