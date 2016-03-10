@@ -1,0 +1,10 @@
+/* APYDataGrid */
+.grid-row-actions li {
+	display:inline-block;
+	padding-right: 5px
+}
+
+/* Content Command */
+.cmd-actions {
+	margin-bottom: 20px
+}
