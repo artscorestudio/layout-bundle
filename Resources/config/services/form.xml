@@ -9,6 +9,9 @@
 		<!-- Collection Form Type -->
 		<parameter key="asf_layout.form.type.base_collection.class">ASF\LayoutBundle\Form\Type\BaseCollectionType</parameter>
 		
+		<!-- Date Picker Form Type -->
+		<parameter key="asf_layout.form.type.date_picker.class">ASF\LayoutBundle\Form\Type\DatePickerType</parameter>
+		
 	</parameters>
 	
 	<services>
@@ -16,6 +19,11 @@
 		<!-- Collection Form Type -->
 		<service id="asf_layout.form.type.base_collection" class="%asf_layout.form.type.base_collection.class%">
 			<tag name="form.type" alias="base_collection" />
+		</service>
+		
+		<!-- Date Picker Form Type -->
+		<service id="asf_layout.form.type.date_picker" class="%asf_layout.form.type.date_picker.class%">
+			<tag name="form.type" alias="date_picker" />
 		</service>
 
 	</services>

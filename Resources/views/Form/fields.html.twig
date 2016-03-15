@@ -109,3 +109,16 @@
 </tr>
 {% endspaceless %}
 {% endblock %}
+
+{% block date_picker_widget %}
+{% spaceless %}
+	{{- block('datetime_widget') -}}
+	<script type="text/javascript">
+	(function($, window, document) {
+		$(function() {
+			$("#{{ form.vars['id'] }} input").datepicker({dateFormat: 'yy-mm-dd'});
+		});
+	}(window.jQuery, window, document));
+	</script>
+{% endspaceless %}
+{% endblock %}
