@@ -13,7 +13,7 @@ The support of an assets means that you have just to enable it in bundle's confi
 
 > By default, just jQuery and Twitter Bootstrap assets are enabled so don't forget to update your composer.json file.
 
-## <a name"jquery"></a> Enable/disable jQuery
+## <a name="jquery"></a> Enable/disable jQuery
 
 > New wave javascript
 
