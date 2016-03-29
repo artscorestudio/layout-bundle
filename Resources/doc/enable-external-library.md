@@ -2,18 +2,18 @@
 
 Layout bundle comes with a list of supported assets. The available assets are :
 * [jQuery](#jquery)
-* [jQuery UI](http://jqueryui.com/)
-* [Twitter Bootstrap](http://getbootstrap.com/)
-* [Select2 jQuery Plugin for select box](https://github.com/select2/select2)
-* [Bazinga Js TranslationBundle for get bundle's translations in javascript](https://github.com/willdurand/BazingaJsTranslationBundle)
-* [Speaking URL for generate a slug](https://github.com/pid/speakingurl)
-* [TinyMCE](https://github.com/tinymce/tinymce)
+* [jQuery UI](#jqueryui)
+* [Twitter Bootstrap](#twbs)
+* [Select2 jQuery Plugin for select box](#select2)
+* [Bazinga Js TranslationBundle for get bundle's translations in javascript](#bazinga)
+* [Speaking URL for generate a slug](#speakingurl)
+* [TinyMCE](#tinymce)
 
 The support of an assets means that you have just to enable it in bundle's configuration, add it in the composer.json file of your Symfony project and in your Twig template.
 
 > By default, just jQuery and Twitter Bootstrap assets are enabled so don't forget to update your composer.json file.
 
-## <a name="jquery"></a> Enable/disable jQuery
+## <a name="jquery"></a>Enable/disable jQuery
 
 > New wave javascript
 
@@ -72,7 +72,7 @@ asf_layout:
         jquery: false
 ```
 
-## <a name="jqueryui"></a> Enable/disable jQuery UI
+## <a name="jqueryui"></a>Enable/disable jQuery UI
 
 > jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of jQuery. Whether you're building highly interactive web applications, or you just need to add a date picker to a form control, jQuery UI is the perfect choice.
 
@@ -137,7 +137,7 @@ asf_layout:
         jqueryui: false
 ```
 
-## Enable/disable Twitter Bootstrap
+## <a name="twbs"></a>Enable/disable Twitter Bootstrap
 
 > Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
 
@@ -215,7 +215,7 @@ asf_layout:
 
 For more information about Twitter Bootstrap, please check this documentation chapter : [Configure Twitter Bootstrap](twitter-bootstrap.md).
 
-## Enable/disable Select2
+## <a name="select2"></a>Enable/disable Select2
 
 > Select2 is a jQuery based replacement for select boxes.
 
@@ -282,7 +282,7 @@ asf_layout:
         select2: false
 ```
 
-## Enable/disable BazingaJsTranslation
+## <a name="bazinga"></a>Enable/disable BazingaJsTranslation
 
 > A pretty nice way to expose your Symfony2 translation messages to your client applications.
 
@@ -344,7 +344,7 @@ asf_layout:
         bazing_js_translation: false
 ```
 
-## Enable/disable speakingURL
+## <a name="speakingurl"></a>Enable/disable speakingURL
 
 > Generate a slug with a lot of options; create a so-called Semantic URL or 'Clean URL' or 'Pretty URL' or 'nice-looking URL' or 'Speaking URL' or 'user-friendly URL' or 'SEO-friendly URL' from a string. This module aims to transliterate the input string.
 
@@ -404,7 +404,7 @@ asf_layout:
         speakingurl: false
 ```
 
-## Enable/disable FOSJsRouting Bundle
+## <a name="fosjsrouting"></a>Enable/disable FOSJsRouting Bundle
 
 > A pretty nice way to expose your Symfony2 routing to client applications. 
 
@@ -442,7 +442,7 @@ asf_layout:
         fos_js_routing: false
 ```
 
-## Enable/disable TinyMCE
+## <a name="tinymce"></a>Enable/disable TinyMCE
 
 > JavaScript library for WYSIWYG HTML editing 
 
