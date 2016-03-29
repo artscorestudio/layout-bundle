@@ -1,7 +1,7 @@
 # Enable/Disable supported assets
 
 Layout bundle comes with a list of supported assets. The available assets are :
-* [jQuery](https://jquery.com/)
+* [jQuery](#jquery)
 * [jQuery UI](http://jqueryui.com/)
 * [Twitter Bootstrap](http://getbootstrap.com/)
 * [Select2 jQuery Plugin for select box](https://github.com/select2/select2)
@@ -13,7 +13,7 @@ The support of an assets means that you have just to enable it in bundle's confi
 
 > By default, just jQuery and Twitter Bootstrap assets are enabled so don't forget to update your composer.json file.
 
-## Enable/disable jQuery
+## <a name"jquery"></a> Enable/disable jQuery
 
 > New wave javascript
 
@@ -362,7 +362,7 @@ You can enable it by two different ways. First, just passing *true* :
 # app/config/config.yml
 asf_layout:
     assets:
-        speaking_url: true
+        speakingurl: true
 ```
 
 This configuration is like following (second way) :
@@ -371,7 +371,7 @@ This configuration is like following (second way) :
 # app/config/config.yml
 asf_layout:
     assets:
-        speaking_url:
+        speakingurl:
             path: "%kernel.root_dir%/../vendor/pid/speakingurl/speakingurl.min.js"
 ```
 
@@ -381,7 +381,7 @@ If you do not want to use this repository, please don't forget to change the pat
 # app/config/config.yml
 asf_layout:
     assets:
-        speaking_url:
+        speakingurl:
             js: "/path/to/your/speaking_url/js/file"
 ```
 
@@ -401,7 +401,7 @@ Just edit config.yml :
 ```yaml
 asf_layout:
     assets:
-        speaking_url: false
+        speakingurl: false
 ```
 
 ## Enable/disable FOSJsRouting Bundle
