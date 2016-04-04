@@ -8,10 +8,11 @@
         {% endblock asf_base_encoding %}
         
         <title>
-        	{% block asf_base_meta_title_prefix %}{% endblock %}
 			{% block asf_base_meta_title %}{{ 'Home'|trans }}{% endblock %}
 			{% block asf_base_meta_title_suffix %}{% endblock %}
         </title>
+        
+        {% block metas %}{% endblock %}
         
         {% block asf_base_favicon %}
         	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
