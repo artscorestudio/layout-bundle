@@ -12,6 +12,9 @@ namespace ASF\LayoutBundle\Tests\DependencyInjection;
 use \Mockery as m; 
 use ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Bundle\AsseticBundle\DependencyInjection\AsseticExtension;
+use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
+use FOS\JsRoutingBundle\DependencyInjection\FOSJsRoutingExtension;
 
 /**
  * Bundle's Extension Test Suites
@@ -84,11 +87,24 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	public function testPrependExtensionWithoutFOSJsRoutingBundle()
 	{
 	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
-	     
-	    $bundles = array('AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle');
-	    $extensions = array('assetic' => array());
 	    
-	    $this->extension->prepend($this->getContainer($bundles, $extensions));
+	    $bundles = array(
+    	    'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+    	    'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle',
+    	);
+	    
+	    $extensions = array(
+    		'assetic' => new AsseticExtension(),
+    		'twig' => new TwigExtension()
+	    );
+	    
+	    $config = $this->getDefaultConfig();
+	    $config['assets']['fos_js_routing'] = true;
+	    
+	    $container = $this->getContainer($bundles, $extensions, $config);
+	    
+	    $container->method('getExtensionConfig')->with('asf_layout')->willReturn($config);
+	    $this->extension->prepend($container);
 	}
 	
 	/**
@@ -331,39 +347,45 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	 * 
 	 * @return \Symfony\Component\DependencyInjection\ContainerBuilder
 	 */
-	protected function getContainer($bundles = null, $extensions = null)
+	protected function getContainer($bundles = null, $extensions = null, $asfLayoutConfig = null)
 	{
-	    $bag = m::mock('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag');
-	    $bag->shouldReceive('add');
+	    $bag = $this->getMock('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag');
+	    $bag->method('add');
 	    
 	    if ( is_null($bundles) ) {
     	    $bundles = $bundles = array(
     	        'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
     	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle',
-    	        'FOSJsRoutingBundle' => 'FOS\JsRoutingBundle\FOSJsRoutingBundle'
+    	        'FOSJsRoutingBundle' => 'FOS\JsRoutingBundle\FOSJsRoutingBundle',
     	    );
 	    }
 	    
 	    if ( is_null($extensions) ) {
     	    $extensions = array(
-    	        'assetic' => array(),
-    	        'twig' => array()
+    	        'assetic' => new AsseticExtension(),
+    	        'twig' => new TwigExtension(),
+    	    	'fos_js_routing' => new FOSJsRoutingExtension(),
     	    );
 	    }
 	    
-	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
-	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
-	    $container->shouldReceive('getExtensions')->andReturn($extensions);
-	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
-	    $container->shouldReceive('prependExtensionConfig');
-	    $container->shouldReceive('setAlias');
+	    $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder');
+	    $container->method('getParameter')->with('kernel.bundles')->willReturn($bundles);
+	    $container->method('getExtensions')->willReturn($extensions);
 	    
-	    $container->shouldReceive('addResource');
-	    $container->shouldReceive('setParameter');
-	    $container->shouldReceive('hasExtension')->andReturn(false);
-	    $container->shouldReceive('getParameterBag')->andReturn($bag);
-	    $container->shouldReceive('setDefinition');
-	    $container->shouldReceive('setParameter');
+	    if ( !is_null($asfLayoutConfig) ) {
+		    $container->method('getExtensionConfig')->with('asf_layout')->willReturn($asfLayoutConfig);
+	    }
+	    
+	    $container->method('getExtensionConfig')->willReturn(array());
+	    $container->method('prependExtensionConfig');
+	    $container->method('setAlias');
+	    $container->method('getExtension');
+	    
+	    $container->method('addResource');
+	    $container->method('setParameter');
+	    $container->method('getParameterBag')->willReturn($bag);
+	    $container->method('setDefinition');
+	    $container->method('setParameter');
 	    
 	    return $container;
 	}
