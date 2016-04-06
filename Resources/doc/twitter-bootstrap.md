@@ -161,4 +161,57 @@ Finally, update your Twig template :
 {% endstylesheets %}
 ```
 
+## Setup and use icons
+
+With Twitter Bootstrap a set of icon can be used directly. For use icons, just call the Twig function *icon* like following :
+
+```twig
+{% block content %}
+{{ icon('plus') }}
+{% endblock %}
+```
+
+By default, the prefix for icons is Glyphicons. If you want to use another set of icons, set up trought bundle configuration :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        twbs:
+            icon_prefix: myPrefix
+            icon_tag: span
+```
+
+## Use badges
+
+For use it, just call the Twig function *badge* :
+
+```twig
+{% block content %}
+{{ badge(4) }}
+{% endblock %}
+```
+
+## Use Labels
+
+For use it, just call the Twig function *label* :
+
+```twig
+{% block content %}
+{{ label('My text', 'success') }}
+{% endblock %}
+```
+
+You can directly call labels by category :
+
+```twig
+{% block content %}
+{{ label_primary('My text') }}
+{{ label_success('My text') }}
+{{ label_info('My text') }}
+{{ label_warning('My text') }}
+{{ label_danger('My text') }}
+{% endblock %}
+```
+
 [1]: http://symfony.com/doc/current/cookbook/form/form_customization.html#form-theming-in-twig
