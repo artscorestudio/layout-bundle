@@ -2,8 +2,8 @@
 
 Layout bundle comes with a list of supported assets. The available assets are :
 * [jQuery](#jquery)
-* [jQuery UI](#jqueryui)
 * [Twitter Bootstrap](#twbs)
+* [jQuery UI](#jqueryui)
 * [Select2 jQuery Plugin for select box](#select2)
 * [Bazinga Js TranslationBundle for get bundle's translations in javascript](#bazinga)
 * [Speaking URL for generate a slug](#speakingurl)
@@ -70,71 +70,6 @@ Just edit config.yml :
 asf_layout:
     assets:
         jquery: false
-```
-
-## <a name="jqueryui"></a>Enable/disable jQuery UI (optionnal)
-
-> jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of jQuery. Whether you're building highly interactive web applications, or you just need to add a date picker to a form control, jQuery UI is the perfect choice.
-
-### Adding jQuery UI in your project's composer.json file
-
-I suggest using [component/jqueryui][2] shim repository for jQuery UI. You can add it by enter the follow command :
-
-```bash
-$ composer require components/jqueryui "1.11.*"
-```
-
-You can enable it by two different ways. First, just passing *true* in LayoutBundle configuration :
-
-```yaml
-# app/config/config.yml
-asf_layout:
-    assets:
-        jqueryui: true
-```
-
-This configuration is like following (second way) :
-
-```yaml
-# app/config/config.yml
-asf_layout:
-    assets:
-        jqueryui:
-            js: "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
-            css: "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
-```
-
-If you do not want to use this repository, please don't forget to change the path to your jQuery UI files like this :
-
-```yaml
-# app/config/config.yml
-asf_layout:
-    assets:
-        jqueryui:
-            js: "/path/to/your/jqueryui/js/file"
-            css: "/path/to/your/jqueryui/css/file"
-```
-
-Update your Twig template :
-
-```twig
-{% stylesheets '@jqueryui_css' %}
-	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
-{% endstylesheets %}
-
-{% javascripts '@jqueryui_js' %}
-	<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
-```
-
-### Disable jQuery UI
-
-Just edit config.yml :
-
-```yaml
-asf_layout:
-    assets:
-        jqueryui: false
 ```
 
 ## <a name="twbs"></a>Enable/disable Twitter Bootstrap (required)
@@ -217,6 +152,71 @@ asf_layout:
 ```
 
 For more information about Twitter Bootstrap, please check this documentation chapter : [Configure Twitter Bootstrap][4].
+
+## <a name="jqueryui"></a>Enable/disable jQuery UI (optionnal)
+
+> jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of jQuery. Whether you're building highly interactive web applications, or you just need to add a date picker to a form control, jQuery UI is the perfect choice.
+
+### Adding jQuery UI in your project's composer.json file
+
+I suggest using [component/jqueryui][2] shim repository for jQuery UI. You can add it by enter the follow command :
+
+```bash
+$ composer require components/jqueryui "1.11.*"
+```
+
+You can enable it by two different ways. First, just passing *true* in LayoutBundle configuration :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        jqueryui: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        jqueryui:
+            js: "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
+            css: "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+```
+
+If you do not want to use this repository, please don't forget to change the path to your jQuery UI files like this :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        jqueryui:
+            js: "/path/to/your/jqueryui/js/file"
+            css: "/path/to/your/jqueryui/css/file"
+```
+
+Update your Twig template :
+
+```twig
+{% stylesheets '@jqueryui_css' %}
+	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+{% endstylesheets %}
+
+{% javascripts '@jqueryui_js' %}
+	<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+```
+
+### Disable jQuery UI
+
+Just edit config.yml :
+
+```yaml
+asf_layout:
+    assets:
+        jqueryui: false
+```
 
 ## <a name="select2"></a>Enable/disable Select2 (optionnal)
 
