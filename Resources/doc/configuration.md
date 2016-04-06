@@ -2,12 +2,10 @@
 
 ## Default configurations
 
-The configuration below is the configuration by default for each assets when they are enabled. If you want to override it, please check the documentation [Enable/Disable supported assets](enable-external-library.md).
+The configuration below is the configuration by default for each assets when they are enabled. If you want to override it, please check the documentation [Enable/Disable supported assets][1].
 
 ```yaml
 asf_layout:
-    enable_twig_support: true
-    enable_assetic_support: true
     assets:
         jquery:
             path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
@@ -18,15 +16,10 @@ asf_layout:
             twbs_dir: "%kernel.root_dir%/../vendor/components/bootstrap/"
             js: js/bootstrap.min.js"
             less: ["less/bootstrap.less", "less/theme.less"]
-            css: ~
             icon_prefix: "glyphicon"
             icon_tag: "span"
             fonts_dir: "%kernel.root_dir%/../web/fonts"
             form_theme: "ASFLayoutBundle:form:form_div_layout.html.twig"
-            customize:
-                less:
-                    dest_dir: ~
-                    files: ~
         select2:
             js: "%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js"
             css: "%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css"
@@ -54,8 +47,6 @@ On the installation of the bundle, the configuration is like following :
 
 ```yaml
 asf_layout:
-    enable_twig_support: true
-    enable_assetic_support: true
     assets:
         jquery: true
         twbs: true
@@ -69,12 +60,10 @@ asf_layout:
 
 ## Enable an assets with default configuration
 
-If you want to enable a supported assets and use the default configuration (see above : Default Configuration), you can just enabled it like following :
+If you want to enable a supported assets and use the default configuration (see above : Default Configuration), you have to enabled it like following and install packages like explain in section of this documentation [Enable/Disable supported assets][1] :
 
 ```yaml
 asf_layout:
-    enable_twig_support: true
-    enable_assetic_support: true
     assets:
         jquery: true
         jqueryui: true
@@ -85,3 +74,5 @@ asf_layout:
         fos_js_routing: true
         tinymce: true
 ```
+
+[1]: enable-external-library.md

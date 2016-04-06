@@ -13,16 +13,19 @@ But this bundle allows you to enable or disable external libraries or add more l
 ## Prerequisites
 
 This version of the bundle requires :
-* Symfony 2.8+ / 3.0+
-* Assetic bundle 2.7+ (suggest [symfony/assetic-bundle](https://packagist.org/packages/symfony/assetic-bundle))
-* jQuery 2.2+ (suggest [components/jquery](https://github.com/components/jquery))
-* Twitter Bootstrap 3.3+ (suggest [components/bootstrap](https://github.com/components/bootstrap))
+* [Symfony 2.8+ LTS / 3.0+][1]
+* Assetic bundle 2.7+ (suggest [symfony/assetic-bundle][2])
+* jQuery 2.2+ (suggest [components/jquery][3])
+* Twitter Bootstrap 3.3+ (suggest [components/bootstrap][4])
 
 If you want to use all features of this bundle, you have to add this packages in your project's composer.json file :
 
-* Select2 4.0+ (suggest [select2/select2](https://github.com/select2/select2))
-* Bazinga Js Translation 2.5+ (suggest [willdurand/js-translation-bundle](https://github.com/willdurand/BazingaJsTranslationBundle))
-* Speaking URL 0.11+ (suggest [pid/speakingurl](https://github.com/pid/speakingurl))
+* jQuery UI 1.11+ (suggest [components/jqueryui][5])
+* Select2 4.0+ (suggest [select2/select2][6])
+* Bazinga Js Translation 2.5+ (suggest [willdurand/js-translation-bundle][7])
+* Speaking URL 0.11+ (suggest [pid/speakingurl][8])
+* FOS Js Routing Bundle 2+ ([friendsofsymfony/jsrouting-bundle][9])
+* TinyMCE 4+ (suggest [tinymce/tinymce][10])
 
 ### Translations
 
@@ -31,10 +34,10 @@ If you wish to use default texts provided in this bundle, you have to make sure 
 ```yaml
 # app/config/config.yml
 framework:
-translator: ~
+    translator: ~
 ```
 
-For more information about translations, check [Symfony documentation](https://symfony.com/doc/current/book/translation.html).
+For more information about translations, check [Symfony documentation][11].
 
 ## Installation
 
@@ -43,7 +46,7 @@ For more information about translations, check [Symfony documentation](https://s
 Require the bundle with composer :
 
 ```bash
-$ composer require artscorestudio/layout-bundle "1.0.0"
+$ composer require artscorestudio/layout-bundle "dev-master"
 ```
 
 Composer will install the bundle to your project's *vendor/artscorestudio/layout-bundle* directory. It also install dependencies. 
@@ -81,7 +84,7 @@ And for install Twitter Bootstrap, add it to your project's composer.json file :
 $ composer require components/bootstrap "3.3.*"
 ```
 
-By default, Layout bundle use Less files directly. Enable Less by isntall it on your system and add it in your project's config.yml file.
+By default, Layout bundle use Less files directly. Enable Less by install it on your system and add it in your project's config.yml file.
 
 Less configuration on *nix operating systems :
 
@@ -92,7 +95,7 @@ assetic:
         cssrewrite: ~
         less:
             node: "/usr/local/bin/node"
-node_paths: ["/usr/local/lib/node_modules/"]
+            node_paths: ["/usr/local/lib/node_modules/"]
 ```
 
 Less configuration on Microsoft Windows operating systems (Windows 7+) :
@@ -104,10 +107,22 @@ assetic:
         cssrewrite: ~
         less:
             node: "C:\\Program Files\\nodejs\\node.exe"
-node_paths: ["C:\\Users\\__USERNAME__\\AppData\\Roaming\\npm\\node_modules"]
+            node_paths: ["C:\\Users\\__USERNAME__\\AppData\\Roaming\\npm\\node_modules"]
 ```
 
-For enable all supported assets, please check [Enable/Disable supported assets](enable-external-library.md) in this documentation.
+Less configuration on MacOS X operating systems :
+
+```yaml
+# /app/config/config.yml
+assetic:
+    filters:
+        cssrewrite: ~
+        less:
+            node: "/opt/local/bin/node"
+            node_paths: ["/opt/local/lib/node_modules/"]
+```
+
+For enable all supported assets, please check [Enable/Disable supported assets][12] in this documentation.
 
 ### Step 4 : Extend model layouts
 
@@ -121,17 +136,40 @@ Open your base template and extend model templates from Layout bundle :
 And it's done ! If you go in your favorite browser, you have basic template for your project based on jQuery and Twitter Bootstrap.
 You can use it as this or overriding it !
 
+LayoutBundle provides another base layout call *backend_layout.html.twig*. For more informations about provided layouts, please see [Layout models provided by ASFLayoutBundle][13].
+
 ### Next Steps
 
 Now you have completed the basic installation and configuration of the ASFLayoutBundle, you are ready to learn about more advanced features and usages of the bundle.
 
 The following documents are available :
-* [Enable/Disable supported assets](enable-external-library.md)
-* [Configure Twitter Bootstrap](twitter-bootstrap.md)
-* [Configure TinyMCE](tinymce.md)
-* [Layout models](layout-models.md)
-* [Flash Messages](flash-messages.md)
-* [Form Types](form.md)
-* [Knp Menu template](knp-menu-template.md)
-* [ASFLayoutBundle Configuration Reference](configuration.md)
-* [ASFLayoutBundle Commands Reference](commands.md)
+* [Enable/Disable supported assets][12]
+* [Configure Twitter Bootstrap][14]
+* [Configure TinyMCE][15]
+* [Layout models][13]
+* [Flash Messages][16]
+* [Form Types][17]
+* [Knp Menu template][18]
+* [ASFLayoutBundle Configuration Reference][19]
+* [ASFLayoutBundle Commands Reference][20]
+
+[1]:  https://symfony.com/download
+[2]:  https://packagist.org/packages/symfony/assetic-bundle 
+[3]:  https://packagist.org/packages/components/jquery
+[4]:  https://packagist.org/packages/components/bootstrap
+[5]:  https://packagist.org/packages/components/jqueryui
+[6]:  https://packagist.org/packages/select2/select2
+[7]:  https://packagist.org/packages/willdurand/js-translation-bundle
+[8]:  https://packagist.org/packages/pid/speakingurl
+[9]:  https://packagist.org/packages/friendsofsymfony/jsrouting-bundle
+[10]: https://packagist.org/packages/tinymce/tinymce
+[11]: https://symfony.com/doc/current/book/translation.html
+[12]: enable-external-library.md
+[13]: layout-models.md
+[14]: twitter-bootstrap.md
+[15]: tinymce.md
+[16]: flash-messages.md
+[17]: form.md
+[18]: knp-menu-template.md
+[19]: configuration.md
+[20]: commands.md

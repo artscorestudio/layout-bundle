@@ -1,4 +1,4 @@
-# Layout models
+# Layout models provided by ASFLayoutBundle
 
 Layout bundle embed two model layouts for your application. You can use it or not. This models are Twig template models. They include all bundle's supported assets :
 * jQuery
