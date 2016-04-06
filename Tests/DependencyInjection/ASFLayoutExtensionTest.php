@@ -24,7 +24,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @var \ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension
 	 */
-	protected $extension;
+	private $extension;
 	
 	/**
 	 * {@inheritDoc}
@@ -61,7 +61,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	        'tinymce' => false,
 	        'fos_js_routing' => false
 	    );
-	     
+	    
 	    $this->extension->load(array($config), $this->getContainer());
 	}
 	
@@ -87,42 +87,6 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	     
 	    $bundles = array('AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle');
 	    $extensions = array('assetic' => array());
-	    
-	    $this->extension->prepend($this->getContainer($bundles, $extensions));
-	}
-	
-	/**
-	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
-	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
-	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
-	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
-	 * 
-	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-	 */
-	public function testPrependExtensionWithoutTwigBundle()
-	{
-	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
-	    
-	    $bundles = array('AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle');
-	    $extensions = array('assetic' => array());
-	    
-	    $this->extension->prepend($this->getContainer($bundles, $extensions));
-	}
-	
-	/**
-	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
-	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
-	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
-	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
-	 * 
-	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-	 */
-	public function testPrependExtensionWithoutAsseticBundle()
-	{
-	    $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
-	    
-	    $bundles = array('TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle');
-	    $extensions = array('twig' => array());
 	    
 	    $this->extension->prepend($this->getContainer($bundles, $extensions));
 	}
@@ -412,8 +376,6 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	protected function getDefaultConfig()
 	{
 	    return array(
-	        'enable_twig_support' => true,
-	        'enable_assetic_support' => true,
 	        'enable_flash_messages' => true,
 	        'assets' => array(
 	            'jquery' => array(
@@ -431,8 +393,7 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	                'icon_tag' => 'span',
 	                'fonts_dir' => '%kernel.root_dir%/../web/fonts',
 	                'form_theme' => 'ASFLayoutBundle:Form:fields.html.twig'
-	            ),
-	            'fos_js_routing' => false
+	            )
 	        )
 	    );
 	}

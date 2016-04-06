@@ -20,24 +20,19 @@ use ASF\LayoutBundle\DependencyInjection\Configuration;
  */
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
-     */
-	public function testEnableTwigSupportParameterInDefaultConfiguration()
-	{
-		$processor = new Processor();
-		$config = $processor->processConfiguration(new Configuration(), array());
-		$this->assertTrue($config['enable_twig_support']);
-	}
+	/**
+	 * @var array
+	 */
+	private $defaultConfig;
 	
 	/**
-     * @covers ASF\LayoutBundle\DependencyInjection\Configuration
-     */
-	public function testEnableAsseticSupportParameterInDefaultConfiguration()
+	 * {@inheritDoc}
+	 * @see PHPUnit_Framework_TestCase::setUp()
+	 */
+	public function setUp()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertTrue($config['enable_assetic_support']);
+		$processor = new Processor();
+		$this->defaultConfig = $processor->processConfiguration(new Configuration(), array());
 	}
 	
 	/**
@@ -45,9 +40,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testEnableFlashMessagesSupportParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertTrue($config['enable_flash_messages']);
+	    $this->assertTrue($this->defaultConfig['enable_flash_messages']);
 	}
 	
 	/**
@@ -55,9 +48,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testSupportedAssetsParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('assets', $config);
+	    $this->assertArrayHasKey('assets', $this->defaultConfig);
 	}
 	
 	/**
@@ -65,9 +56,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testJqueryParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('jquery', $config['assets']);
+	    $this->assertArrayHasKey('jquery', $this->defaultConfig['assets']);
 	}
 	
 	/**
@@ -75,9 +64,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testJqueryPathParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('path', $config['assets']['jquery']);
+	    $this->assertArrayHasKey('path', $this->defaultConfig['assets']['jquery']);
 	}
 	
 	/**
@@ -85,9 +72,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testJqueryPathParameterValueInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertRegExp('/components\/jquery/', $config['assets']['jquery']['path']);
+	    $this->assertRegExp('/components\/jquery/', $this->defaultConfig['assets']['jquery']['path']);
 	}
 	
 	/**
@@ -95,9 +80,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testJqueryUIParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('jqueryui', $config['assets']);
+	    $this->assertArrayNotHasKey('jqueryui', $this->defaultConfig['assets']);
 	}
 	
 	/**
@@ -105,9 +88,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsDirParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('twbs_dir', $config['assets']['twbs']);
+	    $this->assertArrayHasKey('twbs_dir', $this->defaultConfig['assets']['twbs']);
 	}
 	
 	/**
@@ -115,9 +96,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsDirParameterValueInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertRegExp('/components\/bootstrap/', $config['assets']['twbs']['twbs_dir']);
+	    $this->assertRegExp('/components\/bootstrap/', $this->defaultConfig['assets']['twbs']['twbs_dir']);
 	}
 	
 	/**
@@ -125,9 +104,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsIconPrefixParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('icon_prefix', $config['assets']['twbs']);
+	    $this->assertArrayHasKey('icon_prefix', $this->defaultConfig['assets']['twbs']);
 	}
 	
 	/**
@@ -135,9 +112,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsIconPrefixParameterValueInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('glyphicon', $config['assets']['twbs']['icon_prefix']);
+	    $this->assertEquals('glyphicon', $this->defaultConfig['assets']['twbs']['icon_prefix']);
 	}
 	
 	/**
@@ -145,9 +120,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsIconTagParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('icon_tag', $config['assets']['twbs']);
+	    $this->assertArrayHasKey('icon_tag', $this->defaultConfig['assets']['twbs']);
 	}
 	
 	/**
@@ -155,9 +128,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsIconTagParameterValueInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('span', $config['assets']['twbs']['icon_tag']);
+	    $this->assertEquals('span', $this->defaultConfig['assets']['twbs']['icon_tag']);
 	}
 	
 	/**
@@ -165,9 +136,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsFormThemeParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('form_theme', $config['assets']['twbs']);
+	    $this->assertArrayHasKey('form_theme', $this->defaultConfig['assets']['twbs']);
 	}
 	
 	/**
@@ -175,9 +144,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsFormThemeParameterValueInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('ASFLayoutBundle:Form:fields.html.twig', $config['assets']['twbs']['form_theme']);
+	    $this->assertEquals('ASFLayoutBundle:Form:fields.html.twig', $this->defaultConfig['assets']['twbs']['form_theme']);
 	}
 	
 	/**
@@ -185,9 +152,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsFontsDirParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('fonts_dir', $config['assets']['twbs']);
+	    $this->assertArrayHasKey('fonts_dir', $this->defaultConfig['assets']['twbs']);
 	}
 	
 	/**
@@ -195,9 +160,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsFontsDirParameterValueInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('%kernel.root_dir%/../web/fonts', $config['assets']['twbs']['fonts_dir']);
+	    $this->assertEquals('%kernel.root_dir%/../web/fonts', $this->defaultConfig['assets']['twbs']['fonts_dir']);
 	}
 	
 	/**
@@ -205,9 +168,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsJsPathParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('js', $config['assets']['twbs']);
+	    $this->assertArrayHasKey('js', $this->defaultConfig['assets']['twbs']);
 	}
 	
 	/**
@@ -215,26 +176,21 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsJsParameterValueInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertEquals('js/bootstrap.min.js', $config['assets']['twbs']['js'][0]);
+	    $this->assertEquals('js/bootstrap.min.js', $this->defaultConfig['assets']['twbs']['js'][0]);
 	}
 	
 	/**
      * @covers ASF\LayoutBundle\DependencyInjection\Configuration
      */
 	public function testTwbsLessParameterValueInDefaultConfiguration()
-	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    
+	{	    
 	    $default_values = array(
 	        "less/bootstrap.less",
             "less/theme.less"
 	    );
 	    
 	    $defaults_exists = true;
-	    foreach($config['assets']['twbs']['less'] as $key => $value) {
+	    foreach($this->defaultConfig['assets']['twbs']['less'] as $key => $value) {
 	        if ( $value != $default_values[$key] )
 	            $defaults_exists = false;
 	    }
@@ -246,11 +202,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsCSSParameterValueInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	     
-	    $default_values = array();
-	    $this->assertCount(0, $config['assets']['twbs']['css']);
+	    $this->assertCount(0, $this->defaultConfig['assets']['twbs']['css']);
 	}
 	
 	/**
@@ -258,9 +210,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testSelect2ParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('select2', $config['assets']);
+	    $this->assertArrayNotHasKey('select2', $this->defaultConfig['assets']);
 	}
 	
 	/**
@@ -268,9 +218,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testBazingaJsTranslationParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('bazinga_js_translator', $config['assets']);
+	    $this->assertArrayNotHasKey('bazinga_js_translator', $this->defaultConfig['assets']);
 	}
 	
 	/**
@@ -278,9 +226,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testSpeakingURLParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('speakingurl', $config['assets']);
+	    $this->assertArrayNotHasKey('speakingurl', $this->defaultConfig['assets']);
 	}
 	
 	/**
@@ -288,9 +234,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testFOSJsRoutingParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayHasKey('fos_js_routing', $config['assets']);
+	    $this->assertArrayHasKey('fos_js_routing', $this->defaultConfig['assets']);
 	}
 	
 	/**
@@ -298,9 +242,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testFOSJsRoutingParameterValueInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertFalse($config['assets']['fos_js_routing']);
+	    $this->assertFalse($this->defaultConfig['assets']['fos_js_routing']);
 	}
 	
 	/**
@@ -308,21 +250,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTinyMCEParameterInDefaultConfiguration()
 	{
-	    $processor = new Processor();
-	    $config = $processor->processConfiguration(new Configuration(), array());
-	    $this->assertArrayNotHasKey('tinymce', $config['assets']);
-	}
-	
-	/**
-	 * Processes an array of configurations.
-	 * 
-	 * @param array $configs An array of configuration items to process
-	 * 
-	 * @return array The processed configuration
-	 */
-	public function process($configs)
-	{
-		$processor = new Processor();
-		return $processor->processConfiguration(new Configuration(), $configs);
+	    $this->assertArrayNotHasKey('tinymce', $this->defaultConfig['assets']);
 	}
 }

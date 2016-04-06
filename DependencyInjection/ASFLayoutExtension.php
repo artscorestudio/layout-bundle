@@ -37,13 +37,10 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		$loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		$loader->load('services/form.xml');
 		
-		if ( $config['enable_twig_support'] == true ) {
-		    $container->setParameter('asf_layout.assets', $config['assets']);
-		    $container->setParameter('asf_layout.enable_assetic_support', $config['enable_assetic_support']);
-		    $container->setParameter('asf_layout.assets.twbs.icon_prefix', $config['assets']['twbs']['icon_prefix']);
-		    $container->setParameter('asf_layout.assets.twbs.icon_tag', $config['assets']['twbs']['icon_tag']);
-		    $loader->load('services/twig.xml');
-		}
+	    $container->setParameter('asf_layout.assets', $config['assets']);
+	    $container->setParameter('asf_layout.assets.twbs.icon_prefix', $config['assets']['twbs']['icon_prefix']);
+	    $container->setParameter('asf_layout.assets.twbs.icon_tag', $config['assets']['twbs']['icon_tag']);
+	    $loader->load('services/twig.xml');
 		
 		if ( $config['enable_flash_messages'] ) {
 		    $loader->load('services/flash_messages.xml');
@@ -67,17 +64,10 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		
 		if ( !array_key_exists('FOSJsRoutingBundle', $bundles) && $config['assets']['fos_js_routing'] == true )
 		    throw new InvalidConfigurationException('You have enabled the support of FOSJsRouting but it is not enabled. Install it or disable FOSJsRoutingBundle support in Layout bundle.');
+
+		$this->configureTwigBundle($container, $config);
 		
-		if ( !array_key_exists('TwigBundle', $bundles) && $config['enable_twig_support'] == true )
-		    throw new InvalidConfigurationException('You have enabled the support of Twig but Twig is not enabled. Install it or disable TwigBundle support in Layout bundle.');
-		else 
-		    $this->configureTwigBundle($container, $config);
-		
-        if ( !array_key_exists('AsseticBundle', $bundles) && $config['enable_assetic_support'] == true )
-            throw new InvalidConfigurationException('You have enabled the support of Assetic but Assetic is not enabled. Please install symfony/assetic-bundle.');
-		
-		if ( array_key_exists('AsseticBundle', $bundles) && count($config['assets']) > 0 && $config['enable_assetic_support'] == true )
-			$this->configureAsseticBundle($container, $config);
+		$this->configureAsseticBundle($container, $config);
 	}
 	
 	/**

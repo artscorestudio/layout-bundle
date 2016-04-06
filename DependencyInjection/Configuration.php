@@ -31,12 +31,6 @@ class Configuration implements ConfigurationInterface
 		
 		$rootNode
 			->children()
-				->booleanNode('enable_twig_support')
-				    ->defaultTrue()
-				->end()
-				->booleanNode('enable_assetic_support')
-				    ->defaultTrue()
-				->end()
 				->booleanNode('enable_flash_messages')
 				    ->defaultTrue()
 				->end()
@@ -123,20 +117,22 @@ class Configuration implements ConfigurationInterface
 	    $builder = new TreeBuilder();
 	    $node = $builder->root('twbs');
 	
+	    $defaults = array(
+			'twbs_dir' => '%kernel.root_dir%/../vendor/components/bootstrap',
+			'js' => array("js/bootstrap.min.js"),
+			'less' => array(
+				"less/bootstrap.less", 
+				"less/theme.less"
+			),
+			'css' => array(),
+			'icon_prefix' => 'glyphicon',
+			'fonts_dir' => '%kernel.root_dir%/../web/fonts',
+			'icon_tag' => 'span',
+			'form_theme' => 'ASFLayoutBundle:form:form_div_layout.html.twig'
+		);
+	    
 	    $node
-	       ->treatTrueLike(array(
-               'twbs_dir' => '%kernel.root_dir%/../vendor/components/bootstrap',
-               'js' => array("js/bootstrap.min.js"),
-               'less' => array(
-                   "less/bootstrap.less", 
-                   "less/theme.less"
-               ),
-	           'css' => array(),
-               'icon_prefix' => 'glyphicon',
-               'fonts_dir' => '%kernel.root_dir%/../web/fonts',
-	           'icon_tag' => 'span',
-	           'form_theme' => 'ASFLayoutBundle:form:form_div_layout.html.twig'
-           ))
+	       ->treatTrueLike($defaults)
            ->treatFalseLike(array(
                'twbs_dir' => false
            ))
@@ -307,31 +303,24 @@ class Configuration implements ConfigurationInterface
         
         $exclude_files = array('bower.json', 'changelog.txt', 'composer.json', 'license.txt', 'package.json', 'readme.md');
         
+        $defaults = array(
+			'tinymce_dir' => '%kernel.root_dir%/../vendor/tinymce/tinymce',
+			'js' => "tinymce.min.js",
+			'config' => array(
+				'selector' => '.tinymce-content'
+			),
+			'customize' => array(
+				'dest_dir' => '%kernel.root_dir%/../web/js/tinymce',
+				'base_url' => '/js/tinymce',
+				'exclude_files' => $exclude_files
+			)
+		);
+        
         $node
-            ->treatTrueLike(array(
-                'tinymce_dir' => '%kernel.root_dir%/../vendor/tinymce/tinymce',
-                'js' => "tinymce.min.js",
-                'config' => array(
-                    'selector' => '.tinymce-content'
-                ),
-                'customize' => array(
-                    'dest_dir' => '%kernel.root_dir%/../web/js/tinymce',
-                    'base_url' => '/js/tinymce'
-                )
-            ))
+            ->treatTrueLike($defaults)
+            ->treatNullLike($defaults)
             ->treatFalseLike(array(
                 'tinymce_dir' => false
-            ))
-            ->treatNullLike(array(
-                'tinymce_dir' => '%kernel.root_dir%/../vendor/tinymce/tinymce',
-                'js' => "tinymce.min.js",
-                'config' => array(
-                    'selector' => '.tinymce-content'
-                ),
-                'customize' => array(
-                    'dest_dir' => '%kernel.root_dir%/../web/js/tinymce',
-                    'base_url' => '/js/tinymce'
-                )
             ))
             ->children()
                 ->scalarNode('tinymce_dir')
