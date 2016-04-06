@@ -105,6 +105,6 @@ class CopyTinyMCEFilesCommand extends ContainerAwareCommand
                 }
             }
             
-        $output->writeln(sprintf('[OK] TinyMCE files was successfully copied.'));
+        $output->writeln(sprintf('[OK] TinyMCE files was successfully copied in "%s".', $dest_dir));
     }
 }

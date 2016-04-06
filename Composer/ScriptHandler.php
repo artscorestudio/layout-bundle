@@ -151,6 +151,11 @@ class ScriptHandler
         static::executeCommand($event, $consoleDir, 'cache:clear'.$warmup, $options['process-timeout']);
     }
     
+    /**
+     * Return options for commands
+     * 
+     * @param CommandEvent $event
+     */
     protected static function getOptions(CommandEvent $event)
     {
         $options = array_merge(static::$options, $event->getComposer()->getPackage()->getExtra());
@@ -162,6 +167,13 @@ class ScriptHandler
         return $options;
     }
     
+    /**
+     * Return the path to the PHP executable
+     * 
+     * @param string $includeArgs
+     * @throws \RuntimeException
+     * @return string|\Symfony\Component\Process\false
+     */
     protected static function getPhp($includeArgs = true)
     {
         $phpFinder = new PhpExecutableFinder();
@@ -172,6 +184,11 @@ class ScriptHandler
         return $phpPath;
     }
 
+    /**
+     * Return PHP command arguments
+     * 
+     * @return array
+     */
     protected static function getPhpArguments()
     {
         $arguments = array();

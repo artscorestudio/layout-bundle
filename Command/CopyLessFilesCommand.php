@@ -120,7 +120,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
             }
         }
 
-        $output->writeln(sprintf('[OK] Twitter Bootstrap less files was successfully copied.', $dest_dir));
+        $output->writeln(sprintf('[OK] Twitter Bootstrap less files was successfully copied in "%s".', $dest_dir));
     }
     
     /**

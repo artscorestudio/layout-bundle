@@ -85,6 +85,6 @@ class InstallFontsCommand extends ContainerAwareCommand
             }
         }
         
-        $output->writeln(sprintf('[OK] Twitter Bootstrap Glyphicons icons was successfully created.', $dest_dir));
+        $output->writeln(sprintf('[OK] Twitter Bootstrap Glyphicons icons was successfully created in "%s".', $dest_dir));
     }
 }
