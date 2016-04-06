@@ -9,7 +9,7 @@ Layout bundle comes with a list of supported assets. The available assets are :
 * [Speaking URL for generate a slug](#speakingurl)
 * [TinyMCE](#tinymce)
 
-The support of an assets means that you have just to enable it in bundle's configuration, add it in the composer.json file of your Symfony project and in your Twig template.
+The support of an assets means that you have just to enable it in bundle's configuration, add it in the composer.json file of your Symfony project and in your Twig template. Enable external libraries in LayoutBundle allows them to automatically add it in the lists of assets of AsseticBundle. [For more information about AsseticBundle, please see its documentation][11].
 
 > By default, just jQuery and Twitter Bootstrap assets are enabled so don't forget to update your composer.json file.
 
@@ -516,3 +516,4 @@ For more information about TinyMCE, please check this documentation chapter : [C
 [8]:  https://packagist.org/packages/friendsofsymfony/jsrouting-bundle
 [9]:  https://packagist.org/packages/tinymce/tinymce
 [10]: tinymce.md
+[11]: http://symfony.com/doc/current/cookbook/assetic/asset_management.html
