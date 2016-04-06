@@ -1,6 +1,6 @@
 # Knp Menu template
 
-Layout bundle provides a knp menu template. For use it, you have to install [KnpMenuBundle](http://symfony.com/doc/current/bundles/KnpMenuBundle/index.html).
+Layout bundle provides a knp menu template. For use it, you have to install [KnpMenuBundle][1].
 
 ## Install KnpMenuBundle
 
@@ -41,4 +41,4 @@ knp_menu:
         template: "ASFLayoutBundle:menu:knpmenu_template.html.twig"
 ```
 
-
+[1]: http://symfony.com/doc/current/bundles/KnpMenuBundle/index.html

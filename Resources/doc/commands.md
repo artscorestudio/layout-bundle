@@ -30,7 +30,7 @@ You can done one option : files, the list of files to copy like following :
 $ php bin/console asf:twbs:less:copy --files=bootstrap.less
 ```
 
-> The target directory and the list of files can be set throught the bundle configuration see [Twitter Bootstrap chapter](twitter-bootstrap.md).
+> The target directory and the list of files can be set throught the bundle configuration see [Twitter Bootstrap chapter][1].
 
 ## Copy TinyMCE files
 
@@ -52,4 +52,7 @@ You can done one option : files, the list of exclude files to copy like followin
 $ php bin/console asf:twbs:less:copy --exclude_files=composer.json
 ```
 
-> The target directory and the list of excluded files can be set throught the bundle configuration see [TinyMCE chapter](tinymce.md).
+> The target directory and the list of excluded files can be set throught the bundle configuration see [TinyMCE chapter][2].
+
+[1]: twitter-bootstrap.md
+[2]: tinymce.md

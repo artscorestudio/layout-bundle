@@ -62,7 +62,7 @@ asf_layout:
             form_theme: "custom_form_theme.html.twig"
 ```
 
-If you don't want to pass throught Layout bundle, just set twig form_theme param like explains in the [Symfony documentation](http://symfony.com/doc/current/cookbook/form/form_customization.html#form-theming-in-twig).
+If you don't want to pass throught Layout bundle, just set twig form_theme param like explains in the [Symfony documentation][1].
 
 ## Use less files
 
@@ -160,3 +160,5 @@ Finally, update your Twig template :
 	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
 {% endstylesheets %}
 ```
+
+[1]: http://symfony.com/doc/current/cookbook/form/form_customization.html#form-theming-in-twig

@@ -1,6 +1,6 @@
 # Flash messages
 
-> "You can store special messages, called "flash" messages in Symfony, on the user's session. By design, flash messages are meant to be used exactly once: they vanish from the session automatically as soon as you retrieve them. This features makes "flash" messages particularly great for storing user notifications." (from : [Symfony documentation](http://symfony.com/doc/current/book/controller.html#flash-messages))
+> "You can store special messages, called "flash" messages in Symfony, on the user's session. By design, flash messages are meant to be used exactly once: they vanish from the session automatically as soon as you retrieve them. This features makes "flash" messages particularly great for storing user notifications." (from : [Symfony documentation][1])
 
 Layout bundle add Twitter Bootstrap styles for display flash messages. The bundle embed : 
 * a Twig template
@@ -51,3 +51,5 @@ $this->get('asf_layout.flash_message')->info('My message');
 $this->get('asf_layout.flash_message')->warning('My message');
 $this->get('asf_layout.flash_message')->danger('My message');
 ```
+
+[1]: http://symfony.com/doc/current/book/controller.html#flash-messages

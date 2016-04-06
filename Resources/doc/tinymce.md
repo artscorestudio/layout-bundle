@@ -81,9 +81,9 @@ asf_layout:
 
 > Don't forget to set the base_url parameter ! If not, TinyMCE search themes folders (and others) from web root.
 
-You have another way to configure TinyMCE, overriding the Twig template used by tinymce_init() function.
+You have another way to configure TinyMCE, overriding the Twig template used by *tinymce_init()* function.
 
-The ASFLayout Twig template for insert TinyMCE configuration used by tinymce_init() Twig function :
+The ASFLayout Twig template for insert TinyMCE configuration used by *tinymce_init()* Twig function :
 
 ```twig
 # /vendor/artscorestudio/layout-bundle/Resources/views/tinymce/init_js.html.twig
@@ -113,4 +113,6 @@ $(function($, window, document) {
 </script>
 ```
 
-For this way, read the Symfony documentation : [How to Use Bundle Inheritance to Override Parts of a Bundle](http://symfony.com/doc/current/cookbook/bundles/inheritance.html).
+For this way, read the Symfony documentation : [How to Use Bundle Inheritance to Override Parts of a Bundle][1].
+
+[1]: http://symfony.com/doc/current/cookbook/bundles/inheritance.html

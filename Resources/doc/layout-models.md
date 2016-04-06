@@ -1,9 +1,10 @@
 # Layout models provided by ASFLayoutBundle
 
-Layout bundle embed two model layouts for your application. You can use it or not. This models are Twig template models. They include all bundle's supported assets :
+Layout bundle embed two model layouts for your application. You can use it or not. This models are Twig template models. They include following assets :
 * jQuery
-* jQuery UI
 * Twitter Bootstrap 
+
+For further informations about installation of jQuery and Twitter Bootstrap, pleas see documentation : [Enable/Disable supported assets][1].
 
 ## How to use
 
@@ -61,6 +62,6 @@ The first model is a simple base twig template for a frontend/public layout :
 ```
 
 ## Backend/admin model
-The second model is a simple twig template for a backend/admin layout :
+The second model is a simple twig template for a backend/admin layout, extend it like frontend_model.html.twig.
 
-[Not yet implemented]
+[1]: enable-external-library.md
