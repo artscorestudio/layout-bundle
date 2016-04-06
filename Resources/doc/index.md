@@ -26,6 +26,7 @@ If you want to use all features of this bundle, you have to add this packages in
 * Speaking URL 0.11+ (suggest [pid/speakingurl][8])
 * FOS Js Routing Bundle 2+ ([friendsofsymfony/jsrouting-bundle][9])
 * TinyMCE 4+ (suggest [tinymce/tinymce][10])
+* APYDataGrid Bundle (suggest [artscorestudio/APYDataGridBundle][21])
 
 ### Translations
 
@@ -150,6 +151,7 @@ The following documents are available :
 * [Flash Messages][16]
 * [Form Types][17]
 * [Knp Menu template][18]
+* [APYDataGrid bundle support][22]
 * [ASFLayoutBundle Configuration Reference][19]
 * [ASFLayoutBundle Commands Reference][20]
 
@@ -173,3 +175,5 @@ The following documents are available :
 [18]: knp-menu-template.md
 [19]: configuration.md
 [20]: commands.md
+[21]: https://github.com/artscorestudio/APYDataGridBundle
+[22]: apy-datagrid-bundle.md
