@@ -12,7 +12,12 @@
 			{% block asf_base_meta_title_suffix %}{% endblock %}
         </title>
         
-        {% block metas %}{% endblock %}
+		{% block asf_base_meta %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+        {% endblock %}
         
         {% block asf_base_favicon %}
         	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
