@@ -132,6 +132,11 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				if ( isset($config['assets']['tinymce']) ) {
     				    $this->addTinyMCEInAssetic($container, $config['assets']['tinymce']);
     				}
+    				
+    				// Add jQueryTagsInput in assets
+    				if ( isset($config['assets']['jquery_tags_input']) ) {
+    					$this->addJqueryTagsInputInAssetic($container, $config['assets']['jquery_tags_input']);
+    				}
 					break;
 			}
 		}
@@ -318,5 +323,30 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 	            )
 	        ));
 	    }
+	}
+
+	/**
+	 * Adding jQuery Tags Input Plugin in Assetic
+	 *
+	 * @param  ContainerBuilder $container
+	 * @param  array            $config
+	 * @throws InvalidConfigurationException : "Js path not set or CSS path not set"
+	 */
+	protected function addJqueryTagsInputInAssetic(ContainerBuilder $container, array $config)
+	{
+		if ( $config['js'] !== false && $config['css'] !== false) {
+			$container->prependExtensionConfig('assetic', array(
+				'assets' => array(
+					'jquerytagsinput_js' => $config['js'],
+					'jquerytagsinput_css' => $config['css']
+				)
+			));
+			 
+		} elseif ( $config['js'] === false && $config['css'] !== false ) {
+			throw new InvalidConfigurationException('You have enabled jQuery Tags Input supports but js parameter is missing.');
+			 
+		} elseif ( $config['js'] !== false && $config['css'] === false ) {
+			throw new InvalidConfigurationException('You have enabled jQuery Tags Input supports but css parameter is missing.');
+		}
 	}
 }

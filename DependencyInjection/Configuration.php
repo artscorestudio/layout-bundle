@@ -21,6 +21,13 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 class Configuration implements ConfigurationInterface
 {
 	/**
+	 * For assets using components, this is the component dir
+	 * @see https://github.com/RobLoach/component-installer#base-url
+	 * @var string
+	 */
+	const COMPONENTS_DIR = '%kernel.root_dir%/Resources/public';
+	
+	/**
 	 * {@inheritDoc}
 	 * @see \Symfony\Component\Config\Definition\ConfigurationInterface::getConfigTreeBuilder()
 	 */
@@ -44,8 +51,12 @@ class Configuration implements ConfigurationInterface
 					   ->append($this->addBazingaJsTranslationParameterNode())
 					   ->append($this->addSpeakingURLParameterNode())
 					   ->append($this->addTinyMCEParameterNode())
+					   ->append($this->addJqueryTagsInputParameterNode())
 					   ->booleanNode('fos_js_routing')->defaultFalse()->end()
 					->end()
+				->end()
+				->scalarNode('components_dir')
+					->defaultValue(self::COMPONENTS_DIR)
 				->end()
 			->end()
 		;
@@ -62,14 +73,14 @@ class Configuration implements ConfigurationInterface
 	    $node = $builder->root('jquery');
 	    
 	    $node
-            ->treatTrueLike(array('path' => "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"))
+            ->treatTrueLike(array('path' => self::COMPONENTS_DIR."/jquery/jquery.min.js"))
             ->treatFalseLike(array('path' => false))
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('path')
                     ->cannotBeEmpty()
                     ->info('Fill this value if you do not use the package "component/jquery".')
-                    ->defaultValue("%kernel.root_dir%/../vendor/components/jquery/jquery.min.js")
+                    ->defaultValue(self::COMPONENTS_DIR."/components/jquery/jquery.min.js")
                 ->end()
             ->end()
         ;
@@ -87,8 +98,8 @@ class Configuration implements ConfigurationInterface
 	     
 	    $node
 	       ->treatTrueLike(array(
-	           'js' => "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js",
-	           'css' => "%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	           'js' => self::COMPONENTS_DIR."/jqueryui/jquery-ui.min.js",
+	           'css' => self::COMPONENTS_DIR."/jqueryui/themes/ui-lightness/jquery-ui.min.css"
 	       ))
 	       ->treatFalseLike(array('js' => false, 'css' => false))
 	       ->treatNullLike(array('js' => false, 'css' => false))
@@ -96,12 +107,12 @@ class Configuration implements ConfigurationInterface
 	           ->scalarNode('js')
 	               ->cannotBeEmpty()
 	               ->info('Fill this value if you do not use the package "component/jqueryui".')
-	               ->defaultValue("%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js")
+	               ->defaultValue(self::COMPONENTS_DIR."/jqueryui/jquery-ui.min.js")
 	           ->end()
 	           ->scalarNode('css')
 	               ->cannotBeEmpty()
 	               ->info('Fill this value if you do not use the package "component/jqueryui".')
-	               ->defaultValue("%kernel.root_dir%/../vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css")
+	               ->defaultValue(self::COMPONENTS_DIR."/jqueryui/themes/ui-lightness/jquery-ui.min.css")
 	           ->end()
 	       ->end()
 	    ;
@@ -118,7 +129,7 @@ class Configuration implements ConfigurationInterface
 	    $node = $builder->root('twbs');
 	
 	    $defaults = array(
-			'twbs_dir' => '%kernel.root_dir%/../vendor/components/bootstrap',
+			'twbs_dir' => self::COMPONENTS_DIR.'/bootstrap',
 			'js' => array("js/bootstrap.min.js"),
 			'less' => array(
 				"less/bootstrap.less", 
@@ -141,7 +152,7 @@ class Configuration implements ConfigurationInterface
 	           ->scalarNode('twbs_dir')
 	               ->cannotBeEmpty()
 	               ->info('Fill this value if you do not use the package "component/bootstrap".')
-	               ->defaultValue('%kernel.root_dir%/../vendor/components/bootstrap')
+	               ->defaultValue(self::COMPONENTS_DIR.'/bootstrap')
 	           ->end()
 	           ->arrayNode('js')
 	               ->treatNullLike(array())
@@ -360,6 +371,38 @@ class Configuration implements ConfigurationInterface
 	           ->end()
 			->end()
 		;
+	
+		return $node;
+	}
+	
+	/**
+	 * Return jQuery configuration
+	 */
+	protected function addJqueryTagsInputParameterNode()
+	{
+		$builder = new TreeBuilder();
+		$node = $builder->root('jquery_tags_input');
+		 
+		 $node
+	       ->treatTrueLike(array(
+	           'js' => self::COMPONENTS_DIR."/jquery-tags-input/dist/jquerytagsinput.min.js",
+	           'css' => self::COMPONENTS_DIR."/jquery-tags-input/dist/jquerytagsinput.min.css"
+	       ))
+	       ->treatFalseLike(array('js' => false, 'css' => false))
+	       ->treatNullLike(array('js' => false, 'css' => false))
+	       ->children()
+	           ->scalarNode('js')
+	               ->cannotBeEmpty()
+	               ->info('Fill this value if you do not use the package "component/jquery-tags-inputs".')
+	               ->defaultValue(self::COMPONENTS_DIR."/jquery-tags-input/dist/jquerytagsinput.min.js")
+	           ->end()
+	           ->scalarNode('css')
+	               ->cannotBeEmpty()
+	               ->info('Fill this value if you do not use the package "component/jquery-tags-input".')
+	               ->defaultValue(self::COMPONENTS_DIR."/jquery-tags-input/dist/jquerytagsinput.min.css")
+	           ->end()
+	       ->end()
+	    ;
 	
 		return $node;
 	}

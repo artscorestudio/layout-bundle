@@ -33,8 +33,25 @@
 	        "willdurand/js-translation-bundle": ">=2.5",
 	        "pid/speakingurl": ">=0.11",
 	        "friendsofsymfony/jsrouting-bundle": ">=2.0",
-	        "tinymce/tinymce": ">=4"
+	        "tinymce/tinymce": ">=4",
+	        "xoxco/jQuery-Tags-Input": "dev-master"
 	},
+	"repositories" : [{
+        "type": "package",
+        "package": {
+            "name": "xoxco/jQuery-Tags-Input",
+            "version": "dev-master",
+            "dist" : {
+				"url" : "https://github.com/xoxco/jQuery-Tags-Input/archive/master.zip",
+				"type" : "zip"
+			},
+			"source" : {
+				"url" : "https://github.com/xoxco/jQuery-Tags-Input.git",
+				"type" : "git",
+				"reference" : "dev-master"
+			}
+        }
+    }]
 	"autoload" : {
 		"psr-4" : {
 			"ASF\\LayoutBundle\\" : ""
