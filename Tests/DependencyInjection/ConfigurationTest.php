@@ -72,7 +72,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testJqueryPathParameterValueInDefaultConfiguration()
 	{
-	    $this->assertRegExp('/components\/jquery/', $this->defaultConfig['assets']['jquery']['path']);
+	    $this->assertRegExp('/\/jquery/', $this->defaultConfig['assets']['jquery']['path']);
 	}
 	
 	/**
@@ -96,7 +96,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
 	public function testTwbsDirParameterValueInDefaultConfiguration()
 	{
-	    $this->assertRegExp('/components\/bootstrap/', $this->defaultConfig['assets']['twbs']['twbs_dir']);
+	    $this->assertRegExp('/\/bootstrap/', $this->defaultConfig['assets']['twbs']['twbs_dir']);
 	}
 	
 	/**
@@ -251,5 +251,21 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 	public function testTinyMCEParameterInDefaultConfiguration()
 	{
 	    $this->assertArrayNotHasKey('tinymce', $this->defaultConfig['assets']);
+	}
+
+	/**
+	 * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+	 */
+	public function testJqueryTagsInputParameterInDefaultConfiguration()
+	{
+		$this->assertArrayNotHasKey('jquery_tags_input', $this->defaultConfig['assets']);
+	}
+	
+	/**
+	 * @covers ASF\LayoutBundle\DependencyInjection\Configuration
+	 */
+	public function testPrismJSParameterInDefaultConfiguration()
+	{
+		$this->assertArrayNotHasKey('prism_js', $this->defaultConfig['assets']);
 	}
 }

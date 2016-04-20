@@ -343,6 +343,78 @@ class ASFLayoutExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 *
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+	 */
+	public function testJqueryTagsInputCSSPathHasEmptyParameter()
+	{
+		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	
+		$config = $this->getDefaultConfig();
+		$config['assets']['jquery_tags_input']['css'] = '';
+		 
+		$this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 *
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+	 */
+	public function testJqueryTagsInputJsPathHasEmptyParameter()
+	{
+		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	
+		$config = $this->getDefaultConfig();
+		$config['assets']['jquery_tags_input']['js'] = '';
+		 
+		$this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 *
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+	 */
+	public function testPrismJSCSSPathHasEmptyParameter()
+	{
+		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	
+		$config = $this->getDefaultConfig();
+		$config['assets']['prism_js']['css'] = '';
+			
+		$this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::prepend
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureTwigBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::configureAsseticBundle
+	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::<protected>
+	 *
+	 * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+	 */
+	public function testPrismJSJsPathHasEmptyParameter()
+	{
+		$this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException');
+	
+		$config = $this->getDefaultConfig();
+		$config['assets']['prism_js']['js'] = '';
+			
+		$this->extension->load(array($config), $this->getContainer());
+	}
+	
+	/**
 	 * Return a mock object of ContainerBuilder
 	 * 
 	 * @return \Symfony\Component\DependencyInjection\ContainerBuilder
