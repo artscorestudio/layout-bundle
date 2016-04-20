@@ -52,6 +52,7 @@ class Configuration implements ConfigurationInterface
 					   ->append($this->addSpeakingURLParameterNode())
 					   ->append($this->addTinyMCEParameterNode())
 					   ->append($this->addJqueryTagsInputParameterNode())
+					   ->append($this->addPrismJSParameterNode())
 					   ->booleanNode('fos_js_routing')->defaultFalse()->end()
 					->end()
 				->end()
@@ -376,7 +377,7 @@ class Configuration implements ConfigurationInterface
 	}
 	
 	/**
-	 * Return jQuery configuration
+	 * Return jQuery Tags Input Plugin configuration
 	 */
 	protected function addJqueryTagsInputParameterNode()
 	{
@@ -403,6 +404,38 @@ class Configuration implements ConfigurationInterface
 	           ->end()
 	       ->end()
 	    ;
+	
+		return $node;
+	}
+	
+	/**
+	 * Return PrismJS configuration
+	 */
+	protected function addPrismJSParameterNode()
+	{
+		$builder = new TreeBuilder();
+		$node = $builder->root('prism_js');
+			
+		$node
+			->treatTrueLike(array(
+				'js' => self::COMPONENTS_DIR."/prismjs/prism.js",
+				'css' => self::COMPONENTS_DIR."/prismjs/themes/prism.css"
+			))
+			->treatFalseLike(array('js' => false, 'css' => false))
+			->treatNullLike(array('js' => false, 'css' => false))
+			->children()
+				->scalarNode('js')
+					->cannotBeEmpty()
+					->info('Fill this value if you do not use the package "component/prismjs".')
+					->defaultValue(self::COMPONENTS_DIR."/prismjs/prism.js")
+				->end()
+				->scalarNode('css')
+					->cannotBeEmpty()
+					->info('Fill this value if you do not use the package "component/prismjs".')
+					->defaultValue(self::COMPONENTS_DIR."/prismjs/themes/prism.css")
+				->end()
+			->end()
+		;
 	
 		return $node;
 	}

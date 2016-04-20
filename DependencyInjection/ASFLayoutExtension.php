@@ -137,6 +137,11 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
     				if ( isset($config['assets']['jquery_tags_input']) ) {
     					$this->addJqueryTagsInputInAssetic($container, $config['assets']['jquery_tags_input']);
     				}
+    				
+    				// Add PrismJS in assets
+    				if ( isset($config['assets']['prism_js']) ) {
+    					$this->addPrismJSInAssetic($container, $config['assets']['prism_js']);
+    				}
 					break;
 			}
 		}
@@ -347,6 +352,31 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 			 
 		} elseif ( $config['js'] !== false && $config['css'] === false ) {
 			throw new InvalidConfigurationException('You have enabled jQuery Tags Input supports but css parameter is missing.');
+		}
+	}
+	
+	/**
+	 * Adding PrismJS in Assetic
+	 *
+	 * @param  ContainerBuilder $container
+	 * @param  array            $config
+	 * @throws InvalidConfigurationException : "Js path not set or CSS path not set"
+	 */
+	protected function addPrismJSInAssetic(ContainerBuilder $container, array $config)
+	{
+		if ( $config['js'] !== false && $config['css'] !== false) {
+			$container->prependExtensionConfig('assetic', array(
+				'assets' => array(
+					'prismjs_js' => $config['js'],
+					'prismjs_css' => $config['css']
+				)
+			));
+	
+		} elseif ( $config['js'] === false && $config['css'] !== false ) {
+			throw new InvalidConfigurationException('You have enabled PrismJS supports but js parameter is missing.');
+	
+		} elseif ( $config['js'] !== false && $config['css'] === false ) {
+			throw new InvalidConfigurationException('You have enabled PrismJS supports but css parameter is missing.');
 		}
 	}
 }
