@@ -34,12 +34,14 @@
 	        "pid/speakingurl": ">=0.11",
 	        "friendsofsymfony/jsrouting-bundle": ">=2.0",
 	        "tinymce/tinymce": ">=4",
-	        "xoxco/jQuery-Tags-Input": "dev-master"
+	        "components/jquery-tags-input": "dev-master",
+        	"components/prismjs": "dev-master"
 	},
 	"repositories" : [{
         "type": "package",
         "package": {
-            "name": "xoxco/jQuery-Tags-Input",
+            "name": "components/jquery-tags-input",
+            "type": "component",
             "version": "dev-master",
             "dist" : {
 				"url" : "https://github.com/xoxco/jQuery-Tags-Input/archive/master.zip",
@@ -49,9 +51,45 @@
 				"url" : "https://github.com/xoxco/jQuery-Tags-Input.git",
 				"type" : "git",
 				"reference" : "dev-master"
+			},
+			"extra": {
+			    "component": {
+			        "scripts": [
+			            "dist/jquery.tagsinput.min.js"
+			        ],
+			        "styles": [
+			            "dist/jquery.tagsinput.min.css"
+			        ]
+			    }
 			}
         }
-    }]
+    }, {
+        "type": "package",
+        "package": {
+            "name": "components/prismjs",
+            "type": "component",
+            "version": "dev-master",
+            "dist" : {
+				"url" : "https://github.com/PrismJS/prism/archive/gh-pages.zip",
+				"type" : "zip"
+			},
+			"source" : {
+				"url" : "https://github.com/PrismJS/prism.git",
+				"type" : "git",
+				"reference" : "dev-master"
+			},
+			"extra": {
+			    "component": {
+			        "scripts": [
+			            "prism.js"
+			        ],
+			        "styles": [
+			            "themes/prism.css"
+			        ]
+			    }
+			}
+        }
+    }],
 	"autoload" : {
 		"psr-4" : {
 			"ASF\\LayoutBundle\\" : ""
