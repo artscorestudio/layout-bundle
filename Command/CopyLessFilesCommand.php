@@ -143,6 +143,15 @@ class CopyLessFilesCommand extends ContainerAwareCommand
         
         $from     = explode('/', $from);
         $to       = explode('/', $to);
+        $from2 = array();
+        foreach($from as $key => $value) {
+        	if ( $value === '..' ) {
+        		unset($from2[$key-1]);
+        	} else {
+        		$from2[] = $value;
+        	}
+        }
+        $from = $from2;
         $relPath  = $to;
         
         foreach ($from as $depth => $dir) {
@@ -153,9 +162,11 @@ class CopyLessFilesCommand extends ContainerAwareCommand
             } else {
                 // get number of remaining dirs to $from
                 $remaining = count($from) - $depth;
+                
                 if ($remaining > 1) {
                     // add traversals up to first matching dir
-                    $padLength = (count($relPath) + $remaining - 1) * -1;
+                    $padLength = (count($relPath) + $remaining) * -1;
+                    
                     $relPath = array_pad($relPath, $padLength, '..');
                     break;
                 } else {

@@ -8,6 +8,9 @@ Layout bundle comes with a list of supported assets. The available assets are :
 * [Bazinga Js TranslationBundle for get bundle's translations in javascript](#bazinga)
 * [Speaking URL for generate a slug](#speakingurl)
 * [TinyMCE](#tinymce)
+* [jQuery Input Tags](#jquery_input_tags)
+* [PrismJs](#prismjs)
+* [Three.js](#threejs)
 
 The support of an assets means that you have just to enable it in bundle's configuration, add it in the composer.json file of your Symfony project and in your Twig template. Enable external libraries in LayoutBundle allows them to automatically add it in the lists of assets of AsseticBundle. [For more information about AsseticBundle, please see its documentation][11].
 
@@ -506,6 +509,263 @@ asf_layout:
 
 For more information about TinyMCE, please check this documentation chapter : [Configure TinyMCE][10].
 
+## <a name="jquery_input_tags"></a>Enable/disable jQuery Tags Input (optionnal)
+
+> Do you use tags to organize content on your site? This plugin will turn your boring tag list into a magical input that turns each tag into a style-able object with its own delete link. The plugin handles all the data - your form just sees a comma-delimited list of tags!
+
+### Adding jQuery Tags Input in your project's composer.json file
+
+I suggest to installl juqery Input Tags like a component (with [robloach/component-installer][12]) . Open composer.json of your project and add this lines :
+
+```json
+{
+	"require": {
+		"components/jquery-tags-input": "dev-master",
+	},
+	"repositories" : [{
+        "type": "package",
+        "package": {
+            "name": "components/jquery-tags-input",
+            "type": "component",
+            "version": "dev-master",
+            "dist" : {
+				"url" : "https://github.com/xoxco/jQuery-Tags-Input/archive/master.zip",
+				"type" : "zip"
+			},
+			"source" : {
+				"url" : "https://github.com/xoxco/jQuery-Tags-Input.git",
+				"type" : "git",
+				"reference" : "dev-master"
+			},
+			"extra": {
+			    "component": {
+			        "scripts": [
+			            "dist/jquery.tagsinput.min.js"
+			        ],
+			        "styles": [
+			            "dist/jquery.tagsinput.min.css"
+			        ]
+			    }
+			}
+        }
+    }],
+```
+
+````bash
+$ composer update
+```
+
+You can enable it by two different ways. First, just passing *true* in LayoutBundle configuration :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        jquery_tags_input: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        jquery_tags_input:
+            js: "%kernel.root_dir%/../vendor/components/jquery-tags-input/dist/jquery.tagsinput.min.js"
+            css: "%kernel.root_dir%/../vendor/components/jquery-tags-input/dist/jquery.tagsinput.min.css"
+```
+
+If you do not want to use this repository, please don't forget to change the path to your jQuery UI files like this :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        jquery_tags_input:
+            js: "/path/to/your/jquery_tags_input/js/file"
+            css: "/path/to/your/jquery_tags_input/css/file"
+```
+
+Update your Twig template :
+
+```twig
+{% stylesheets '@jquerytagsinput_css' %}
+	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+{% endstylesheets %}
+
+{% javascripts '@jquerytagsinput_js' %}
+	<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+```
+
+### Disable jQuery Tags Input
+
+Just edit config.yml :
+
+```yaml
+asf_layout:
+    assets:
+        jquery_tags_input: false
+```
+
+## <a name="prismjs"></a>Enable/disable PrismJs (optionnal)
+
+> Prism is a lightweight, robust, elegant syntax highlighting library.
+
+### Adding PrismJS in your project's composer.json file
+
+I suggest to install juqery Input Tags like a component (with [robloach/component-installer][12]) . Open composer.json of your project and add this lines :
+
+```json
+{
+	"require": {
+		"components/prismjs": "dev-master",
+	},
+	"repositories" : [{
+        "type": "package",
+        "package": {
+            "name": "components/prismjs",
+            "type": "component",
+            "version": "dev-master",
+            "dist" : {
+				"url" : "https://github.com/PrismJS/prism/archive/gh-pages.zip",
+				"type" : "zip"
+			},
+			"source" : {
+				"url" : "https://github.com/PrismJS/prism.git",
+				"type" : "git",
+				"reference" : "dev-master"
+			},
+			"extra": {
+			    "component": {
+			        "scripts": [
+			            "prism.js"
+			        ],
+			        "styles": [
+			            "themes/prism.css"
+			        ]
+			    }
+			}
+        }
+    }],
+```
+
+````bash
+$ composer update
+```
+
+You can enable it by two different ways. First, just passing *true* in LayoutBundle configuration :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        prism_js: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        prism_js:
+            js: "%kernel.root_dir%/../vendor/components/prismjs/prism.js"
+            css: "%kernel.root_dir%/../vendor/components/prismjs/themes/prism.css"
+```
+
+If you do not want to use this repository, please don't forget to change the path to your jQuery UI files like this :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        prism_js:
+            js: "/path/to/your/prism_js/js/file"
+            css: "/path/to/your/prism_js/css/file"
+```
+
+Update your Twig template :
+
+```twig
+{% stylesheets '@prismjs_css' %}
+	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+{% endstylesheets %}
+
+{% javascripts '@prismjs_js' %}
+	<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+```
+
+### Disable PrismJs
+
+Just edit config.yml :
+
+```yaml
+asf_layout:
+    assets:
+        prism_js: false
+```
+
+## <a name="threejs"></a>Enable/disable Three.js (optionnal)
+
+> JavaScript 3D library.
+
+### Adding Three.js in your project's composer.json file
+
+I suggest to install juqery Input Tags like a component (with [robloach/component-installer][12]) . Open composer.json of your project and add this lines :
+
+````bash
+$ composer require components/three.js
+```
+
+You can enable it by two different ways. First, just passing *true* in LayoutBundle configuration :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        three_js: true
+```
+
+This configuration is like following (second way) :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        three_js:
+            js: "%kernel.root_dir%/../vendor/components/threejs/three.js"
+```
+
+If you do not want to use this repository, please don't forget to change the path to your three.js file like this :
+
+```yaml
+# app/config/config.yml
+asf_layout:
+    assets:
+        three_js:
+            js: "/path/to/your/three_js/js/file"
+```
+
+Update your Twig template :
+
+```twig
+{% javascripts '@threejs_js' %}
+	<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+```
+
+### Disable PrismJs
+
+Just edit config.yml :
+
+```yaml
+asf_layout:
+    assets:
+        three_js: false
+```
+
 [1]:  https://packagist.org/packages/components/jquery
 [2]:  https://packagist.org/packages/components/jqueryui
 [3]:  https://packagist.org/packages/components/bootstrap
@@ -517,3 +777,4 @@ For more information about TinyMCE, please check this documentation chapter : [C
 [9]:  https://packagist.org/packages/tinymce/tinymce
 [10]: tinymce.md
 [11]: http://symfony.com/doc/current/cookbook/assetic/asset_management.html
+[12]: https://github.com/RobLoach/component-installer
