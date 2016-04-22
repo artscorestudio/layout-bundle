@@ -100,8 +100,8 @@ class Configuration implements ConfigurationInterface
 	     
 	    $node
 	       ->treatTrueLike(array(
-	           'js' => self::COMPONENTS_DIR."/jqueryui/jquery-ui.min.js",
-	           'css' => self::COMPONENTS_DIR."/jqueryui/themes/ui-lightness/jquery-ui.min.css"
+	           'js' => self::COMPONENTS_DIR."/jquery-ui/jquery-ui.min.js",
+	           'css' => self::COMPONENTS_DIR."/jquery-ui/themes/ui-lightness/jquery-ui.min.css"
 	       ))
 	       ->treatFalseLike(array('js' => false, 'css' => false))
 	       ->treatNullLike(array('js' => false, 'css' => false))
@@ -109,12 +109,12 @@ class Configuration implements ConfigurationInterface
 	           ->scalarNode('js')
 	               ->cannotBeEmpty()
 	               ->info('Fill this value if you do not use the package "component/jqueryui".')
-	               ->defaultValue(self::COMPONENTS_DIR."/jqueryui/jquery-ui.min.js")
+	               ->defaultValue(self::COMPONENTS_DIR."/jquery-ui/jquery-ui.min.js")
 	           ->end()
 	           ->scalarNode('css')
 	               ->cannotBeEmpty()
 	               ->info('Fill this value if you do not use the package "component/jqueryui".')
-	               ->defaultValue(self::COMPONENTS_DIR."/jqueryui/themes/ui-lightness/jquery-ui.min.css")
+	               ->defaultValue(self::COMPONENTS_DIR."/jquery-ui/themes/ui-lightness/jquery-ui.min.css")
 	           ->end()
 	       ->end()
 	    ;
