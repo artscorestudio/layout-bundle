@@ -450,14 +450,14 @@ class Configuration implements ConfigurationInterface
 	    $node = $builder->root('three_js');
 	    
 	    $node
-            ->treatTrueLike(array('path' => self::COMPONENTS_DIR."/threejs/three.min.js"))
+            ->treatTrueLike(array('path' => self::COMPONENTS_DIR."/threejs/build/three.min.js"))
             ->treatFalseLike(array('path' => false))
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('path')
                     ->cannotBeEmpty()
                     ->info('Fill this value if you do not use the package "component/jquery".')
-                    ->defaultValue(self::COMPONENTS_DIR."/threejs/three.min.js")
+                    ->defaultValue(self::COMPONENTS_DIR."/threejs/build/three.min.js")
                 ->end()
             ->end()
         ;
