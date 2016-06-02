@@ -125,6 +125,8 @@ assetic:
 
 For enable all supported assets, please check [Enable/Disable supported assets][12] in this documentation.
 
+> Don(t forget to set Assetic Configuration ([see Assetic Installation instructions][23]).
+
 ### Step 4 : Extend model layouts
 
 Open your base template and extend model templates from Layout bundle :
@@ -177,3 +179,4 @@ The following documents are available :
 [20]: commands.md
 [21]: https://github.com/artscorestudio/APYDataGridBundle
 [22]: apy-datagrid-bundle.md
+[23]: http://symfony.com/doc/current/cookbook/assetic/asset_management.html
