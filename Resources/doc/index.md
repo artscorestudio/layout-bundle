@@ -125,7 +125,7 @@ assetic:
 
 For enable all supported assets, please check [Enable/Disable supported assets][12] in this documentation.
 
-> Don(t forget to set Assetic Configuration ([see Assetic Installation instructions][23]).
+> Don't forget to set Assetic Configuration ([see Assetic Installation instructions][23]).
 
 ### Step 4 : Extend model layouts
 
@@ -133,7 +133,7 @@ Open your base template and extend model templates from Layout bundle :
 
 ```twig
 // app/Resources/views/base.html.twig
-{% extends ASFLayoutBundle::frontend_layout.html.twig %}
+{% extends ASFLayoutBundle::frontend_model.html.twig %}
 ```
 
 And it's done ! If you go in your favorite browser, you have basic template for your project based on jQuery and Twitter Bootstrap.
