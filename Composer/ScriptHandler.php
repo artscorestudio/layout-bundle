@@ -40,8 +40,6 @@ class ScriptHandler
      */
     public static function defineDirectoryStructure(CommandEvent $event)
     {
-        $options = static::getOptions($event);
-    
         if (!getenv('SENSIOLABS_ENABLE_NEW_DIRECTORY_STRUCTURE') || !$event->getIO()->askConfirmation('Would you like to use Symfony 3 directory structure? [y/N] ', false)) {
             return;
         }
