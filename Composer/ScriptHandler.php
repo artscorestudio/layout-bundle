@@ -45,12 +45,6 @@ class ScriptHandler
         if (!getenv('SENSIOLABS_ENABLE_NEW_DIRECTORY_STRUCTURE') || !$event->getIO()->askConfirmation('Would you like to use Symfony 3 directory structure? [y/N] ', false)) {
             return;
         }
-    
-        $rootDir = getcwd();
-        $appDir = $options['symfony-app-dir'];
-        $webDir = $options['symfony-web-dir'];
-        $binDir = static::$options['symfony-bin-dir'] = 'bin';
-        $varDir = static::$options['symfony-var-dir'] = 'var';
     }
     
     /**

@@ -46,7 +46,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		    $loader->load('services/flash_messages.xml');
 		}
 		
-		if ( isset($config['assets']['tinymce']) && $config['assets']['tinymce'] != false ) {
+		if ( isset($config['assets']['tinymce']) && $config['assets']['tinymce'] !== false ) {
 		    $loader->load('services/tinymce.xml');
 		}
 	}
@@ -62,7 +62,7 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		$configs = $container->getExtensionConfig($this->getAlias());
 		$config = $this->processConfiguration(new Configuration(), $configs);
 		
-		if ( !array_key_exists('FOSJsRoutingBundle', $bundles) && $config['assets']['fos_js_routing'] == true )
+		if ( !array_key_exists('FOSJsRoutingBundle', $bundles) && $config['assets']['fos_js_routing'] === true )
 		    throw new InvalidConfigurationException('You have enabled the support of FOSJsRouting but it is not enabled. Install it or disable FOSJsRoutingBundle support in Layout bundle.');
 
 		$this->configureTwigBundle($container, $config);

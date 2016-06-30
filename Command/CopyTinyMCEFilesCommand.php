@@ -16,7 +16,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -74,7 +73,6 @@ class CopyTinyMCEFilesCommand extends ContainerAwareCommand
 
         
         $finder = new Finder();
-        $fs = new Filesystem();
         
         try {
             if ( !$fs->exists($dest_dir) )

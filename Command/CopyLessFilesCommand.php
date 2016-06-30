@@ -16,7 +16,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -109,7 +108,7 @@ class CopyLessFilesCommand extends ContainerAwareCommand
             
             $dest = sprintf('%s/%s', $dest_dir, $file->getBaseName());
             
-            if ( $copy == true && !$fs->exists($dest)) {
+            if ( $copy === true && !$fs->exists($dest)) {
                 try {
                     $fs->copy($file, $dest);
                     $this->replacePathInFile('/@import "/', '@import "'.$path, $dest, $files);
