@@ -16,6 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Copy TinyMCE Files Command
@@ -69,6 +70,8 @@ class CopyTinyMCEFilesCommand extends ContainerAwareCommand
         $exclude_files = $input->getOption('exclude_files') ? $input->getOption('exclude_files') : $this->tinymce_config['customize']['exclude_files'];
         $src_dir = sprintf('%s', $this->tinymce_config['tinymce_dir']);
 
+        $fs = new Filesystem();
+        
         try {
             if ( !$fs->exists($dest_dir) )
                 $fs->mkdir($dest_dir);
