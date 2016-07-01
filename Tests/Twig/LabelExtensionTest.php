@@ -8,9 +8,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace ASF\LayoutBundle\Tests\Twig\Extension;
+namespace ASF\LayoutBundle\Tests\Twig;
 
-use ASF\LayoutBundle\Twig\Extension\LabelExtension;
+use ASF\LayoutBundle\Twig\LabelExtension;
 
 /**
  * LabelExtensionTest.
@@ -38,7 +38,7 @@ class LabelExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\LabelExtension::getFunctions()
+     * @covers ASF\LayoutBundle\Twig\LabelExtension::getFunctions()
      */
     public function testGetFunctions()
     {
@@ -46,7 +46,7 @@ class LabelExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\LabelExtension::labelFunction
+     * @covers ASF\LayoutBundle\Twig\LabelExtension::labelFunction
      */
     public function testLabelFunction()
     {
@@ -63,7 +63,7 @@ class LabelExtensionTest extends \PHPUnit_Framework_TestCase
             );
     }
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\LabelExtension::labelSuccessFunction
+     * @covers ASF\LayoutBundle\Twig\LabelExtension::labelSuccessFunction
      */
     public function testLabelSuccessFunction()
     {
@@ -73,7 +73,7 @@ class LabelExtensionTest extends \PHPUnit_Framework_TestCase
             );
     }
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\LabelExtension::labelWarningFunction
+     * @covers ASF\LayoutBundle\Twig\LabelExtension::labelWarningFunction
      */
     public function testLabelWarningFunction()
     {
@@ -83,7 +83,7 @@ class LabelExtensionTest extends \PHPUnit_Framework_TestCase
             );
     }
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\LabelExtension::labelDangerFunction
+     * @covers ASF\LayoutBundle\Twig\LabelExtension::labelDangerFunction
      */
     public function testLabelDangerFunction()
     {
@@ -93,7 +93,7 @@ class LabelExtensionTest extends \PHPUnit_Framework_TestCase
             );
     }
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\LabelExtension::labelInfoFunction
+     * @covers ASF\LayoutBundle\Twig\LabelExtension::labelInfoFunction
      */
     public function testLabelInfoFunction()
     {
@@ -102,8 +102,9 @@ class LabelExtensionTest extends \PHPUnit_Framework_TestCase
             $this->extension->labelInfoFunction('Foobar')
             );
     }
+    
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\LabelExtension::labelPrimaryFunction
+     * @covers ASF\LayoutBundle\Twig\LabelExtension::labelPrimaryFunction
      */
     public function testLabelPrimaryFunction()
     {
@@ -114,7 +115,7 @@ class LabelExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\LabelExtension::getName()
+     * @covers ASF\LayoutBundle\Twig\LabelExtension::getName()
      */
     public function testGetName()
     {

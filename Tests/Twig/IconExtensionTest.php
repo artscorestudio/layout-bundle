@@ -8,9 +8,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace ASF\LayoutBundle\Tests\Twig\Extension;
+namespace ASF\LayoutBundle\Tests\Twig;
 
-use ASF\LayoutBundle\Twig\Extension\IconExtension;
+use ASF\LayoutBundle\Twig\IconExtension;
 
 /**
  * BootstrapIconExtensionTest.
@@ -29,7 +29,7 @@ use ASF\LayoutBundle\Twig\Extension\IconExtension;
 class IconExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\IconExtension::getFilters()
+     * @covers ASF\LayoutBundle\Twig\IconExtension::getFilters()
      */
     public function testGetFilters()
     {
@@ -37,7 +37,7 @@ class IconExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\IconExtension::getFunctions()
+     * @covers ASF\LayoutBundle\Twig\IconExtension::getFunctions()
      */
     public function testGetFunctions()
     {
@@ -45,7 +45,7 @@ class IconExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\IconExtension::iconFunction
+     * @covers ASF\LayoutBundle\Twig\IconExtension::iconFunction
      */
     public function testIconFilter()
     {
@@ -62,7 +62,7 @@ class IconExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\IconExtension::iconFunction
+     * @covers ASF\LayoutBundle\Twig\IconExtension::iconFunction
      */
     public function testIconFilterWithDifferntPrefix()
     {
@@ -79,7 +79,7 @@ class IconExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\IconExtension::parseIconsFilter
+     * @covers ASF\LayoutBundle\Twig\IconExtension::parseIconsFilter
      */
     public function testParseIconsFilter()
     {
@@ -96,7 +96,7 @@ class IconExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\IconExtension::parseIconsFilter
+     * @covers ASF\LayoutBundle\Twig\IconExtension::parseIconsFilter
      */
     public function testParseIconsFilterWithDifferntPrefix()
     {
@@ -113,7 +113,7 @@ class IconExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\IconExtension::getName()
+     * @covers ASF\LayoutBundle\Twig\IconExtension::getName()
      */
     public function testGetName()
     {
@@ -123,7 +123,7 @@ class IconExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @param string $iconPrefix
      *
-     * @return \ASF\LayoutBundle\Twig\Extension\IconExtension
+     * @return \ASF\LayoutBundle\Twig\IconExtension
      */
     private function getIconExtension($iconPrefix = null)
     {

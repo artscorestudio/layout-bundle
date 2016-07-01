@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ASF\LayoutBundle\Tests\Twig\Extension;
+namespace ASF\LayoutBundle\Tests\Twig;
 
-use ASF\LayoutBundle\Twig\Extension\TinyMCEExtension;
+use ASF\LayoutBundle\Twig\TinyMCEExtension;
 
 /**
  * TinyMCE Extension for generate tinymce init.
@@ -20,7 +20,7 @@ use ASF\LayoutBundle\Twig\Extension\TinyMCEExtension;
 class TinyMCEExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ASF\LayoutBundle\Twig\Extension\TinyMCEExtension
+     * @var ASF\LayoutBundle\Twig\TinyMCEExtension
      */
     protected $extension;
 
@@ -38,7 +38,7 @@ class TinyMCEExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\TinyMCEExtension::getFunctions()
+     * @covers ASF\LayoutBundle\Twig\TinyMCEExtension::getFunctions()
      */
     public function testGetFunctions()
     {
@@ -46,7 +46,7 @@ class TinyMCEExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\TinyMCEExtension::getName()
+     * @covers ASF\LayoutBundle\Twig\TinyMCEExtension::getName()
      */
     public function testGetName()
     {

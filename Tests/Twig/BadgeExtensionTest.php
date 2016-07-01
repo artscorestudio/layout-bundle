@@ -8,9 +8,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace ASF\LayoutBundle\Tests\Twig\Extension;
+namespace ASF\LayoutBundle\Tests\Twig;
 
-use ASF\LayoutBundle\Twig\Extension\BadgeExtension;
+use ASF\LayoutBundle\Twig\BadgeExtension;
 
 /**
  * BadgeExtensionTest.
@@ -26,7 +26,7 @@ use ASF\LayoutBundle\Twig\Extension\BadgeExtension;
 class BadgeExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ASF\LayoutBundle\Twig\Extension\BadgeExtension
+     * @var ASF\LayoutBundle\Twig\BadgeExtension
      */
     protected $extension;
 
@@ -39,7 +39,7 @@ class BadgeExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\BadgeExtension::getFunctions()
+     * @covers ASF\LayoutBundle\Twig\BadgeExtension::getFunctions()
      */
     public function testGetFunctions()
     {
@@ -47,7 +47,7 @@ class BadgeExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\BadgeExtension::badgeFunction
+     * @covers ASF\LayoutBundle\Twig\BadgeExtension::badgeFunction
      */
     public function testBadgeFunction()
     {
@@ -59,7 +59,7 @@ class BadgeExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\BadgeExtension::getName()
+     * @covers ASF\LayoutBundle\Twig\BadgeExtension::getName()
      */
     public function testGetName()
     {

@@ -8,9 +8,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace ASF\LayoutBundle\Tests\Twig\Extension;
+namespace ASF\LayoutBundle\Tests\Twig;
 
-use ASF\LayoutBundle\Twig\Extension\FlashMessagesExtension;
+use ASF\LayoutBundle\Twig\FlashMessagesExtension;
 
 /**
  * FlashMessagesExtensionTest.
@@ -20,7 +20,7 @@ use ASF\LayoutBundle\Twig\Extension\FlashMessagesExtension;
 class FlashMessagesExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ASF\LayoutBundle\Twig\Extension\FlashMessagesExtension
+     * @var ASF\LayoutBundle\Twig\FlashMessagesExtension
      */
     protected $extension;
 
@@ -33,7 +33,7 @@ class FlashMessagesExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\FlashMessagesExtension::getFunctions()
+     * @covers ASF\LayoutBundle\Twig\FlashMessagesExtension::getFunctions()
      */
     public function testGetFunctions()
     {
@@ -41,14 +41,14 @@ class FlashMessagesExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\FlashMessagesExtension::FlashMessages
+     * @covers ASF\LayoutBundle\Twig\FlashMessagesExtension::FlashMessages
      */
     public function testFlashMessages()
     {
     }
 
     /**
-     * @covers ASF\LayoutBundle\Twig\Extension\FlashMessagesExtension::getName()
+     * @covers ASF\LayoutBundle\Twig\FlashMessagesExtension::getName()
      */
     public function testGetName()
     {
