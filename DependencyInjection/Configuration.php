@@ -144,7 +144,7 @@ class Configuration implements ConfigurationInterface
             'icon_prefix' => 'glyphicon',
             'fonts_dir' => '%kernel.root_dir%/../web/fonts',
             'icon_tag' => 'span',
-            'form_theme' => 'ASFLayoutBundle:form:form_div_layout.html.twig',
+            'form_theme' => 'ASFLayoutBundle:form:fields.html.twig',
         );
 
         $node
@@ -197,7 +197,7 @@ class Configuration implements ConfigurationInterface
                    ->defaultValue('%kernel.root_dir%/../web/fonts')
                ->end()
                ->scalarNode('form_theme')
-                   ->defaultValue('ASFLayoutBundle:Form:fields.html.twig')
+                   ->defaultValue('ASFLayoutBundle:form:fields.html.twig')
                ->end()
                ->arrayNode('customize')
                    ->children()
