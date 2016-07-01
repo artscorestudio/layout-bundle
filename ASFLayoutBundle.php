@@ -7,14 +7,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace ASF\LayoutBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Layout Bundle
+ * Layout Bundle.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
- *
  */
-class ASFLayoutBundle extends Bundle {}
+class ASFLayoutBundle extends Bundle
+{
+}

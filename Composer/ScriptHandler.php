@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace ASF\LayoutBundle\Composer;
 
 use Composer\Script\CommandEvent;
@@ -14,10 +15,9 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Process\PhpExecutableFinder;
 
 /**
- * ScriptHandler
+ * ScriptHandler.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
- *
  */
 class ScriptHandler
 {
@@ -32,7 +32,7 @@ class ScriptHandler
         'symfony-assets-install' => 'hard',
         'symfony-cache-warmup' => false,
     );
-    
+
     /**
      * Asks if the new directory structure should be used, installs the structure if needed.
      *
@@ -44,7 +44,7 @@ class ScriptHandler
             return;
         }
     }
-    
+
     /**
      * @param CommandEnvent $event
      */
@@ -52,20 +52,20 @@ class ScriptHandler
     {
         $options = static::getOptions($event);
         $consoleDir = static::getConsoleDir($event, 'install TinyMCE files');
-        
+
         if (null === $consoleDir) {
             return;
         }
-        
+
         $webDir = $options['symfony-web-dir'];
-        
+
         if (!static::hasDirectory($event, 'symfony-web-dir', $webDir, 'install TinyMCE files')) {
             return;
         }
-        
+
         static::executeCommand($event, $consoleDir, 'asf:tinymce:copy', $options['process-timeout']);
     }
-    
+
     /**
      * @param CommandEnvent $event
      */
@@ -73,25 +73,26 @@ class ScriptHandler
     {
         $options = static::getOptions($event);
         $consoleDir = static::getConsoleDir($event, 'install bootstrap fonts and files');
-        
+
         if (null === $consoleDir) {
             return;
         }
-        
+
         $webDir = $options['symfony-web-dir'];
-        
+
         if (!static::hasDirectory($event, 'symfony-web-dir', $webDir, 'install bootstrap fonts and files')) {
             return;
         }
-        
+
         static::executeCommand($event, $consoleDir, 'asf:twbs:fonts:install ', $options['process-timeout']);
     }
-    
+
     /**
      * @param CommandEvent $event
      * @param string       $consolePath
      * @param string       $cmd
      * @param number       $timeout
+     *
      * @throws \RuntimeException
      */
     public static function executeCommand(CommandEvent $event, $consoleDir, $cmd, $timeout = 300)
@@ -109,18 +110,18 @@ class ScriptHandler
             throw new \RuntimeException(sprintf("An error occurred when executing the \"%s\" command:\n\n%s\n\n%s.", escapeshellarg($cmd), $process->getOutput(), $process->getErrorOutput()));
         }
     }
-    
+
     protected static function hasDirectory(CommandEvent $event, $configName, $path, $actionName)
     {
         if (!is_dir($path)) {
             $event->getIO()->write(sprintf('The %s (%s) specified in composer.json was not found in %s, can not %s.', $configName, $path, getcwd(), $actionName));
-    
+
             return false;
         }
-    
+
         return true;
     }
-    
+
     /**
      * Clears the Symfony cache.
      *
@@ -130,21 +131,21 @@ class ScriptHandler
     {
         $options = static::getOptions($event);
         $consoleDir = static::getConsoleDir($event, 'clear the cache');
-    
+
         if (null === $consoleDir) {
             return;
         }
-    
+
         $warmup = '';
         if (!$options['symfony-cache-warmup']) {
             $warmup = ' --no-warmup';
         }
-    
+
         static::executeCommand($event, $consoleDir, 'cache:clear'.$warmup, $options['process-timeout']);
     }
-    
+
     /**
-     * Return options for commands
+     * Return options for commands.
      * 
      * @param CommandEvent $event
      */
@@ -158,12 +159,14 @@ class ScriptHandler
 
         return $options;
     }
-    
+
     /**
-     * Return the path to the PHP executable
+     * Return the path to the PHP executable.
      * 
      * @param string $includeArgs
+     *
      * @throws \RuntimeException
+     *
      * @return string|\Symfony\Component\Process\false
      */
     protected static function getPhp($includeArgs = true)
@@ -177,7 +180,7 @@ class ScriptHandler
     }
 
     /**
-     * Return PHP command arguments
+     * Return PHP command arguments.
      * 
      * @return array
      */
@@ -196,7 +199,7 @@ class ScriptHandler
 
         return $arguments;
     }
-    
+
     /**
      * Returns a relative path to the directory that contains the `console` command.
      *
@@ -208,22 +211,22 @@ class ScriptHandler
     protected static function getConsoleDir(CommandEvent $event, $actionName)
     {
         $options = static::getOptions($event);
-    
+
         if (static::useNewDirectoryStructure($options)) {
             if (!static::hasDirectory($event, 'symfony-bin-dir', $options['symfony-bin-dir'], $actionName)) {
                 return;
             }
-    
+
             return $options['symfony-bin-dir'];
         }
-    
+
         if (!static::hasDirectory($event, 'symfony-app-dir', $options['symfony-app-dir'], 'execute command')) {
             return;
         }
-    
+
         return $options['symfony-app-dir'];
     }
-    
+
     /**
      * Returns true if the new directory structure is used.
      *

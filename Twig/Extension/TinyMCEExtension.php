@@ -7,13 +7,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace ASF\LayoutBundle\Twig\Extension;
 
 /**
- * TinyMCE Extension for generate tinymce init
+ * TinyMCE Extension for generate tinymce init.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
- *
  */
 class TinyMCEExtension extends \Twig_Extension
 {
@@ -21,7 +21,7 @@ class TinyMCEExtension extends \Twig_Extension
      * @var array
      */
     protected $assets;
-    
+
     /**
      * @param array $assets
      */
@@ -29,9 +29,10 @@ class TinyMCEExtension extends \Twig_Extension
     {
         $this->assets = $assets;
     }
-    
+
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
+     *
      * @see Twig_Extension::getFunctions()
      */
     public function getFunctions()
@@ -39,24 +40,25 @@ class TinyMCEExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFunction('tinymce_init', array($this, 'tinymceInitJs'), array(
                 'needs_environment' => true,
-                'is_safe' => array('html')
-            ))
+                'is_safe' => array('html'),
+            )),
         );
     }
-    
+
     /**
-     * Return the tinyMCE init js
+     * Return the tinyMCE init js.
      */
     public function tinymceInitJs(\Twig_Environment $environment)
     {
         return $environment->render('ASFLayoutBundle:tinymce:init_js.html.twig', array(
             'tinymce_config' => $this->assets['tinymce']['config'],
-            'tinymce_base_url' => $this->assets['tinymce']['customize']['base_url']
+            'tinymce_base_url' => $this->assets['tinymce']['customize']['base_url'],
         ));
     }
-    
+
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
+     *
      * @see Twig_ExtensionInterface::getName()
      */
     public function getName()

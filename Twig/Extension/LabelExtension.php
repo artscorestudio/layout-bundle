@@ -1,29 +1,30 @@
 <?php
 /**
- * This file is part of Artscore Studio Framework package
+ * This file is part of Artscore Studio Framework package.
  * 
  * (c) 2012-2014 Nicolas Claverie <info@artscore-studio.fr>
  * 
  * This dource file is subject to the MIT Licence that is bundled 
  * with this source code in the file LICENSE.
  */
+
 namespace ASF\LayoutBundle\Twig\Extension;
 
 /**
- * LabelExtension
+ * LabelExtension.
  *
  * @category   TwigExtension
- * @package    BraincraftedBootstrapBundle
- * @subpackage Twig
+ *
  * @author     Florian Eckerstorfer <florian@eckerstorfer.co>
  * @copyright  2012-2013 Florian Eckerstorfer
  * @license    http://opensource.org/licenses/MIT The MIT License
+ *
  * @link       http://bootstrap.braincrafted.com Bootstrap for Symfony2
  */
 class LabelExtension extends \Twig_Extension
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
@@ -35,7 +36,7 @@ class LabelExtension extends \Twig_Extension
             new \Twig_SimpleFunction('label_success', array($this, 'labelSuccessFunction'), $options),
             new \Twig_SimpleFunction('label_info', array($this, 'labelInfoFunction'), $options),
             new \Twig_SimpleFunction('label_warning', array($this, 'labelWarningFunction'), $options),
-            new \Twig_SimpleFunction('label_danger', array($this, 'labelDangerFunction'), $options)
+            new \Twig_SimpleFunction('label_danger', array($this, 'labelDangerFunction'), $options),
         );
     }
 
@@ -49,7 +50,7 @@ class LabelExtension extends \Twig_Extension
      */
     public function labelFunction($text, $type = 'default')
     {
-        return sprintf('<span class="label%s">%s</span>', ($type ? ' label-' . $type : ''), $text);
+        return sprintf('<span class="label%s">%s</span>', ($type ? ' label-'.$type : ''), $text);
     }
 
     /**
@@ -111,7 +112,7 @@ class LabelExtension extends \Twig_Extension
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {

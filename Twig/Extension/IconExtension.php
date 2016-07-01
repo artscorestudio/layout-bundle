@@ -1,22 +1,22 @@
 <?php
 /**
- * This file is part of Artscore Studio Framework package
+ * This file is part of Artscore Studio Framework package.
  * 
  * (c) 2012-2014 Nicolas Claverie <info@artscore-studio.fr>
  * 
  * This dource file is subject to the MIT Licence that is bundled 
  * with this source code in the file LICENSE.
  */
+
 namespace ASF\LayoutBundle\Twig\Extension;
 
 /**
- * BootstrapIconExtension
+ * BootstrapIconExtension.
  *
- * @package    BraincraftedBootstrapBundle
- * @subpackage Twig
  * @author     Florian Eckerstorfer <florian@eckerstorfer.co>
  * @copyright  2012-2013 Florian Eckerstorfer
  * @license    http://opensource.org/licenses/MIT The MIT License
+ *
  * @link       http://bootstrap.braincrafted.com Bootstrap for Symfony2
  */
 class IconExtension extends \Twig_Extension
@@ -25,12 +25,12 @@ class IconExtension extends \Twig_Extension
      * @var string
      */
     private $iconPrefix;
-    
+
     /**
      * @var string
      */
     private $iconTag;
-    
+
     /**
      * @param string $iconPrefix
      * @param string $iconTag
@@ -40,9 +40,9 @@ class IconExtension extends \Twig_Extension
         $this->iconPrefix = $iconPrefix;
         $this->iconTag = $iconTag;
     }
-    
+
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFilters()
     {
@@ -51,12 +51,12 @@ class IconExtension extends \Twig_Extension
                 'parse_icons',
                 array($this, 'parseIconsFilter'),
                 array('pre_escape' => 'html', 'is_safe' => array('html'))
-            )
+            ),
         );
     }
-    
+
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
@@ -65,10 +65,10 @@ class IconExtension extends \Twig_Extension
                 'icon',
                 array($this, 'iconFunction'),
                 array('pre_escape' => 'html', 'is_safe' => array('html'))
-            )
+            ),
         );
     }
-    
+
     /**
      * Parses the given string and replaces all occurrences of .icon-[name] with the corresponding icon.
      *
@@ -79,6 +79,7 @@ class IconExtension extends \Twig_Extension
     public function parseIconsFilter($text)
     {
         $that = $this;
+
         return preg_replace_callback(
             '/\.([a-z]+)-([a-z0-9+-]+)/',
             function ($matches) use ($that) {
@@ -87,24 +88,27 @@ class IconExtension extends \Twig_Extension
             $text
         );
     }
-    
+
     /**
      * Returns the HTML code for the given icon.
      *
-     * @param string $icon The name of the icon
+     * @param string $icon    The name of the icon
      * @param string $iconSet The icon-set name
      *
      * @return string The HTML code for the icon
      */
     public function iconFunction($icon, $iconSet = 'icon')
     {
-        if ($iconSet == 'icon') $iconSet = $this->iconPrefix;
+        if ($iconSet == 'icon') {
+            $iconSet = $this->iconPrefix;
+        }
         $icon = str_replace('+', ' '.$iconSet.'-', $icon);
+
         return sprintf('<%1$s class="%2$s %2$s-%3$s"></%1$s>', $this->iconTag, $iconSet, $icon);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {

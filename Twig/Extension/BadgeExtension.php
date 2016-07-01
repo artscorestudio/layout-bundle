@@ -1,37 +1,38 @@
 <?php
 /**
- * This file is part of Artscore Studio Framework package
+ * This file is part of Artscore Studio Framework package.
  * 
  * (c) 2012-2014 Nicolas Claverie <info@artscore-studio.fr>
  * 
  * This dource file is subject to the MIT Licence that is bundled 
  * with this source code in the file LICENSE.
  */
+
 namespace ASF\LayoutBundle\Twig\Extension;
 
 /**
- * BadgeExtension
+ * BadgeExtension.
  *
  * @category   TwigExtension
- * @package    BraincraftedBootstrapBundle
- * @subpackage Twig
+ *
  * @author     Florian Eckerstorfer <florian@eckerstorfer.co>
  * @copyright  2012-2013 Florian Eckerstorfer
  * @license    http://opensource.org/licenses/MIT The MIT License
+ *
  * @link       http://bootstrap.braincrafted.com Bootstrap for Symfony2
  */
 class BadgeExtension extends \Twig_Extension
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
         return array(
             new \Twig_SimpleFunction('badge', array($this, 'badgeFunction'), array(
-                'pre_escape' => 'html', 
-                'is_safe' => array('html')
-            ))
+                'pre_escape' => 'html',
+                'is_safe' => array('html'),
+            )),
         );
     }
 
@@ -48,7 +49,7 @@ class BadgeExtension extends \Twig_Extension
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
