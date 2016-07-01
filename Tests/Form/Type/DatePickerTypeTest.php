@@ -11,7 +11,7 @@
 namespace ASF\LayoutBundle\Tests\Form\Type;
 
 use Symfony\Component\Form\Test\TypeTestCase;
-use ASF\LayoutBundle\Form\Type\DatePickerType;
+use ASF\LayoutBundle\Form\DatePickerType;
 
 /**
  * Date Picker Form Type Tests.
@@ -21,7 +21,7 @@ use ASF\LayoutBundle\Form\Type\DatePickerType;
 class DatePickerTypeTest extends TypeTestCase
 {
     /**
-     * @covers ASF\LayoutBundle\Form\Type\DatePickerType
+     * @covers ASF\LayoutBundle\Form\DatePickerType
      */
     public function testOfAddingDatePickerTypeInForm()
     {

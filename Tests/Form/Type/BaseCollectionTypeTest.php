@@ -11,7 +11,7 @@
 namespace ASF\LayoutBundle\Tests\Form\Type;
 
 use Symfony\Component\Form\Test\TypeTestCase;
-use ASF\LayoutBundle\Form\Type\BaseCollectionType;
+use ASF\LayoutBundle\Form\BaseCollectionType;
 
 /**
  * Base Collection Form Type Tests.
@@ -21,7 +21,7 @@ use ASF\LayoutBundle\Form\Type\BaseCollectionType;
 class BaseCollectionTypeTest extends TypeTestCase
 {
     /**
-     * @covers ASF\LayoutBundle\Form\Type\BaseCollectionType
+     * @covers ASF\LayoutBundle\Form\BaseCollectionType
      */
     public function testOfAddingBaseCollectionTypeInForm()
     {
