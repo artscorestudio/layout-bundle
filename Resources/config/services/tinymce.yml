@@ -1,0 +1,6 @@
+services:
+    asf_layout.twig.tinymce:
+        class: ASF\LayoutBundle\Twig\Extension\TinyMCEExtension
+        arguments: ["%asf_layout.assets%"]
+        tags:
+            - { name: "twig.extension" }

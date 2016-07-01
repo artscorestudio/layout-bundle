@@ -1,0 +1,17 @@
+services:
+    asf_layout.twig.extension.label:
+        class: ASF\LayoutBundle\Twig\Extension\LabelExtension
+        tags:
+            - { name: "twig.extension" }
+            
+    asf_layout.twig.extension.badge:
+        class: ASF\LayoutBundle\Twig\Extension\BadgeExtension
+        tags:
+            - { name: "twig.extension" }
+                    
+    asf_layout.twig.extension.icon:
+        class: ASF\LayoutBundle\Twig\Extension\IconExtension
+        arguments: ["%asf_layout.assets.twbs.icon_prefix%", "%asf_layout.assets.twbs.icon_tag%"]
+        tags:
+            - { name: "twig.extension" }
+            

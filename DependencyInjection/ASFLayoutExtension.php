@@ -12,10 +12,10 @@ namespace ASF\LayoutBundle\DependencyInjection;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 /**
  * Bundle extension
@@ -34,20 +34,21 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
 		$configuration = new Configuration();
 		$config = $this->processConfiguration($configuration, $configs);
         
-		$loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-		$loader->load('services/form.xml');
+		$loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		
 	    $container->setParameter('asf_layout.assets', $config['assets']);
 	    $container->setParameter('asf_layout.assets.twbs.icon_prefix', $config['assets']['twbs']['icon_prefix']);
 	    $container->setParameter('asf_layout.assets.twbs.icon_tag', $config['assets']['twbs']['icon_tag']);
-	    $loader->load('services/twig.xml');
+	    
+	    $loader->load('services/form.yml');
+	    $loader->load('services/twig.yml');
 		
 		if ( $config['enable_flash_messages'] ) {
-		    $loader->load('services/flash_messages.xml');
+		    $loader->load('services/flash_messages.yml');
 		}
 		
 		if ( isset($config['assets']['tinymce']) && $config['assets']['tinymce'] !== false ) {
-		    $loader->load('services/tinymce.xml');
+		    $loader->load('services/tinymce.yml');
 		}
 	}
 	
