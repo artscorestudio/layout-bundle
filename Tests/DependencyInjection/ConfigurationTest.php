@@ -145,7 +145,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testTwbsFormThemeParameterValueInDefaultConfiguration()
     {
-        $this->assertEquals('ASFLayoutBundle:Form:fields.html.twig', $this->defaultConfig['assets']['twbs']['form_theme']);
+        $this->assertEquals('ASFLayoutBundle:form:fields.html.twig', $this->defaultConfig['assets']['twbs']['form_theme']);
     }
 
     /**
