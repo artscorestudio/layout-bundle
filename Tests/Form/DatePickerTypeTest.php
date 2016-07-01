@@ -8,27 +8,27 @@
  * with this source code in the file LICENSE.
  */
 
-namespace ASF\LayoutBundle\Tests\Form\Type;
+namespace ASF\LayoutBundle\Tests\Form;
 
 use Symfony\Component\Form\Test\TypeTestCase;
-use ASF\LayoutBundle\Form\BaseCollectionType;
+use ASF\LayoutBundle\Form\DatePickerType;
 
 /**
- * Base Collection Form Type Tests.
+ * Date Picker Form Type Tests.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  */
-class BaseCollectionTypeTest extends TypeTestCase
+class DatePickerTypeTest extends TypeTestCase
 {
     /**
-     * @covers ASF\LayoutBundle\Form\BaseCollectionType
+     * @covers ASF\LayoutBundle\Form\DatePickerType
      */
-    public function testOfAddingBaseCollectionTypeInForm()
+    public function testOfAddingDatePickerTypeInForm()
     {
-        $formData = array('collection' => null);
+        $formData = array('date' => null);
 
         $form = $this->factory->createBuilder()
-            ->add('collection', BaseCollectionType::class)->getForm();
+            ->add('date', DatePickerType::class)->getForm();
 
         $view = $form->createView();
         $children = $view->children;
