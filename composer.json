@@ -15,7 +15,7 @@
 	"require" : {
 		"php": ">=5.3.9",
 	    "symfony/symfony": "~2.8|~3.0",
-	    "symfony/assetic": "~2.7|~2.8",
+	    "symfony/assetic-bundle": "~2.7|~2.8",
         "components/jquery": "2.2.*",
         "components/bootstrap": "3.3.*"
 	},
