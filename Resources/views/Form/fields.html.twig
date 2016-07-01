@@ -37,7 +37,7 @@
 			</div>
 			<div class="col-xs-3 text-right">
 				<div class="btn-group btn-group-xs" role="group">
-					<a href="#" title="{{ 'Add'|trans({}, 'asf_layout') }}" class="btn btn-default item-add">{{ icon('plus') }}</a>
+					<a href="#" title="{{ 'add'|trans({}, 'asf_layout')|capitalize }}" class="btn btn-default item-add">{{ icon('plus') }}</a>
 				</div>
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 								{{ form_row(item) }}
 							</td>
 							<td class="actions">
-								<a href="#" title="{{ 'Delete'|trans({}, 'asf_layout') }}" class="delete-item">{{ icon('remove') }}</a>
+								<a href="#" title="{{ 'delete'|trans({}, 'asf_layout')|capitalize }}" class="delete-item">{{ icon('remove') }}</a>
 							</td>
 						</tr>
 						{% set element_id = element_id + 1 %}
@@ -105,7 +105,7 @@
 		{{ form_row(prototype) }}
 	</td>
 	<td class="actions">
-		<a href="#" title="{{ 'Delete'|trans({}, 'asf_layout') }}" class="delete-item">{{ icon('remove') }}</a>
+		<a href="#" title="{{ 'delete'|trans({}, 'asf_layout')|capitalize }}" class="delete-item">{{ icon('remove') }}</a>
 	</td>
 </tr>
 {% endspaceless %}
