@@ -8,7 +8,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace ASF\LayoutBundle\Twig\Extension;
+namespace ASF\LayoutBundle\Twig;
 
 /**
  * BootstrapIconExtension.

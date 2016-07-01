@@ -1,16 +1,16 @@
 services:
-    asf_layout.twig.extension.label:
-        class: ASF\LayoutBundle\Twig\Extension\LabelExtension
+    asf_layout.twig.label:
+        class: ASF\LayoutBundle\Twig\LabelExtension
         tags:
             - { name: "twig.extension" }
             
-    asf_layout.twig.extension.badge:
-        class: ASF\LayoutBundle\Twig\Extension\BadgeExtension
+    asf_layout.twig.badge:
+        class: ASF\LayoutBundle\Twig\BadgeExtension
         tags:
             - { name: "twig.extension" }
                     
-    asf_layout.twig.extension.icon:
-        class: ASF\LayoutBundle\Twig\Extension\IconExtension
+    asf_layout.twig.icon:
+        class: ASF\LayoutBundle\Twig\IconExtension
         arguments: ["%asf_layout.assets.twbs.icon_prefix%", "%asf_layout.assets.twbs.icon_tag%"]
         tags:
             - { name: "twig.extension" }

@@ -3,10 +3,10 @@ services:
         class: ASF\LayoutBundle\Session\FlashMessage
         arguments: ["@session"]
         
-    asf_layout.twig.extension.flash_messages:
-        class: ASF\LayoutBundle\Twig\Extension\FlashMessagesExtension
+    asf_layout.twig.flash_messages:
+        class: ASF\LayoutBundle\Twig\FlashMessagesExtension
         tags:
             - { name: twig.extension }
             
     asf_layout.alerts:
-        alias: asf_layout.twig.extension.flash_messages
+        alias: asf_layout.twig.flash_messages

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ASF\LayoutBundle\Twig\Extension;
+namespace ASF\LayoutBundle\Twig;
 
 /**
  * TinyMCE Extension for generate tinymce init.
