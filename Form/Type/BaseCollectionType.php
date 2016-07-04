@@ -8,7 +8,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace ASF\LayoutBundle\Form;
+namespace ASF\LayoutBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
