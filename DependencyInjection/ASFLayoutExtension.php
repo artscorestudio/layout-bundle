@@ -145,11 +145,6 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
                     if (isset($config['assets']['prism_js'])) {
                         $this->addPrismJSInAssetic($container, $config['assets']['prism_js']);
                     }
-
-                    // Add ThreeJS in assets
-                    if (isset($config['assets']['three_js'])) {
-                        $this->addThreeJSInAssetic($container, $config['assets']['three_js']);
-                    }
                     break;
             }
         }
@@ -378,25 +373,6 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
             throw new InvalidConfigurationException('You have enabled PrismJS supports but js parameter is missing.');
         } elseif ($config['js'] !== false && $config['css'] === false) {
             throw new InvalidConfigurationException('You have enabled PrismJS supports but css parameter is missing.');
-        }
-    }
-
-    /**
-     * Adding ThreeJS in Assetic.
-     *
-     * @param ContainerBuilder $container
-     * @param array            $config
-     *
-     * @throws InvalidConfigurationException : "Js path not set or CSS path not set"
-     */
-    protected function addThreeJSInAssetic(ContainerBuilder $container, array $config)
-    {
-        if ($config['path'] !== false) {
-            $container->prependExtensionConfig('assetic', array(
-                'assets' => array(
-                    'threejs' => $config['path'],
-                ),
-            ));
         }
     }
 }
