@@ -5,16 +5,11 @@
     <head>
     	{% block asf_base_encoding %}
         <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         {% endblock asf_base_encoding %}
         
-        <title>
-			{% block asf_base_meta_title %}{{ 'home'|trans|capitalize }}{% endblock %}
-			{% block asf_base_meta_title_suffix %}{% endblock %}
-        </title>
-        
-		{% block asf_base_meta %}
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block asf_base_meta %}
 		<meta name="description" content="">
 		<meta name="author" content="">
         {% endblock %}
@@ -23,6 +18,11 @@
         	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% endblock asf_base_favicon %}
         
+        <title>
+			{% block asf_base_meta_title %}{{ 'home'|trans|capitalize }}{% endblock %}
+			{% block asf_base_meta_title_suffix %}{% endblock %}
+        </title>
+
 		{% block asf_base_header_stylesheets %}
 			{% stylesheets '@twbs_css' filter="less" %}
             	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
@@ -30,9 +30,11 @@
 		{% endblock %}
         
         {% block asf_base_header_javascripts %}
-            {% javascripts '@jquery' '@twbs_js' %}
-	        	<script src="{{ asset_url }}"></script>
-	        {% endjavascripts %}
+	        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+            <!--[if lt IE 9]>
+            	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+            <![endif]-->
         {% endblock %}
     </head>
     
@@ -107,7 +109,11 @@
 	</div> <!-- /container -->    
     {% endblock asf_base_body %}
     
-    {% block asf_base_footer_javascripts %}{% endblock asf_base_footer_javascripts %}
+    {% block asf_base_footer_javascripts %}
+        {% javascripts '@jquery' '@twbs_js' %}
+			<script src="{{ asset_url }}"></script>
+	    {% endjavascripts %}
+    {% endblock asf_base_footer_javascripts %}
     
     </body>
 </html>
