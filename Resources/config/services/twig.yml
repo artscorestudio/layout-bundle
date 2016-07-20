@@ -14,4 +14,3 @@ services:
         arguments: ["%asf_layout.assets.twbs.icon_prefix%", "%asf_layout.assets.twbs.icon_tag%"]
         tags:
             - { name: "twig.extension" }
-            
