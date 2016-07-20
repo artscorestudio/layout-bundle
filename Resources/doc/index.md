@@ -47,7 +47,7 @@ For more information about translations, check [Symfony documentation][11].
 Require the bundle with composer :
 
 ```bash
-$ composer require artscorestudio/layout-bundle "dev-master"
+$ composer require artscorestudio/layout-bundle "^1.2"
 ```
 
 Composer will install the bundle to your project's *vendor/artscorestudio/layout-bundle* directory. It also install dependencies. 
@@ -71,59 +71,20 @@ public function registerBundles()
 
 ### Step 3 : Configure the bundle for a quickly use of it with jQuery and Twitter Bootstrap
 
-For a quickly access to a basic template based on jQuery and Twitter Bottstrap, just add jQuery and Twitter Bootstrap in your project's composer.json file.
+For a quickly access to a basic template based on jQuery and Twitter Bootstrap, just add jQuery and Twitter Bootstrap in your project's composer.json file or with tools like Bower.
 
-For install jQuery, add it to your project's composer.json file :
-
-```bash
-$ composer require components/jquery "2.2.*"
-```
-
-And for install Twitter Bootstrap, add it to your project's composer.json file :
-
-```bash
-$ composer require components/bootstrap "3.3.*"
-```
-
-By default, Layout bundle use Less files directly. Enable Less by install it on your system and add it in your project's config.yml file.
-
-Less configuration on *nix operating systems :
+By default, LayoutBundle have this paths for jQuery and Twitter Bootstrap :
 
 ```yaml
-# /app/config/config.yml
-assetic:
-    filters:
-        cssrewrite: ~
-        less:
-            node: "/usr/local/bin/node"
-            node_paths: ["/usr/local/lib/node_modules/"]
+asf_layout:
+    assets:
+        jquery:
+            path: "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+        twbs:
+            twbs_dir: "%kernel.root_dir%/../vendor/components/bootstrap/"
 ```
 
-Less configuration on Microsoft Windows operating systems (Windows 7+) :
-
-```yaml
-# /app/config/config.yml
-assetic:
-    filters:
-        cssrewrite: ~
-        less:
-            node: "C:\\Program Files\\nodejs\\node.exe"
-            node_paths: ["C:\\Users\\__USERNAME__\\AppData\\Roaming\\npm\\node_modules"]
-```
-
-Less configuration on MacOS X operating systems :
-
-```yaml
-# /app/config/config.yml
-assetic:
-    filters:
-        cssrewrite: ~
-        less:
-            node: "/opt/local/bin/node"
-            node_paths: ["/opt/local/lib/node_modules/"]
-```
-
-For enable all supported assets, please check [Enable/Disable supported assets][12] in this documentation.
+For further informations about installation of external libraries via Composer see [Enable/Disable supported assets][12].
 
 > Don't forget to set Assetic Configuration ([see Assetic Installation instructions][23]).
 
