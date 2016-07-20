@@ -8,18 +8,18 @@ But this bundle allows you to enable or disable external libraries or add more l
 
 > IMPORTANT NOTICE: This bundle is still under development. Any changes will be done without prior notice to consumers of this package. Of course this code will become stable at a certain point, but for now, use at your own risk.
 
-> BE CARREFUL : This bundle does not include external libraries, you must install the libraries via Compoer, in accordance with best practices of Symfony documentation.
+> BE CARREFUL : This bundle does not include external libraries, you must install the libraries via Compoer, in accordance with best practices of Symfony documentation or with tools designed for managing assets like Bower.
  
 ## Prerequisites
 
 This version of the bundle requires :
 * [Symfony 2.8+ LTS / 3.0+][1]
 * Assetic bundle 2.7+ (suggest [symfony/assetic-bundle][2])
-* jQuery 2.2+ (suggest [components/jquery][3])
-* Twitter Bootstrap 3.3+ (suggest [components/bootstrap][4])
 
 If you want to use all features of this bundle, you have to add this packages in your project's composer.json file :
 
+* jQuery 2.2+ (suggest [components/jquery][3])
+* Twitter Bootstrap 3.3+ (suggest [components/bootstrap][4])
 * jQuery UI 1.11+ (suggest [components/jqueryui][5])
 * Select2 4.0+ (suggest [select2/select2][6])
 * Bazinga Js Translation 2.5+ (suggest [willdurand/js-translation-bundle][7])
