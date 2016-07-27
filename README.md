@@ -4,9 +4,9 @@ Layout Bundle is a Symfony 2/3 component providing frontend and backend layouts 
 
 > IMPORTANT NOTICE: This bundle is still under development. Any changes will be done without prior notice to consumers of this package. Of course this code will become stable at a certain point, but for now, use at your own risk.
 
-| [Master](https://github.com/artscorestudio/layout-bundle) | [Latest Release (1.2.3)](https://github.com/artscorestudio/layout-bundle/releases/tag/1.2.3) |
+| [Master](https://github.com/artscorestudio/layout-bundle) | [Latest Release (1.2.7)](https://github.com/artscorestudio/layout-bundle/releases/tag/1.2.7) |
 | ------ | -------------- |
-| [![Build Status](https://travis-ci.org/artscorestudio/layout-bundle.svg?branch=master)](https://travis-ci.org/artscorestudio/layout-bundle) | [![Build Status](https://travis-ci.org/artscorestudio/layout-bundle.svg?branch=1.2.3)](https://travis-ci.org/artscorestudio/layout-bundle) |
+| [![Build Status](https://travis-ci.org/artscorestudio/layout-bundle.svg?branch=master)](https://travis-ci.org/artscorestudio/layout-bundle) | [![Build Status](https://travis-ci.org/artscorestudio/layout-bundle.svg?branch=1.2.7)](https://travis-ci.org/artscorestudio/layout-bundle) |
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/0fc3b510-d773-4668-8c16-26768c4e52f0/mini.png)](https://insight.sensiolabs.com/projects/0fc3b510-d773-4668-8c16-26768c4e52f0)
 
@@ -14,7 +14,7 @@ Layout Bundle is a Symfony 2/3 component providing frontend and backend layouts 
 
 The bulk of the documentation is stored in the Resources/docs/index.md file in bundle :
 
-[Read the documentation for master](https://github.com/artscorestudio/layout-bundle/blob/1.2.3/Resources/doc/index.md).
+[Read the documentation for 1.2.7](https://github.com/artscorestudio/layout-bundle/blob/1.2.7/Resources/doc/index.md).
 
 
 ## Installation
