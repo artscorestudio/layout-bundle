@@ -1,9 +1,4 @@
 services:
-    asf_layout.form.type.base_collection:
-        class: ASF\LayoutBundle\Form\Type\BaseCollectionType
-        tags:
-            - { name: "form.type", alias: "base_collection" }
-            
     asf_layout.form.type.date_picker:
         class: ASF\LayoutBundle\Form\Type\DatePickerType
         tags:
