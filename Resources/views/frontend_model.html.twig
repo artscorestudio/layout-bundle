@@ -23,8 +23,8 @@
 			{% block asf_base_meta_title_suffix %}{% endblock %}
         </title>
 
-		{% block asf_base_header_stylesheets %}
-			{% stylesheets '@twbs_css' filter="less" %}
+        {% block asf_base_header_stylesheets %}
+			{% stylesheets '@twbs_css' '@ASFLayoutBundle/Resources/public/css/common.css' filter="less" %}
             	<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
             {% endstylesheets %}
 		{% endblock %}

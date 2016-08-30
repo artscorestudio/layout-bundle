@@ -1,0 +1,26 @@
+.wrapper-collection .commands {
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  margin-bottom: 5px;
+  line-height: 3;
+  color: #171717
+}
+
+.wrapper-collection .commands label {
+  margin: 0
+}
+
+.wrapper-collection .list-collection .actions {
+  width: 50px;
+  vertical-align: middle;
+  text-align: center
+}
+
+.wrapper-collection .list-collection .actions a {
+  color:#171717
+}
+
+.wrapper-collection .list-collection .alert {
+  margin-top:5px;
+  padding: 5px
+}
