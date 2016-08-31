@@ -10,7 +10,7 @@
 
 namespace ASF\LayoutBundle\Composer;
 
-use Composer\Script\CommandEvent;
+use Composer\Script\Event;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\PhpExecutableFinder;
 
@@ -36,9 +36,9 @@ class ScriptHandler
     /**
      * Asks if the new directory structure should be used, installs the structure if needed.
      *
-     * @param CommandEvent $event
+     * @param Event $event
      */
-    public static function defineDirectoryStructure(CommandEvent $event)
+    public static function defineDirectoryStructure(Event $event)
     {
         if (!getenv('SENSIOLABS_ENABLE_NEW_DIRECTORY_STRUCTURE') || !$event->getIO()->askConfirmation('Would you like to use Symfony 3 directory structure? [y/N] ', false)) {
             return;
@@ -48,7 +48,7 @@ class ScriptHandler
     /**
      * @param CommandEnvent $event
      */
-    public static function installTinyMCE(CommandEvent $event)
+    public static function installTinyMCE(Event $event)
     {
         $options = static::getOptions($event);
         $consoleDir = static::getConsoleDir($event, 'install TinyMCE files');
@@ -69,7 +69,7 @@ class ScriptHandler
     /**
      * @param CommandEnvent $event
      */
-    public static function installTwbs(CommandEvent $event)
+    public static function installTwbs(Event $event)
     {
         $options = static::getOptions($event);
         $consoleDir = static::getConsoleDir($event, 'install bootstrap fonts and files');
@@ -88,14 +88,14 @@ class ScriptHandler
     }
 
     /**
-     * @param CommandEvent $event
+     * @param Event $event
      * @param string       $consolePath
      * @param string       $cmd
      * @param number       $timeout
      *
      * @throws \RuntimeException
      */
-    public static function executeCommand(CommandEvent $event, $consoleDir, $cmd, $timeout = 300)
+    public static function executeCommand(Event $event, $consoleDir, $cmd, $timeout = 300)
     {
         $php = escapeshellarg(static::getPhp(false));
         $phpArgs = implode(' ', array_map('escapeshellarg', static::getPhpArguments()));
@@ -111,7 +111,7 @@ class ScriptHandler
         }
     }
 
-    protected static function hasDirectory(CommandEvent $event, $configName, $path, $actionName)
+    protected static function hasDirectory(Event $event, $configName, $path, $actionName)
     {
         if (!is_dir($path)) {
             $event->getIO()->write(sprintf('The %s (%s) specified in composer.json was not found in %s, can not %s.', $configName, $path, getcwd(), $actionName));
@@ -125,9 +125,9 @@ class ScriptHandler
     /**
      * Clears the Symfony cache.
      *
-     * @param $event CommandEvent A instance
+     * @param $event Event A instance
      */
-    public static function clearCache(CommandEvent $event)
+    public static function clearCache(Event $event)
     {
         $options = static::getOptions($event);
         $consoleDir = static::getConsoleDir($event, 'clear the cache');
@@ -147,9 +147,9 @@ class ScriptHandler
     /**
      * Return options for commands.
      * 
-     * @param CommandEvent $event
+     * @param Event $event
      */
-    protected static function getOptions(CommandEvent $event)
+    protected static function getOptions(Event $event)
     {
         $options = array_merge(static::$options, $event->getComposer()->getPackage()->getExtra());
 
@@ -203,12 +203,12 @@ class ScriptHandler
     /**
      * Returns a relative path to the directory that contains the `console` command.
      *
-     * @param CommandEvent $event      The command event.
+     * @param Event $event      The command event.
      * @param string       $actionName The name of the action
      *
      * @return string|null The path to the console directory, null if not found.
      */
-    protected static function getConsoleDir(CommandEvent $event, $actionName)
+    protected static function getConsoleDir(Event $event, $actionName)
     {
         $options = static::getOptions($event);
 
