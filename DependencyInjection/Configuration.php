@@ -27,7 +27,7 @@ class Configuration implements ConfigurationInterface
      *
      * @var string
      */
-    const COMPONENTS_DIR = '%kernel.root_dir%/Resources/public';
+    const COMPONENTS_DIR = '%kernel.root_dir%/../web/assets';
 
     /**
      * {@inheritdoc}
@@ -56,7 +56,6 @@ class Configuration implements ConfigurationInterface
                        ->append($this->addTinyMCEParameterNode())
                        ->append($this->addJqueryTagsInputParameterNode())
                        ->append($this->addPrismJSParameterNode())
-                       ->booleanNode('fos_js_routing')->defaultFalse()->end()
                     ->end()
                 ->end()
                 ->scalarNode('components_dir')
@@ -136,8 +135,7 @@ class Configuration implements ConfigurationInterface
             'twbs_dir' => self::COMPONENTS_DIR.'/bootstrap',
             'js' => array('js/bootstrap.min.js'),
             'less' => array(
-                'less/bootstrap.less',
-                'less/theme.less',
+                'less/bootstrap.less'
             ),
             'css' => array(),
             'icon_prefix' => 'glyphicon',
@@ -175,8 +173,7 @@ class Configuration implements ConfigurationInterface
                    ->fixXmlConfig('less')
                    ->prototype('scalar')->end()
                    ->defaultValue(array(
-                       'less/bootstrap.less',
-                       'less/theme.less',
+                       'less/bootstrap.less'
                    ))
                ->end()
                ->arrayNode('css')

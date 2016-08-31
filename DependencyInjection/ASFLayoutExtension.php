@@ -64,10 +64,6 @@ class ASFLayoutExtension extends Extension implements PrependExtensionInterface
         $configs = $container->getExtensionConfig($this->getAlias());
         $config = $this->processConfiguration(new Configuration(), $configs);
 
-        if (!array_key_exists('FOSJsRoutingBundle', $bundles) && $config['assets']['fos_js_routing'] === true) {
-            throw new InvalidConfigurationException('You have enabled the support of FOSJsRouting but it is not enabled. Install it or disable FOSJsRoutingBundle support in Layout bundle.');
-        }
-
         $this->configureTwigBundle($container, $config);
 
         $this->configureAsseticBundle($container, $config);
