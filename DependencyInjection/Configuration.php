@@ -226,8 +226,8 @@ class Configuration implements ConfigurationInterface
             ->treatFalseLike(array('js' => false, 'css' => false))
             ->treatNullLike(array('js' => false, 'css' => false))
             ->treatTrueLike(array(
-                'js' => '%kernel.root_dir%/../vendor/select2/select2/dist/js/select2.full.min.js',
-                'css' => '%kernel.root_dir%/../vendor/select2/select2/dist/css/select2.min.css',
+                'js' => self::COMPONENTS_DIR.'/select2/dist/js/select2.js',
+                'css' => self::COMPONENTS_DIR.'/select2/dist/css/select2.min.css',
             ))
             ->children()
                 ->scalarNode('js')
