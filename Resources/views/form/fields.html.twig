@@ -46,7 +46,7 @@
             var item_count_{{ form.vars.id }} = $('#{{ form.vars.id }} .list-collection .item').length;
             $('#{{ form.vars.id }} .item-add').click(function(e){
                 e.preventDefault();
-
+                
                 var $collection = $('#{{ form.vars.id }} #list-collection-{{ form.vars.id }}')
                     , collectionParent = $collection.parent() 
                     , prototype = $(collectionParent).attr('data-prototype')
@@ -54,16 +54,19 @@
                     , $prototype = $(prototype);
 
                 $collection.append($prototype);
-
+                $(this).trigger('collection:add', $prototype);
+                
                 $prototype.find('.delete-item').click(function(e){
                     e.preventDefault();
                     $(this).parent().parent().remove();
+                    $('#{{ form.vars.id }}').trigger('collection:remove');
                 });
             });
 
             $('#{{ form.vars.id }} .delete-item').click(function(e){
                 e.preventDefault();
                 $(this).parent().parent().remove();
+                $('#{{ form.vars.id }}').trigger('collection:remove');
             });
         
         }(window.jQuery, window, document));
