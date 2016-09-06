@@ -27,9 +27,10 @@
                 <table class="table table-striped table-bordered list-collection" id="list-collection-{{ form.vars.id }}">
                     {% set element_id = 0 %}
                     {% for item in form %}
-                        <tr class="item" id="item-{{ item_id }}">
+                        <tr class="item" id="item-{{ element_id }}">
                             <td>
-                                {{ form_row(item) }}
+                                {{ form_widget(item) }}
+                                {{ form_errors(item) }}
                             </td>
                             <td class="actions">
                                 <a href="#" title="{{ 'delete'|trans({}, 'asf_layout')|capitalize }}" class="delete-item">{{ icon('remove') }}</a>
